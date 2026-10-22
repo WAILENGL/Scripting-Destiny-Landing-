@@ -28,9 +28,24 @@ export const ELEMENT_METALLIC: Record<ElementType, string> = {
   Water: "metallic-water",
 };
 
+function getCurrentDate(): string {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function getCurrentTime(): string {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  return `${hours}:${minutes}`;
+}
+
 export function ChartTry() {
-  const [date, setDate] = useState("1990-06-15");
-  const [time, setTime] = useState("12:00");
+  const [date, setDate] = useState(getCurrentDate);
+  const [time, setTime] = useState(getCurrentTime);
   const [chart, setChart] = useState<BaZiChart | null>(null);
 
   const submit = (e: FormEvent) => {
