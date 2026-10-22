@@ -84,7 +84,7 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
               </span>
               {substackOptin && (
                 <span className="inline-flex items-center gap-1 rounded-full bg-primary-foreground/10 px-2.5 py-0.5 font-medium opacity-90">
-                  <Check className="h-3 w-3 text-wood" /> Substack Essays
+                  <Check className="h-3 w-3 text-wood" /> Substack Articles
                 </span>
               )}
             </div>
@@ -166,7 +166,7 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
             htmlFor="substack-optin"
             className="text-xs sm:text-sm text-primary-foreground/85 leading-normal cursor-pointer select-none"
           >
-            Also send me occasional essays on timing & life cycles{" "}
+            Also send me occasional articles on timing & life cycles{" "}
             <span className="opacity-60">(Substack)</span>
           </label>
         </div>
