@@ -24,7 +24,7 @@ export function ChartTry() {
   };
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-6 shadow-[0_30px_60px_-30px_oklch(0.22_0.015_55/0.25)] sm:p-8">
+    <div className="rounded-2xl border border-border bg-card p-6 shadow-[0_30px_60px_-30px_oklch(0_0_0/0.6)] sm:p-8">
       <p className="eyebrow">Free · takes 10 seconds</p>
       <h2 className="mt-2 font-serif text-2xl">Find your Day Master</h2>
       <form onSubmit={submit} className="mt-6 grid gap-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
@@ -49,7 +49,7 @@ export function ChartTry() {
         </label>
         <button
           type="submit"
-          className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-accent px-5 text-sm font-semibold text-accent-foreground transition hover:bg-primary"
+          className="gold-surface inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-accent px-5 text-sm font-semibold text-accent-foreground transition hover:bg-primary"
         >
           Reveal <ArrowRight className="h-4 w-4" />
         </button>
@@ -58,7 +58,7 @@ export function ChartTry() {
       {chart && (
         <div id="result" className="mt-8 animate-in fade-in slide-in-from-bottom-2 duration-500 rule-top pt-8">
           <div className="flex items-start gap-5">
-            <span className="font-serif text-6xl leading-none text-accent">{chart.dayMaster.hanzi}</span>
+            <span className="font-serif text-6xl leading-none gold">{chart.dayMaster.hanzi}</span>
             <div>
               <p className="eyebrow">
                 {chart.dayMaster.pinyin} {chart.dayMaster.element} · You are
@@ -68,6 +68,21 @@ export function ChartTry() {
             </div>
           </div>
           <p className="mt-4 text-sm leading-relaxed">{chart.dayMaster.description}</p>
+
+          <div className="mt-6">
+            <p className="eyebrow mb-2">Your eight characters</p>
+            <div className="grid grid-cols-4 gap-1.5 rounded-lg border border-metal/40 p-1.5">
+              {(["hour", "day", "month", "year"] as const).map((k) => (
+                <div key={k + "s"} className={`pillar-cell ${k === "day" ? "text-accent" : ""}`}>{chart[k].stem.hanzi}</div>
+              ))}
+              {(["hour", "day", "month", "year"] as const).map((k) => (
+                <div key={k + "b"} className="pillar-cell">{chart[k].branch.hanzi}</div>
+              ))}
+            </div>
+            <div className="mt-1.5 grid grid-cols-4 text-center text-[10px] uppercase tracking-widest text-muted-foreground">
+              <span>Hour</span><span>Day</span><span>Month</span><span>Year</span>
+            </div>
+          </div>
 
           <div className="mt-6 grid gap-2">
             {(Object.keys(chart.elementBalance) as ElementType[]).map((el) => (

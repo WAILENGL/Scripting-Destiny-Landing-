@@ -9,4 +9,4 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Landing page sections live in src/components/site and are composed in src/routes/index.tsx; BaZi math stays client-side in src/lib/bazi*.ts (pure, no backend needed).
+- Single-page landing: sections are inline in src/routes/index.tsx, interactive pieces (chart tool, waitlist form) in src/components/site; BaZi math stays client-side in src/lib/bazi*.ts (pure, no backend needed).
