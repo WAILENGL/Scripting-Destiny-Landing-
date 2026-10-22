@@ -7,18 +7,18 @@ const ZHI_LIST = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申',
 
 function getStemByHanzi(hanzi: string): Stem {
   const index = GAN_LIST.indexOf(hanzi);
-  if (index >= 0 && STEMS[index]) {
-    return STEMS[index];
+  if (index >= 0 && STEMS[index]!) {
+    return STEMS[index]!;
   }
-  return STEMS[0]; // fallback Jia
+  return STEMS[0]!; // fallback Jia
 }
 
 function getBranchByHanzi(hanzi: string): Branch {
   const index = ZHI_LIST.indexOf(hanzi);
-  if (index >= 0 && BRANCHES[index]) {
-    return BRANCHES[index];
+  if (index >= 0 && BRANCHES[index]!) {
+    return BRANCHES[index]!;
   }
-  return BRANCHES[0]; // fallback Zi
+  return BRANCHES[0]!; // fallback Zi
 }
 
 // Ten God (Shi Shen) classification
@@ -57,11 +57,11 @@ export function calculateBaZi(birthDate: string, birthTime: string, gender: 'M' 
     const [yearStr, monthStr, dayStr] = birthDate.split('-');
     const [hourStr, minStr] = (birthTime || '12:00').split(':');
 
-    const yearNum = parseInt(yearStr, 10) || 1990;
-    const monthNum = parseInt(monthStr, 10) || 1;
-    const dayNum = parseInt(dayStr, 10) || 1;
-    const hourNum = parseInt(hourStr, 10) || 12;
-    const minNum = parseInt(minStr, 10) || 0;
+    const yearNum = parseInt(yearStr ?? "", 10) || 1990;
+    const monthNum = parseInt(monthStr ?? "", 10) || 1;
+    const dayNum = parseInt(dayStr ?? "", 10) || 1;
+    const hourNum = parseInt(hourStr ?? "", 10) || 12;
+    const minNum = parseInt(minStr ?? "", 10) || 0;
 
     const solar = Solar.fromYmdHms(yearNum, monthNum, dayNum, hourNum, minNum, 0);
     const lunar = solar.getLunar();
@@ -164,8 +164,8 @@ export function calculateBaZi(birthDate: string, birthTime: string, gender: 'M' 
       cyclesToMap.forEach((cycleItem) => {
         const gz = cycleItem.getGanZhi();
         if (gz && gz.length >= 2) {
-          const s = getStemByHanzi(gz[0]);
-          const b = getBranchByHanzi(gz[1]);
+          const s = getStemByHanzi(gz[0]!);
+          const b = getBranchByHanzi(gz[1]!);
           luckCycles.push({
             startAge: cycleItem.getStartAge(),
             startYear: cycleItem.getStartYear(),
@@ -206,23 +206,23 @@ export function calculateBaZi(birthDate: string, birthTime: string, gender: 'M' 
 }
 
 function getFallbackBaZi(): BaZiChart {
-  const dm = STEMS[0]; // Jia Wood
+  const dm = STEMS[0]!; // Jia Wood
   return {
     birthDate: '1990-01-01',
     birthTime: '12:00',
     year: {
       name: 'Year Pillar',
       label: 'Ancestral Foundation',
-      stem: STEMS[5],
-      branch: BRANCHES[5],
+      stem: STEMS[5]!,
+      branch: BRANCHES[5]!,
       tenGod: 'Direct Wealth (Zheng Cai)',
       significance: 'External reputation and baseline generational market presence.',
     },
     month: {
       name: 'Month Pillar',
       label: 'Career / Execution Arena',
-      stem: STEMS[2],
-      branch: BRANCHES[0],
+      stem: STEMS[2]!,
+      branch: BRANCHES[0]!,
       tenGod: 'Creative Output (Shi Shen)',
       significance: 'Vocational engine and mid-career execution.',
     },
@@ -230,15 +230,15 @@ function getFallbackBaZi(): BaZiChart {
       name: 'Day Pillar',
       label: 'Core Self',
       stem: dm,
-      branch: BRANCHES[2],
+      branch: BRANCHES[2]!,
       tenGod: 'Day Master (Self)',
       significance: 'The core engine of your operating system.',
     },
     hour: {
       name: 'Hour Pillar',
       label: 'Legacy / Vision',
-      stem: STEMS[0],
-      branch: BRANCHES[6],
+      stem: STEMS[0]!,
+      branch: BRANCHES[6]!,
       tenGod: 'Companion (Bi Jian)',
       significance: 'Compound long-range investments and intellectual assets.',
     },
@@ -251,10 +251,10 @@ function getFallbackBaZi(): BaZiChart {
       Water: 15,
     },
     luckCycles: [
-      { startAge: 9, startYear: 1999, stem: STEMS[1], branch: BRANCHES[11], phaseTheme: 'Formative Wood exploration' },
-      { startAge: 19, startYear: 2009, stem: STEMS[0], branch: BRANCHES[10], phaseTheme: 'Pioneering structural foundation' },
-      { startAge: 29, startYear: 2019, stem: STEMS[9], branch: BRANCHES[9], phaseTheme: 'Strategic expansion and resource compounding' },
-      { startAge: 39, startYear: 2029, stem: STEMS[8], branch: BRANCHES[8], phaseTheme: 'Macro leadership and global momentum' },
+      { startAge: 9, startYear: 1999, stem: STEMS[1]!, branch: BRANCHES[11]!, phaseTheme: 'Formative Wood exploration' },
+      { startAge: 19, startYear: 2009, stem: STEMS[0]!, branch: BRANCHES[10]!, phaseTheme: 'Pioneering structural foundation' },
+      { startAge: 29, startYear: 2019, stem: STEMS[9]!, branch: BRANCHES[9]!, phaseTheme: 'Strategic expansion and resource compounding' },
+      { startAge: 39, startYear: 2029, stem: STEMS[8]!, branch: BRANCHES[8]!, phaseTheme: 'Macro leadership and global momentum' },
     ],
     strategicSummary: 'Jia (甲) The Pioneer. Natural gravity to architect long-range systems and rally high-performing teams.',
   };
