@@ -180,7 +180,7 @@ function Index() {
               <p className="mb-8 mt-4 opacity-75">
                 10-year cycle tracking, yearly timing guides and team compatibility. Free for early members.
               </p>
-              <div className="[&_input]:border-primary-foreground/30 [&_input]:bg-transparent [&_input]:text-primary-foreground [&_button]:bg-accent [&_button:hover]:bg-primary-foreground [&_button:hover]:text-primary [&_p]:text-primary-foreground">
+              <div className="[&_input[type=email]]:border-primary-foreground/30 [&_input[type=email]]:bg-transparent [&_input[type=email]]:text-primary-foreground [&_button[type=submit]]:bg-accent [&_button[type=submit]:hover]:bg-primary-foreground [&_button[type=submit]:hover]:text-primary [&_p]:text-primary-foreground">
                 <WaitlistForm />
               </div>
               <a href="#try" className="mt-6 inline-block text-sm underline underline-offset-4 opacity-75 hover:opacity-100">
