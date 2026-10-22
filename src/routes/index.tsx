@@ -65,6 +65,7 @@ function Index() {
           <a href="#how" className="hover:text-foreground">How it works</a>
           <a href="#elements" className="hover:text-foreground">Elements</a>
           <a href="#faq" className="hover:text-foreground">FAQ</a>
+          <a href="https://blog.scriptingdestiny.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">Blog</a>
         </nav>
         <a href="#try" className="rounded-full border border-foreground/40 px-4 py-2 text-sm font-medium transition hover:bg-foreground hover:text-background">
           Try it free
@@ -192,11 +193,8 @@ function Index() {
 
       <footer>
         <InkStroke className="mx-auto max-w-6xl px-5 sm:px-6" />
-        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-8 text-xs text-muted-foreground sm:flex-row sm:justify-between">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 text-xs text-muted-foreground">
           <span>© {new Date().getFullYear()} Scripting Destiny</span>
-          <a href="https://github.com/WAILENGL/Scripting-Destiny-MVP" target="_blank" rel="noopener noreferrer" className="hover:text-foreground">
-            Open-source on GitHub
-          </a>
         </div>
       </footer>
     </div>
