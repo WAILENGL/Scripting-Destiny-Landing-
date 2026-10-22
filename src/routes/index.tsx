@@ -50,7 +50,7 @@ const PURPOSE = [
 const FAQ = [
   { q: "What is BaZi?", a: "BaZi (“Eight Characters”) is a classical Chinese system that turns the moment of your birth into four pairs of characters — the Four Pillars. It describes your natural strengths and the timing cycles of your life." },
   { q: "Is this fortune-telling?", a: "No. Scripting Destiny is secular and practical. Your chart is a starting point, not a verdict — it helps you make deliberate choices instead of running on default." },
-  { q: "Do I need to know Chinese or astrology?", a: "Not at all. Every concept is translated into everyday language like The Pioneer or The Strategist." },
+  { q: "Do I need to know Chinese or astrology?", a: "Not at all. Every concept is translated into everyday language that is easy for modern users to understand." },
   { q: "Why does birth time matter?", a: "It sets your Hour Pillar — your long-range vision and legacy. If you don't know it, leave the default; your Day Master stays the same." },
 ];
 
