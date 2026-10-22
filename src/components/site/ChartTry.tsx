@@ -12,6 +12,14 @@ export const ELEMENT_BAR: Record<ElementType, string> = {
   Water: "bg-water",
 };
 
+export const ELEMENT_TEXT: Record<ElementType, string> = {
+  Wood: "text-wood",
+  Fire: "text-fire",
+  Earth: "text-earth",
+  Metal: "text-metal",
+  Water: "text-water",
+};
+
 export function ChartTry() {
   const [date, setDate] = useState("1990-06-15");
   const [time, setTime] = useState("12:00");
@@ -73,10 +81,20 @@ export function ChartTry() {
             <p className="eyebrow mb-2">Your eight characters</p>
             <div className="grid grid-cols-4 gap-1.5 rounded-lg border border-metal/40 p-1.5">
               {(["hour", "day", "month", "year"] as const).map((k) => (
-                <div key={k + "s"} className={`pillar-cell ${k === "day" ? "text-accent" : ""}`}>{chart[k].stem.hanzi}</div>
+                <div
+                  key={k + "s"}
+                  className={`pillar-cell ${ELEMENT_TEXT[chart[k].stem.element]} ${k === "day" ? "ring-1 ring-accent/60" : ""}`}
+                >
+                  {chart[k].stem.hanzi}
+                </div>
               ))}
               {(["hour", "day", "month", "year"] as const).map((k) => (
-                <div key={k + "b"} className="pillar-cell">{chart[k].branch.hanzi}</div>
+                <div
+                  key={k + "b"}
+                  className={`pillar-cell ${ELEMENT_TEXT[chart[k].branch.element]}`}
+                >
+                  {chart[k].branch.hanzi}
+                </div>
               ))}
             </div>
             <div className="mt-1.5 grid grid-cols-4 text-center text-[10px] uppercase tracking-widest text-muted-foreground">
