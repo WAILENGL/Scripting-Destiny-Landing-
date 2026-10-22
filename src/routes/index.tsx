@@ -5,7 +5,7 @@ import { WaitlistForm } from "@/components/site/WaitlistForm";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import enso from "@/assets/ink-enso.jpg";
 import { InkStroke, Reveal } from "@/components/site/Ink";
-import logo from "@/assets/scripting-destiny-logo.png.asset.json";
+import logo from "@/assets/logo.png";
 
 const TITLE = "Scripting Destiny — Know your nature. Time your moves.";
 const DESC =
@@ -59,7 +59,7 @@ function Index() {
     <div className="min-h-screen">
       <header className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 sm:px-6">
         <a href="#top" aria-label="Scripting Destiny home" className="block">
-          <img src={logo.url} alt="Scripting Destiny" className="h-10 w-auto sm:h-12" />
+          <img src={logo} alt="Scripting Destiny" className="h-10 w-auto sm:h-12" />
         </a>
         <nav className="hidden gap-8 text-sm text-muted-foreground md:flex">
           <a href="#how" className="hover:text-foreground">How it works</a>

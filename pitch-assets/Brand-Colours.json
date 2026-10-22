@@ -1,0 +1,42 @@
+{
+  "background": {
+    "css": "oklch(16% .008 60)",
+    "hex": "#100d0a"
+  },
+  "foreground": {
+    "css": "oklch(93% .018 85)",
+    "hex": "#ede7db"
+  },
+  "card": {
+    "css": "oklch(20% .009 60)",
+    "hex": "#191512"
+  },
+  "accent": {
+    "css": "oklch(79% .115 92)",
+    "hex": "#d5b85e"
+  },
+  "muted-foreground": {
+    "css": "oklch(70% .02 75)",
+    "hex": "#a69d91"
+  },
+  "wood": {
+    "css": "oklch(72% .085 145)",
+    "hex": "#83b384"
+  },
+  "fire": {
+    "css": "oklch(80% .115 90)",
+    "hex": "#daba61"
+  },
+  "earth": {
+    "css": "oklch(66% .06 72)",
+    "hex": "#a98d6a"
+  },
+  "metal": {
+    "css": "oklch(82% .012 250)",
+    "hex": "#bec5cc"
+  },
+  "water": {
+    "css": "oklch(68% .075 232)",
+    "hex": "#67a1bf"
+  }
+}
