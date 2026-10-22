@@ -128,7 +128,7 @@ function Index() {
         <section id="elements" className="bg-secondary">
           <div className="mx-auto max-w-6xl px-5 py-20 sm:px-6 sm:py-28">
             <p className="eyebrow">The five elements</p>
-            <h2 className="mt-3 max-w-xl font-serif text-4xl font-light leading-[1.05] tracking-tight sm:text-5xl">Everyone carries all five — in different measure.</h2>
+            <h2 className="mt-3 max-w-xl font-serif text-4xl font-light leading-[1.05] tracking-tight sm:text-5xl">Every chart is a unique balance — shaped by what is present, and what is missing.</h2>
             <div className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-5">
               {ELEMENTS.map((e) => (
                 <div key={e.k} className="bg-card p-6 last:col-span-2 sm:last:col-span-1">
