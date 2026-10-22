@@ -1,8 +1,0 @@
-[
-  {"capability":"code","source":"Vite React landing (AI Studio export)","outcome":"migrate","status":"verified","next_action":"none"},
-  {"capability":"bazi calculator","source":"lunar-typescript, client-side","outcome":"migrate","status":"verified","next_action":"none"},
-  {"capability":"early access form","source":"client-only confirmation, no storage","outcome":"preserve as-is","status":"verified","next_action":"optional: store signups in Lovable Cloud"},
-  {"capability":"Gemini AI","source":"@google/genai dependency, unused in code","outcome":"drop (no call sites)","status":"verified","next_action":"none"},
-  {"capability":"database/auth/records/schedules/webhooks","source":"none detected","outcome":"n/a","status":"verified","next_action":"none"},
-  {"capability":"metadata/SEO","source":"index.html","outcome":"migrate to route head","status":"verified","next_action":"none"}
-]
