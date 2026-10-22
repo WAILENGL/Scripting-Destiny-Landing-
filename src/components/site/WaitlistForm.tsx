@@ -28,7 +28,9 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
         formData.append("EMAIL", email.trim());
         formData.append("email_address_check", "");
         formData.append("locale", "en");
-        formData.append("SUBSTACK_OPTIN", substackOptin ? "1" : "0");
+        if (substackOptin) {
+          formData.append("SUBSTACK_OPTIN", "1");
+        }
 
         try {
           // Attempt direct fetch first (no-cors ensures request fires without CORS errors)
@@ -143,9 +145,13 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
         <input type="hidden" name="email_address_check" value="" />
         <input type="hidden" name="locale" value="en" />
         <input
-          type="hidden"
+          type="checkbox"
           name="SUBSTACK_OPTIN"
-          value={substackOptin ? "1" : "0"}
+          value="1"
+          checked={substackOptin}
+          readOnly
+          className="sr-only"
+          tabIndex={-1}
         />
 
         {/* Dual opt-in Substack checkbox */}
