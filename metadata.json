@@ -1,0 +1,6 @@
+{
+  "name": "Scripting Destiny",
+  "description": "The official website for Scripting Destiny — bridging classical Chinese metaphysics and BaZi with modern structural software engineering to decode your life strategy and timing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
