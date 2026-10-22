@@ -20,6 +20,14 @@ export const ELEMENT_TEXT: Record<ElementType, string> = {
   Water: "text-water",
 };
 
+export const ELEMENT_METALLIC: Record<ElementType, string> = {
+  Wood: "metallic-wood",
+  Fire: "metallic-fire",
+  Earth: "metallic-earth",
+  Metal: "metallic-metal",
+  Water: "metallic-water",
+};
+
 export function ChartTry() {
   const [date, setDate] = useState("1990-06-15");
   const [time, setTime] = useState("12:00");
@@ -66,7 +74,7 @@ export function ChartTry() {
       {chart && (
         <div id="result" className="mt-8 animate-in fade-in slide-in-from-bottom-2 duration-500 rule-top pt-8">
           <div className="flex items-start gap-5">
-            <span className="font-serif text-6xl leading-none gold">{chart.dayMaster.hanzi}</span>
+            <span className={`font-serif text-6xl leading-none ${ELEMENT_METALLIC[chart.dayMaster.element]}`}>{chart.dayMaster.hanzi}</span>
             <div>
               <p className="eyebrow">
                 {chart.dayMaster.pinyin} {chart.dayMaster.element} · You are
