@@ -173,7 +173,7 @@ function Index() {
               </Accordion>
             </div>
             <div id="waitlist" className="scroll-mt-8 rounded-2xl bg-primary p-10 text-primary-foreground">
-              <h2 className="font-serif text-4xl font-light leading-[1.05] tracking-tight sm:text-5xl leading-tight">
+              <h2 className="font-serif text-4xl font-light tracking-tight sm:text-5xl leading-tight">
                 The full app is <em>coming soon.</em>
               </h2>
               <p className="mb-8 mt-4 opacity-75">

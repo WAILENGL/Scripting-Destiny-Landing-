@@ -25,26 +25,16 @@ export function Reveal({ children, delay = 0, className = "" }: { children: Reac
   );
 }
 
-/** Hand-drawn ink brush divider that draws itself on scroll. */
+/** Clean straight divider that draws itself on scroll. */
 export function InkStroke({ className = "" }: { className?: string }) {
   return (
     <Reveal className={className}>
-      <svg viewBox="0 0 600 24" preserveAspectRatio="none" className="ink-stroke h-4 w-full text-foreground" aria-hidden>
+      <svg viewBox="0 0 600 2" preserveAspectRatio="none" className="ink-stroke h-px w-full text-border" aria-hidden>
         <path
-          d="M4 14 C 80 6, 160 18, 240 11 S 400 5, 470 12 S 560 16, 596 9"
+          d="M0 1 L 600 1"
           fill="none"
           stroke="currentColor"
-          strokeWidth="3.2"
-          strokeLinecap="round"
-          pathLength={1}
-        />
-        <path
-          d="M30 17 C 120 13, 260 19, 380 15"
-          fill="none"
-          stroke="currentColor"
-          strokeOpacity="0.35"
-          strokeWidth="1.2"
-          strokeLinecap="round"
+          strokeWidth="1.5"
           pathLength={1}
         />
       </svg>
