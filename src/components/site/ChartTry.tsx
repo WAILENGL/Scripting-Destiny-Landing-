@@ -1,5 +1,5 @@
-import { useState, type FormEvent } from "react";
-import { ArrowRight } from "lucide-react";
+import { useState, useRef, type FormEvent } from "react";
+import { ArrowRight, Calendar } from "lucide-react";
 import { calculateBaZi } from "@/lib/baziCalculator";
 import type { BaZiChart, ElementType } from "@/types/bazi";
 import { WaitlistForm } from "./WaitlistForm";
@@ -28,28 +28,15 @@ export const ELEMENT_METALLIC: Record<ElementType, string> = {
   Water: "metallic-water",
 };
 
-function getCurrentDate(): string {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
-
-function getCurrentTime(): string {
-  const now = new Date();
-  const hours = String(now.getHours()).padStart(2, "0");
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  return `${hours}:${minutes}`;
-}
-
 export function ChartTry() {
-  const [date, setDate] = useState(getCurrentDate);
-  const [time, setTime] = useState(getCurrentTime);
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("12:00");
   const [chart, setChart] = useState<BaZiChart | null>(null);
+  const datePickerRef = useRef<HTMLInputElement>(null);
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
+    if (!date.trim()) return;
     setChart(calculateBaZi(date, time));
     setTimeout(() => document.getElementById("result")?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 50);
   };
@@ -61,13 +48,47 @@ export function ChartTry() {
       <form onSubmit={submit} className="mt-6 grid gap-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
         <label className="grid gap-1.5 text-xs font-medium text-muted-foreground">
           Birth date
-          <input
-            type="date"
-            required
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className="h-11 rounded-lg border border-input bg-background px-3 text-sm text-foreground outline-none focus:border-accent"
-          />
+          <div className="relative flex items-center">
+            <input
+              type="text"
+              required
+              placeholder="DD-MM-YYYY"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              className="h-11 w-full rounded-lg border border-input bg-background px-3 pr-10 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-accent"
+            />
+            <button
+              type="button"
+              aria-label="Open calendar"
+              onClick={() => {
+                if (datePickerRef.current) {
+                  try {
+                    datePickerRef.current.showPicker();
+                  } catch {
+                    datePickerRef.current.focus();
+                  }
+                }
+              }}
+              className="absolute right-2.5 p-1 text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Calendar className="h-4 w-4" />
+            </button>
+            <input
+              ref={datePickerRef}
+              type="date"
+              tabIndex={-1}
+              aria-hidden="true"
+              className="sr-only"
+              onChange={(e) => {
+                if (e.target.value) {
+                  const [y, m, d] = e.target.value.split("-");
+                  if (y && m && d) {
+                    setDate(`${d}-${m}-${y}`);
+                  }
+                }
+              }}
+            />
+          </div>
         </label>
         <label className="grid gap-1.5 text-xs font-medium text-muted-foreground">
           Birth time <span className="sr-only">(optional)</span>

@@ -54,12 +54,26 @@ export function getTenGodName(dmStem: Stem, targetStem: Stem): string {
 
 export function calculateBaZi(birthDate: string, birthTime: string, gender: 'M' | 'F' = 'M'): BaZiChart {
   try {
-    const [yearStr, monthStr, dayStr] = birthDate.split('-');
-    const [hourStr, minStr] = (birthTime || '12:00').split(':');
+    let yearNum = 1990;
+    let monthNum = 1;
+    let dayNum = 1;
 
-    const yearNum = parseInt(yearStr ?? "", 10) || 1990;
-    const monthNum = parseInt(monthStr ?? "", 10) || 1;
-    const dayNum = parseInt(dayStr ?? "", 10) || 1;
+    const parts = (birthDate || '').trim().split(/[-/.]/);
+    if (parts.length === 3) {
+      if (parts[0].length === 4) {
+        // YYYY-MM-DD
+        yearNum = parseInt(parts[0], 10) || 1990;
+        monthNum = Math.min(12, Math.max(1, parseInt(parts[1], 10) || 1));
+        dayNum = Math.min(31, Math.max(1, parseInt(parts[2], 10) || 1));
+      } else if (parts[2].length === 4) {
+        // DD-MM-YYYY
+        dayNum = Math.min(31, Math.max(1, parseInt(parts[0], 10) || 1));
+        monthNum = Math.min(12, Math.max(1, parseInt(parts[1], 10) || 1));
+        yearNum = parseInt(parts[2], 10) || 1990;
+      }
+    }
+
+    const [hourStr, minStr] = (birthTime || '12:00').split(':');
     const hourNum = parseInt(hourStr ?? "", 10) || 12;
     const minNum = parseInt(minStr ?? "", 10) || 0;
 
