@@ -61,6 +61,40 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
   };
 
   if (done) {
+    if (compact) {
+      return (
+        <div className="rounded-xl border border-border/80 bg-card/60 p-5 text-foreground animate-in fade-in duration-300">
+          <div className="flex items-start gap-3">
+            <div className="rounded-full bg-accent/20 p-2 text-accent shrink-0 mt-0.5">
+              <MailCheck className="h-5 w-5 text-accent" />
+            </div>
+            <div>
+              <h4 className="font-serif text-lg font-medium leading-snug text-foreground">
+                Check your inbox to confirm
+              </h4>
+              <p className="mt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                We just sent a confirmation link to{" "}
+                <strong className="font-semibold text-foreground underline decoration-accent/60 underline-offset-2">
+                  {email}
+                </strong>
+                . Click the button inside to lock in your spot.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                <span className="inline-flex items-center gap-1 rounded-full bg-secondary/80 px-2.5 py-0.5 font-medium text-foreground border border-border/50">
+                  <Check className="h-3 w-3 text-wood" /> Waitlist Early Access
+                </span>
+                {substackOptin && (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-secondary/80 px-2.5 py-0.5 font-medium text-foreground border border-border/50">
+                    <Check className="h-3 w-3 text-wood" /> Substack Articles
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="rounded-xl border border-primary-foreground/20 bg-primary-foreground/5 p-5 text-primary-foreground animate-in fade-in duration-300">
         <div className="flex items-start gap-3">
@@ -157,17 +191,25 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
         {/* Dual opt-in Substack checkbox */}
         <div className="mt-3.5 flex items-start gap-2.5">
           <Checkbox
-            id="substack-optin"
+            id={compact ? "substack-optin-compact" : "substack-optin"}
             checked={substackOptin}
             onCheckedChange={(checked) => setSubstackOptin(checked === true)}
-            className="mt-0.5 border-primary-foreground/40 bg-transparent data-[state=checked]:bg-accent data-[state=checked]:border-accent data-[state=checked]:text-accent-foreground shadow-none"
+            className={
+              compact
+                ? "mt-0.5 border-muted-foreground/60 bg-transparent data-[state=checked]:bg-accent data-[state=checked]:border-accent data-[state=checked]:text-accent-foreground shadow-none"
+                : "mt-0.5 border-primary-foreground/40 bg-transparent data-[state=checked]:bg-accent data-[state=checked]:border-accent data-[state=checked]:text-accent-foreground shadow-none"
+            }
           />
           <label
-            htmlFor="substack-optin"
-            className="text-xs sm:text-sm text-primary-foreground/85 leading-normal cursor-pointer select-none"
+            htmlFor={compact ? "substack-optin-compact" : "substack-optin"}
+            className={
+              compact
+                ? "text-xs sm:text-sm text-foreground/90 leading-normal cursor-pointer select-none"
+                : "text-xs sm:text-sm text-primary-foreground/85 leading-normal cursor-pointer select-none"
+            }
           >
             Also send me occasional articles on timing & life cycles{" "}
-            <span className="opacity-60">(Substack)</span>
+            <span className={compact ? "text-muted-foreground" : "opacity-60"}>(Substack)</span>
           </label>
         </div>
 
