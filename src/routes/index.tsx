@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { ChartTry } from "@/components/site/ChartTry";
 import { WaitlistForm } from "@/components/site/WaitlistForm";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -12,6 +12,9 @@ const DESC =
   "Enter your birth date and discover your BaZi Day Master: your natural strengths, element balance and the 10-year cycles that shape your best timing.";
 
 export const Route = createFileRoute("/")({
+  validateSearch: (search: Record<string, unknown>): { confirmed?: string } => ({
+    confirmed: typeof search.confirmed === "string" ? search.confirmed : undefined,
+  }),
   head: () => ({
     meta: [
       { title: TITLE },
@@ -55,8 +58,18 @@ const FAQ = [
 ];
 
 function Index() {
+  const { confirmed } = Route.useSearch();
+
   return (
     <div className="min-h-screen">
+      {confirmed && (
+        <div className="bg-card/95 border-b border-accent/40 px-4 py-3 text-center text-xs sm:text-sm text-foreground flex items-center justify-center gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
+          <Check className="h-4 w-4 text-wood shrink-0" />
+          <span>
+            <strong>You're confirmed!</strong> Your spot on the early access waitlist is secured.
+          </span>
+        </div>
+      )}
       <header className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 sm:px-6">
         <a href="#top" aria-label="Scripting Destiny home" className="block">
           <img src={logo} alt="Scripting Destiny" className="h-10 w-auto sm:h-12" />
