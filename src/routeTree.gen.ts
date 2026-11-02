@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConfirmedRouteImport } from './routes/confirmed'
+import { Route as SurveyRouteImport } from './routes/survey'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const ConfirmedRoute = ConfirmedRouteImport.update({
   path: '/confirmed',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SurveyRoute = SurveyRouteImport.update({
+  id: '/survey',
+  path: '/survey',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/confirmed': typeof ConfirmedRoute
+  '/survey': typeof SurveyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/confirmed': typeof ConfirmedRoute
+  '/survey': typeof SurveyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/confirmed': typeof ConfirmedRoute
+  '/survey': typeof SurveyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/confirmed'
+  fullPaths: '/' | '/confirmed' | '/survey'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/confirmed'
-  id: '__root__' | '/' | '/confirmed'
+  to: '/' | '/confirmed' | '/survey'
+  id: '__root__' | '/' | '/confirmed' | '/survey'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ConfirmedRoute: typeof ConfirmedRoute
+  SurveyRoute: typeof SurveyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConfirmedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/survey': {
+      id: '/survey'
+      path: '/survey'
+      fullPath: '/survey'
+      preLoaderRoute: typeof SurveyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ConfirmedRoute: ConfirmedRoute,
+  SurveyRoute: SurveyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

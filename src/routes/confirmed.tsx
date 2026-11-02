@@ -58,7 +58,8 @@ function ConfirmedPage() {
 
           {/* Description */}
           <p className="mx-auto mt-5 max-w-lg text-base sm:text-lg leading-relaxed text-muted-foreground">
-            Your email is verified. When the full app opens, you will be among the first to receive access — with full 10-year cycle tracking and timing guides free for early members.
+            Your email is verified. When the full app opens, you will be among the first to receive
+            access — with full 10-year cycle tracking and timing guides free for early members.
           </p>
 
           {/* Status Badges */}
@@ -91,8 +92,21 @@ function ConfirmedPage() {
               rel="noopener noreferrer"
               className="inline-flex w-full sm:w-auto h-12 items-center justify-center gap-2 rounded-full border border-foreground/25 bg-transparent px-6 text-sm font-medium text-foreground transition hover:bg-foreground/10"
             >
-              <BookOpen className="h-4 w-4" /> Read our Substack <ArrowRight className="h-3.5 w-3.5 opacity-60" />
+              <BookOpen className="h-4 w-4" /> Read our Substack{" "}
+              <ArrowRight className="h-3.5 w-3.5 opacity-60" />
             </a>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-border/60">
+            <p className="text-xs text-muted-foreground mb-2.5">
+              Have 2 minutes to help shape what we build first?
+            </p>
+            <Link
+              to="/survey"
+              className="text-xs font-medium text-accent hover:underline inline-flex items-center gap-1"
+            >
+              Take our Life Clarity & Timing Inquiry <ArrowRight className="h-3 w-3" />
+            </Link>
           </div>
         </div>
       </main>
@@ -102,7 +116,9 @@ function ConfirmedPage() {
         <InkStroke className="mx-auto max-w-6xl px-5 sm:px-6" />
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 text-xs text-muted-foreground">
           <span>&copy; {new Date().getFullYear()} Scripting Destiny</span>
-          <span>Know your nature. Time your moves.</span>
+          <Link to="/survey" className="hover:text-foreground transition-colors">
+            Life Clarity Survey
+          </Link>
         </div>
       </footer>
     </div>
