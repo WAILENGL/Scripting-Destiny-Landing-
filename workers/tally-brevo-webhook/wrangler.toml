@@ -1,0 +1,12 @@
+name = "tally-brevo-webhook"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+# Deploy with:
+#   wrangler deploy
+#
+# Then set your secret (run once in your terminal):
+#   wrangler secret put BREVO_API_KEY
+#
+# After deploy, your webhook URL will be:
+#   https://tally-brevo-webhook.<your-subdomain>.workers.dev

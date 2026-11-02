@@ -1,0 +1,13 @@
+{
+  "name": "tally-brevo-webhook",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Worker: receives Tally survey webhooks and adds opt-in contacts to Brevo",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
