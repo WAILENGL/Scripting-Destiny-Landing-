@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { ArrowLeft, Sparkles } from "lucide-react";
 import logo from "@/assets/logo.png";
-import enso from "@/assets/ink-enso.jpg";
 import { InkStroke } from "@/components/site/Ink";
 
 declare global {
@@ -86,17 +85,7 @@ function SurveyPage() {
       </header>
 
       {/* Main Container */}
-      <main className="relative mx-auto my-6 w-full max-w-4xl px-4 sm:px-6">
-        {/* Subtle decorative Enso background */}
-        <img
-          src={enso}
-          alt=""
-          width={800}
-          height={800}
-          style={{ filter: "grayscale(1) invert(1) contrast(1.6) brightness(0.9)" }}
-          className="pointer-events-none absolute left-1/2 top-40 -z-10 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[600px] opacity-25 mix-blend-screen [mask-image:radial-gradient(circle,black_35%,transparent_70%)]"
-        />
-
+      <main className="mx-auto my-6 w-full max-w-4xl px-4 sm:px-6">
         <div className="text-center mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-medium text-accent">
             <Sparkles className="h-3.5 w-3.5 text-accent" />
