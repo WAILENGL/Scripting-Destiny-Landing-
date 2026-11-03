@@ -35,6 +35,30 @@ export const Route = createFileRoute("/survey")({
   component: SurveyPage,
 });
 
+// ── Constants ─────────────────────────────────────────────────────────────────
+
+/**
+ * Q: "How do you prefer to work with challenging information about yourself?"
+ * Maps answer label keywords → READING_PREFERENCE attribute value saved to Brevo.
+ */
+const READING_PREF_MAP: { keywords: string[]; value: string }[] = [
+  {
+    // "Give it to me straight — I'd rather have precision than reassurance"
+    keywords: ["straight", "precision", "reassurance", "raw read"],
+    value: "precision",
+  },
+  {
+    // "Help me find the growth edge in it — context and application matter more than the raw read"
+    keywords: ["growth edge", "application", "context", "growth"],
+    value: "application",
+  },
+  {
+    // "I want both the classical reading and how to work with it"
+    keywords: ["both", "classical reading", "work with it"],
+    value: "both",
+  },
+];
+
 // ── Types ──────────────────────────────────────────────────────────────────────
 
 interface TallyField {
@@ -61,10 +85,12 @@ async function upsertBrevoContact({
   email,
   openToChat,
   wantsTrial,
+  readingPreference,
 }: {
   email: string;
   openToChat: boolean;
   wantsTrial: boolean;
+  readingPreference: string | null;
 }): Promise<void> {
   const apiKey = BREVO_CONFIG.surveyApiKey;
   if (!apiKey) {
@@ -87,6 +113,7 @@ async function upsertBrevoContact({
         OPEN_TO_CHAT: openToChat,
         WANTS_TRIAL: wantsTrial,
         SURVEY_SOURCE: "tally-life-clarity",
+        ...(readingPreference ? { READING_PREFERENCE: readingPreference } : {}),
       },
     }),
   });
@@ -205,9 +232,31 @@ function SurveyPage() {
         ),
       );
 
+      // ── Detect reading preference from the multiple-choice question ──
+      // Matches "How do you prefer to work with challenging information about yourself?"
+      let readingPreference: string | null = null;
+      const prefField = findField(
+        fields,
+        (f) =>
+          f.label?.toLowerCase().includes("challenging") ||
+          f.label?.toLowerCase().includes("prefer to work with"),
+      );
+      if (prefField) {
+        const selected = (
+          Array.isArray(prefField.value) ? prefField.value.join(" ") : String(prefField.value ?? "")
+        ).toLowerCase();
+
+        for (const { keywords, value } of READING_PREF_MAP) {
+          if (keywords.some((kw) => selected.includes(kw))) {
+            readingPreference = value;
+            break;
+          }
+        }
+      }
+
       setBrevoState("saving");
       try {
-        await upsertBrevoContact({ email, openToChat, wantsTrial });
+        await upsertBrevoContact({ email, openToChat, wantsTrial, readingPreference });
         setBrevoState("saved");
       } catch (err) {
         console.error("[Survey] Brevo upsert failed:", err);
