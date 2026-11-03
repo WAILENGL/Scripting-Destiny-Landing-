@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Sparkles, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import logo from "@/assets/logo.png";
+import enso from "@/assets/ink-enso.jpg";
 import { InkStroke } from "@/components/site/Ink";
 import { BREVO_CONFIG } from "@/config/newsletter";
 
@@ -293,7 +294,20 @@ function SurveyPage() {
       </header>
 
       {/* Main Container */}
-      <main className="mx-auto my-6 w-full max-w-4xl px-4 sm:px-6">
+      <main className="relative mx-auto my-6 w-full max-w-4xl px-4 sm:px-6">
+        {/* Ambient Gold Radial Glow */}
+        <div className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-[550px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-gradient-to-b from-accent/15 via-accent/5 to-transparent blur-3xl" />
+
+        {/* Ambient Enso Watermark */}
+        <img
+          src={enso}
+          alt=""
+          width={800}
+          height={800}
+          style={{ filter: "grayscale(1) invert(1) contrast(1.6) brightness(0.9)" }}
+          className="pointer-events-none absolute -top-16 right-[-8%] -z-10 w-[320px] max-w-none opacity-20 mix-blend-screen [mask-image:radial-gradient(circle,black_40%,transparent_70%)] sm:w-[480px]"
+        />
+
         <div className="text-center mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-medium text-accent">
             <Sparkles className="h-3.5 w-3.5 text-accent" />
@@ -310,14 +324,14 @@ function SurveyPage() {
         </div>
 
         {/* Survey Embed Container */}
-        <div className="rounded-3xl border border-foreground/15 bg-card/75 p-3 sm:p-8 shadow-2xl backdrop-blur-md">
+        <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-card/85 p-2 sm:p-6 shadow-[0_24px_60px_rgba(0,0,0,0.65)] backdrop-blur-xl ring-1 ring-accent/10 transition-all">
           <iframe
             data-tally-src="https://tally.so/embed/Ge6Deo?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
             loading="lazy"
             width="100%"
-            height={700}
+            height={750}
             title="Scripting Destiny: Life Clarity & Timing Inquiry"
-            className="w-full border-0 min-h-[700px] transition-all"
+            className="w-full border-0 min-h-[750px] transition-all"
           />
         </div>
 
