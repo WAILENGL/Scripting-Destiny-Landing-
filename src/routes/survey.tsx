@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, Sparkles, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { InkStroke } from "@/components/site/Ink";
+import { BREVO_CONFIG } from "@/config/newsletter";
 
 declare global {
   interface Window {
@@ -15,6 +16,8 @@ declare global {
 const TITLE = "Life Clarity & Timing Inquiry — Scripting Destiny";
 const DESC =
   "Share your perspective on life clarity, personal crossroads, and timing to help shape the Scripting Destiny experience.";
+
+const TALLY_FORM_ID = "Ge6Deo";
 
 export const Route = createFileRoute("/survey")({
   head: () => ({
@@ -32,7 +35,91 @@ export const Route = createFileRoute("/survey")({
   component: SurveyPage,
 });
 
+// ── Types ──────────────────────────────────────────────────────────────────────
+
+interface TallyField {
+  key: string;
+  label: string;
+  type: string;
+  value: unknown;
+}
+
+interface TallySubmitPayload {
+  formId: string;
+  fields: TallyField[];
+}
+
+type BrevoState = "idle" | "saving" | "saved" | "error";
+
+// ── Brevo upsert ──────────────────────────────────────────────────────────────
+
+/**
+ * Adds (or updates) a contact in Brevo list 3 with their survey opt-in flags.
+ * Called client-side — Brevo CORS-allowlists scriptingdestiny.com.
+ */
+async function upsertBrevoContact({
+  email,
+  openToChat,
+  wantsTrial,
+}: {
+  email: string;
+  openToChat: boolean;
+  wantsTrial: boolean;
+}): Promise<void> {
+  const apiKey = BREVO_CONFIG.surveyApiKey;
+  if (!apiKey) {
+    console.warn("[Survey] VITE_BREVO_SURVEY_API_KEY not set — skipping Brevo upsert.");
+    return;
+  }
+
+  const res = await fetch("https://api.brevo.com/v3/contacts", {
+    method: "POST",
+    headers: {
+      "api-key": apiKey,
+      "Content-Type": "application/json",
+      accept: "application/json",
+    },
+    body: JSON.stringify({
+      email: email.trim().toLowerCase(),
+      updateEnabled: true, // upsert — safe if they already exist
+      listIds: [BREVO_CONFIG.listIdSurveyContacts],
+      attributes: {
+        OPEN_TO_CHAT: openToChat,
+        WANTS_TRIAL: wantsTrial,
+        SURVEY_SOURCE: "tally-life-clarity",
+      },
+    }),
+  });
+
+  if (!res.ok && res.status !== 204) {
+    const body = await res.text();
+    throw new Error(`Brevo ${res.status}: ${body}`);
+  }
+}
+
+// ── Tally field helpers ───────────────────────────────────────────────────────
+
+function findField(fields: TallyField[], matchFn: (f: TallyField) => boolean) {
+  return fields.find(matchFn);
+}
+
+function fieldValueTruthy(value: unknown): boolean {
+  if (typeof value === "boolean") return value;
+  if (typeof value === "string") {
+    const v = value.toLowerCase().trim();
+    return v === "true" || v === "yes" || v === "1";
+  }
+  if (Array.isArray(value)) return value.length > 0;
+  return Boolean(value);
+}
+
+// ── Component ─────────────────────────────────────────────────────────────────
+
 function SurveyPage() {
+  const [brevoState, setBrevoState] = useState<BrevoState>("idle");
+  const listenerRef = useRef<((e: MessageEvent) => void) | null>(null);
+
+  // Load Tally embed script
   useEffect(() => {
     const tallyScriptSrc = "https://tally.so/widgets/embed.js";
 
@@ -62,6 +149,78 @@ function SurveyPage() {
     } else {
       loadEmbeds();
     }
+  }, []);
+
+  // Listen for Tally form submission via postMessage
+  useEffect(() => {
+    const handler = async (e: MessageEvent) => {
+      let data: { event?: string; payload?: TallySubmitPayload } | null = null;
+
+      try {
+        data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+      } catch {
+        return; // not our message
+      }
+
+      if (!data || data.event !== "Tally.FormSubmitted") return;
+
+      const payload = data.payload;
+      if (!payload || payload.formId !== TALLY_FORM_ID) return;
+
+      const fields = payload.fields ?? [];
+
+      // ── Find the email field (Q10 email, type INPUT_EMAIL) ──
+      const emailField = findField(
+        fields,
+        (f) => f.type === "INPUT_EMAIL" || f.label?.toLowerCase().includes("email"),
+      );
+      const email = typeof emailField?.value === "string" ? emailField.value.trim() : "";
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        // No valid email supplied on Q10 — nothing to save
+        return;
+      }
+
+      // ── Detect opt-in checkboxes by label keywords ──
+      const openToChat = Boolean(
+        findField(
+          fields,
+          (f) =>
+            fieldValueTruthy(f.value) &&
+            (f.label?.toLowerCase().includes("chat") ||
+              f.label?.toLowerCase().includes("conversation") ||
+              f.label?.toLowerCase().includes("contact")),
+        ),
+      );
+
+      const wantsTrial = Boolean(
+        findField(
+          fields,
+          (f) =>
+            fieldValueTruthy(f.value) &&
+            (f.label?.toLowerCase().includes("trial") ||
+              f.label?.toLowerCase().includes("launch") ||
+              f.label?.toLowerCase().includes("notif") ||
+              f.label?.toLowerCase().includes("early access")),
+        ),
+      );
+
+      setBrevoState("saving");
+      try {
+        await upsertBrevoContact({ email, openToChat, wantsTrial });
+        setBrevoState("saved");
+      } catch (err) {
+        console.error("[Survey] Brevo upsert failed:", err);
+        setBrevoState("error");
+      }
+    };
+
+    window.addEventListener("message", handler);
+    listenerRef.current = handler;
+
+    return () => {
+      window.removeEventListener("message", handler);
+    };
   }, []);
 
   return (
@@ -112,6 +271,27 @@ function SurveyPage() {
             className="w-full border-0 min-h-[700px] transition-all"
           />
         </div>
+
+        {/* Brevo save status — only shown when an email is captured */}
+        {brevoState === "saving" && (
+          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground animate-in fade-in duration-200">
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            Saving your contact preferences…
+          </div>
+        )}
+        {brevoState === "saved" && (
+          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground animate-in fade-in duration-200">
+            <CheckCircle2 className="h-3.5 w-3.5 text-wood" />
+            Your preferences have been saved. We'll be in touch!
+          </div>
+        )}
+        {brevoState === "error" && (
+          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-destructive animate-in fade-in duration-200">
+            <AlertCircle className="h-3.5 w-3.5" />
+            Couldn't save your contact details — please email us directly if you'd like to be
+            reached.
+          </div>
+        )}
       </main>
 
       {/* Footer */}

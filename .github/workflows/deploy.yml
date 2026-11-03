@@ -31,6 +31,8 @@ jobs:
 
       - name: Build site
         run: npm run build
+        env:
+          VITE_BREVO_SURVEY_API_KEY: ${{ secrets.VITE_BREVO_SURVEY_API_KEY }}
 
       - name: Setup 404 for SPA routing
         run: cp dist/index.html dist/404.html
