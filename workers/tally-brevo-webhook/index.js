@@ -67,8 +67,8 @@ export default {
           }
         }
 
-        // 2. Check Question 9 (1-on-1 consultation interest)
-        if (label.includes("consultation") || label.includes("personal consultation") || label.includes("9.") || label.includes("7.") || label.includes("chat")) {
+        // 2. Check Question 10 (1-on-1 consultation interest)
+        if (label.includes("consultation") || label.includes("personal consultation") || label.includes("10.") || label.includes("9.") || label.includes("7.") || label.includes("chat")) {
           const answerText = typeof val === "string" ? val : (Array.isArray(val) ? val.join(", ") : "");
           if (answerText.toLowerCase().includes("yes") || answerText.toLowerCase().includes("love to be considered")) {
             isYesToQ7 = true;
