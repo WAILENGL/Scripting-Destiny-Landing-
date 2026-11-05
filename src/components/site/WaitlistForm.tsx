@@ -96,7 +96,7 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
     }
 
     return (
-      <div className="rounded-xl border border-accent/30 bg-card p-5 text-foreground shadow-sm dark:border-primary-foreground/20 dark:bg-primary-foreground/5 dark:text-primary-foreground animate-in fade-in duration-300">
+      <div className="rounded-xl border border-primary-foreground/20 bg-primary-foreground/5 p-5 text-primary-foreground animate-in fade-in duration-300">
         <div className="flex items-start gap-3">
           <div className="rounded-full bg-accent/20 p-2 text-accent shrink-0 mt-0.5">
             <MailCheck className="h-5 w-5 text-accent" />
@@ -105,7 +105,7 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
             <h4 className="font-serif text-lg font-medium leading-snug">
               {t.waitlist.inboxConfirmTitle}
             </h4>
-            <p className="mt-1 text-xs sm:text-sm text-muted-foreground dark:text-primary-foreground/80 leading-relaxed">
+            <p className="mt-1 text-xs sm:text-sm opacity-80 leading-relaxed">
               {t.waitlist.inboxConfirmDescPre}{" "}
               <strong className="font-semibold underline decoration-accent/60 underline-offset-2">
                 {email}
@@ -113,11 +113,11 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
               . {t.waitlist.inboxConfirmDescPost}
             </p>
             <div className="mt-3 flex flex-wrap gap-2 text-xs">
-              <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 font-medium text-foreground dark:bg-primary-foreground/10 dark:text-primary-foreground">
+              <span className="inline-flex items-center gap-1 rounded-full bg-primary-foreground/10 px-2.5 py-0.5 font-medium opacity-90">
                 <Check className="h-3 w-3 text-wood" /> {t.waitlist.badgeEarlyAccess}
               </span>
               {substackOptin && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 font-medium text-foreground dark:bg-primary-foreground/10 dark:text-primary-foreground">
+                <span className="inline-flex items-center gap-1 rounded-full bg-primary-foreground/10 px-2.5 py-0.5 font-medium opacity-90">
                   <Check className="h-3 w-3 text-wood" /> {t.waitlist.badgeSubstack}
                 </span>
               )}
@@ -197,7 +197,7 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
             className={
               compact
                 ? "mt-0.5 border-muted-foreground/60 bg-transparent data-[state=checked]:bg-accent data-[state=checked]:border-accent data-[state=checked]:text-accent-foreground shadow-none"
-                : "mt-0.5 border-input dark:border-primary-foreground/40 bg-transparent data-[state=checked]:bg-accent data-[state=checked]:border-accent data-[state=checked]:text-accent-foreground shadow-none"
+                : "mt-0.5 border-primary-foreground/40 bg-transparent data-[state=checked]:bg-accent data-[state=checked]:border-accent data-[state=checked]:text-accent-foreground shadow-none"
             }
           />
           <label
@@ -205,17 +205,11 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
             className={
               compact
                 ? "text-xs sm:text-sm text-foreground/90 leading-normal cursor-pointer select-none"
-                : "text-xs sm:text-sm text-foreground/90 dark:text-primary-foreground/85 leading-normal cursor-pointer select-none"
+                : "text-xs sm:text-sm text-primary-foreground/85 leading-normal cursor-pointer select-none"
             }
           >
             {t.waitlist.substackOptin}{" "}
-            <span
-              className={
-                compact
-                  ? "text-muted-foreground"
-                  : "text-muted-foreground dark:text-primary-foreground/60"
-              }
-            >
+            <span className={compact ? "text-muted-foreground" : "opacity-60"}>
               {t.waitlist.substackTag}
             </span>
           </label>

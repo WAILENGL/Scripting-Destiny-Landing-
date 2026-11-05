@@ -59,7 +59,7 @@ function ConfirmedPage() {
           className="enso-watermark pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[460px] 2xl:max-w-[650px] [mask-image:radial-gradient(circle,black_35%,transparent_70%)]"
         />
 
-        <div className="rounded-3xl border border-border/80 dark:border-foreground/15 bg-card/90 p-8 sm:p-12 2xl:p-16 shadow-xl dark:shadow-2xl backdrop-blur-sm">
+        <div className="rounded-3xl border border-foreground/15 bg-card/85 p-8 sm:p-12 2xl:p-16 shadow-2xl backdrop-blur-sm">
           {/* Eyebrow */}
           <p className="eyebrow text-accent">{t.confirmed.badge}</p>
 
