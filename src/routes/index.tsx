@@ -87,48 +87,54 @@ function Index() {
           </span>
         </div>
       )}
-      <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-background/85 border-b border-border/30 transition-colors duration-300">
-        <div className="site-container flex items-center justify-between py-3.5 sm:py-4 2xl:py-5">
-          <a href="#top" aria-label="Scripting Destiny home" className="block">
-            <img
-              src={logo}
-              alt="Scripting Destiny"
-              className="brand-logo h-9 w-auto sm:h-11 2xl:h-13 transition-all"
-            />
-          </a>
-          <nav className="hidden gap-8 2xl:gap-12 3xl:gap-16 text-sm 2xl:text-base text-muted-foreground md:flex">
-            <a href="#how" className="hover:text-foreground transition-colors">
-              {t.nav.howItWorks}
+      {view !== "chart-result" && (
+        <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-background/85 border-b border-border/30 transition-colors duration-300">
+          <div className="site-container flex items-center justify-between py-3.5 sm:py-4 2xl:py-5">
+            <a href="#top" aria-label="Scripting Destiny home" className="block">
+              <img
+                src={logo}
+                alt="Scripting Destiny"
+                className="brand-logo h-9 w-auto sm:h-11 2xl:h-13 transition-all"
+              />
             </a>
-            <a href="#elements" className="hover:text-foreground transition-colors">
-              {t.nav.elements}
-            </a>
-            <a href="#faq" className="hover:text-foreground transition-colors">
-              {t.nav.faq}
-            </a>
-            <a
-              href="https://blog.scriptingdestiny.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-foreground transition-colors"
-            >
-              {t.nav.blog}
-            </a>
-          </nav>
-          <div className="flex items-center gap-2 sm:gap-3 2xl:gap-4">
-            <LanguageToggle />
-            <ThemeToggle />
-            <a
-              href="#try"
-              className="rounded-full border border-foreground/40 px-3.5 py-1.5 2xl:px-5 2xl:py-2 text-xs sm:text-sm 2xl:text-base font-medium transition hover:bg-foreground hover:text-background shadow-sm"
-            >
-              {t.nav.tryItFree}
-            </a>
+            <nav className="hidden gap-8 2xl:gap-12 3xl:gap-16 text-sm 2xl:text-base text-muted-foreground md:flex">
+              <a href="#how" className="hover:text-foreground transition-colors">
+                {t.nav.howItWorks}
+              </a>
+              <a href="#elements" className="hover:text-foreground transition-colors">
+                {t.nav.elements}
+              </a>
+              <a href="#faq" className="hover:text-foreground transition-colors">
+                {t.nav.faq}
+              </a>
+              <a
+                href="https://blog.scriptingdestiny.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors"
+              >
+                {t.nav.blog}
+              </a>
+            </nav>
+            <div className="flex items-center gap-2 sm:gap-3 2xl:gap-4">
+              <LanguageToggle />
+              <ThemeToggle />
+              <a
+                href="#try"
+                className="rounded-full border border-foreground/40 px-3.5 py-1.5 2xl:px-5 2xl:py-2 text-xs sm:text-sm 2xl:text-base font-medium transition hover:bg-foreground hover:text-background shadow-sm"
+              >
+                {t.nav.tryItFree}
+              </a>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      )}
 
-      {view === "chart" || view === "free-chart" ? (
+      {view === "chart-result" ? (
+        <main className="site-container py-6 max-w-md">
+          <ChartTry />
+        </main>
+      ) : view === "chart" || view === "free-chart" ? (
         <main className="site-container py-6 sm:py-10 max-w-2xl">
           <ChartTry />
         </main>

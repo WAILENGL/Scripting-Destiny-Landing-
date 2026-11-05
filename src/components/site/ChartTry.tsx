@@ -74,6 +74,87 @@ export function ChartTry() {
   };
 
   const stemInfo = chart ? getStem(chart.dayMaster.index) : null;
+  const isResultOnly = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("view") === "chart-result";
+
+  if (isResultOnly && chart && stemInfo) {
+    return (
+      <div id="result" className="animate-in fade-in duration-300">
+        <div className="flex items-start gap-5">
+          <span
+            className={`font-serif text-6xl leading-none ${ELEMENT_METALLIC[chart.dayMaster.element]}`}
+          >
+            {chart.dayMaster.hanzi}
+          </span>
+          <div>
+            <p className="eyebrow">
+              {chart.dayMaster.pinyin} ·{" "}
+              {isZh ? ELEMENT_ZH_MAP[chart.dayMaster.element] : chart.dayMaster.element} ·{" "}
+              {t.chart.youAre}
+            </p>
+            <h3 className="font-serif text-3xl font-light">{stemInfo.title}</h3>
+            <p className="text-sm italic text-muted-foreground">{stemInfo.archetype}</p>
+          </div>
+        </div>
+        <p className="mt-4 text-sm leading-relaxed">{stemInfo.description}</p>
+
+        <div className="mt-6">
+          <p className="eyebrow mb-2">{t.chart.eightCharacters}</p>
+          <div className="grid grid-cols-4 gap-2 rounded-xl border border-accent/25 dark:border-accent/20 p-2 bg-background/40 backdrop-blur-sm shadow-inner">
+            {(["hour", "day", "month", "year"] as const).map((k) => (
+              <div
+                key={k + "s"}
+                className={`pillar-cell ${ELEMENT_TEXT[chart[k].stem.element]} ${k === "day" ? "is-day-master" : ""}`}
+              >
+                {chart[k].stem.hanzi}
+              </div>
+            ))}
+            {(["hour", "day", "month", "year"] as const).map((k) => (
+              <div
+                key={k + "b"}
+                className={`pillar-cell ${ELEMENT_TEXT[chart[k].branch.element]}`}
+              >
+                {chart[k].branch.hanzi}
+              </div>
+            ))}
+          </div>
+          <div className="mt-1.5 grid grid-cols-4 text-center text-[10px] uppercase tracking-widest text-muted-foreground">
+            <span>{t.chart.hour}</span>
+            <span>{t.chart.day}</span>
+            <span>{t.chart.month}</span>
+            <span>{t.chart.year}</span>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <p className="eyebrow mb-2">{t.chart.fiveElementsBalance}</p>
+          <div className="grid gap-2.5 rounded-lg border border-border/60 bg-background/30 p-3">
+            {(Object.keys(chart.elementBalance) as ElementType[]).map((el) => (
+              <div key={el} className="flex items-center gap-3 text-xs">
+                <span className="w-12 text-muted-foreground font-medium">
+                  {isZh ? ELEMENT_ZH_MAP[el] : el}
+                </span>
+                <div className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
+                  <div
+                    className={`h-full ${ELEMENT_BAR[el]} transition-all duration-500`}
+                    style={{ width: `${chart.elementBalance[el]}%` }}
+                  />
+                </div>
+                <span className="w-8 text-right tabular-nums font-mono">
+                  {chart.elementBalance[el]}%
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-xl bg-card border border-accent/20 p-5">
+          <p className="text-sm font-semibold">{t.chart.wantFullTitle}</p>
+          <p className="mb-4 mt-1 text-xs text-muted-foreground">{t.chart.wantFullDesc}</p>
+          <WaitlistForm compact />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="rounded-2xl 2xl:rounded-3xl border border-accent/25 dark:border-accent/20 bg-card p-6 shadow-xl dark:shadow-[0_30px_60px_-30px_oklch(0_0_0/0.7)] sm:p-8 2xl:p-10 transition-all ring-1 ring-accent/10">
