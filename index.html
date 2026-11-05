@@ -13,7 +13,9 @@
     <script>
       (function () {
         try {
-          var saved = localStorage.getItem("sd-theme");
+          var params = new URLSearchParams(window.location.search);
+          var urlTheme = params.get("theme");
+          var saved = urlTheme || localStorage.getItem("sd-theme");
           var theme = saved === "light" ? "light" : "dark";
           var root = document.documentElement;
           var meta = document.getElementById("theme-color-meta");

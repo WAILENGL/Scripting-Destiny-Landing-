@@ -467,6 +467,9 @@ export const translations = {
 export function getInitialLanguage(): Language {
   if (typeof window === "undefined") return "en";
   try {
+    const params = new URLSearchParams(window.location.search);
+    const urlLang = params.get("lang");
+    if (urlLang === "en" || urlLang === "zh") return urlLang;
     const saved = localStorage.getItem(LANG_STORAGE_KEY);
     if (saved === "en" || saved === "zh") return saved;
     const browserLang = navigator.language.toLowerCase();

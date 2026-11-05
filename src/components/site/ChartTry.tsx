@@ -1,4 +1,4 @@
-import { useState, useRef, type FormEvent } from "react";
+import { useState, useRef, useEffect, type FormEvent } from "react";
 import { ArrowRight, Calendar } from "lucide-react";
 import { calculateBaZi } from "@/lib/baziCalculator";
 import type { BaZiChart, ElementType } from "@/types/bazi";
@@ -43,6 +43,24 @@ export function ChartTry() {
   const [chart, setChart] = useState<BaZiChart | null>(null);
   const datePickerRef = useRef<HTMLInputElement>(null);
   const { t, isZh, getStem } = useLanguage();
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const d = params.get("d");
+    const tParam = params.get("t");
+    if (d) {
+      setDate(d);
+      const chosenTime = tParam || "12:00";
+      if (tParam) setTime(tParam);
+      try {
+        const calculated = calculateBaZi(d, chosenTime);
+        setChart(calculated);
+      } catch (err) {
+        console.error("Failed to calculate BaZi from URL params:", err);
+      }
+    }
+  }, []);
 
   const submit = (e: FormEvent) => {
     e.preventDefault();

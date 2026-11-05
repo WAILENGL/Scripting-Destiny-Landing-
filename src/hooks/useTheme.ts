@@ -7,6 +7,9 @@ const THEME_STORAGE_KEY = "sd-theme";
 export function getInitialTheme(): Theme {
   if (typeof window === "undefined") return "dark";
   try {
+    const params = new URLSearchParams(window.location.search);
+    const urlTheme = params.get("theme");
+    if (urlTheme === "light" || urlTheme === "dark") return urlTheme;
     const saved = localStorage.getItem(THEME_STORAGE_KEY);
     if (saved === "light" || saved === "dark") return saved;
   } catch {

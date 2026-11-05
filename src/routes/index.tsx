@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { ChartTry } from "@/components/site/ChartTry";
 import { WaitlistForm } from "@/components/site/WaitlistForm";
@@ -54,6 +55,24 @@ const ELEMENT_COLORS: Record<string, string> = {
 function Index() {
   const { confirmed } = Route.useSearch();
   const { t, isZh } = useLanguage();
+  const view = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("view") : null;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const scrollTarget = params.get("scroll");
+    if (scrollTarget) {
+      const scrollFn = () => {
+        const el = document.getElementById(scrollTarget);
+        if (el) {
+          el.scrollIntoView({ behavior: "instant", block: "start" });
+        }
+      };
+      scrollFn();
+      setTimeout(scrollFn, 100);
+      setTimeout(scrollFn, 300);
+    }
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -109,7 +128,27 @@ function Index() {
         </div>
       </header>
 
-      <main id="top" className="overflow-x-clip">
+      {view === "chart" || view === "free-chart" ? (
+        <main className="site-container py-6 sm:py-10 max-w-2xl">
+          <ChartTry />
+        </main>
+      ) : view === "waitlist" ? (
+        <main className="site-container py-6 sm:py-10 max-w-xl">
+          <div className="rounded-2xl 2xl:rounded-3xl border border-accent/30 bg-card p-6 sm:p-10 text-foreground shadow-xl ring-1 ring-accent/15 relative overflow-hidden">
+            <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
+            <h2 className="font-serif text-3xl sm:text-4xl font-light tracking-tight leading-tight">
+              {t.waitlist.heading} <em className="gold">{t.waitlist.headingItalic}</em>
+            </h2>
+            <p className="mb-6 mt-3 text-sm 2xl:text-base text-muted-foreground">
+              {t.waitlist.description}
+            </p>
+            <div className="[&_input[type=email]]:border-input [&_input[type=email]]:bg-background [&_input[type=email]]:text-foreground [&_button[type=submit]]:bg-accent [&_button[type=submit]]:text-accent-foreground [&_button[type=submit]:hover]:brightness-110 [&_p]:text-foreground">
+              <WaitlistForm />
+            </div>
+          </div>
+        </main>
+      ) : (
+        <main id="top" className="overflow-x-clip">
         {/* Hero */}
         <section className="relative site-container pb-16 pt-6 sm:pb-20 sm:pt-8 lg:pt-12 2xl:pb-28 2xl:pt-16">
           <img
@@ -275,6 +314,7 @@ function Index() {
           </div>
         </section>
       </main>
+      )}
 
       <footer>
         <InkStroke className="site-container" />
