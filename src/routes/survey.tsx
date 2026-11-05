@@ -5,6 +5,8 @@ import logo from "@/assets/logo.png";
 import enso from "@/assets/ink-enso.jpg";
 import { InkStroke } from "@/components/site/Ink";
 import { ThemeToggle } from "@/components/site/ThemeToggle";
+import { LanguageToggle } from "@/components/site/LanguageToggle";
+import { useLanguage } from "@/hooks/useLanguage";
 import { BREVO_CONFIG } from "@/config/newsletter";
 
 declare global {
@@ -145,6 +147,7 @@ function fieldValueTruthy(value: unknown): boolean {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 function SurveyPage() {
+  const { t } = useLanguage();
   const [brevoState, setBrevoState] = useState<BrevoState>("idle");
   const listenerRef = useRef<((e: MessageEvent) => void) | null>(null);
 
@@ -290,13 +293,14 @@ function SurveyPage() {
           />
         </Link>
         <div className="flex items-center gap-2.5 sm:gap-3 2xl:gap-4">
+          <LanguageToggle />
           <ThemeToggle />
           <Link
             to="/"
             className="inline-flex items-center gap-1.5 rounded-full border border-foreground/20 px-3.5 py-1.5 2xl:px-5 2xl:py-2 text-xs sm:text-sm 2xl:text-base font-medium transition hover:border-foreground hover:bg-foreground hover:text-background"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            <span>Back to home</span>
+            <span>{t.survey.backHome}</span>
           </Link>
         </div>
       </header>
@@ -318,15 +322,14 @@ function SurveyPage() {
         <div className="text-center mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-medium text-accent">
             <Sparkles className="h-3.5 w-3.5 text-accent" />
-            <span>Community Inquiry</span>
+            <span>{t.survey.communityBadge}</span>
           </div>
 
           <h1 className="mt-4 font-serif text-3xl sm:text-5xl 2xl:text-6xl font-light tracking-tight text-foreground leading-tight">
-            Scripting Destiny: Life Clarity & Timing
+            {t.survey.headline}
           </h1>
           <p className="mx-auto mt-4 max-w-xl 2xl:max-w-2xl text-sm sm:text-base 2xl:text-lg leading-relaxed text-muted-foreground">
-            We are designing tools to help people decipher their innate nature and make timely,
-            aligned life decisions. Your answers directly shape what we build next.
+            {t.survey.description}
           </p>
         </div>
 
@@ -337,7 +340,7 @@ function SurveyPage() {
             loading="lazy"
             width="100%"
             height={750}
-            title="Scripting Destiny: Life Clarity & Timing Inquiry"
+            title={t.survey.headline}
             className="w-full border-0 min-h-[750px] transition-all"
           />
         </div>
@@ -346,20 +349,19 @@ function SurveyPage() {
         {brevoState === "saving" && (
           <div className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground animate-in fade-in duration-200">
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
-            Saving your contact preferences…
+            {t.survey.saving}
           </div>
         )}
         {brevoState === "saved" && (
           <div className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground animate-in fade-in duration-200">
             <CheckCircle2 className="h-3.5 w-3.5 text-wood" />
-            Your preferences have been saved. We'll be in touch!
+            {t.survey.saved}
           </div>
         )}
         {brevoState === "error" && (
           <div className="mt-4 flex items-center justify-center gap-2 text-xs text-destructive animate-in fade-in duration-200">
             <AlertCircle className="h-3.5 w-3.5" />
-            Couldn't save your contact details — please email us directly if you'd like to be
-            reached.
+            {t.survey.error}
           </div>
         )}
       </main>
@@ -368,8 +370,13 @@ function SurveyPage() {
       <footer className="w-full mt-12">
         <InkStroke className="site-container" />
         <div className="site-container flex items-center justify-between py-6 text-xs 2xl:text-sm text-muted-foreground">
-          <span>&copy; {new Date().getFullYear()} Scripting Destiny</span>
-          <span>Know your nature. Time your moves.</span>
+          <span>
+            &copy; {new Date().getFullYear()} {t.footer.copyright}
+          </span>
+          <div className="flex items-center gap-4">
+            <LanguageToggle />
+            <span>{t.footer.tagline}</span>
+          </div>
         </div>
       </footer>
     </div>

@@ -2,6 +2,7 @@ import { useState, useRef, type FormEvent } from "react";
 import { ArrowRight, Check, MailCheck, Loader2 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { BREVO_CONFIG } from "@/config/newsletter";
+import { useLanguage } from "@/hooks/useLanguage";
 
 export function WaitlistForm({ compact = false }: { compact?: boolean }) {
   const [email, setEmail] = useState("");
@@ -10,11 +11,12 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+  const { t, lang } = useLanguage();
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     if (!/^\S+@\S+\.\S+$/.test(email)) {
-      setError("Please enter a valid email address.");
+      setError(t.waitlist.errorEmail);
       return;
     }
     setError("");
@@ -27,7 +29,7 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
         const formData = new FormData();
         formData.append("EMAIL", email.trim());
         formData.append("email_address_check", "");
-        formData.append("locale", "en");
+        formData.append("locale", lang === "zh" ? "zh" : "en");
         if (substackOptin) {
           formData.append("SUBSTACK_OPTIN", "1");
         }
@@ -46,15 +48,13 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
           }
         }
       } else {
-        console.info(
-          `[WaitlistForm] Submitted: ${email}, Substack opt-in: ${substackOptin}`
-        );
+        console.info(`[WaitlistForm] Submitted: ${email}, Substack opt-in: ${substackOptin}`);
       }
 
       await new Promise((resolve) => setTimeout(resolve, 500));
       setDone(true);
     } catch {
-      setError("Unable to join waitlist. Please check your connection and try again.");
+      setError(t.waitlist.errorGeneric);
     } finally {
       setIsSubmitting(false);
     }
@@ -70,22 +70,22 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
             </div>
             <div>
               <h4 className="font-serif text-lg font-medium leading-snug text-foreground">
-                Check your inbox to confirm
+                {t.waitlist.inboxConfirmTitle}
               </h4>
               <p className="mt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                We just sent a confirmation link to{" "}
+                {t.waitlist.inboxConfirmDescPre}{" "}
                 <strong className="font-semibold text-foreground underline decoration-accent/60 underline-offset-2">
                   {email}
                 </strong>
-                . Click the button inside to lock in your spot.
+                . {t.waitlist.inboxConfirmDescPost}
               </p>
               <div className="mt-3 flex flex-wrap gap-2 text-xs">
                 <span className="inline-flex items-center gap-1 rounded-full bg-secondary/80 px-2.5 py-0.5 font-medium text-foreground border border-border/50">
-                  <Check className="h-3 w-3 text-wood" /> Waitlist Early Access
+                  <Check className="h-3 w-3 text-wood" /> {t.waitlist.badgeEarlyAccess}
                 </span>
                 {substackOptin && (
                   <span className="inline-flex items-center gap-1 rounded-full bg-secondary/80 px-2.5 py-0.5 font-medium text-foreground border border-border/50">
-                    <Check className="h-3 w-3 text-wood" /> Substack Articles
+                    <Check className="h-3 w-3 text-wood" /> {t.waitlist.badgeSubstack}
                   </span>
                 )}
               </div>
@@ -103,22 +103,22 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
           </div>
           <div>
             <h4 className="font-serif text-lg font-medium leading-snug">
-              Check your inbox to confirm
+              {t.waitlist.inboxConfirmTitle}
             </h4>
             <p className="mt-1 text-xs sm:text-sm opacity-80 leading-relaxed">
-              We just sent a confirmation link to{" "}
+              {t.waitlist.inboxConfirmDescPre}{" "}
               <strong className="font-semibold underline decoration-accent/60 underline-offset-2">
                 {email}
               </strong>
-              . Click the button inside to lock in your spot.
+              . {t.waitlist.inboxConfirmDescPost}
             </p>
             <div className="mt-3 flex flex-wrap gap-2 text-xs">
               <span className="inline-flex items-center gap-1 rounded-full bg-primary-foreground/10 px-2.5 py-0.5 font-medium opacity-90">
-                <Check className="h-3 w-3 text-wood" /> Waitlist Early Access
+                <Check className="h-3 w-3 text-wood" /> {t.waitlist.badgeEarlyAccess}
               </span>
               {substackOptin && (
                 <span className="inline-flex items-center gap-1 rounded-full bg-primary-foreground/10 px-2.5 py-0.5 font-medium opacity-90">
-                  <Check className="h-3 w-3 text-wood" /> Substack Articles
+                  <Check className="h-3 w-3 text-wood" /> {t.waitlist.badgeSubstack}
                 </span>
               )}
             </div>
@@ -152,7 +152,7 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
             name="EMAIL"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@email.com"
+            placeholder={t.waitlist.inputPlaceholder}
             aria-label="Email address"
             required
             disabled={isSubmitting}
@@ -165,11 +165,11 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="h-4 w-4 animate-spin" /> Reserving...
+                <Loader2 className="h-4 w-4 animate-spin" /> {t.waitlist.submittingBtn}
               </>
             ) : (
               <>
-                Join the waitlist <ArrowRight className="h-4 w-4" />
+                {t.waitlist.submitBtn} <ArrowRight className="h-4 w-4" />
               </>
             )}
           </button>
@@ -177,7 +177,7 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
 
         {/* Hidden inputs expected by Brevo */}
         <input type="hidden" name="email_address_check" value="" />
-        <input type="hidden" name="locale" value="en" />
+        <input type="hidden" name="locale" value={lang === "zh" ? "zh" : "en"} />
         <input
           type="checkbox"
           name="SUBSTACK_OPTIN"
@@ -208,8 +208,10 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
                 : "text-xs sm:text-sm text-primary-foreground/85 leading-normal cursor-pointer select-none"
             }
           >
-            Also send me occasional articles on timing & life cycles{" "}
-            <span className={compact ? "text-muted-foreground" : "opacity-60"}>(Substack)</span>
+            {t.waitlist.substackOptin}{" "}
+            <span className={compact ? "text-muted-foreground" : "opacity-60"}>
+              {t.waitlist.substackTag}
+            </span>
           </label>
         </div>
 

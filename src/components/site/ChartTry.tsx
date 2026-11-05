@@ -2,6 +2,7 @@ import { useState, useRef, type FormEvent } from "react";
 import { ArrowRight, Calendar } from "lucide-react";
 import { calculateBaZi } from "@/lib/baziCalculator";
 import type { BaZiChart, ElementType } from "@/types/bazi";
+import { useLanguage } from "@/hooks/useLanguage";
 import { WaitlistForm } from "./WaitlistForm";
 
 export const ELEMENT_BAR: Record<ElementType, string> = {
@@ -28,11 +29,20 @@ export const ELEMENT_METALLIC: Record<ElementType, string> = {
   Water: "metallic-water",
 };
 
+const ELEMENT_ZH_MAP: Record<ElementType, string> = {
+  Wood: "木",
+  Fire: "火",
+  Earth: "土",
+  Metal: "金",
+  Water: "水",
+};
+
 export function ChartTry() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("12:00");
   const [chart, setChart] = useState<BaZiChart | null>(null);
   const datePickerRef = useRef<HTMLInputElement>(null);
+  const { t, isZh, getStem } = useLanguage();
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
@@ -45,28 +55,30 @@ export function ChartTry() {
     );
   };
 
+  const stemInfo = chart ? getStem(chart.dayMaster.index) : null;
+
   return (
     <div className="rounded-2xl 2xl:rounded-3xl border border-border bg-card p-6 shadow-[0_20px_50px_-20px_oklch(0.2_0.01_60/0.12)] dark:shadow-[0_30px_60px_-30px_oklch(0_0_0/0.6)] sm:p-8 2xl:p-10 transition-all">
-      <p className="eyebrow">Free · takes 10 seconds</p>
-      <h2 className="mt-2 font-serif text-2xl 2xl:text-3xl">Find your Day Master</h2>
+      <p className="eyebrow">{t.chart.freeBadge}</p>
+      <h2 className="mt-2 font-serif text-2xl 2xl:text-3xl">{t.chart.heading}</h2>
       <form
         onSubmit={submit}
         className="mt-6 grid gap-4 sm:grid-cols-[1fr_1fr_auto] 2xl:gap-5 sm:items-end"
       >
         <label className="grid gap-1.5 text-xs 2xl:text-sm font-medium text-muted-foreground">
-          Birth date
+          {t.chart.birthDateLabel}
           <div className="relative flex items-center">
             <input
               type="text"
               required
-              placeholder="DD-MM-YYYY"
+              placeholder={t.chart.birthDatePlaceholder}
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className="h-11 2xl:h-12 w-full rounded-lg 2xl:rounded-xl border border-input bg-background px-3 2xl:px-4 pr-10 text-sm 2xl:text-base text-foreground outline-none placeholder:text-muted-foreground focus:border-accent"
             />
             <button
               type="button"
-              aria-label="Open calendar"
+              aria-label={t.chart.openCalendar}
               onClick={() => {
                 if (datePickerRef.current) {
                   try {
@@ -98,7 +110,8 @@ export function ChartTry() {
           </div>
         </label>
         <label className="grid gap-1.5 text-xs 2xl:text-sm font-medium text-muted-foreground">
-          Birth time <span className="sr-only">(optional)</span>
+          {t.chart.birthTimeLabel}{" "}
+          <span className="text-muted-foreground/75 font-normal">{t.chart.birthTimeOptional}</span>
           <input
             type="time"
             value={time}
@@ -110,11 +123,11 @@ export function ChartTry() {
           type="submit"
           className="gold-surface inline-flex h-11 2xl:h-12 items-center justify-center gap-2 rounded-lg 2xl:rounded-xl bg-accent px-5 2xl:px-7 text-sm 2xl:text-base font-semibold text-accent-foreground transition hover:bg-primary hover:text-primary-foreground"
         >
-          Reveal <ArrowRight className="h-4 w-4" />
+          {t.chart.revealBtn} <ArrowRight className="h-4 w-4" />
         </button>
       </form>
 
-      {chart && (
+      {chart && stemInfo && (
         <div
           id="result"
           className="mt-8 animate-in fade-in slide-in-from-bottom-2 duration-500 rule-top pt-8"
@@ -127,22 +140,22 @@ export function ChartTry() {
             </span>
             <div>
               <p className="eyebrow">
-                {chart.dayMaster.pinyin} {chart.dayMaster.element} · You are
+                {chart.dayMaster.pinyin} ·{" "}
+                {isZh ? ELEMENT_ZH_MAP[chart.dayMaster.element] : chart.dayMaster.element} ·{" "}
+                {t.chart.youAre}
               </p>
-              <h3 className="font-serif text-2xl 2xl:text-3xl">{chart.dayMaster.title}</h3>
+              <h3 className="font-serif text-2xl 2xl:text-3xl">{stemInfo.title}</h3>
               <p className="text-sm 2xl:text-base italic text-muted-foreground">
-                {chart.dayMaster.archetype}
+                {stemInfo.archetype}
               </p>
             </div>
           </div>
-          <p className="mt-4 text-sm 2xl:text-base leading-relaxed">
-            {chart.dayMaster.description}
-          </p>
+          <p className="mt-4 text-sm 2xl:text-base leading-relaxed">{stemInfo.description}</p>
 
           {/* Balanced side-by-side grid on tablet/desktop to reduce vertical stack */}
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6 2xl:gap-8 items-start">
             <div>
-              <p className="eyebrow mb-2">Your eight characters</p>
+              <p className="eyebrow mb-2">{t.chart.eightCharacters}</p>
               <div className="grid grid-cols-4 gap-1.5 rounded-lg 2xl:rounded-xl border border-border/80 dark:border-metal/40 p-1.5 bg-background/30">
                 {(["hour", "day", "month", "year"] as const).map((k) => (
                   <div
@@ -162,19 +175,21 @@ export function ChartTry() {
                 ))}
               </div>
               <div className="mt-1.5 grid grid-cols-4 text-center text-[10px] 2xl:text-xs uppercase tracking-widest text-muted-foreground">
-                <span>Hour</span>
-                <span>Day</span>
-                <span>Month</span>
-                <span>Year</span>
+                <span>{t.chart.hour}</span>
+                <span>{t.chart.day}</span>
+                <span>{t.chart.month}</span>
+                <span>{t.chart.year}</span>
               </div>
             </div>
 
             <div>
-              <p className="eyebrow mb-2">Five elements balance</p>
+              <p className="eyebrow mb-2">{t.chart.fiveElementsBalance}</p>
               <div className="grid gap-2.5 rounded-lg 2xl:rounded-xl border border-border/60 bg-background/30 p-3 2xl:p-4">
                 {(Object.keys(chart.elementBalance) as ElementType[]).map((el) => (
                   <div key={el} className="flex items-center gap-3 text-xs 2xl:text-sm">
-                    <span className="w-12 text-muted-foreground font-medium">{el}</span>
+                    <span className="w-12 text-muted-foreground font-medium">
+                      {isZh ? ELEMENT_ZH_MAP[el] : el}
+                    </span>
                     <div className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
                       <div
                         className={`h-full ${ELEMENT_BAR[el]} transition-all duration-500`}
@@ -191,10 +206,9 @@ export function ChartTry() {
           </div>
 
           <div className="mt-8 rounded-xl 2xl:rounded-2xl bg-secondary p-5 2xl:p-6">
-            <p className="text-sm 2xl:text-base font-semibold">Want the full reading?</p>
+            <p className="text-sm 2xl:text-base font-semibold">{t.chart.wantFullTitle}</p>
             <p className="mb-4 mt-1 text-sm 2xl:text-base text-muted-foreground">
-              Your 10-year cycles, best timing windows and team compatibility are coming in the full
-              app.
+              {t.chart.wantFullDesc}
             </p>
             <WaitlistForm compact />
           </div>
