@@ -334,7 +334,7 @@ function SurveyPage() {
         </div>
 
         {/* Survey Embed Container */}
-        <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-card/85 p-2 sm:p-6 2xl:p-8 shadow-[0_24px_60px_rgba(0,0,0,0.65)] backdrop-blur-xl ring-1 ring-accent/10 transition-all">
+        <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-card/85 p-2 sm:p-6 2xl:p-8 shadow-[0_20px_50px_-20px_oklch(0.2_0.01_60/0.1)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.65)] backdrop-blur-xl ring-1 ring-accent/10 transition-all">
           <iframe
             data-tally-src="https://tally.so/embed/Ge6Deo?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
             loading="lazy"

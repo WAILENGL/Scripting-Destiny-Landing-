@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scripting Destiny — Know your nature. Time your moves.</title>
     <meta name="description" content="Enter your birth date and discover your BaZi Day Master: your natural strengths, element balance and the 10-year cycles that shape your best timing." />
+    <meta name="theme-color" content="#18191e" id="theme-color-meta" />
     <link rel="icon" type="image/png" href="./favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,14 +16,17 @@
           var saved = localStorage.getItem("sd-theme");
           var theme = saved === "light" ? "light" : "dark";
           var root = document.documentElement;
+          var meta = document.getElementById("theme-color-meta");
           if (theme === "light") {
             root.classList.remove("dark");
             root.classList.add("light");
             root.style.colorScheme = "light";
+            if (meta) meta.setAttribute("content", "#fbf9f4");
           } else {
             root.classList.add("dark");
             root.classList.remove("light");
             root.style.colorScheme = "dark";
+            if (meta) meta.setAttribute("content", "#18191e");
           }
         } catch (e) {}
       })();
