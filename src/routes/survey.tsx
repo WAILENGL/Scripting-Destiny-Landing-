@@ -24,7 +24,7 @@ const DESC =
 // Default English form
 const TALLY_FORM_ID_EN = "Ge6Deo";
 // Mandarin form ID (configurable via VITE_TALLY_FORM_ID_ZH or url query ?zhForm=...)
-const ENV_TALLY_FORM_ID_ZH = (import.meta.env.VITE_TALLY_FORM_ID_ZH as string) || "";
+const ENV_TALLY_FORM_ID_ZH = (import.meta.env.VITE_TALLY_FORM_ID_ZH as string) || "4aB4Zd";
 
 export const Route = createFileRoute("/survey")({
   validateSearch: (search: Record<string, unknown>): { zhForm?: string; form?: string } => ({
