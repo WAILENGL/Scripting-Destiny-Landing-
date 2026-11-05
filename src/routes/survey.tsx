@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, Sparkles, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { ArrowLeft, Sparkles, CheckCircle2, AlertCircle, Loader2, Languages } from "lucide-react";
 import logo from "@/assets/logo.png";
 import enso from "@/assets/ink-enso.jpg";
 import { InkStroke } from "@/components/site/Ink";
@@ -21,7 +21,10 @@ const TITLE = "Life Clarity & Timing Inquiry — Scripting Destiny";
 const DESC =
   "Share your perspective on life clarity, personal crossroads, and timing to help shape the Scripting Destiny experience.";
 
-const TALLY_FORM_ID = "Ge6Deo";
+// Default English form
+const TALLY_FORM_ID_EN = "Ge6Deo";
+// Mandarin form ID (configurable via VITE_TALLY_FORM_ID_ZH or defaults to English form until created)
+const TALLY_FORM_ID_ZH = (import.meta.env.VITE_TALLY_FORM_ID_ZH as string) || "Ge6Deo";
 
 export const Route = createFileRoute("/survey")({
   head: () => ({
@@ -42,23 +45,40 @@ export const Route = createFileRoute("/survey")({
 // ── Constants ─────────────────────────────────────────────────────────────────
 
 /**
- * Q: "How do you prefer to work with challenging information about yourself?"
- * Maps answer label keywords → READING_PREFERENCE attribute value saved to Brevo.
+ * Maps answer label keywords (English & Mandarin) → READING_PREFERENCE attribute in Brevo
  */
 const READING_PREF_MAP: { keywords: string[]; value: string }[] = [
   {
-    // "Give it to me straight — I'd rather have precision than reassurance"
-    keywords: ["straight", "precision", "reassurance", "raw read"],
+    keywords: [
+      "straight",
+      "precision",
+      "reassurance",
+      "raw read",
+      "直言",
+      "直言不讳",
+      "精准",
+      "传统",
+      "古典",
+    ],
     value: "precision",
   },
   {
-    // "Help me find the growth edge in it — context and application matter more than the raw read"
-    keywords: ["growth edge", "application", "context", "growth"],
+    keywords: [
+      "growth edge",
+      "application",
+      "context",
+      "growth",
+      "成长",
+      "成长点",
+      "破局",
+      "应对",
+      "实操",
+      "策略",
+    ],
     value: "application",
   },
   {
-    // "I want both the classical reading and how to work with it"
-    keywords: ["both", "classical reading", "work with it"],
+    keywords: ["both", "classical reading", "work with it", "两者", "两者兼得", "兼得"],
     value: "both",
   },
 ];
@@ -81,20 +101,18 @@ type BrevoState = "idle" | "saving" | "saved" | "error";
 
 // ── Brevo upsert ──────────────────────────────────────────────────────────────
 
-/**
- * Adds (or updates) a contact in Brevo list 3 with their survey opt-in flags.
- * Called client-side — Brevo CORS-allowlists scriptingdestiny.com.
- */
 async function upsertBrevoContact({
   email,
   openToChat,
   wantsTrial,
   readingPreference,
+  surveyLanguage,
 }: {
   email: string;
   openToChat: boolean;
   wantsTrial: boolean;
   readingPreference: string | null;
+  surveyLanguage: string;
 }): Promise<void> {
   const apiKey = BREVO_CONFIG.surveyApiKey;
   if (!apiKey) {
@@ -111,12 +129,13 @@ async function upsertBrevoContact({
     },
     body: JSON.stringify({
       email: email.trim().toLowerCase(),
-      updateEnabled: true, // upsert — safe if they already exist
+      updateEnabled: true,
       listIds: [BREVO_CONFIG.listIdSurveyContacts],
       attributes: {
         OPEN_TO_CHAT: openToChat,
         WANTS_TRIAL: wantsTrial,
         SURVEY_SOURCE: "tally-life-clarity",
+        SURVEY_LANGUAGE: surveyLanguage,
         ...(readingPreference ? { READING_PREFERENCE: readingPreference } : {}),
       },
     }),
@@ -138,7 +157,7 @@ function fieldValueTruthy(value: unknown): boolean {
   if (typeof value === "boolean") return value;
   if (typeof value === "string") {
     const v = value.toLowerCase().trim();
-    return v === "true" || v === "yes" || v === "1";
+    return v === "true" || v === "yes" || v === "1" || v === "是" || v === "对";
   }
   if (Array.isArray(value)) return value.length > 0;
   return Boolean(value);
@@ -147,11 +166,14 @@ function fieldValueTruthy(value: unknown): boolean {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 function SurveyPage() {
-  const { t } = useLanguage();
+  const { t, lang, setLang, isZh } = useLanguage();
   const [brevoState, setBrevoState] = useState<BrevoState>("idle");
-  const listenerRef = useRef<((e: MessageEvent) => void) | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Load Tally embed script
+  const activeFormId = isZh ? TALLY_FORM_ID_ZH : TALLY_FORM_ID_EN;
+  const tallyEmbedUrl = `https://tally.so/embed/${activeFormId}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
+
+  // Reload Tally embed script and iframe whenever active form/language changes
   useEffect(() => {
     const tallyScriptSrc = "https://tally.so/widgets/embed.js";
 
@@ -181,7 +203,7 @@ function SurveyPage() {
     } else {
       loadEmbeds();
     }
-  }, []);
+  }, [activeFormId]);
 
   // Listen for Tally form submission via postMessage
   useEffect(() => {
@@ -191,29 +213,36 @@ function SurveyPage() {
       try {
         data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
       } catch {
-        return; // not our message
+        return;
       }
 
       if (!data || data.event !== "Tally.FormSubmitted") return;
 
       const payload = data.payload;
-      if (!payload || payload.formId !== TALLY_FORM_ID) return;
+      if (
+        !payload ||
+        (payload.formId !== TALLY_FORM_ID_EN && payload.formId !== TALLY_FORM_ID_ZH)
+      ) {
+        return;
+      }
 
       const fields = payload.fields ?? [];
 
-      // ── Find the email field (Q10 email, type INPUT_EMAIL) ──
+      // Email field detection (English or Chinese)
       const emailField = findField(
         fields,
-        (f) => f.type === "INPUT_EMAIL" || f.label?.toLowerCase().includes("email"),
+        (f) =>
+          f.type === "INPUT_EMAIL" ||
+          f.label?.toLowerCase().includes("email") ||
+          f.label?.includes("邮箱"),
       );
       const email = typeof emailField?.value === "string" ? emailField.value.trim() : "";
 
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        // No valid email supplied on Q10 — nothing to save
         return;
       }
 
-      // ── Detect opt-in checkboxes by label keywords ──
+      // Check for consultation/chat interest (English or Chinese)
       const openToChat = Boolean(
         findField(
           fields,
@@ -221,10 +250,14 @@ function SurveyPage() {
             fieldValueTruthy(f.value) &&
             (f.label?.toLowerCase().includes("chat") ||
               f.label?.toLowerCase().includes("conversation") ||
-              f.label?.toLowerCase().includes("contact")),
+              f.label?.toLowerCase().includes("contact") ||
+              f.label?.includes("一对一") ||
+              f.label?.includes("咨询") ||
+              f.label?.includes("深度交流")),
         ),
       );
 
+      // Check for launch notification / trial interest (English or Chinese)
       const wantsTrial = Boolean(
         findField(
           fields,
@@ -233,18 +266,23 @@ function SurveyPage() {
             (f.label?.toLowerCase().includes("trial") ||
               f.label?.toLowerCase().includes("launch") ||
               f.label?.toLowerCase().includes("notif") ||
-              f.label?.toLowerCase().includes("early access")),
+              f.label?.toLowerCase().includes("early access") ||
+              f.label?.includes("免费") ||
+              f.label?.includes("报告") ||
+              f.label?.includes("席位") ||
+              f.label?.includes("上线")),
         ),
       );
 
-      // ── Detect reading preference from the multiple-choice question ──
-      // Matches "How do you prefer to work with challenging information about yourself?"
+      // Detect reading preference
       let readingPreference: string | null = null;
       const prefField = findField(
         fields,
         (f) =>
           f.label?.toLowerCase().includes("challenging") ||
-          f.label?.toLowerCase().includes("prefer to work with"),
+          f.label?.toLowerCase().includes("prefer to work with") ||
+          f.label?.includes("挑战性信息") ||
+          f.label?.includes("面对命盘"),
       );
       if (prefField) {
         const selected = (
@@ -252,7 +290,7 @@ function SurveyPage() {
         ).toLowerCase();
 
         for (const { keywords, value } of READING_PREF_MAP) {
-          if (keywords.some((kw) => selected.includes(kw))) {
+          if (keywords.some((kw) => selected.includes(kw.toLowerCase()))) {
             readingPreference = value;
             break;
           }
@@ -261,7 +299,13 @@ function SurveyPage() {
 
       setBrevoState("saving");
       try {
-        await upsertBrevoContact({ email, openToChat, wantsTrial, readingPreference });
+        await upsertBrevoContact({
+          email,
+          openToChat,
+          wantsTrial,
+          readingPreference,
+          surveyLanguage: isZh ? "zh" : "en",
+        });
         setBrevoState("saved");
       } catch (err) {
         console.error("[Survey] Brevo upsert failed:", err);
@@ -270,12 +314,10 @@ function SurveyPage() {
     };
 
     window.addEventListener("message", handler);
-    listenerRef.current = handler;
-
     return () => {
       window.removeEventListener("message", handler);
     };
-  }, []);
+  }, [isZh]);
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-background text-foreground selection:bg-accent/30">
@@ -319,7 +361,7 @@ function SurveyPage() {
           className="enso-watermark pointer-events-none absolute -top-16 right-[-8%] -z-10 w-[320px] max-w-none [mask-image:radial-gradient(circle,black_40%,transparent_70%)] sm:w-[480px] 2xl:w-[650px]"
         />
 
-        <div className="text-center mb-8 sm:mb-12">
+        <div className="text-center mb-6 sm:mb-8">
           <div className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-medium text-accent">
             <Sparkles className="h-3.5 w-3.5 text-accent" />
             <span>{t.survey.communityBadge}</span>
@@ -333,10 +375,45 @@ function SurveyPage() {
           </p>
         </div>
 
+        {/* Survey Language Switcher Pill Banner */}
+        <div className="mx-auto max-w-md mb-6 flex items-center justify-between gap-3 rounded-full border border-accent/25 bg-card/75 p-1.5 px-3.5 shadow-sm backdrop-blur-md">
+          <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+            <Languages className="h-3.5 w-3.5 text-accent shrink-0" />
+            <span>{t.survey.langPrompt}:</span>
+          </div>
+          <div className="inline-flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => setLang("en")}
+              className={`inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
+                !isZh
+                  ? "bg-accent text-accent-foreground shadow-sm font-semibold"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              English
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang("zh")}
+              className={`inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
+                isZh
+                  ? "bg-accent text-accent-foreground shadow-sm font-semibold"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              中文 (Mandarin)
+            </button>
+          </div>
+        </div>
+
         {/* Survey Embed Container */}
-        <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-card/85 p-2 sm:p-6 2xl:p-8 shadow-[0_24px_60px_rgba(0,0,0,0.65)] backdrop-blur-xl ring-1 ring-accent/10 transition-all">
+        <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-card/85 p-2 sm:p-6 2xl:p-8 shadow-[0_20px_50px_-20px_oklch(0.2_0.01_60/0.1)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.65)] backdrop-blur-xl ring-1 ring-accent/10 transition-all">
           <iframe
-            data-tally-src="https://tally.so/embed/Ge6Deo?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            key={activeFormId}
+            ref={iframeRef}
+            src={tallyEmbedUrl}
+            data-tally-src={tallyEmbedUrl}
             loading="lazy"
             width="100%"
             height={750}
@@ -345,7 +422,7 @@ function SurveyPage() {
           />
         </div>
 
-        {/* Brevo save status — only shown when an email is captured */}
+        {/* Brevo save status */}
         {brevoState === "saving" && (
           <div className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground animate-in fade-in duration-200">
             <Loader2 className="h-3.5 w-3.5 animate-spin" />

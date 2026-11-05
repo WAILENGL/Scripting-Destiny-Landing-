@@ -295,6 +295,9 @@ export const translations = {
       error:
         "Couldn't save your contact details — please email us directly if you'd like to be reached.",
       backHome: "Back to home",
+      langPrompt: "Survey Language",
+      langEn: "English",
+      langZh: "中文 (Mandarin)",
     },
   },
 
@@ -454,6 +457,9 @@ export const translations = {
       saved: "您的偏好已保存，我们会在第一时间与您联络！",
       error: "保存联系信息失败，如需联络请直接发送邮件给我们。",
       backHome: "返回首页",
+      langPrompt: "问卷语言",
+      langEn: "English (英文)",
+      langZh: "中文 (Mandarin)",
     },
   },
 };
