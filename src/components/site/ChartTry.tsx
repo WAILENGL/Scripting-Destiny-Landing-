@@ -78,32 +78,32 @@ export function ChartTry() {
 
   if (isResultOnly && chart && stemInfo) {
     return (
-      <div id="result" className="animate-in fade-in duration-300">
-        <div className="flex items-start gap-5">
+      <div id="result" className="animate-in fade-in duration-300 w-full max-w-sm sm:max-w-md mx-auto">
+        <div className="flex items-start gap-4 sm:gap-5">
           <span
-            className={`font-serif text-6xl leading-none ${ELEMENT_METALLIC[chart.dayMaster.element]}`}
+            className={`font-serif text-5xl sm:text-6xl leading-none shrink-0 ${ELEMENT_METALLIC[chart.dayMaster.element]}`}
           >
             {chart.dayMaster.hanzi}
           </span>
-          <div>
-            <p className="eyebrow">
+          <div className="min-w-0">
+            <p className="eyebrow truncate">
               {chart.dayMaster.pinyin} ·{" "}
               {isZh ? ELEMENT_ZH_MAP[chart.dayMaster.element] : chart.dayMaster.element} ·{" "}
               {t.chart.youAre}
             </p>
-            <h3 className="font-serif text-3xl font-light">{stemInfo.title}</h3>
-            <p className="text-sm italic text-muted-foreground">{stemInfo.archetype}</p>
+            <h3 className="font-serif text-2xl sm:text-3xl font-light">{stemInfo.title}</h3>
+            <p className="text-xs sm:text-sm italic text-muted-foreground">{stemInfo.archetype}</p>
           </div>
         </div>
-        <p className="mt-4 text-sm leading-relaxed">{stemInfo.description}</p>
+        <p className="mt-3.5 sm:mt-4 text-xs sm:text-sm leading-relaxed">{stemInfo.description}</p>
 
-        <div className="mt-6">
+        <div className="mt-5 sm:mt-6">
           <p className="eyebrow mb-2">{t.chart.eightCharacters}</p>
-          <div className="grid grid-cols-4 gap-2 rounded-xl border border-accent/25 dark:border-accent/20 p-2 bg-background/40 backdrop-blur-sm shadow-inner">
+          <div className="grid grid-cols-4 gap-1.5 sm:gap-2 rounded-xl border border-accent/25 dark:border-accent/20 p-1.5 sm:p-2.5 bg-background/40 backdrop-blur-sm shadow-inner">
             {(["hour", "day", "month", "year"] as const).map((k) => (
               <div
                 key={k + "s"}
-                className={`pillar-cell ${ELEMENT_TEXT[chart[k].stem.element]} ${k === "day" ? "is-day-master" : ""}`}
+                className={`pillar-cell min-w-0 ${ELEMENT_TEXT[chart[k].stem.element]} ${k === "day" ? "is-day-master" : ""}`}
               >
                 {chart[k].stem.hanzi}
               </div>
@@ -111,7 +111,7 @@ export function ChartTry() {
             {(["hour", "day", "month", "year"] as const).map((k) => (
               <div
                 key={k + "b"}
-                className={`pillar-cell ${ELEMENT_TEXT[chart[k].branch.element]}`}
+                className={`pillar-cell min-w-0 ${ELEMENT_TEXT[chart[k].branch.element]}`}
               >
                 {chart[k].branch.hanzi}
               </div>
@@ -125,12 +125,12 @@ export function ChartTry() {
           </div>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-5 sm:mt-6">
           <p className="eyebrow mb-2">{t.chart.fiveElementsBalance}</p>
-          <div className="grid gap-2.5 rounded-lg border border-border/60 bg-background/30 p-3">
+          <div className="grid gap-2 sm:gap-2.5 rounded-lg border border-border/60 bg-background/30 p-2.5 sm:p-3">
             {(Object.keys(chart.elementBalance) as ElementType[]).map((el) => (
-              <div key={el} className="flex items-center gap-3 text-xs">
-                <span className="w-12 text-muted-foreground font-medium">
+              <div key={el} className="flex items-center gap-2.5 sm:gap-3 text-xs">
+                <span className="w-10 sm:w-12 text-muted-foreground font-medium">
                   {isZh ? ELEMENT_ZH_MAP[el] : el}
                 </span>
                 <div className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
@@ -147,9 +147,9 @@ export function ChartTry() {
           </div>
         </div>
 
-        <div className="mt-6 rounded-xl bg-card border border-accent/20 p-5">
+        <div className="mt-5 sm:mt-6 rounded-xl bg-card border border-accent/20 p-4 sm:p-5">
           <p className="text-sm font-semibold">{t.chart.wantFullTitle}</p>
-          <p className="mb-4 mt-1 text-xs text-muted-foreground">{t.chart.wantFullDesc}</p>
+          <p className="mb-3.5 sm:mb-4 mt-1 text-xs text-muted-foreground">{t.chart.wantFullDesc}</p>
           <WaitlistForm compact />
         </div>
       </div>

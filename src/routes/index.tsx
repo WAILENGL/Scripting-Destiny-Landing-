@@ -116,12 +116,12 @@ function Index() {
                 {t.nav.blog}
               </a>
             </nav>
-            <div className="flex items-center gap-2 sm:gap-3 2xl:gap-4">
+            <div className="flex items-center gap-1.5 sm:gap-3 2xl:gap-4 shrink-0">
               <LanguageToggle />
               <ThemeToggle />
               <a
                 href="#try"
-                className="rounded-full border border-foreground/40 px-3.5 py-1.5 2xl:px-5 2xl:py-2 text-xs sm:text-sm 2xl:text-base font-medium transition hover:bg-foreground hover:text-background shadow-sm"
+                className="rounded-full border border-foreground/40 px-3 py-1 sm:px-3.5 sm:py-1.5 2xl:px-5 2xl:py-2 text-xs sm:text-sm 2xl:text-base font-medium transition hover:bg-foreground hover:text-background shadow-sm whitespace-nowrap"
               >
                 {t.nav.tryItFree}
               </a>
@@ -131,7 +131,7 @@ function Index() {
       )}
 
       {view === "chart-result" ? (
-        <main className="site-container py-6 max-w-md">
+        <main className="site-container py-6 max-w-md mx-auto px-4 sm:px-6 overflow-x-hidden">
           <ChartTry />
         </main>
       ) : view === "chart" || view === "free-chart" ? (
@@ -156,7 +156,7 @@ function Index() {
       ) : (
         <main id="top" className="overflow-x-clip">
         {/* Hero */}
-        <section className="relative site-container pb-16 pt-6 sm:pb-20 sm:pt-8 lg:pt-12 2xl:pb-28 2xl:pt-16">
+        <section className="relative site-container pb-16 pt-6 sm:pb-20 sm:pt-8 lg:pt-12 2xl:pb-28 2xl:pt-16 overflow-x-clip">
           <img
             src={enso}
             alt=""
@@ -322,21 +322,23 @@ function Index() {
       </main>
       )}
 
-      <footer>
-        <InkStroke className="site-container" />
-        <div className="site-container flex flex-wrap items-center justify-between gap-4 py-8 2xl:py-12 text-xs 2xl:text-sm text-muted-foreground">
-          <span>
-            © {new Date().getFullYear()} {t.footer.copyright}
-          </span>
-          <div className="flex items-center gap-3 sm:gap-6 2xl:gap-8">
-            <LanguageToggle />
-            <ThemeToggle />
-            <Link to="/survey" className="hover:text-foreground transition-colors">
-              {t.footer.surveyLink}
-            </Link>
+      {view !== "chart-result" && (
+        <footer>
+          <InkStroke className="site-container" />
+          <div className="site-container flex flex-col sm:flex-row items-center justify-between gap-4 py-8 2xl:py-12 text-xs 2xl:text-sm text-muted-foreground">
+            <span>
+              © {new Date().getFullYear()} {t.footer.copyright}
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 2xl:gap-8">
+              <LanguageToggle />
+              <ThemeToggle />
+              <Link to="/survey" className="hover:text-foreground transition-colors whitespace-nowrap">
+                {t.footer.surveyLink}
+              </Link>
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      )}
     </div>
   );
 }
