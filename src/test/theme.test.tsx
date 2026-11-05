@@ -49,4 +49,19 @@ describe("Theme system", () => {
     expect(document.documentElement.classList.contains("dark")).toBe(true);
     expect(document.documentElement.classList.contains("light")).toBe(false);
   });
+
+  it("updates theme-color meta tag for mobile browser address bars", () => {
+    const meta = document.createElement("meta");
+    meta.id = "theme-color-meta";
+    meta.setAttribute("name", "theme-color");
+    document.head.appendChild(meta);
+
+    applyTheme("light");
+    expect(meta.getAttribute("content")).toBe("#fbf9f4");
+
+    applyTheme("dark");
+    expect(meta.getAttribute("content")).toBe("#131417");
+
+    meta.remove();
+  });
 });

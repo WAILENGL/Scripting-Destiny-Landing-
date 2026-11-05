@@ -253,20 +253,21 @@ function Index() {
             </div>
             <div
               id="waitlist"
-              className="scroll-mt-8 rounded-2xl 2xl:rounded-3xl bg-primary p-10 2xl:p-14 3xl:p-16 text-primary-foreground"
+              className="scroll-mt-8 rounded-2xl 2xl:rounded-3xl border border-accent/30 bg-card p-8 sm:p-10 2xl:p-14 3xl:p-16 text-foreground shadow-xl ring-1 ring-accent/15 transition-all relative overflow-hidden"
             >
+              <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/10 blur-3xl" />
               <h2 className="font-serif text-4xl font-light tracking-tight sm:text-5xl 2xl:text-6xl 3xl:text-7xl leading-tight">
-                {t.waitlist.heading} <em>{t.waitlist.headingItalic}</em>
+                {t.waitlist.heading} <em className="gold">{t.waitlist.headingItalic}</em>
               </h2>
-              <p className="mb-8 2xl:mb-10 mt-4 2xl:text-lg 3xl:text-xl opacity-75">
+              <p className="mb-8 2xl:mb-10 mt-4 2xl:text-lg 3xl:text-xl text-muted-foreground">
                 {t.waitlist.description}
               </p>
-              <div className="[&_input[type=email]]:border-primary-foreground/30 [&_input[type=email]]:bg-transparent [&_input[type=email]]:text-primary-foreground [&_button[type=submit]]:bg-accent [&_button[type=submit]:hover]:bg-primary-foreground [&_button[type=submit]:hover]:text-primary [&_p]:text-primary-foreground">
+              <div className="[&_input[type=email]]:border-input [&_input[type=email]]:bg-background [&_input[type=email]]:text-foreground [&_button[type=submit]]:bg-accent [&_button[type=submit]]:text-accent-foreground [&_button[type=submit]:hover]:brightness-110 [&_p]:text-foreground">
                 <WaitlistForm />
               </div>
               <a
                 href="#try"
-                className="mt-6 2xl:mt-8 inline-block text-sm 2xl:text-base underline underline-offset-4 opacity-75 hover:opacity-100"
+                className="mt-6 2xl:mt-8 inline-block text-sm 2xl:text-base text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
               >
                 {t.waitlist.orTryChart}
               </a>

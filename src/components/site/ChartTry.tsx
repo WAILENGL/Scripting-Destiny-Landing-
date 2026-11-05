@@ -58,7 +58,7 @@ export function ChartTry() {
   const stemInfo = chart ? getStem(chart.dayMaster.index) : null;
 
   return (
-    <div className="rounded-2xl 2xl:rounded-3xl border border-border bg-card p-6 shadow-[0_20px_50px_-20px_oklch(0.2_0.01_60/0.12)] dark:shadow-[0_30px_60px_-30px_oklch(0_0_0/0.6)] sm:p-8 2xl:p-10 transition-all">
+    <div className="rounded-2xl 2xl:rounded-3xl border border-accent/25 dark:border-accent/20 bg-card p-6 shadow-xl dark:shadow-[0_30px_60px_-30px_oklch(0_0_0/0.7)] sm:p-8 2xl:p-10 transition-all ring-1 ring-accent/10">
       <p className="eyebrow">{t.chart.freeBadge}</p>
       <h2 className="mt-2 font-serif text-2xl 2xl:text-3xl">{t.chart.heading}</h2>
       <form
@@ -156,11 +156,11 @@ export function ChartTry() {
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6 2xl:gap-8 items-start">
             <div>
               <p className="eyebrow mb-2">{t.chart.eightCharacters}</p>
-              <div className="grid grid-cols-4 gap-1.5 rounded-lg 2xl:rounded-xl border border-border/80 dark:border-metal/40 p-1.5 bg-background/30">
+              <div className="grid grid-cols-4 gap-2 rounded-xl border border-accent/25 dark:border-accent/20 p-2 bg-background/40 backdrop-blur-sm shadow-inner">
                 {(["hour", "day", "month", "year"] as const).map((k) => (
                   <div
                     key={k + "s"}
-                    className={`pillar-cell ${ELEMENT_TEXT[chart[k].stem.element]} ${k === "day" ? "ring-1 ring-accent/60" : ""}`}
+                    className={`pillar-cell ${ELEMENT_TEXT[chart[k].stem.element]} ${k === "day" ? "is-day-master" : ""}`}
                   >
                     {chart[k].stem.hanzi}
                   </div>

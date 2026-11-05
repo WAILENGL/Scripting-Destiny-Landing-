@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scripting Destiny vs. Tian Qi — Design Preview & Strategic Teardown</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-serif: "Cormorant Garamond", Georgia, serif;
+      --font-sans: "Manrope", system-ui, sans-serif;
+    }
+    .font-serif { font-family: var(--font-serif); }
+    .font-sans { font-family: var(--font-sans); }
+
+    /* Dark Mode Theme Tokens: Obsidian Sumi Inkstone */
+    html.dark {
+      --bg-page: #111215;
+      --bg-surface: #18191f;
+      --bg-card: #1c1d24;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(212, 175, 105, 0.35);
+      --text-main: #f5f2ea;
+      --text-muted: #9ba1ad;
+      --accent-gold: #dfb76c;
+      --accent-gold-hover: #edd18e;
+      --gold-gradient: linear-gradient(135deg, #eed290 0%, #caa157 50%, #ad833e 100%);
+      --tag-wood: #4e9a68;
+      --tag-fire: #d95c47;
+      --tag-earth: #b3864c;
+      --tag-metal: #adb3be;
+      --tag-water: #5c8fc2;
+    }
+
+    /* Light Mode Theme Tokens: Xuan Rice Paper & Sumi Ink */
+    html.light {
+      --bg-page: #fbf9f4;
+      --bg-surface: #f3efe6;
+      --bg-card: #ffffff;
+      --border-subtle: rgba(20, 20, 25, 0.09);
+      --border-gold: rgba(184, 137, 56, 0.4);
+      --text-main: #18191d;
+      --text-muted: #6b6f79;
+      --accent-gold: #b38536;
+      --accent-gold-hover: #c99a48;
+      --gold-gradient: linear-gradient(135deg, #c99a48 0%, #a8792c 100%);
+      --tag-wood: #2e7345;
+      --tag-fire: #b83d28;
+      --tag-earth: #8f652b;
+      --tag-metal: #555c68;
+      --tag-water: #2d6199;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .gold-text {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-btn {
+      background: var(--gold-gradient);
+      color: #111215;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(202, 161, 87, 0.25);
+      transition: all 0.25s ease;
+    }
+    .gold-btn:hover {
+      box-shadow: 0 6px 24px rgba(202, 161, 87, 0.4);
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .pillar-seal {
+      border: 1px solid var(--border-gold);
+      background: rgba(255,255,255,0.02);
+      transition: all 0.3s ease;
+    }
+    html.light .pillar-seal {
+      background: #faf8f3;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 sm:p-8 antialiased selection:bg-amber-500/20">
+
+  <!-- Top Sticky Review Bar -->
+  <header class="max-w-6xl mx-auto mb-10 flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)]/80 backdrop-blur-md shadow-lg">
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-500/20 text-amber-500 text-xs font-bold font-serif">SD</span>
+      <div>
+        <h1 class="text-sm font-semibold tracking-tight text-[var(--text-main)]">Scripting Destiny vs. Tian Qi AI</h1>
+        <p class="text-xs text-[var(--text-muted)]">Design Teardown & Proposed Executive Styling Preview</p>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="flex items-center gap-2.5">
+      <!-- Tab filter -->
+      <div class="inline-flex rounded-full p-1 bg-[var(--bg-card)] border border-[var(--border-subtle)] text-xs">
+        <button id="tab-comparison" onclick="switchTab('comparison')" class="px-3 py-1 rounded-full font-medium transition bg-amber-500/20 text-[var(--accent-gold)]">Side-by-Side</button>
+        <button id="tab-mockup" onclick="switchTab('mockup')" class="px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]">Live Redesign</button>
+        <button id="tab-memo" onclick="switchTab('memo')" class="px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]">Mentor Memo</button>
+      </div>
+
+      <!-- Theme Switcher -->
+      <button onclick="toggleTheme()" class="px-3 py-1.5 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-card)] text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition flex items-center gap-1.5 cursor-pointer">
+        <span id="theme-icon">☀️</span>
+        <span id="theme-label">Light Xuan Paper</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto space-y-12">
+
+    <!-- =================================================================================== -->
+    <!-- TAB 1: SIDE-BY-SIDE COMPARISON -->
+    <!-- =================================================================================== -->
+    <section id="view-comparison" class="space-y-8">
+      <div class="text-center max-w-2xl mx-auto">
+        <span class="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-semibold">Competitive Landscape</span>
+        <h2 class="mt-2 font-serif text-3xl sm:text-4xl text-[var(--text-main)] font-light">Two Opposing Visions of Chinese Metaphysics</h2>
+        <p class="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">
+          Tian Qi positions itself as an all-in-one occult fortune-telling portal. Scripting Destiny commands the opposite pole: an intellectual, secular executive timing system.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+        <!-- Left: Tian Qi Competitor Analysis -->
+        <div class="rounded-3xl border border-red-500/30 bg-[#1c140e] text-[#f2e6d8] p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-red-600/20 text-red-400 border border-red-500/40 text-[11px] font-semibold uppercase px-2.5 py-0.5 rounded-full">
+            Competitor: Tian Qi
+          </div>
+
+          <p class="text-xs uppercase tracking-widest text-[#caa157] font-serif">Master Sean Chan AI</p>
+          <h3 class="mt-2 text-2xl font-serif font-light text-[#f5ebd7]">"Occult Fortune-Telling Portal"</h3>
+
+          <!-- Competitor Snapshot Preview -->
+          <div class="mt-5 rounded-xl border border-white/10 bg-black/40 p-4 space-y-3">
+            <div class="flex items-center justify-between text-xs text-[#a89582] border-b border-white/5 pb-2">
+              <span>Dark Chocolate Palette (`#1c140e`)</span>
+              <span class="text-amber-400">8 Occult Systems in Sidebar</span>
+            </div>
+
+            <div class="text-xs space-y-2 text-[#d1c2b0]">
+              <div class="p-2.5 rounded bg-[#271d15] border border-amber-900/40">
+                <span class="font-serif text-amber-300">Four Pillars Dashboard:</span>
+                <p class="text-[11px] text-[#a4917c] mt-0.5">Heavy colorful Stem cards (Year 丙, Month 戊, Day 癸, Hour 庚) with Luopan compass wheel and Singapore time dials.</p>
+              </div>
+
+              <div class="p-2.5 rounded bg-[#f7eedf] text-[#241a12] border border-amber-300/30">
+                <span class="font-serif font-bold text-xs uppercase tracking-wider text-amber-900">Inverted Cream Banner:</span>
+                <p class="text-[11px] text-[#554637] mt-0.5">"Your readings, saved. Sign in to pick up any conversation..."</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weaknesses Checklist -->
+          <div class="mt-6 space-y-2.5 text-xs text-[#d1c2b0]">
+            <h4 class="font-semibold text-red-300 flex items-center gap-1.5">
+              <span>⚠️</span> Key Weaknesses to Capitalize On:
+            </h4>
+            <ul class="space-y-2 list-disc list-inside text-[12px] text-[#baa896] leading-relaxed">
+              <li><strong class="text-[#f5ebd7]">Too dense & mystical:</strong> Zi Wei, Qi Men, Horary, and Synastry crammed together overwhelms high-intent users seeking practical clarity.</li>
+              <li><strong class="text-[#f5ebd7]">Muddy TCM color scheme:</strong> Red-brown lacquer looks like a traditional Chinese medicine store or fortune-teller booth.</li>
+              <li><strong class="text-[#f5ebd7]">No Light Mode:</strong> Permanently locked into heavy dark occult vibes; unsuitable for daytime professional or mobile reading.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right: Scripting Destiny Proposed Direction -->
+        <div class="rounded-3xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-6 sm:p-8 shadow-2xl relative overflow-hidden ring-1 ring-amber-500/10">
+          <div class="absolute top-4 right-4 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[11px] font-semibold uppercase px-2.5 py-0.5 rounded-full">
+            Our Edge: Scripting Destiny
+          </div>
+
+          <p class="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-serif">Personal Operating System</p>
+          <h3 class="mt-2 text-2xl font-serif font-light text-[var(--text-main)]">"Zen Minimalist Decision Timing"</h3>
+
+          <!-- Scripting Destiny Snapshot Preview -->
+          <div class="mt-5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-4 space-y-3">
+            <div class="flex items-center justify-between text-xs text-[var(--text-muted)] border-b border-[var(--border-subtle)] pb-2">
+              <span>Obsidian Inkstone Slate (`#111215`)</span>
+              <span class="text-[var(--accent-gold)]">Laser-focused BaZi Timing</span>
+            </div>
+
+            <div class="text-xs space-y-2 text-[var(--text-main)]">
+              <div class="p-2.5 rounded bg-[var(--bg-card)] border border-[var(--border-gold)]">
+                <span class="font-serif text-[var(--accent-gold)]">Embossed Seal Pillar Cells:</span>
+                <p class="text-[11px] text-[var(--text-muted)] mt-0.5">Refined typographic seals paired with the 10 Day Master Psychological Archetypes (*The Pioneer, The Luminary*).</p>
+              </div>
+
+              <div class="p-2.5 rounded bg-[var(--bg-card)] border border-[var(--border-gold)] ring-1 ring-amber-500/20">
+                <span class="font-serif font-bold text-xs uppercase tracking-wider text-[var(--accent-gold)]">Architectural Luxury Waitlist:</span>
+                <p class="text-[11px] text-[var(--text-muted)] mt-0.5">Hairline gold framing with warm champagne CTA button — 100% free of Tian Qi's flat cream rectangle.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Our Superpowers Checklist -->
+          <div class="mt-6 space-y-2.5 text-xs text-[var(--text-main)]">
+            <h4 class="font-semibold text-emerald-400 flex items-center gap-1.5">
+              <span>✦</span> Scripting Destiny's Strategic Moats:
+            </h4>
+            <ul class="space-y-2 list-disc list-inside text-[12px] text-[var(--text-muted)] leading-relaxed">
+              <li><strong class="text-[var(--text-main)]">Modern Secular Luxury:</strong> Visual tone inspired by Kinfolk, Aesop, and Apple — zero incense or superstition.</li>
+              <li><strong class="text-[var(--text-main)]">Dual-Theme Superiority:</strong> Luminous Xuan Rice Paper light mode and deep Obsidian Slate dark mode give visitors agency and elevated taste.</li>
+              <li><strong class="text-[var(--text-main)]">Psychological Resonance:</strong> We translate ancient stems into clear leadership strengths, team compatibility, and 10-year season navigation.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =================================================================================== -->
+    <!-- TAB 2: LIVE REDESIGN MOCKUP -->
+    <!-- =================================================================================== -->
+    <section id="view-mockup" class="hidden space-y-10">
+      <div class="text-center max-w-2xl mx-auto">
+        <span class="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-semibold">Interactive Prototype</span>
+        <h2 class="mt-2 font-serif text-3xl sm:text-4xl text-[var(--text-main)] font-light">Proposed Visual Redesign</h2>
+        <p class="mt-3 text-sm text-[var(--text-muted)]">
+          Toggle light and dark themes using the top switch to experience how these changes look across both palettes.
+        </p>
+      </div>
+
+      <!-- Hero & Chart Section Preview -->
+      <div class="rounded-3xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6 sm:p-10 shadow-xl space-y-10">
+
+        <!-- Mini Brand Hero Header -->
+        <div class="text-center max-w-xl mx-auto space-y-3">
+          <p class="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-medium">Modern BaZi · Classical Astronomy, Made Practical</p>
+          <h3 class="font-serif text-4xl sm:text-5xl font-light leading-tight">
+            Know your nature. <br>
+            <span class="gold-text italic">Time your moves.</span>
+          </h3>
+          <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+            Enter your birth date and discover your Day Master: your innate leadership archetype, five-element balance, and upcoming 10-year decision seasons.
+          </p>
+        </div>
+
+        <!-- Four Pillars Redesigned Widget (vs. Tian Qi's software cards) -->
+        <div class="max-w-2xl mx-auto rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-6 sm:p-8 shadow-2xl space-y-6">
+          <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
+            <div>
+              <span class="text-xs text-[var(--accent-gold)] uppercase tracking-wider font-semibold">Sample Chart Analysis</span>
+              <h4 class="font-serif text-xl sm:text-2xl font-light">Your Four Classical Pillars</h4>
+            </div>
+            <span class="text-xs px-3 py-1 rounded-full border border-[var(--border-gold)] text-[var(--accent-gold)] bg-amber-500/10">10-Second Calculation</span>
+          </div>
+
+          <!-- The 4 Seal Stamps -->
+          <div class="grid grid-cols-4 gap-3 text-center">
+            <!-- Hour -->
+            <div class="pillar-seal p-3 rounded-xl">
+              <span class="block text-[11px] text-[var(--text-muted)] uppercase tracking-wider">Hour 时</span>
+              <div class="my-2 font-serif text-2xl sm:text-3xl text-[var(--tag-metal)] font-light">庚</div>
+              <div class="font-serif text-lg text-[var(--tag-metal)] opacity-80">申</div>
+              <span class="inline-block mt-2 text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-[var(--text-muted)]">Metal 金</span>
+            </div>
+            <!-- Day (Master) -->
+            <div class="pillar-seal p-3 rounded-xl border-amber-500/60 ring-2 ring-amber-500/30 bg-amber-500/5">
+              <span class="block text-[11px] text-[var(--accent-gold)] font-bold uppercase tracking-wider">Day 日主</span>
+              <div class="my-2 font-serif text-2xl sm:text-3xl text-[var(--tag-water)] font-light">癸</div>
+              <div class="font-serif text-lg text-[var(--tag-water)] opacity-80">未</div>
+              <span class="inline-block mt-2 text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-[var(--tag-water)] font-semibold">Water 水</span>
+            </div>
+            <!-- Month -->
+            <div class="pillar-seal p-3 rounded-xl">
+              <span class="block text-[11px] text-[var(--text-muted)] uppercase tracking-wider">Month 月</span>
+              <div class="my-2 font-serif text-2xl sm:text-3xl text-[var(--tag-earth)] font-light">戊</div>
+              <div class="font-serif text-lg text-[var(--tag-earth)] opacity-80">戌</div>
+              <span class="inline-block mt-2 text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-[var(--text-muted)]">Earth 土</span>
+            </div>
+            <!-- Year -->
+            <div class="pillar-seal p-3 rounded-xl">
+              <span class="block text-[11px] text-[var(--text-muted)] uppercase tracking-wider">Year 年</span>
+              <div class="my-2 font-serif text-2xl sm:text-3xl text-[var(--tag-fire)] font-light">丙</div>
+              <div class="font-serif text-lg text-[var(--tag-fire)] opacity-80">午</div>
+              <span class="inline-block mt-2 text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-[var(--text-muted)]">Fire 火</span>
+            </div>
+          </div>
+
+          <!-- Day Master Archetype Reveal (Our Signature Differentiator) -->
+          <div class="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs uppercase tracking-wider text-[var(--accent-gold)] font-medium">Day Master Archetype</span>
+              <span class="font-serif text-xs text-[var(--text-muted)]">癸水 · Yin Water</span>
+            </div>
+            <h5 class="font-serif text-2xl font-light text-[var(--text-main)]">The Strategist <span class="text-sm font-sans text-[var(--accent-gold)] font-normal ml-2">沉潜智略家</span></h5>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+              Deep, perceptive, and highly intuitive. Like an underground aquifer or morning mist, you read implicit currents before others notice them and formulate high-leverage moves with quiet mastery.
+            </p>
+          </div>
+        </div>
+
+        <!-- Redesigned Waitlist Card (No longer an inverted cream block!) -->
+        <div class="max-w-2xl mx-auto rounded-3xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-8 sm:p-10 shadow-2xl relative overflow-hidden ring-1 ring-amber-500/10">
+          <div class="max-w-lg space-y-3">
+            <span class="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-semibold">Priority Reservation</span>
+            <h4 class="font-serif text-3xl sm:text-4xl font-light text-[var(--text-main)]">
+              The full platform is <em class="gold-text">coming soon.</em>
+            </h4>
+            <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+              10-year cycle tracking, personalized annual timing guides, and team compatibility合盘. Free forever for early waitlist members.
+            </p>
+
+            <!-- Waitlist Form Input Mockup -->
+            <div class="pt-4 flex flex-col sm:flex-row gap-2">
+              <input type="email" placeholder="you@example.com" class="h-11 rounded-full px-5 text-xs bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-main)] outline-none flex-1 focus:border-[var(--accent-gold)]">
+              <button class="gold-btn h-11 px-7 rounded-full text-xs font-semibold">Reserve Your Spot →</button>
+            </div>
+            <p class="text-[11px] text-[var(--text-muted)] pt-1">
+              ✓ No credit card required &nbsp;·&nbsp; ✓ Free for early members &nbsp;·&nbsp; ✓ 100% secular
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =================================================================================== -->
+    <!-- TAB 3: MENTOR DECISION MEMO -->
+    <!-- =================================================================================== -->
+    <section id="view-memo" class="hidden space-y-8">
+      <div class="text-center max-w-2xl mx-auto">
+        <span class="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-semibold">Strategic Brief</span>
+        <h2 class="mt-2 font-serif text-3xl sm:text-4xl text-[var(--text-main)] font-light">Summary for Mentor Discussion</h2>
+        <p class="mt-3 text-sm text-[var(--text-muted)]">
+          Key points to walk through with mentors on why this visual direction wins.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-card)] p-6 space-y-3">
+          <div class="w-8 h-8 rounded-full bg-amber-500/20 text-[var(--accent-gold)] flex items-center justify-center font-serif text-base">1</div>
+          <h4 class="font-serif text-xl font-light text-[var(--text-main)]">Ditch the "Fortune-Teller" Palette</h4>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Tian Qi uses reddish-brown chocolate tones (`#1c140e`) reminiscent of traditional geomancy shops. Scripting Destiny shifts to <strong>Obsidian Sumi Slate & Champagne Gold</strong>, immediately conveying modern intellectual rigor.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-card)] p-6 space-y-3">
+          <div class="w-8 h-8 rounded-full bg-amber-500/20 text-[var(--accent-gold)] flex items-center justify-center font-serif text-base">2</div>
+          <h4 class="font-serif text-xl font-light text-[var(--text-main)]">Kill the Inverted Cream Box</h4>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Tian Qi has a prominent cream horizontal banner ("CONTINUE READING"). Our previous waitlist card mirrored that exact visual weight. Replacing it with an architectural hairline-gold card eliminates accidental brand confusion.
+          </p>
+        </div>
+
+        <div class="rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-card)] p-6 space-y-3">
+          <div class="w-8 h-8 rounded-full bg-amber-500/20 text-[var(--accent-gold)] flex items-center justify-center font-serif text-base">3</div>
+          <h4 class="font-serif text-xl font-light text-[var(--text-main)]">The Xuan Paper Light Mode Moat</h4>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Tian Qi cannot offer a compelling light mode because its design system is rooted in dark lacquer. Our <strong>Warm Xuan Rice Paper</strong> mode creates an instant, defensible identity that appeals to modern executives and readers.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Mentor Discussion Questions -->
+      <div class="rounded-3xl border border-[var(--border-gold)] bg-[var(--bg-surface)] p-6 sm:p-8 space-y-4">
+        <h4 class="font-serif text-2xl font-light text-[var(--text-main)]">Suggested Questions to Ask Your Mentors:</h4>
+        <ol class="space-y-3 text-xs sm:text-sm text-[var(--text-muted)] list-decimal list-inside leading-relaxed">
+          <li><strong>Positioning:</strong> "Does the Obsidian & Champagne Gold direction feel distinct enough from Tian Qi's dark brown occult dashboard?"</li>
+          <li><strong>Target Audience:</strong> "Do you agree that leading with Day Master psychological archetypes and life timing feels higher-trust than a generic 8-system astrology portal?"</li>
+          <li><strong>Light Mode Appeal:</strong> "Does having a dedicated Xuan Paper light mode make the product feel more like an editorial self-development tool (like MasterClass or Kinfolk)?"</li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function switchTab(tab) {
+      document.getElementById('view-comparison').classList.add('hidden');
+      document.getElementById('view-mockup').classList.add('hidden');
+      document.getElementById('view-memo').classList.add('hidden');
+
+      document.getElementById('tab-comparison').className = 'px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]';
+      document.getElementById('tab-mockup').className = 'px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]';
+      document.getElementById('tab-memo').className = 'px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]';
+
+      document.getElementById('view-' + tab).classList.remove('hidden');
+      document.getElementById('tab-' + tab).className = 'px-3 py-1 rounded-full font-medium transition bg-amber-500/20 text-[var(--accent-gold)]';
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      const label = document.getElementById('theme-label');
+      const icon = document.getElementById('theme-icon');
+
+      if (isDark) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        label.textContent = 'Dark Obsidian Slate';
+        icon.textContent = '🌙';
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        label.textContent = 'Light Xuan Paper';
+        icon.textContent = '☀️';
+      }
+    }
+  </script>
+</body>
+</html>

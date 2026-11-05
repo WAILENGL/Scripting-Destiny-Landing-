@@ -18,14 +18,17 @@ export function getInitialTheme(): Theme {
 export function applyTheme(theme: Theme) {
   if (typeof document === "undefined") return;
   const root = document.documentElement;
+  const metaThemeColor = document.getElementById("theme-color-meta");
   if (theme === "dark") {
     root.classList.add("dark");
     root.classList.remove("light");
     root.style.colorScheme = "dark";
+    if (metaThemeColor) metaThemeColor.setAttribute("content", "#131417");
   } else {
     root.classList.remove("dark");
     root.classList.add("light");
     root.style.colorScheme = "light";
+    if (metaThemeColor) metaThemeColor.setAttribute("content", "#fbf9f4");
   }
   try {
     localStorage.setItem(THEME_STORAGE_KEY, theme);

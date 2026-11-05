@@ -96,28 +96,28 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
     }
 
     return (
-      <div className="rounded-xl border border-primary-foreground/20 bg-primary-foreground/5 p-5 text-primary-foreground animate-in fade-in duration-300">
+      <div className="rounded-xl border border-accent/30 bg-card/90 p-5 text-foreground shadow-sm animate-in fade-in duration-300">
         <div className="flex items-start gap-3">
           <div className="rounded-full bg-accent/20 p-2 text-accent shrink-0 mt-0.5">
             <MailCheck className="h-5 w-5 text-accent" />
           </div>
           <div>
-            <h4 className="font-serif text-lg font-medium leading-snug">
+            <h4 className="font-serif text-lg font-medium leading-snug text-foreground">
               {t.waitlist.inboxConfirmTitle}
             </h4>
-            <p className="mt-1 text-xs sm:text-sm opacity-80 leading-relaxed">
+            <p className="mt-1 text-xs sm:text-sm text-muted-foreground leading-relaxed">
               {t.waitlist.inboxConfirmDescPre}{" "}
-              <strong className="font-semibold underline decoration-accent/60 underline-offset-2">
+              <strong className="font-semibold text-foreground underline decoration-accent/60 underline-offset-2">
                 {email}
               </strong>
               . {t.waitlist.inboxConfirmDescPost}
             </p>
             <div className="mt-3 flex flex-wrap gap-2 text-xs">
-              <span className="inline-flex items-center gap-1 rounded-full bg-primary-foreground/10 px-2.5 py-0.5 font-medium opacity-90">
+              <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 font-medium text-foreground border border-border/50">
                 <Check className="h-3 w-3 text-wood" /> {t.waitlist.badgeEarlyAccess}
               </span>
               {substackOptin && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-primary-foreground/10 px-2.5 py-0.5 font-medium opacity-90">
+                <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-0.5 font-medium text-foreground border border-border/50">
                   <Check className="h-3 w-3 text-wood" /> {t.waitlist.badgeSubstack}
                 </span>
               )}
@@ -161,7 +161,7 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex h-11 shrink-0 whitespace-nowrap items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:bg-accent disabled:opacity-50 cursor-pointer"
+            className="inline-flex h-11 shrink-0 whitespace-nowrap items-center justify-center gap-2 rounded-full bg-accent px-6 text-sm font-semibold text-accent-foreground transition hover:brightness-110 active:scale-95 disabled:opacity-50 cursor-pointer shadow-sm"
           >
             {isSubmitting ? (
               <>
@@ -194,24 +194,14 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
             id={compact ? "substack-optin-compact" : "substack-optin"}
             checked={substackOptin}
             onCheckedChange={(checked) => setSubstackOptin(checked === true)}
-            className={
-              compact
-                ? "mt-0.5 border-muted-foreground/60 bg-transparent data-[state=checked]:bg-accent data-[state=checked]:border-accent data-[state=checked]:text-accent-foreground shadow-none"
-                : "mt-0.5 border-primary-foreground/40 bg-transparent data-[state=checked]:bg-accent data-[state=checked]:border-accent data-[state=checked]:text-accent-foreground shadow-none"
-            }
+            className="mt-0.5 border-input data-[state=checked]:bg-accent data-[state=checked]:border-accent data-[state=checked]:text-accent-foreground shadow-none"
           />
           <label
             htmlFor={compact ? "substack-optin-compact" : "substack-optin"}
-            className={
-              compact
-                ? "text-xs sm:text-sm text-foreground/90 leading-normal cursor-pointer select-none"
-                : "text-xs sm:text-sm text-primary-foreground/85 leading-normal cursor-pointer select-none"
-            }
+            className="text-xs sm:text-sm text-foreground/90 leading-normal cursor-pointer select-none"
           >
             {t.waitlist.substackOptin}{" "}
-            <span className={compact ? "text-muted-foreground" : "opacity-60"}>
-              {t.waitlist.substackTag}
-            </span>
+            <span className="text-muted-foreground">{t.waitlist.substackTag}</span>
           </label>
         </div>
 
