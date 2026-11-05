@@ -23,10 +23,14 @@ const DESC =
 
 // Default English form
 const TALLY_FORM_ID_EN = "Ge6Deo";
-// Mandarin form ID (configurable via VITE_TALLY_FORM_ID_ZH or defaults to English form until created)
-const TALLY_FORM_ID_ZH = (import.meta.env.VITE_TALLY_FORM_ID_ZH as string) || "Ge6Deo";
+// Mandarin form ID (configurable via VITE_TALLY_FORM_ID_ZH or url query ?zhForm=...)
+const ENV_TALLY_FORM_ID_ZH = (import.meta.env.VITE_TALLY_FORM_ID_ZH as string) || "";
 
 export const Route = createFileRoute("/survey")({
+  validateSearch: (search: Record<string, unknown>): { zhForm?: string; form?: string } => ({
+    zhForm: typeof search.zhForm === "string" ? search.zhForm : undefined,
+    form: typeof search.form === "string" ? search.form : undefined,
+  }),
   head: () => ({
     meta: [
       { title: TITLE },
@@ -166,14 +170,19 @@ function fieldValueTruthy(value: unknown): boolean {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 function SurveyPage() {
-  const { t, lang, setLang, isZh } = useLanguage();
+  const { zhForm, form } = Route.useSearch();
+  const { t, setLang, isZh } = useLanguage();
   const [brevoState, setBrevoState] = useState<BrevoState>("idle");
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  const activeFormId = isZh ? TALLY_FORM_ID_ZH : TALLY_FORM_ID_EN;
+  const customZhId = zhForm || ENV_TALLY_FORM_ID_ZH;
+  const hasSeparateZhForm = Boolean(customZhId && customZhId !== TALLY_FORM_ID_EN);
+  const activeFormId = form || (isZh && hasSeparateZhForm ? customZhId : TALLY_FORM_ID_EN);
+
+  // Note: transparentBackground=1 is essential for blending into dark & light modes
   const tallyEmbedUrl = `https://tally.so/embed/${activeFormId}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
 
-  // Reload Tally embed script and iframe whenever active form/language changes
+  // Initialize Tally embeds via official script
   useEffect(() => {
     const tallyScriptSrc = "https://tally.so/widgets/embed.js";
 
@@ -219,12 +228,7 @@ function SurveyPage() {
       if (!data || data.event !== "Tally.FormSubmitted") return;
 
       const payload = data.payload;
-      if (
-        !payload ||
-        (payload.formId !== TALLY_FORM_ID_EN && payload.formId !== TALLY_FORM_ID_ZH)
-      ) {
-        return;
-      }
+      if (!payload) return;
 
       const fields = payload.fields ?? [];
 
@@ -407,18 +411,34 @@ function SurveyPage() {
           </div>
         </div>
 
-        {/* Survey Embed Container */}
-        <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-card/85 p-2 sm:p-6 2xl:p-8 shadow-[0_20px_50px_-20px_oklch(0.2_0.01_60/0.1)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.65)] backdrop-blur-xl ring-1 ring-accent/10 transition-all">
+        {/* Notice when Chinese is selected but custom form ID not yet connected */}
+        {isZh && !hasSeparateZhForm && (
+          <div className="mx-auto max-w-2xl mb-6 rounded-2xl border border-accent/30 bg-accent/10 p-4 text-center text-xs sm:text-sm text-foreground/90 backdrop-blur-sm animate-in fade-in duration-300">
+            <p className="font-semibold text-accent">ℹ️ 中文问卷创建指引 (Mandarin Form Setup)</p>
+            <p className="mt-1 text-muted-foreground leading-relaxed">
+              目前展示的是英文原版问卷。我们已为您准备好
+              <strong>100%校对完成的中文问卷题目与选项</strong>，在 Tally
+              复制表单并粘贴后，即可在此无缝加载您的中文版！
+            </p>
+          </div>
+        )}
+
+        {/* Survey Embed Container: dark:bg-[#1a1917] matches Tally dark theme perfectly */}
+        <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-card/90 dark:bg-[#1a1917] p-2 sm:p-6 2xl:p-8 shadow-[0_20px_50px_-20px_oklch(0.2_0.01_60/0.1)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.7)] backdrop-blur-xl ring-1 ring-accent/10 transition-all">
           <iframe
             key={activeFormId}
             ref={iframeRef}
-            src={tallyEmbedUrl}
             data-tally-src={tallyEmbedUrl}
             loading="lazy"
             width="100%"
             height={750}
             title={t.survey.headline}
-            className="w-full border-0 min-h-[750px] transition-all"
+            allowTransparency={true}
+            style={{
+              backgroundColor: "transparent",
+              colorScheme: "dark",
+            }}
+            className="w-full border-0 min-h-[750px] transition-all bg-transparent"
           />
         </div>
 
