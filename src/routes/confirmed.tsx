@@ -3,6 +3,7 @@ import { ArrowRight, Check, Compass, BookOpen } from "lucide-react";
 import logo from "@/assets/logo.png";
 import enso from "@/assets/ink-enso.jpg";
 import { InkStroke } from "@/components/site/Ink";
+import { ThemeToggle } from "@/components/site/ThemeToggle";
 
 const TITLE = "Confirmation Successful — Scripting Destiny";
 const DESC = "Your place on the Scripting Destiny early access waitlist is confirmed.";
@@ -23,31 +24,37 @@ function ConfirmedPage() {
   return (
     <div className="min-h-screen flex flex-col justify-between bg-background text-foreground">
       {/* Top Header */}
-      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-6 sm:px-6">
+      <header className="site-container flex items-center justify-between py-5 sm:py-6">
         <Link to="/" aria-label="Scripting Destiny home" className="block">
-          <img src={logo} alt="Scripting Destiny" className="h-10 w-auto sm:h-12" />
+          <img
+            src={logo}
+            alt="Scripting Destiny"
+            className="brand-logo h-9 w-auto sm:h-11 2xl:h-13 transition-all"
+          />
         </Link>
-        <Link
-          to="/"
-          className="rounded-full border border-foreground/30 px-4 py-1.5 text-xs sm:text-sm font-medium transition hover:bg-foreground hover:text-background"
-        >
-          Back to home
-        </Link>
+        <div className="flex items-center gap-2.5 sm:gap-3 2xl:gap-4">
+          <ThemeToggle />
+          <Link
+            to="/"
+            className="rounded-full border border-foreground/30 px-3.5 py-1.5 2xl:px-5 2xl:py-2 text-xs sm:text-sm 2xl:text-base font-medium transition hover:bg-foreground hover:text-background"
+          >
+            Back to home
+          </Link>
+        </div>
       </header>
 
       {/* Main Confirmation Content */}
-      <main className="relative mx-auto my-auto w-full max-w-2xl px-5 py-12 sm:px-6 text-center">
+      <main className="relative mx-auto my-auto w-full max-w-2xl 2xl:max-w-3xl 3xl:max-w-4xl px-5 py-12 sm:px-6 2xl:py-16 text-center">
         {/* Subtle decorative Enso background */}
         <img
           src={enso}
           alt=""
           width={700}
           height={700}
-          style={{ filter: "grayscale(1) invert(1) contrast(1.6) brightness(0.9)" }}
-          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[460px] opacity-30 mix-blend-screen [mask-image:radial-gradient(circle,black_35%,transparent_70%)]"
+          className="enso-watermark pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[460px] 2xl:max-w-[650px] [mask-image:radial-gradient(circle,black_35%,transparent_70%)]"
         />
 
-        <div className="rounded-3xl border border-foreground/15 bg-card/85 p-8 sm:p-12 shadow-2xl backdrop-blur-sm">
+        <div className="rounded-3xl border border-foreground/15 bg-card/85 p-8 sm:p-12 2xl:p-16 shadow-2xl backdrop-blur-sm">
           {/* Eyebrow */}
           <p className="eyebrow text-accent">Waitlist Confirmed</p>
 
@@ -113,8 +120,8 @@ function ConfirmedPage() {
 
       {/* Footer */}
       <footer className="w-full">
-        <InkStroke className="mx-auto max-w-6xl px-5 sm:px-6" />
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 text-xs text-muted-foreground">
+        <InkStroke className="site-container" />
+        <div className="site-container flex items-center justify-between py-6 text-xs 2xl:text-sm text-muted-foreground">
           <span>&copy; {new Date().getFullYear()} Scripting Destiny</span>
           <Link to="/survey" className="hover:text-foreground transition-colors">
             Life Clarity Survey

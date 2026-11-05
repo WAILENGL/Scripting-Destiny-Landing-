@@ -4,6 +4,7 @@ import { ArrowLeft, Sparkles, CheckCircle2, AlertCircle, Loader2 } from "lucide-
 import logo from "@/assets/logo.png";
 import enso from "@/assets/ink-enso.jpg";
 import { InkStroke } from "@/components/site/Ink";
+import { ThemeToggle } from "@/components/site/ThemeToggle";
 import { BREVO_CONFIG } from "@/config/newsletter";
 
 declare global {
@@ -276,25 +277,32 @@ function SurveyPage() {
   return (
     <div className="min-h-screen flex flex-col justify-between bg-background text-foreground selection:bg-accent/30">
       {/* Top Header */}
-      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-6 sm:px-6">
+      <header className="site-container flex items-center justify-between py-5 sm:py-6">
         <Link
           to="/"
           aria-label="Scripting Destiny home"
           className="block transition-opacity hover:opacity-90"
         >
-          <img src={logo} alt="Scripting Destiny" className="h-10 w-auto sm:h-12" />
+          <img
+            src={logo}
+            alt="Scripting Destiny"
+            className="brand-logo h-9 w-auto sm:h-11 2xl:h-13 transition-all"
+          />
         </Link>
-        <Link
-          to="/"
-          className="inline-flex items-center gap-1.5 rounded-full border border-foreground/20 px-4 py-1.5 text-xs sm:text-sm font-medium transition hover:border-foreground hover:bg-foreground hover:text-background"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          Back to home
-        </Link>
+        <div className="flex items-center gap-2.5 sm:gap-3 2xl:gap-4">
+          <ThemeToggle />
+          <Link
+            to="/"
+            className="inline-flex items-center gap-1.5 rounded-full border border-foreground/20 px-3.5 py-1.5 2xl:px-5 2xl:py-2 text-xs sm:text-sm 2xl:text-base font-medium transition hover:border-foreground hover:bg-foreground hover:text-background"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            <span>Back to home</span>
+          </Link>
+        </div>
       </header>
 
       {/* Main Container */}
-      <main className="relative mx-auto my-6 w-full max-w-4xl px-4 sm:px-6">
+      <main className="relative mx-auto my-6 w-full max-w-4xl 2xl:max-w-5xl 3xl:max-w-6xl px-4 sm:px-6 2xl:px-8">
         {/* Ambient Gold Radial Glow */}
         <div className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-[550px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-gradient-to-b from-accent/15 via-accent/5 to-transparent blur-3xl" />
 
@@ -304,8 +312,7 @@ function SurveyPage() {
           alt=""
           width={800}
           height={800}
-          style={{ filter: "grayscale(1) invert(1) contrast(1.6) brightness(0.9)" }}
-          className="pointer-events-none absolute -top-16 right-[-8%] -z-10 w-[320px] max-w-none opacity-20 mix-blend-screen [mask-image:radial-gradient(circle,black_40%,transparent_70%)] sm:w-[480px]"
+          className="enso-watermark pointer-events-none absolute -top-16 right-[-8%] -z-10 w-[320px] max-w-none [mask-image:radial-gradient(circle,black_40%,transparent_70%)] sm:w-[480px] 2xl:w-[650px]"
         />
 
         <div className="text-center mb-8 sm:mb-12">
@@ -314,17 +321,17 @@ function SurveyPage() {
             <span>Community Inquiry</span>
           </div>
 
-          <h1 className="mt-4 font-serif text-3xl sm:text-5xl font-light tracking-tight text-foreground leading-tight">
+          <h1 className="mt-4 font-serif text-3xl sm:text-5xl 2xl:text-6xl font-light tracking-tight text-foreground leading-tight">
             Scripting Destiny: Life Clarity & Timing
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-sm sm:text-base leading-relaxed text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-xl 2xl:max-w-2xl text-sm sm:text-base 2xl:text-lg leading-relaxed text-muted-foreground">
             We are designing tools to help people decipher their innate nature and make timely,
             aligned life decisions. Your answers directly shape what we build next.
           </p>
         </div>
 
         {/* Survey Embed Container */}
-        <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-card/85 p-2 sm:p-6 shadow-[0_24px_60px_rgba(0,0,0,0.65)] backdrop-blur-xl ring-1 ring-accent/10 transition-all">
+        <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-card/85 p-2 sm:p-6 2xl:p-8 shadow-[0_24px_60px_rgba(0,0,0,0.65)] backdrop-blur-xl ring-1 ring-accent/10 transition-all">
           <iframe
             data-tally-src="https://tally.so/embed/Ge6Deo?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
             loading="lazy"
@@ -359,8 +366,8 @@ function SurveyPage() {
 
       {/* Footer */}
       <footer className="w-full mt-12">
-        <InkStroke className="mx-auto max-w-6xl px-5 sm:px-6" />
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 text-xs text-muted-foreground">
+        <InkStroke className="site-container" />
+        <div className="site-container flex items-center justify-between py-6 text-xs 2xl:text-sm text-muted-foreground">
           <span>&copy; {new Date().getFullYear()} Scripting Destiny</span>
           <span>Know your nature. Time your moves.</span>
         </div>
