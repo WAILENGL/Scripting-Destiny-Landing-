@@ -330,7 +330,7 @@ function PrivacyPage() {
               {isZh ? "数据保护官与联系方式" : "Data Protection Officer & Inquiries"}
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              If you have any questions, feedback, or wish to exercise any of your statutory privacy rights (including consent withdrawal or access/correction requests), you may contact our designated Data Protection Officer (DPO) representing Scripting Destiny. Inquiries may be directed by email to <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a> or via phone/WhatsApp message at <span className="text-foreground font-medium">+1 (628) 238-4763</span>. Standard verification checks may be conducted before processing requests concerning personal data.
+              If you have any questions, feedback, or wish to exercise any of your statutory privacy rights (including consent withdrawal or access/correction requests), you may contact our designated Data Protection Officer (DPO) representing Scripting Destiny. Inquiries may be directed by email to <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a> or by phone / voicemail at <span className="text-foreground font-medium">+1 (628) 238-4763</span>. Standard verification checks may be conducted before processing requests concerning personal data.
             </p>
           </section>
 
