@@ -472,6 +472,9 @@ function SurveyPage() {
           </span>
           <div className="flex items-center gap-4">
             <LanguageToggle />
+            <Link to="/privacy" className="hover:text-foreground transition-colors">
+              {t.footer.privacyPolicy}
+            </Link>
             <span>{t.footer.tagline}</span>
           </div>
         </div>

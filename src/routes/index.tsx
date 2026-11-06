@@ -335,6 +335,9 @@ function Index() {
               <Link to="/survey" className="hover:text-foreground transition-colors whitespace-nowrap">
                 {t.footer.surveyLink}
               </Link>
+              <Link to="/privacy" className="hover:text-foreground transition-colors whitespace-nowrap">
+                {t.footer.privacyPolicy}
+              </Link>
             </div>
           </div>
         </footer>

@@ -1,4 +1,5 @@
 import { useState, useRef, type FormEvent } from "react";
+import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, MailCheck, Loader2 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { BREVO_CONFIG } from "@/config/newsletter";
@@ -204,6 +205,18 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
             <span className="text-muted-foreground">{t.waitlist.substackTag}</span>
           </label>
         </div>
+
+        {/* Global privacy compliance notice */}
+        <p className="mt-2 text-[11px] text-muted-foreground/80 leading-normal">
+          {t.waitlist.privacyConsentPre}{" "}
+          <Link
+            to="/privacy"
+            className="underline underline-offset-2 hover:text-foreground transition-colors"
+          >
+            {t.waitlist.privacyConsentLink}
+          </Link>
+          .
+        </p>
 
         {error && <p className="mt-2 text-xs text-destructive">{error}</p>}
       </form>

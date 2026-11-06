@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConfirmedRouteImport } from './routes/confirmed'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SurveyRouteImport } from './routes/survey'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const ConfirmedRoute = ConfirmedRouteImport.update({
   path: '/confirmed',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SurveyRoute = SurveyRouteImport.update({
   id: '/survey',
   path: '/survey',
@@ -32,30 +38,34 @@ const SurveyRoute = SurveyRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/confirmed': typeof ConfirmedRoute
+  '/privacy': typeof PrivacyRoute
   '/survey': typeof SurveyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/confirmed': typeof ConfirmedRoute
+  '/privacy': typeof PrivacyRoute
   '/survey': typeof SurveyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/confirmed': typeof ConfirmedRoute
+  '/privacy': typeof PrivacyRoute
   '/survey': typeof SurveyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/confirmed' | '/survey'
+  fullPaths: '/' | '/confirmed' | '/privacy' | '/survey'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/confirmed' | '/survey'
-  id: '__root__' | '/' | '/confirmed' | '/survey'
+  to: '/' | '/confirmed' | '/privacy' | '/survey'
+  id: '__root__' | '/' | '/confirmed' | '/privacy' | '/survey'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ConfirmedRoute: typeof ConfirmedRoute
+  PrivacyRoute: typeof PrivacyRoute
   SurveyRoute: typeof SurveyRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConfirmedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/survey': {
       id: '/survey'
       path: '/survey'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ConfirmedRoute: ConfirmedRoute,
+  PrivacyRoute: PrivacyRoute,
   SurveyRoute: SurveyRoute,
 }
 export const routeTree = rootRouteImport

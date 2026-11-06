@@ -265,10 +265,13 @@ export const translations = {
       orTryChart: "Or try your free chart first →",
       errorEmail: "Please enter a valid email address.",
       errorGeneric: "Unable to join waitlist. Please check your connection and try again.",
+      privacyConsentPre: "By joining, you agree to our",
+      privacyConsentLink: "Privacy Policy",
     },
     footer: {
       copyright: "Scripting Destiny",
       surveyLink: "Life Clarity & Timing Survey",
+      privacyPolicy: "Privacy Policy",
       tagline: "Know your nature. Time your moves.",
     },
     confirmed: {
@@ -428,10 +431,13 @@ export const translations = {
       orTryChart: "或先查看您的免费命盘 →",
       errorEmail: "请输入有效的邮箱地址。",
       errorGeneric: "无法加入候补名单，请检查网络连接后重试。",
+      privacyConsentPre: "加入即表示您同意我们的",
+      privacyConsentLink: "隐私政策",
     },
     footer: {
       copyright: "Scripting Destiny",
       surveyLink: "生命清晰度与时机洞察调研",
+      privacyPolicy: "隐私政策",
       tagline: "洞悉天性 · 顺势而为",
     },
     confirmed: {
