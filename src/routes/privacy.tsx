@@ -95,11 +95,11 @@ function PrivacyPage() {
           </div>
         </div>
 
-        {/* Metadata Card */}
-        <div className="mb-10 rounded-2xl border border-accent/20 bg-card/75 p-5 sm:p-6 backdrop-blur-sm grid gap-3 sm:grid-cols-2 text-xs sm:text-sm">
+        {/* Metadata Card (Clean & Discrete) */}
+        <div className="mb-10 rounded-2xl border border-accent/20 bg-card/60 p-4 sm:p-5 backdrop-blur-sm grid gap-3 sm:grid-cols-2 text-xs sm:text-sm">
           <div>
             <span className="text-muted-foreground block text-[11px] uppercase tracking-wider font-semibold">
-              {isZh ? "生效 / 更新日期" : "Effective / Last Updated"}
+              {isZh ? "生效与更新日期" : "Effective / Last Updated"}
             </span>
             <span className="font-medium text-foreground">November 7, 2026</span>
           </div>
@@ -108,23 +108,6 @@ function PrivacyPage() {
               {isZh ? "运营实体" : "Operating Entity"}
             </span>
             <span className="font-medium text-foreground">Scripting Destiny</span>
-          </div>
-          <div>
-            <span className="text-muted-foreground block text-[11px] uppercase tracking-wider font-semibold">
-              {isZh ? "数据保护官 (DPO) 邮箱" : "Data Protection Officer (DPO)"}
-            </span>
-            <a
-              href="mailto:admin@scriptingdestiny.com"
-              className="font-medium text-wood hover:underline"
-            >
-              admin@scriptingdestiny.com
-            </a>
-          </div>
-          <div>
-            <span className="text-muted-foreground block text-[11px] uppercase tracking-wider font-semibold">
-              {isZh ? "联络电话" : "Contact Telephone / WhatsApp"}
-            </span>
-            <span className="font-medium text-foreground">+1 (628) 238-4763</span>
           </div>
         </div>
 
@@ -341,36 +324,32 @@ function PrivacyPage() {
           </section>
 
           {/* Section 10 */}
-          <section className="rounded-xl border border-accent/40 bg-card p-6 sm:p-8">
+          <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
               <span className="text-accent font-sans font-semibold text-base sm:text-lg">10</span>
-              {isZh ? "联系数据保护官 (DPO)" : "Contacting the Data Protection Officer"}
+              {isZh ? "数据保护官与联系方式" : "Data Protection Officer & Inquiries"}
             </h2>
-            <p className="text-muted-foreground mb-4">
-              For any queries, feedback, or requests regarding this Privacy Policy or your personal data, please contact:
+            <p className="text-muted-foreground leading-relaxed">
+              If you have any questions, feedback, or wish to exercise any of your statutory privacy rights (including consent withdrawal or access/correction requests), you may contact our designated Data Protection Officer (DPO) representing Scripting Destiny. Inquiries may be directed by email to <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a> or via phone/WhatsApp message at <span className="text-foreground font-medium">+1 (628) 238-4763</span>. Standard verification checks may be conducted before processing requests concerning personal data.
             </p>
-            <div className="grid gap-3 sm:grid-cols-2 text-xs sm:text-sm">
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <UserCheck className="h-4 w-4 text-accent shrink-0" />
-                <span><strong>Designation:</strong> Data Protection Officer</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Globe className="h-4 w-4 text-accent shrink-0" />
-                <span><strong>Entity:</strong> Scripting Destiny</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Mail className="h-4 w-4 text-accent shrink-0" />
-                <span>
-                  <strong>Email:</strong>{" "}
-                  <a href="mailto:admin@scriptingdestiny.com" className="text-wood hover:underline">
-                    admin@scriptingdestiny.com
-                  </a>
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Phone className="h-4 w-4 text-accent shrink-0" />
-                <span><strong>Phone / WhatsApp:</strong> +1 (628) 238-4763</span>
-              </div>
+          </section>
+
+          {/* Section 11 */}
+          <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
+            <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
+              <span className="text-accent font-sans font-semibold text-base sm:text-lg">11</span>
+              {isZh ? "条款修订与默示同意" : "Changes to This Notice & Deemed Acceptance"}
+            </h2>
+            <div className="space-y-3 text-muted-foreground leading-relaxed">
+              <p>
+                We reserve the right to review, update, or amend this Privacy Policy from time to time without prior notice to reflect operational enhancements, new technical integrations, or statutory regulatory developments.
+              </p>
+              <p>
+                You can verify when this policy was most recently modified by referencing the “Last Updated” date at the top of this page. For routine or non-material updates, changes take effect immediately upon publication. Within reasonable bounds under applicable law, your continued access, use of our Services, or participation in our waitlist following any posted modifications constitutes your acknowledgment, acceptance, and deemed consent to the updated terms.
+              </p>
+              <p>
+                Where any revision involves a materially significant change to how your personal data is collected, disclosed, or processed in a way not reasonably contemplated at the time of initial collection, we will provide appropriate advance notice (such as an email notification to registered addresses or an announcement banner on the platform) before such changes become effective.
+              </p>
             </div>
           </section>
         </div>
