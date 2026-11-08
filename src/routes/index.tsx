@@ -5,6 +5,7 @@ import { ChartTry } from "@/components/site/ChartTry";
 import { WaitlistForm } from "@/components/site/WaitlistForm";
 import { ThemeToggle } from "@/components/site/ThemeToggle";
 import { LanguageToggle } from "@/components/site/LanguageToggle";
+import { PillarsSection } from "@/components/site/PillarsSection";
 import { useLanguage } from "@/hooks/useLanguage";
 import {
   Accordion,
@@ -254,6 +255,9 @@ function Index() {
             </div>
           </div>
         </section>
+
+        {/* The Four Pillars & 10-Year Luck Cycles */}
+        <PillarsSection />
 
         {/* Why this exists */}
         <section className="site-container py-16 sm:py-24 2xl:py-32">

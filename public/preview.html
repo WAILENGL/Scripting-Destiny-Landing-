@@ -3,418 +3,964 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scripting Destiny vs. Tian Qi — Design Preview & Strategic Teardown</title>
-  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <title>Preview: Four Pillars & 10-Year Luck Cycles — Scripting Destiny</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              DEFAULT: '#131417',
+              card: '#1a1b22',
+              surface: '#232530',
+              border: '#2d303a'
+            },
+            gold: {
+              champagne: '#dfb76c',
+              dim: '#ad833e',
+              glow: 'rgba(223, 183, 108, 0.15)'
+            },
+            cream: '#eeebe2',
+            slateMuted: '#a8a5a0',
+            wood: '#7cb988',
+            fire: '#e05c52',
+            earth: '#c49a5b',
+            metal: '#dfb76c',
+            water: '#64a1d8'
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Karla"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root {
-      --font-serif: "Cormorant Garamond", Georgia, serif;
-      --font-sans: "Manrope", system-ui, sans-serif;
-    }
-    .font-serif { font-family: var(--font-serif); }
-    .font-sans { font-family: var(--font-sans); }
-
-    /* Dark Mode Theme Tokens: Obsidian Sumi Inkstone */
-    html.dark {
-      --bg-page: #111215;
-      --bg-surface: #18191f;
-      --bg-card: #1c1d24;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-gold: rgba(212, 175, 105, 0.35);
-      --text-main: #f5f2ea;
-      --text-muted: #9ba1ad;
-      --accent-gold: #dfb76c;
-      --accent-gold-hover: #edd18e;
-      --gold-gradient: linear-gradient(135deg, #eed290 0%, #caa157 50%, #ad833e 100%);
-      --tag-wood: #4e9a68;
-      --tag-fire: #d95c47;
-      --tag-earth: #b3864c;
-      --tag-metal: #adb3be;
-      --tag-water: #5c8fc2;
-    }
-
-    /* Light Mode Theme Tokens: Xuan Rice Paper & Sumi Ink */
-    html.light {
-      --bg-page: #fbf9f4;
-      --bg-surface: #f3efe6;
-      --bg-card: #ffffff;
-      --border-subtle: rgba(20, 20, 25, 0.09);
-      --border-gold: rgba(184, 137, 56, 0.4);
-      --text-main: #18191d;
-      --text-muted: #6b6f79;
-      --accent-gold: #b38536;
-      --accent-gold-hover: #c99a48;
-      --gold-gradient: linear-gradient(135deg, #c99a48 0%, #a8792c 100%);
-      --tag-wood: #2e7345;
-      --tag-fire: #b83d28;
-      --tag-earth: #8f652b;
-      --tag-metal: #555c68;
-      --tag-water: #2d6199;
-    }
-
     body {
-      background-color: var(--bg-page);
-      color: var(--text-main);
-      font-family: var(--font-sans);
+      background-color: #131417;
+      color: #eeebe2;
+      font-family: 'Karla', sans-serif;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
+    .light body {
+      background-color: #fbf9f4;
+      color: #18191d;
+    }
+    .light .bg-obsidian {
+      background-color: #fbf9f4;
+    }
+    .light .bg-obsidian-card {
+      background-color: #ffffff;
+      border-color: rgba(20, 20, 25, 0.12);
+    }
+    .light .bg-obsidian-surface {
+      background-color: #f4efe6;
+      border-color: rgba(20, 20, 25, 0.12);
+    }
+    .light .text-cream {
+      color: #18191d;
+    }
+    .light .text-slateMuted {
+      color: #666a75;
+    }
+    .light .border-obsidian-border {
+      border-color: rgba(20, 20, 25, 0.12);
+    }
 
-    .gold-text {
-      background: var(--gold-gradient);
+    .pillar-box {
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .pillar-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.4);
+    }
+    .pillar-box.active {
+      transform: translateY(-3px);
+      border-color: #dfb76c !important;
+      box-shadow: 0 0 0 1px #dfb76c, 0 10px 24px -4px rgba(223, 183, 108, 0.25);
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #eed290 0%, #caa157 50%, #ad833e 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
-    .gold-btn {
-      background: var(--gold-gradient);
-      color: #111215;
-      font-weight: 600;
-      box-shadow: 0 4px 20px rgba(202, 161, 87, 0.25);
-      transition: all 0.25s ease;
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 5px;
     }
-    .gold-btn:hover {
-      box-shadow: 0 6px 24px rgba(202, 161, 87, 0.4);
-      filter: brightness(1.06);
-      transform: translateY(-1px);
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 9999px;
     }
-
-    .pillar-seal {
-      border: 1px solid var(--border-gold);
-      background: rgba(255,255,255,0.02);
-      transition: all 0.3s ease;
-    }
-    html.light .pillar-seal {
-      background: #faf8f3;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(223, 183, 108, 0.35);
+      border-radius: 9999px;
     }
   </style>
 </head>
-<body class="min-h-screen p-4 sm:p-8 antialiased selection:bg-amber-500/20">
+<body class="min-h-screen text-cream antialiased selection:bg-gold-champagne/30 selection:text-cream">
 
-  <!-- Top Sticky Review Bar -->
-  <header class="max-w-6xl mx-auto mb-10 flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)]/80 backdrop-blur-md shadow-lg">
-    <div class="flex items-center gap-3">
-      <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-500/20 text-amber-500 text-xs font-bold font-serif">SD</span>
-      <div>
-        <h1 class="text-sm font-semibold tracking-tight text-[var(--text-main)]">Scripting Destiny vs. Tian Qi AI</h1>
-        <p class="text-xs text-[var(--text-muted)]">Design Teardown & Proposed Executive Styling Preview</p>
+  <!-- Sticky Top Preview Controls -->
+  <header class="sticky top-0 z-50 w-full backdrop-blur-md bg-obsidian/90 border-b border-obsidian-border/50 px-4 py-3 sm:px-8">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center justify-center px-2.5 py-1 rounded-full text-xs font-semibold bg-gold-champagne text-obsidian tracking-wide">
+          DESIGN PREVIEW
+        </span>
+        <span class="text-xs text-slateMuted hidden sm:inline" data-t="bar-subtitle">
+          Simplified BaZi Chart + 10-Year Luck Cycle Pillars
+        </span>
       </div>
-    </div>
-
-    <!-- Controls -->
-    <div class="flex items-center gap-2.5">
-      <!-- Tab filter -->
-      <div class="inline-flex rounded-full p-1 bg-[var(--bg-card)] border border-[var(--border-subtle)] text-xs">
-        <button id="tab-comparison" onclick="switchTab('comparison')" class="px-3 py-1 rounded-full font-medium transition bg-amber-500/20 text-[var(--accent-gold)]">Side-by-Side</button>
-        <button id="tab-mockup" onclick="switchTab('mockup')" class="px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]">Live Redesign</button>
-        <button id="tab-memo" onclick="switchTab('memo')" class="px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]">Mentor Memo</button>
+      <div class="flex items-center gap-3">
+        <!-- Language Toggle -->
+        <button id="langToggle" onclick="toggleLanguage()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-obsidian-border bg-obsidian-card text-xs font-medium hover:border-gold-champagne text-slateMuted hover:text-cream transition-all cursor-pointer">
+          <span id="langLabel">Switch to 简体中文</span>
+        </button>
+        <!-- Theme Toggle -->
+        <button id="themeToggle" onclick="toggleTheme()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-obsidian-border bg-obsidian-card text-xs font-medium hover:border-gold-champagne text-slateMuted hover:text-cream transition-all cursor-pointer">
+          <span id="themeLabel">Light Mode</span>
+        </button>
       </div>
-
-      <!-- Theme Switcher -->
-      <button onclick="toggleTheme()" class="px-3 py-1.5 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-card)] text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition flex items-center gap-1.5 cursor-pointer">
-        <span id="theme-icon">☀️</span>
-        <span id="theme-label">Light Xuan Paper</span>
-      </button>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto space-y-12">
+  <!-- Notice Banner -->
+  <div class="bg-obsidian-card/90 border-b border-gold-champagne/20 py-2.5 px-4 text-center text-xs sm:text-sm text-slateMuted">
+    <span class="text-gold-champagne font-medium">Updated Design:</span>
+    <span class="text-cream ml-1" data-t="banner-desc">Year pillar labeled as "Roots". 10-Year luck cycles now displayed as vertical pillars with authentic element colors. Click any pillar to inspect what it represents.</span>
+  </div>
 
-    <!-- =================================================================================== -->
-    <!-- TAB 1: SIDE-BY-SIDE COMPARISON -->
-    <!-- =================================================================================== -->
-    <section id="view-comparison" class="space-y-8">
-      <div class="text-center max-w-2xl mx-auto">
-        <span class="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-semibold">Competitive Landscape</span>
-        <h2 class="mt-2 font-serif text-3xl sm:text-4xl text-[var(--text-main)] font-light">Two Opposing Visions of Chinese Metaphysics</h2>
-        <p class="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">
-          Tian Qi positions itself as an all-in-one occult fortune-telling portal. Scripting Destiny commands the opposite pole: an intellectual, secular executive timing system.
-        </p>
+  <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10 space-y-16">
+
+    <!-- PRECEDING SECTION: THE FIVE ELEMENTS (Context Reference) -->
+    <section class="opacity-75 hover:opacity-100 transition-opacity border-b border-obsidian-border/40 pb-12">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="h-1.5 w-1.5 rounded-full bg-slateMuted"></span>
+        <p class="text-xs uppercase tracking-[0.2em] text-slateMuted" data-t="elements-eyebrow">THE FIVE ELEMENTS · PRECEDING SECTION</p>
       </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-
-        <!-- Left: Tian Qi Competitor Analysis -->
-        <div class="rounded-3xl border border-red-500/30 bg-[#1c140e] text-[#f2e6d8] p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-          <div class="absolute top-4 right-4 bg-red-600/20 text-red-400 border border-red-500/40 text-[11px] font-semibold uppercase px-2.5 py-0.5 rounded-full">
-            Competitor: Tian Qi
-          </div>
-
-          <p class="text-xs uppercase tracking-widest text-[#caa157] font-serif">Master Sean Chan AI</p>
-          <h3 class="mt-2 text-2xl font-serif font-light text-[#f5ebd7]">"Occult Fortune-Telling Portal"</h3>
-
-          <!-- Competitor Snapshot Preview -->
-          <div class="mt-5 rounded-xl border border-white/10 bg-black/40 p-4 space-y-3">
-            <div class="flex items-center justify-between text-xs text-[#a89582] border-b border-white/5 pb-2">
-              <span>Dark Chocolate Palette (`#1c140e`)</span>
-              <span class="text-amber-400">8 Occult Systems in Sidebar</span>
-            </div>
-
-            <div class="text-xs space-y-2 text-[#d1c2b0]">
-              <div class="p-2.5 rounded bg-[#271d15] border border-amber-900/40">
-                <span class="font-serif text-amber-300">Four Pillars Dashboard:</span>
-                <p class="text-[11px] text-[#a4917c] mt-0.5">Heavy colorful Stem cards (Year 丙, Month 戊, Day 癸, Hour 庚) with Luopan compass wheel and Singapore time dials.</p>
-              </div>
-
-              <div class="p-2.5 rounded bg-[#f7eedf] text-[#241a12] border border-amber-300/30">
-                <span class="font-serif font-bold text-xs uppercase tracking-wider text-amber-900">Inverted Cream Banner:</span>
-                <p class="text-[11px] text-[#554637] mt-0.5">"Your readings, saved. Sign in to pick up any conversation..."</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Weaknesses Checklist -->
-          <div class="mt-6 space-y-2.5 text-xs text-[#d1c2b0]">
-            <h4 class="font-semibold text-red-300 flex items-center gap-1.5">
-              <span>⚠️</span> Key Weaknesses to Capitalize On:
-            </h4>
-            <ul class="space-y-2 list-disc list-inside text-[12px] text-[#baa896] leading-relaxed">
-              <li><strong class="text-[#f5ebd7]">Too dense & mystical:</strong> Zi Wei, Qi Men, Horary, and Synastry crammed together overwhelms high-intent users seeking practical clarity.</li>
-              <li><strong class="text-[#f5ebd7]">Muddy TCM color scheme:</strong> Red-brown lacquer looks like a traditional Chinese medicine store or fortune-teller booth.</li>
-              <li><strong class="text-[#f5ebd7]">No Light Mode:</strong> Permanently locked into heavy dark occult vibes; unsuitable for daytime professional or mobile reading.</li>
-            </ul>
-          </div>
+      <h2 class="font-serif text-3xl sm:text-4xl font-light tracking-tight leading-tight max-w-3xl" data-t="elements-heading">
+        Every chart is a unique balance — shaped by what is present, and what is missing.
+      </h2>
+      <div class="mt-6 grid grid-cols-2 sm:grid-cols-5 gap-px overflow-hidden rounded-2xl border border-obsidian-border bg-obsidian-border">
+        <div class="bg-obsidian-card p-4 text-center">
+          <span class="font-serif text-3xl text-wood">木</span>
+          <h4 class="mt-1.5 font-semibold text-xs">Wood</h4>
+          <p class="text-[11px] text-slateMuted mt-0.5" data-t="wood-desc">Growth, vision, starting things</p>
         </div>
-
-        <!-- Right: Scripting Destiny Proposed Direction -->
-        <div class="rounded-3xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-6 sm:p-8 shadow-2xl relative overflow-hidden ring-1 ring-amber-500/10">
-          <div class="absolute top-4 right-4 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-[11px] font-semibold uppercase px-2.5 py-0.5 rounded-full">
-            Our Edge: Scripting Destiny
-          </div>
-
-          <p class="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-serif">Personal Operating System</p>
-          <h3 class="mt-2 text-2xl font-serif font-light text-[var(--text-main)]">"Zen Minimalist Decision Timing"</h3>
-
-          <!-- Scripting Destiny Snapshot Preview -->
-          <div class="mt-5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-4 space-y-3">
-            <div class="flex items-center justify-between text-xs text-[var(--text-muted)] border-b border-[var(--border-subtle)] pb-2">
-              <span>Obsidian Inkstone Slate (`#111215`)</span>
-              <span class="text-[var(--accent-gold)]">Laser-focused BaZi Timing</span>
-            </div>
-
-            <div class="text-xs space-y-2 text-[var(--text-main)]">
-              <div class="p-2.5 rounded bg-[var(--bg-card)] border border-[var(--border-gold)]">
-                <span class="font-serif text-[var(--accent-gold)]">Embossed Seal Pillar Cells:</span>
-                <p class="text-[11px] text-[var(--text-muted)] mt-0.5">Refined typographic seals paired with the 10 Day Master Psychological Archetypes (*The Pioneer, The Luminary*).</p>
-              </div>
-
-              <div class="p-2.5 rounded bg-[var(--bg-card)] border border-[var(--border-gold)] ring-1 ring-amber-500/20">
-                <span class="font-serif font-bold text-xs uppercase tracking-wider text-[var(--accent-gold)]">Architectural Luxury Waitlist:</span>
-                <p class="text-[11px] text-[var(--text-muted)] mt-0.5">Hairline gold framing with warm champagne CTA button — 100% free of Tian Qi's flat cream rectangle.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Our Superpowers Checklist -->
-          <div class="mt-6 space-y-2.5 text-xs text-[var(--text-main)]">
-            <h4 class="font-semibold text-emerald-400 flex items-center gap-1.5">
-              <span>✦</span> Scripting Destiny's Strategic Moats:
-            </h4>
-            <ul class="space-y-2 list-disc list-inside text-[12px] text-[var(--text-muted)] leading-relaxed">
-              <li><strong class="text-[var(--text-main)]">Modern Secular Luxury:</strong> Visual tone inspired by Kinfolk, Aesop, and Apple — zero incense or superstition.</li>
-              <li><strong class="text-[var(--text-main)]">Dual-Theme Superiority:</strong> Luminous Xuan Rice Paper light mode and deep Obsidian Slate dark mode give visitors agency and elevated taste.</li>
-              <li><strong class="text-[var(--text-main)]">Psychological Resonance:</strong> We translate ancient stems into clear leadership strengths, team compatibility, and 10-year season navigation.</li>
-            </ul>
-          </div>
+        <div class="bg-obsidian-card p-4 text-center">
+          <span class="font-serif text-3xl text-fire">火</span>
+          <h4 class="mt-1.5 font-semibold text-xs">Fire</h4>
+          <p class="text-[11px] text-slateMuted mt-0.5" data-t="fire-desc">Visibility, energy, influence</p>
         </div>
-
+        <div class="bg-obsidian-card p-4 text-center">
+          <span class="font-serif text-3xl text-earth">土</span>
+          <h4 class="mt-1.5 font-semibold text-xs">Earth</h4>
+          <p class="text-[11px] text-slateMuted mt-0.5" data-t="earth-desc">Stability, trust, holding space</p>
+        </div>
+        <div class="bg-obsidian-card p-4 text-center">
+          <span class="font-serif text-3xl text-metal">金</span>
+          <h4 class="mt-1.5 font-semibold text-xs">Metal</h4>
+          <p class="text-[11px] text-slateMuted mt-0.5" data-t="metal-desc">Precision, standards, decisions</p>
+        </div>
+        <div class="bg-obsidian-card p-4 text-center col-span-2 sm:col-span-1">
+          <span class="font-serif text-3xl text-water">水</span>
+          <h4 class="mt-1.5 font-semibold text-xs">Water</h4>
+          <p class="text-[11px] text-slateMuted mt-0.5" data-t="water-desc">Insight, strategy, adaptability</p>
+        </div>
       </div>
     </section>
 
-    <!-- =================================================================================== -->
-    <!-- TAB 2: LIVE REDESIGN MOCKUP -->
-    <!-- =================================================================================== -->
-    <section id="view-mockup" class="hidden space-y-10">
-      <div class="text-center max-w-2xl mx-auto">
-        <span class="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-semibold">Interactive Prototype</span>
-        <h2 class="mt-2 font-serif text-3xl sm:text-4xl text-[var(--text-main)] font-light">Proposed Visual Redesign</h2>
-        <p class="mt-3 text-sm text-[var(--text-muted)]">
-          Toggle light and dark themes using the top switch to experience how these changes look across both palettes.
+    <!-- NEW SECTION: THE FOUR PILLARS & 10-YEAR LUCK CYCLES -->
+    <section id="bazi-anatomy" class="relative pt-2">
+
+      <!-- Ambient Glow Decorator -->
+      <div class="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 w-96 h-96 bg-gold-champagne/10 blur-[130px] rounded-full"></div>
+
+      <!-- Section Title & Subtitle -->
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <p class="text-xs uppercase tracking-[0.22em] text-gold-champagne font-medium" data-t="anatomy-eyebrow">
+          THE ANATOMY OF A BAZI CHART · 四柱八字与十年大运
+        </p>
+        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.08]">
+          <span data-t="anatomy-title-1">The blueprint of your nature.</span><br>
+          <em class="italic gold-gradient-text" data-t="anatomy-title-2">The road beneath your feet.</em>
+        </h2>
+        <p class="text-sm sm:text-base text-slateMuted leading-relaxed max-w-2xl mx-auto" data-t="anatomy-desc">
+          The Four Pillars represent your cognitive baseline and life stages. Directly beneath, your 10-Year Luck Cycle pillars reveal the environmental terrain and macro seasons you travel through.
         </p>
       </div>
 
-      <!-- Hero & Chart Section Preview -->
-      <div class="rounded-3xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6 sm:p-10 shadow-xl space-y-10">
+      <!-- Chart + Detail Container -->
+      <div class="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-        <!-- Mini Brand Hero Header -->
-        <div class="text-center max-w-xl mx-auto space-y-3">
-          <p class="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-medium">Modern BaZi · Classical Astronomy, Made Practical</p>
-          <h3 class="font-serif text-4xl sm:text-5xl font-light leading-tight">
-            Know your nature. <br>
-            <span class="gold-text italic">Time your moves.</span>
-          </h3>
-          <p class="text-sm text-[var(--text-muted)] leading-relaxed">
-            Enter your birth date and discover your Day Master: your innate leadership archetype, five-element balance, and upcoming 10-year decision seasons.
-          </p>
+        <!-- LEFT: UNIFIED CHART (NATAL PILLARS + 10-YEAR LUCK PILLARS) -->
+        <div class="lg:col-span-7 space-y-6">
+
+          <!-- Beginner Educational Banner: This is an Example Chart -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-obsidian-card border border-gold-champagne/30 text-slateMuted leading-relaxed flex items-start gap-3.5 shadow-md">
+            <span class="text-gold-champagne text-xl shrink-0 mt-0.5">💡</span>
+            <div class="space-y-1.5">
+              <p class="font-semibold text-cream text-sm sm:text-base" data-t="banner-example-title">
+                Understanding This Example Chart:
+              </p>
+              <p class="text-xs sm:text-sm text-slateMuted leading-relaxed" data-t="banner-example-desc">
+                The chart shown below is an <strong>illustrative example</strong> to demonstrate how a BaZi chart works. Every person's chart is calculated from their own unique birth year, month, day, and time. In this example, the Day Master happens to be <strong>Xin Metal</strong>, but everyone is represented by different elements across Wood, Fire, Earth, Metal, or Water. Click any pillar below to see what it represents in a reading.
+              </p>
+            </div>
+          </div>
+
+          <!-- 1. NATAL FOUR PILLARS CARD -->
+          <div class="rounded-2xl bg-obsidian-card border border-obsidian-border p-5 sm:p-6 shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-obsidian-border/60 pb-3.5">
+              <div class="flex items-center gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-gold-champagne"></span>
+                <span class="text-xs sm:text-sm font-semibold tracking-wider uppercase text-cream" data-t="natal-card-title">
+                  Example Natal Chart · Four Pillars
+                </span>
+                <span class="px-2 py-0.5 rounded text-xs font-mono bg-gold-champagne/15 text-gold-champagne border border-gold-champagne/30 font-medium" data-t="natal-badge">
+                  Example
+                </span>
+              </div>
+              <span class="text-xs sm:text-sm text-slateMuted font-mono" data-t="natal-sub">Cognitive Baseline</span>
+            </div>
+
+            <!-- 4 Natal Pillars -->
+            <div class="grid grid-cols-4 gap-2 sm:gap-3">
+              
+              <!-- Hour Pillar -->
+              <button onclick="selectItem('natal', 'hour')" id="btn-natal-hour" class="pillar-box flex flex-col items-center p-2 sm:p-3 rounded-xl border border-obsidian-border bg-obsidian/60 cursor-pointer">
+                <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted mb-2 font-mono font-medium" data-t="col-hour">HOUR 时柱</span>
+                <div class="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-5xl text-wood mb-2 shadow-sm font-medium">
+                  甲
+                </div>
+                <div class="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-5xl text-fire shadow-sm font-medium">
+                  午
+                </div>
+                <span class="mt-2 text-[10px] sm:text-xs text-slateMuted text-center font-medium leading-tight" data-t="tag-hour">Ages 49+<br>Legacy</span>
+              </button>
+
+              <!-- Day Pillar (Day Master ★) -->
+              <button onclick="selectItem('natal', 'day')" id="btn-natal-day" class="pillar-box active flex flex-col items-center p-2 sm:p-3 rounded-xl border border-gold-champagne bg-gold-champagne/10 cursor-pointer shadow-[0_0_16px_rgba(223,183,108,0.25)]">
+                <span class="text-[10px] sm:text-xs uppercase tracking-wider text-gold-champagne mb-2 font-mono font-bold" data-t="col-day">DAY 日柱 ★</span>
+                <div class="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-obsidian-surface border-2 border-gold-champagne flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-5xl text-metal mb-2 shadow-sm font-medium relative">
+                  辛
+                  <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-gold-champagne ring-2 ring-obsidian"></span>
+                </div>
+                <div class="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-5xl text-water shadow-sm font-medium">
+                  亥
+                </div>
+                <span class="mt-2 text-[10px] sm:text-xs text-gold-champagne text-center font-semibold leading-tight" data-t="tag-day">Ages 33–48<br>Self</span>
+              </button>
+
+              <!-- Month Pillar -->
+              <button onclick="selectItem('natal', 'month')" id="btn-natal-month" class="pillar-box flex flex-col items-center p-2 sm:p-3 rounded-xl border border-obsidian-border bg-obsidian/60 cursor-pointer">
+                <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted mb-2 font-mono font-medium" data-t="col-month">MONTH 月柱</span>
+                <div class="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-5xl text-water mb-2 shadow-sm font-medium">
+                  壬
+                </div>
+                <div class="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-5xl text-fire shadow-sm font-medium">
+                  午
+                </div>
+                <span class="mt-2 text-[10px] sm:text-xs text-slateMuted text-center font-medium leading-tight" data-t="tag-month">Ages 17–32<br>Career</span>
+              </button>
+
+              <!-- Year Pillar (ROOTS as requested!) -->
+              <button onclick="selectItem('natal', 'year')" id="btn-natal-year" class="pillar-box flex flex-col items-center p-2 sm:p-3 rounded-xl border border-obsidian-border bg-obsidian/60 cursor-pointer">
+                <span class="text-[10px] sm:text-xs uppercase tracking-wider text-slateMuted mb-2 font-mono font-medium" data-t="col-year">YEAR 年柱</span>
+                <div class="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-5xl text-metal mb-2 shadow-sm font-medium">
+                  庚
+                </div>
+                <div class="w-13 h-13 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-3xl sm:text-4xl md:text-5xl text-fire shadow-sm font-medium">
+                  午
+                </div>
+                <span class="mt-2 text-[10px] sm:text-xs text-slateMuted text-center font-medium leading-tight" data-t="tag-year">Ages 0–16<br>Roots</span>
+              </button>
+
+            </div>
+          </div>
+
+          <!-- 2. 10-YEAR LUCK CYCLES CARD (PILLARS DIRECTLY BENEATH WITH ACCURATE COLORS) -->
+          <div class="rounded-2xl bg-obsidian-card border border-obsidian-border p-5 sm:p-6 shadow-xl space-y-4">
+            <div class="flex items-center justify-between border-b border-border/60 pb-3.5">
+              <div class="flex items-center gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-water"></span>
+                <span class="text-xs sm:text-sm font-semibold tracking-wider uppercase text-cream" data-t="luck-card-title">
+                  Example 10-Year Luck Cycles
+                </span>
+                <span class="px-2 py-0.5 rounded text-xs font-mono bg-water/15 text-water border border-water/30 font-medium" data-t="luck-badge">
+                  Sample Path
+                </span>
+              </div>
+              <span class="text-xs sm:text-sm text-slateMuted font-mono" data-t="luck-sub">Environmental Terrain</span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slateMuted leading-relaxed" data-t="luck-instruction">
+              Luck cycles show shifting external weather across 10-year chapters. This example shows a sample progression starting at age 8. Heavenly Stems and Earthly Branches carry distinct elemental energies:
+            </p>
+
+            <!-- 6 Decade Pillars in horizontal scroll/grid -->
+            <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-2.5 overflow-x-auto pb-1 custom-scrollbar">
+              
+              <!-- 8–17: 癸未 (Water / Earth) -->
+              <button onclick="selectItem('luck', 0)" id="btn-luck-0" class="pillar-box flex flex-col items-center p-2 rounded-xl border border-obsidian-border bg-obsidian/60 cursor-pointer">
+                <span class="text-[10px] sm:text-xs font-mono text-slateMuted mb-1.5 font-semibold">8–17</span>
+                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-2xl sm:text-3xl md:text-3xl text-water mb-1.5 shadow-sm font-medium" title="癸 (Gui Water)">
+                  癸
+                </div>
+                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-2xl sm:text-3xl md:text-3xl text-earth shadow-sm font-medium" title="未 (Wei Earth)">
+                  未
+                </div>
+                <span class="mt-2 text-[10px] sm:text-xs text-slateMuted text-center truncate max-w-full font-medium" data-t="d0-tag">Foundation</span>
+              </button>
+
+              <!-- 18–27: 甲申 (Wood / Metal) -->
+              <button onclick="selectItem('luck', 1)" id="btn-luck-1" class="pillar-box flex flex-col items-center p-2 rounded-xl border border-obsidian-border bg-obsidian/60 cursor-pointer">
+                <span class="text-[10px] sm:text-xs font-mono text-slateMuted mb-1.5 font-semibold">18–27</span>
+                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-2xl sm:text-3xl md:text-3xl text-wood mb-1.5 shadow-sm font-medium" title="甲 (Jia Wood)">
+                  甲
+                </div>
+                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-2xl sm:text-3xl md:text-3xl text-metal shadow-sm font-medium" title="申 (Shen Metal)">
+                  申
+                </div>
+                <span class="mt-2 text-[10px] sm:text-xs text-slateMuted text-center truncate max-w-full font-medium" data-t="d1-tag">Ventures</span>
+              </button>
+
+              <!-- 28–37: 乙酉 (Wood / Metal) · CURRENT -->
+              <button onclick="selectItem('luck', 2)" id="btn-luck-2" class="pillar-box flex flex-col items-center p-2 rounded-xl border border-gold-champagne bg-gold-champagne/10 cursor-pointer relative shadow-[0_0_12px_rgba(223,183,108,0.2)]">
+                <span class="text-[10px] sm:text-xs font-mono text-gold-champagne mb-1.5 font-bold">28–37 ★</span>
+                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-2xl sm:text-3xl md:text-3xl text-wood mb-1.5 shadow-sm font-medium" title="乙 (Yi Wood)">
+                  乙
+                </div>
+                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-2xl sm:text-3xl md:text-3xl text-metal shadow-sm font-medium" title="酉 (You Metal)">
+                  酉
+                </div>
+                <span class="mt-2 text-[10px] sm:text-xs text-gold-champagne text-center font-bold truncate max-w-full" data-t="d2-tag">Current</span>
+              </button>
+
+              <!-- 38–47: 丙戌 (Fire / Earth) -->
+              <button onclick="selectItem('luck', 3)" id="btn-luck-3" class="pillar-box flex flex-col items-center p-2 rounded-xl border border-obsidian-border bg-obsidian/60 cursor-pointer">
+                <span class="text-[10px] sm:text-xs font-mono text-slateMuted mb-1.5 font-semibold">38–47</span>
+                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-2xl sm:text-3xl md:text-3xl text-fire mb-1.5 shadow-sm font-medium" title="丙 (Bing Fire)">
+                  丙
+                </div>
+                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-2xl sm:text-3xl md:text-3xl text-earth shadow-sm font-medium" title="戌 (Xu Earth)">
+                  戌
+                </div>
+                <span class="mt-2 text-[10px] sm:text-xs text-slateMuted text-center truncate max-w-full font-medium" data-t="d3-tag">Authority</span>
+              </button>
+
+              <!-- 48–57: 丁亥 (Fire / Water) -->
+              <button onclick="selectItem('luck', 4)" id="btn-luck-4" class="pillar-box flex flex-col items-center p-2 rounded-xl border border-obsidian-border bg-obsidian/60 cursor-pointer">
+                <span class="text-[10px] sm:text-xs font-mono text-slateMuted mb-1.5 font-semibold">48–57</span>
+                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-2xl sm:text-3xl md:text-3xl text-fire mb-1.5 shadow-sm font-medium" title="丁 (Ding Fire)">
+                  丁
+                </div>
+                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-2xl sm:text-3xl md:text-3xl text-water shadow-sm font-medium" title="亥 (Hai Water)">
+                  亥
+                </div>
+                <span class="mt-2 text-[10px] sm:text-xs text-slateMuted text-center truncate max-w-full font-medium" data-t="d4-tag">Legacy</span>
+              </button>
+
+              <!-- 58–67: 戊子 (Earth / Water) -->
+              <button onclick="selectItem('luck', 5)" id="btn-luck-5" class="pillar-box flex flex-col items-center p-2 rounded-xl border border-obsidian-border bg-obsidian/60 cursor-pointer">
+                <span class="text-[10px] sm:text-xs font-mono text-slateMuted mb-1.5 font-semibold">58–67</span>
+                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-2xl sm:text-3xl md:text-3xl text-earth mb-1.5 shadow-sm font-medium" title="戊 (Wu Earth)">
+                  戊
+                </div>
+                <div class="w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-xl bg-obsidian-surface border border-obsidian-border flex items-center justify-center font-serif text-2xl sm:text-3xl md:text-3xl text-water shadow-sm font-medium" title="子 (Zi Water)">
+                  子
+                </div>
+                <span class="mt-2 text-[10px] sm:text-xs text-slateMuted text-center truncate max-w-full font-medium" data-t="d5-tag">Stewardship</span>
+              </button>
+
+            </div>
+
+            <!-- Subtitle legend for element colors -->
+            <div class="pt-2 flex flex-wrap items-center justify-between text-[11px] text-slateMuted gap-2 border-t border-obsidian-border/50">
+              <span data-t="legend-title">Element Colors:</span>
+              <div class="flex items-center gap-3">
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-wood"></span>Wood 木</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-fire"></span>Fire 火</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-earth"></span>Earth 土</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-metal"></span>Metal 金</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-water"></span>Water 水</span>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
-        <!-- Four Pillars Redesigned Widget (vs. Tian Qi's software cards) -->
-        <div class="max-w-2xl mx-auto rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-6 sm:p-8 shadow-2xl space-y-6">
-          <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4">
-            <div>
-              <span class="text-xs text-[var(--accent-gold)] uppercase tracking-wider font-semibold">Sample Chart Analysis</span>
-              <h4 class="font-serif text-xl sm:text-2xl font-light">Your Four Classical Pillars</h4>
-            </div>
-            <span class="text-xs px-3 py-1 rounded-full border border-[var(--border-gold)] text-[var(--accent-gold)] bg-amber-500/10">10-Second Calculation</span>
+        <!-- RIGHT: DYNAMIC COMPONENT INSPECTION CARD -->
+        <div class="lg:col-span-5 bg-obsidian-card border border-obsidian-border rounded-2xl 2xl:rounded-3xl p-6 sm:p-8 lg:p-9 shadow-xl sticky top-20 space-y-6 lg:space-y-7">
+          <div id="inspector-header" class="border-b border-obsidian-border pb-5 space-y-1.5">
+            <!-- Header injected via JS -->
           </div>
-
-          <!-- The 4 Seal Stamps -->
-          <div class="grid grid-cols-4 gap-3 text-center">
-            <!-- Hour -->
-            <div class="pillar-seal p-3 rounded-xl">
-              <span class="block text-[11px] text-[var(--text-muted)] uppercase tracking-wider">Hour 时</span>
-              <div class="my-2 font-serif text-2xl sm:text-3xl text-[var(--tag-metal)] font-light">庚</div>
-              <div class="font-serif text-lg text-[var(--tag-metal)] opacity-80">申</div>
-              <span class="inline-block mt-2 text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-[var(--text-muted)]">Metal 金</span>
-            </div>
-            <!-- Day (Master) -->
-            <div class="pillar-seal p-3 rounded-xl border-amber-500/60 ring-2 ring-amber-500/30 bg-amber-500/5">
-              <span class="block text-[11px] text-[var(--accent-gold)] font-bold uppercase tracking-wider">Day 日主</span>
-              <div class="my-2 font-serif text-2xl sm:text-3xl text-[var(--tag-water)] font-light">癸</div>
-              <div class="font-serif text-lg text-[var(--tag-water)] opacity-80">未</div>
-              <span class="inline-block mt-2 text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-[var(--tag-water)] font-semibold">Water 水</span>
-            </div>
-            <!-- Month -->
-            <div class="pillar-seal p-3 rounded-xl">
-              <span class="block text-[11px] text-[var(--text-muted)] uppercase tracking-wider">Month 月</span>
-              <div class="my-2 font-serif text-2xl sm:text-3xl text-[var(--tag-earth)] font-light">戊</div>
-              <div class="font-serif text-lg text-[var(--tag-earth)] opacity-80">戌</div>
-              <span class="inline-block mt-2 text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-[var(--text-muted)]">Earth 土</span>
-            </div>
-            <!-- Year -->
-            <div class="pillar-seal p-3 rounded-xl">
-              <span class="block text-[11px] text-[var(--text-muted)] uppercase tracking-wider">Year 年</span>
-              <div class="my-2 font-serif text-2xl sm:text-3xl text-[var(--tag-fire)] font-light">丙</div>
-              <div class="font-serif text-lg text-[var(--tag-fire)] opacity-80">午</div>
-              <span class="inline-block mt-2 text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-[var(--text-muted)]">Fire 火</span>
-            </div>
-          </div>
-
-          <!-- Day Master Archetype Reveal (Our Signature Differentiator) -->
-          <div class="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-5 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-xs uppercase tracking-wider text-[var(--accent-gold)] font-medium">Day Master Archetype</span>
-              <span class="font-serif text-xs text-[var(--text-muted)]">癸水 · Yin Water</span>
-            </div>
-            <h5 class="font-serif text-2xl font-light text-[var(--text-main)]">The Strategist <span class="text-sm font-sans text-[var(--accent-gold)] font-normal ml-2">沉潜智略家</span></h5>
-            <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-              Deep, perceptive, and highly intuitive. Like an underground aquifer or morning mist, you read implicit currents before others notice them and formulate high-leverage moves with quiet mastery.
-            </p>
-          </div>
-        </div>
-
-        <!-- Redesigned Waitlist Card (No longer an inverted cream block!) -->
-        <div class="max-w-2xl mx-auto rounded-3xl border border-[var(--border-gold)] bg-[var(--bg-card)] p-8 sm:p-10 shadow-2xl relative overflow-hidden ring-1 ring-amber-500/10">
-          <div class="max-w-lg space-y-3">
-            <span class="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-semibold">Priority Reservation</span>
-            <h4 class="font-serif text-3xl sm:text-4xl font-light text-[var(--text-main)]">
-              The full platform is <em class="gold-text">coming soon.</em>
-            </h4>
-            <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
-              10-year cycle tracking, personalized annual timing guides, and team compatibility合盘. Free forever for early waitlist members.
-            </p>
-
-            <!-- Waitlist Form Input Mockup -->
-            <div class="pt-4 flex flex-col sm:flex-row gap-2">
-              <input type="email" placeholder="you@example.com" class="h-11 rounded-full px-5 text-xs bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-main)] outline-none flex-1 focus:border-[var(--accent-gold)]">
-              <button class="gold-btn h-11 px-7 rounded-full text-xs font-semibold">Reserve Your Spot →</button>
-            </div>
-            <p class="text-[11px] text-[var(--text-muted)] pt-1">
-              ✓ No credit card required &nbsp;·&nbsp; ✓ Free for early members &nbsp;·&nbsp; ✓ 100% secular
-            </p>
+          <div id="inspector-body" class="space-y-4 text-sm sm:text-base text-slateMuted leading-relaxed">
+            <!-- Body injected via JS -->
           </div>
         </div>
 
       </div>
-    </section>
 
-    <!-- =================================================================================== -->
-    <!-- TAB 3: MENTOR DECISION MEMO -->
-    <!-- =================================================================================== -->
-    <section id="view-memo" class="hidden space-y-8">
-      <div class="text-center max-w-2xl mx-auto">
-        <span class="text-xs uppercase tracking-widest text-[var(--accent-gold)] font-semibold">Strategic Brief</span>
-        <h2 class="mt-2 font-serif text-3xl sm:text-4xl text-[var(--text-main)] font-light">Summary for Mentor Discussion</h2>
-        <p class="mt-3 text-sm text-[var(--text-muted)]">
-          Key points to walk through with mentors on why this visual direction wins.
+      <!-- Bottom Strategic Takeaway -->
+      <div class="mt-12 p-6 sm:p-8 rounded-2xl border border-gold-champagne/25 bg-gradient-to-r from-obsidian-card via-obsidian-surface to-obsidian-card text-center space-y-2">
+        <p class="text-xs uppercase tracking-[0.2em] text-gold-champagne font-mono font-medium" data-t="takeaway-eyebrow">
+          CLASSICAL TIMING WISDOM · 顺天应时
+        </p>
+        <h3 class="font-serif text-2xl sm:text-3xl font-light text-cream max-w-2xl mx-auto" data-t="takeaway-heading">
+          Your natal chart is your vehicle. The luck cycles are the road.
+        </h3>
+        <p class="text-xs sm:text-sm text-slateMuted max-w-2xl mx-auto leading-relaxed" data-t="takeaway-desc">
+          Some people are sports cars built for quick bursts. Others are rugged trucks built for long journeys. Your chart shows how you were built. Your luck cycles show whether you're navigating fog or cruising in clear weather. Don’t mistake a turbulent season for failure, and don’t miss the moments meant for your biggest leaps.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-        <div class="rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-card)] p-6 space-y-3">
-          <div class="w-8 h-8 rounded-full bg-amber-500/20 text-[var(--accent-gold)] flex items-center justify-center font-serif text-base">1</div>
-          <h4 class="font-serif text-xl font-light text-[var(--text-main)]">Ditch the "Fortune-Teller" Palette</h4>
-          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-            Tian Qi uses reddish-brown chocolate tones (`#1c140e`) reminiscent of traditional geomancy shops. Scripting Destiny shifts to <strong>Obsidian Sumi Slate & Champagne Gold</strong>, immediately conveying modern intellectual rigor.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-card)] p-6 space-y-3">
-          <div class="w-8 h-8 rounded-full bg-amber-500/20 text-[var(--accent-gold)] flex items-center justify-center font-serif text-base">2</div>
-          <h4 class="font-serif text-xl font-light text-[var(--text-main)]">Kill the Inverted Cream Box</h4>
-          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-            Tian Qi has a prominent cream horizontal banner ("CONTINUE READING"). Our previous waitlist card mirrored that exact visual weight. Replacing it with an architectural hairline-gold card eliminates accidental brand confusion.
-          </p>
-        </div>
-
-        <div class="rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-card)] p-6 space-y-3">
-          <div class="w-8 h-8 rounded-full bg-amber-500/20 text-[var(--accent-gold)] flex items-center justify-center font-serif text-base">3</div>
-          <h4 class="font-serif text-xl font-light text-[var(--text-main)]">The Xuan Paper Light Mode Moat</h4>
-          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-            Tian Qi cannot offer a compelling light mode because its design system is rooted in dark lacquer. Our <strong>Warm Xuan Rice Paper</strong> mode creates an instant, defensible identity that appeals to modern executives and readers.
-          </p>
-        </div>
-
-      </div>
-
-      <!-- Mentor Discussion Questions -->
-      <div class="rounded-3xl border border-[var(--border-gold)] bg-[var(--bg-surface)] p-6 sm:p-8 space-y-4">
-        <h4 class="font-serif text-2xl font-light text-[var(--text-main)]">Suggested Questions to Ask Your Mentors:</h4>
-        <ol class="space-y-3 text-xs sm:text-sm text-[var(--text-muted)] list-decimal list-inside leading-relaxed">
-          <li><strong>Positioning:</strong> "Does the Obsidian & Champagne Gold direction feel distinct enough from Tian Qi's dark brown occult dashboard?"</li>
-          <li><strong>Target Audience:</strong> "Do you agree that leading with Day Master psychological archetypes and life timing feels higher-trust than a generic 8-system astrology portal?"</li>
-          <li><strong>Light Mode Appeal:</strong> "Does having a dedicated Xuan Paper light mode make the product feel more like an editorial self-development tool (like MasterClass or Kinfolk)?"</li>
-        </ol>
-      </div>
     </section>
 
   </main>
 
+  <footer class="mt-20 border-t border-obsidian-border/50 py-8 px-4 text-center text-xs text-slateMuted">
+    <p>© 2026 Scripting Destiny. Preview Mockup for Mentor Review.</p>
+  </footer>
+
+  <!-- Interactive Logic & Clean Metaphysical Data -->
   <script>
-    function switchTab(tab) {
-      document.getElementById('view-comparison').classList.add('hidden');
-      document.getElementById('view-mockup').classList.add('hidden');
-      document.getElementById('view-memo').classList.add('hidden');
+    let currentLang = 'en';
+    let currentType = 'natal'; // 'natal' or 'luck'
+    let currentKey = 'day';     // 'hour', 'day', 'month', 'year', or 0..5
 
-      document.getElementById('tab-comparison').className = 'px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]';
-      document.getElementById('tab-mockup').className = 'px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]';
-      document.getElementById('tab-memo').className = 'px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]';
+    const DATA = {
+      en: {
+        barSubtitle: "Simplified BaZi Chart + 10-Year Luck Cycle Pillars",
+        bannerDesc: "Year pillar labeled as 'Roots'. 10-Year luck cycles now displayed as vertical pillars with authentic element colors. Click any pillar to inspect what it represents.",
+        elementsEyebrow: "THE FIVE ELEMENTS · PRECEDING SECTION",
+        elementsHeading: "Every chart is a unique balance — shaped by what is present, and what is missing.",
+        woodDesc: "Growth, vision, starting things",
+        fireDesc: "Visibility, energy, influence",
+        earthDesc: "Stability, trust, holding space",
+        metalDesc: "Precision, standards, decisions",
+        waterDesc: "Insight, strategy, adaptability",
+        anatomyEyebrow: "THE ANATOMY OF A BAZI CHART · 四柱八字与十年大运",
+        anatomyTitle1: "The blueprint of your nature.",
+        anatomyTitle2: "The road beneath your feet.",
+        anatomyDesc: "The Four Pillars represent your cognitive baseline and life stages. Directly beneath, your 10-Year Luck Cycle pillars reveal the environmental terrain and macro seasons you travel through.",
+        natalCardTitle: "Natal Chart (先天命盘) · Four Pillars",
+        natalSub: "Vehicle & Innate Nature",
+        colHour: "HOUR 时柱",
+        colDay: "DAY 日柱 ★",
+        colMonth: "MONTH 月柱",
+        colYear: "YEAR 年柱",
+        tagHour: "Ages 49+<br>Legacy",
+        tagDay: "Ages 33–48<br>Self",
+        tagMonth: "Ages 17–32<br>Career",
+        tagYear: "Ages 0–16<br>Roots",
+        luckCardTitle: "10-Year Luck Cycles (后天大运) · Decade Pillars",
+        luckSub: "Road Terrain & Shifting Macro Qi",
+        luckInstruction: "Each 10-year cycle acts as a shifting environmental pillar. Note how Heavenly Stems and Earthly Branches carry their own individual element energies:",
+        d0Tag: "Foundation",
+        d1Tag: "Ventures",
+        d2Tag: "Current",
+        d3Tag: "Authority",
+        d4Tag: "Legacy",
+        d5Tag: "Stewardship",
+        legendTitle: "Element Colors:",
+        takeawayEyebrow: "CLASSICAL TIMING WISDOM · 顺天应时",
+        takeawayHeading: "Your natal chart is your vehicle. The luck cycles are the road.",
+        takeawayDesc: "Some people are sports cars built for quick bursts. Others are rugged trucks built for long journeys. Your chart shows how you were built. Your luck cycles show whether you're navigating fog or cruising in clear weather. Don’t mistake a turbulent season for failure, and don’t miss the moments meant for your biggest leaps.",
 
-      document.getElementById('view-' + tab).classList.remove('hidden');
-      document.getElementById('tab-' + tab).className = 'px-3 py-1 rounded-full font-medium transition bg-amber-500/20 text-[var(--accent-gold)]';
+        bannerExampleTitle: "Understanding This Example Chart:",
+        bannerExampleDesc: "The chart shown below is an <strong>illustrative example</strong> to demonstrate how a BaZi chart works. Every person's chart is calculated from their own unique birth year, month, day, and time. In this example, the Day Master happens to be <strong>Xin Metal</strong>, but everyone is represented by different elements across Wood, Fire, Earth, Metal, or Water. Click any pillar below to see what it represents in a reading.",
+        natalBadge: "Example",
+        luckBadge: "Sample Path",
+        natalCardTitle: "Example Natal Chart · Four Pillars",
+        natalSub: "Cognitive Baseline",
+        luckCardTitle: "Example 10-Year Luck Cycles",
+        luckSub: "Environmental Terrain",
+        luckInstruction: "Luck cycles show shifting external weather across 10-year chapters. This example shows a sample progression starting at age 8. Heavenly Stems and Earthly Branches carry distinct elemental energies:",
+
+        natalDetails: {
+          year: {
+            badge: "NATAL PILLAR · 先天年柱 (SAMPLE)",
+            title: "Year Pillar (年柱) — Roots & Ancestry",
+            stage: "Life Stage: Ages 0–16 (Childhood & Heritage)",
+            chars: "In this sample: 庚 (Metal) / 午 (Fire) · Your chart will have its own elements",
+            whatItRepresents: [
+              "What This Pillar Does: Represents your family roots, ancestral lineage, early childhood environment (ages 0–16), and the macro era into which you were born.",
+              "How to Read It: The Year Pillar governs your outer social interface—the first impression, public vibe, and reputation you project to acquaintances and the wider world before they get to know you deeply.",
+              "How It Relates to the Whole Chart: Sets your baseline social foundation. It shows the instinctive way you navigate large groups, broad networks, and community spaces.",
+              "Different for Everyone: Everyone's Year Pillar is determined by their lunar-solar birth year. While this sample has Metal over Fire, your chart will feature its own unique elements."
+            ]
+          },
+          month: {
+            badge: "NATAL PILLAR · 先天月柱 (SAMPLE)",
+            title: "Month Pillar (月柱) — Career, Drive & Season of Birth",
+            stage: "Life Stage: Ages 17–32 (Youth & Vocational Ascent)",
+            chars: "In this sample: 壬 (Water) / 午 (Fire) · Sets the seasonal climate of the chart",
+            whatItRepresents: [
+              "What This Pillar Does: Represents your career drive, working style, ambition, and relationships with parents, teachers, and early professional mentors.",
+              "Season of Birth (月令): The Earthly Branch (bottom character) is the most powerful anchor in BaZi. It tells whether you were born in spring, summer, autumn, or winter, setting the internal thermal climate for your entire chart.",
+              "How to Read It: Shows what environments enable your innate talents to flourish and how you naturally convert raw potential into practical achievements and livelihood.",
+              "Different for Everyone: Your birth month introduces specific seasonal energy that either nourishes, balances, or challenges your core self."
+            ]
+          },
+          day: {
+            badge: "NATAL PILLAR · 先天日柱 (CORE SAMPLE)",
+            title: "Day Pillar (日柱) — Core Self (Day Master) & Inner Sanctuary",
+            stage: "Life Stage: Ages 33–48 (Prime Adulthood & Maturity)",
+            chars: "In this sample: 辛 (Xin Metal) / 亥 (Hai Water) · Note: Not everyone is Xin Metal!",
+            whatItRepresents: [
+              "Day Master (日主元神): The top character is the central reference point of the entire chart—representing you (your core self, values, and natural way of processing life).",
+              "Everyone Is a Different Element: Not everyone is Xin Metal! There are 10 possible Day Masters across the 5 Elements (Wood, Fire, Earth, Metal, or Water). In this example, it happens to be Xin Metal, but yours might be an expansive ocean (Ren Water), a towering tree (Jia Wood), warm sunlight (Bing Fire), or fertile soil (Wu Earth).",
+              "Spouse Palace (夫妻宫): The bottom character represents your private inner world, emotional sanctuary, and relationship patterns with your life partner.",
+              "How to Read It: All other 7 characters in your chart—and every 10-year luck cycle—are evaluated by how they support, soften, or challenge your personal Day Master."
+            ]
+          },
+          hour: {
+            badge: "NATAL PILLAR · 先天时柱 (SAMPLE)",
+            title: "Hour Pillar (时柱) — Inner Aspirations, Output & Legacy",
+            stage: "Life Stage: Ages 49 and beyond (Second Half of Life)",
+            chars: "In this sample: 甲 (Wood) / 午 (Fire) · Calculated from solar birth time",
+            whatItRepresents: [
+              "What This Pillar Does: Represents your private dreams, creative outputs, inventions, and relationships with children, apprentices, or team members.",
+              "Second Half of Life: Governs how your life compounds after age 49—revealing what you build and leave behind.",
+              "How to Read It: While the Year Pillar is your outer public front, the Hour Pillar is your deepest private core—what you care about when all social expectations drop away.",
+              "Different for Everyone: Calculated from your exact solar birth hour, completing the Four Pillars that define your unique personal fingerprint."
+            ]
+          }
+        },
+
+        luckDetails: [
+          {
+            badge: "10-YEAR LUCK PILLAR · 大运示例 (8–17)",
+            title: "Ages 8–17 (Sample Decade 1) — Early Chapter",
+            stage: "Life Chapter: Formative Years & Schooling",
+            chars: "Sample Stem: 癸 (Water) · Sample Branch: 未 (Earth)",
+            whatItRepresents: [
+              "What Luck Cycles Represent: While your 4 natal pillars remain constant throughout life, you travel through different 10-year chapters that introduce changing environmental conditions.",
+              "How to Read This Period: The interaction between this decade's elements and the birth chart reveals whether early schooling felt smooth and supported, or required early adaptability.",
+              "Different for Everyone: In BaZi, the exact age you start your first luck cycle (such as 2, 5, or 8) is mathematically calculated from your birth date."
+            ]
+          },
+          {
+            badge: "10-YEAR LUCK PILLAR · 大运示例 (18–27)",
+            title: "Ages 18–27 (Sample Decade 2) — Entering the World",
+            stage: "Life Chapter: Young Adulthood & Vocational Launch",
+            chars: "Sample Stem: 甲 (Wood) · Sample Branch: 申 (Metal)",
+            whatItRepresents: [
+              "What Luck Cycles Represent: As you step into independence, new elemental influences test your adaptability and shape your career trajectory.",
+              "How to Read This Period: Shows whether external circumstances push you toward bold exploration, structured training, or trial-and-error discovery.",
+              "Different for Everyone: Your own chart will encounter its own sequence of elements, creating your personal rhythm of growth."
+            ]
+          },
+          {
+            badge: "10-YEAR LUCK PILLAR · 大运示例 (28–37) ★ ACTIVE SAMPLE",
+            title: "Ages 28–37 (Sample Decade 3) — Active Cycle Example",
+            stage: "Life Chapter: Current Active Macro Weather (Example)",
+            chars: "Sample Stem: 乙 (Wood) · Sample Branch: 酉 (Metal)",
+            whatItRepresents: [
+              "Reading the Active Cycle: In a reading, this is the current 'road condition' you are traveling on. It shows whether you have tailwinds that accelerate your goals, or uphill terrain that asks for patient strategy.",
+              "Stem vs. Branch Timing: The top character (Heavenly Stem) influences the first 5 years and visible external events. The bottom character (Earthly Branch) influences the second 5 years and internal foundation.",
+              "Remember (Sample Elements Only): In this sample, the active cycle features Wood over Metal. In your personal reading, your current 10-year cycle will have completely different elements based on your own birth moment."
+            ]
+          },
+          {
+            badge: "10-YEAR LUCK PILLAR · 大运示例 (38–47)",
+            title: "Ages 38–47 (Sample Decade 4) — Mid-Career & Mastery",
+            stage: "Life Chapter: Maturity & Prime Responsibility",
+            chars: "Sample Stem: 丙 (Fire) · Sample Branch: 戌 (Earth)",
+            whatItRepresents: [
+              "What This Chapter Represents: The mid-life decade where personal mastery deepens, professional identity solidifies, and family or community roles peak.",
+              "How to Read This Period: Shows how shifting macro conditions impact your leadership bandwidth, financial priorities, and long-term security.",
+              "Different for Everyone: The elements that arrive in your prime decades will interact uniquely with your personal Day Master."
+            ]
+          },
+          {
+            badge: "10-YEAR LUCK PILLAR · 大运示例 (48–57)",
+            title: "Ages 48–57 (Sample Decade 5) — Synthesis & Mentorship",
+            stage: "Life Chapter: Transition to Mentorship & Wisdom",
+            chars: "Sample Stem: 丁 (Fire) · Sample Branch: 亥 (Water)",
+            whatItRepresents: [
+              "What This Chapter Represents: A period often marked by sharing knowledge, guiding younger generations, and enjoying the compounded fruits of earlier hard work.",
+              "How to Read This Period: Examines how life's pace transitions toward advisory roles, spiritual reflection, and health balance.",
+              "Different for Everyone: Your personal luck chart will map out these later chapters according to your unique natal balance."
+            ]
+          },
+          {
+            badge: "10-YEAR LUCK PILLAR · 大运示例 (58–67)",
+            title: "Ages 58–67 (Sample Decade 6) — Stewardship & Legacy",
+            stage: "Life Chapter: Long-term Stewardship & Serenity",
+            chars: "Sample Stem: 戊 (Earth) · Sample Branch: 子 (Water)",
+            whatItRepresents: [
+              "What This Chapter Represents: Focuses on lasting peace of mind, family harmony, health preservation, and legacy stewardship.",
+              "How to Read This Period: Shows how external conditions support retirement, philosophical contemplation, and family grounding.",
+              "Different for Everyone: Every life has its own autumn and winter seasons, shaped by your own chart's elemental path."
+            ]
+          }
+        ]
+      },
+
+      zh: {
+        barSubtitle: "精简版四柱八字与十年大运柱架构",
+        bannerDesc: "年柱已精准调整为“根基 (Roots)”。十年大运现以独立柱式呈现，天干与地支各具准确五行颜色。点击任意一柱即可查看其人生维度。",
+        elementsEyebrow: "五行平衡 · 上方已有模块",
+        elementsHeading: "每个人的命盘皆为独特的五行能量平衡 —— 取决于何者充盈，何者缺失。",
+        woodDesc: "生长、远见、开创赛道",
+        fireDesc: "明亮、热量、影响力",
+        earthDesc: "沉稳、信赖、承载包容",
+        metalDesc: "严谨、标准、决断执行",
+        waterDesc: "智慧、谋略、应变流动",
+        anatomyEyebrow: "THE ANATOMY OF A BAZI CHART · 四柱八字与十年大运",
+        anatomyTitle1: "先天命局为车，洞悉本性蓝图。",
+        anatomyTitle2: "后天大运为路，把握行事节律。",
+        anatomyDesc: "四柱八字构成您的先天认知基准与生命阶段；下方紧邻的十年大运柱，则生动揭示您在不同十年中所穿越的外部环境与宏观时节。",
+        bannerExampleTitle: "关于本图表的说明（示例文盘）：",
+        bannerExampleDesc: "此处的四柱八字与十年大运仅用于<strong>展示命盘结构</strong>。每个人的八字均由其具体的出生年、月、日、时独立计算。在本例中，日主核心恰为<strong>辛金</strong>，但每个人的五行代表各不相同（木、火、土、金、水共10种天干元神）。点击下方任意柱位，了解其在命理推演中所代表的人生维度。",
+        natalBadge: "结构示例",
+        luckBadge: "大运流转",
+        natalCardTitle: "示例命盘 · 先天四柱八字",
+        natalSub: "先天认知基准",
+        colHour: "时柱 HOUR",
+        colDay: "日柱 DAY ★",
+        colMonth: "月柱 MONTH",
+        colYear: "年柱 YEAR",
+        tagHour: "49岁后<br>归宿晚景",
+        tagDay: "33–48岁<br>真我元神",
+        tagMonth: "17–32岁<br>职场格局",
+        tagYear: "0–16岁<br>根基祖业",
+        luckCardTitle: "示例十年大运 (10-Year Cycles)",
+        luckSub: "外部宏观时节",
+        luckInstruction: "大运代表不同人生十年的外部环境。本例展示了一个人从8岁起运的流转示例。天干与地支各具独立五行能量：",
+        d0Tag: "求知筑基",
+        d1Tag: "创业开拓",
+        d2Tag: "当前示例",
+        d3Tag: "盛年担当",
+        d4Tag: "传承布道",
+        d5Tag: "守成从容",
+        legendTitle: "五行颜色图例：",
+        takeawayEyebrow: "顺天应时 · 传统命理智慧",
+        takeawayHeading: "八字如车，大运如路。",
+        takeawayDesc: "有人如跑车适于爆发，有人如越野车擅长长途跋涉。命盘揭示您天生的配置；大运则显示您当前是在穿行浓雾，还是驰骋在晴空之下。别把一时的动荡低潮误判为个人失败，更别在晴空万里时错失飞跃的良机。",
+
+        natalDetails: {
+          year: {
+            badge: "先天命柱 · 年柱 (示例)",
+            title: "年柱 (Year Pillar) —— 根基、祖德与外延初见",
+            stage: "对应人生阶段：0至16岁（幼年启蒙与根基阶段）",
+            chars: "本例展示：庚金 / 午火 · 您的命盘将由您的出生年份决定",
+            whatItRepresents: [
+              "此柱代表的核心维度: 代表家族根基、祖业渊源、幼年成长环境（0–16岁）以及出生时的大时代宏观背景。",
+              "在命盘推演中的作用: 年柱主导您的“外延气场”——即陌生人、外界市场或初次见面者对您产生的第一印象与品牌声量。",
+              "与整盘的关联: 年柱是整张命盘的底色与起点，揭示您在面对大型社交网络、行业大圈子时的本能姿态。",
+              "每个人各不相同: 每个人的年柱由其阴阳历出生年份决定。本例虽为庚金与午火，您自己的命盘将拥有专属的天干地支组合。"
+            ]
+          },
+          month: {
+            badge: "先天命柱 · 月柱 (示例)",
+            title: "月柱 (Month Pillar) —— 事业、格局与月令气候",
+            stage: "对应人生阶段：17至32岁（青年求索与职场攀登期）",
+            chars: "本例展示：壬水 / 午火 · 月令决定全盘气候节律",
+            whatItRepresents: [
+              "此柱代表的核心维度: 主导职业赛道、作战方式、事业心志，以及与父母长辈、早期导师及职场权威的互动。",
+              "月令提纲（地支）: 月柱地支是八字中极具分量的核心坐标。它反映出您出生时的季节（春夏秋冬），直接决定全盘能量是偏温热、寒凉、燥烈还是润泽。",
+              "在命盘推演中的作用: 揭示何种工作环境最能激发您的天赋，以及如何将先天潜能高效转化为真实的社会价值与成就。",
+              "每个人各不相同: 您的出生月份决定了您的季节气候，指示您最适合的发展舞台。"
+            ]
+          },
+          day: {
+            badge: "先天命柱 · 日柱核心 (示例)",
+            title: "日柱 (Day Pillar) —— 核心元神 (日主) 与夫妻宫",
+            stage: "对应人生阶段：33至48岁（人生黄金壮年期）",
+            chars: "本例展示：辛金 / 亥水 · 注意：并非每个人的日主都是辛金！",
+            whatItRepresents: [
+              "日主元神（天干）: 日柱上方天干是整张八字的终极坐标——代表“您自己”（最本真的性格底色、核心价值观与思维方式）。",
+              "重要（每个人代表不同五行）: 并不是每个人都是辛金！在八字系统中共有10种天干元神，涵盖木、火、土、金、水五大行。本例恰好是辛金（珠宝之金），而您的命盘可能是苍天栋梁（甲木）、汪洋江海（壬水）、普照暖阳（丙火）或厚重山川（戊土）。",
+              "夫妻宫（地支）: 日柱下方地支代表您的私密心理圣殿、内在安全感，以及与终身伴侣或最亲密伙伴的互动模式。",
+              "在命盘推演中的作用: 全盘其余七个字以及所有后天大运，皆以日主为圆心，推断它们对您的核心能量是滋养、雕琢还是消耗。"
+            ]
+          },
+          hour: {
+            badge: "先天命柱 · 时柱 (示例)",
+            title: "时柱 (Hour Pillar) —— 归宿、创造成果与抱负",
+            stage: "对应人生阶段：49岁及以后（人生下半场与后代传承）",
+            chars: "本例展示：甲木 / 午火 · 依据真太阳时出生时刻推算",
+            whatItRepresents: [
+              "此柱代表的核心维度: 代表个人自主创办的产品、创造发明、深层抱负，以及与子女晚辈、核心团队或门生学徒的缘分。",
+              "人生下半场的写照: 主导49岁以后的生命阶段，揭示岁月沉淀后的成果、晚年归宿与长期复利。",
+              "在命盘推演中的作用: 年柱主外，时柱主内。时柱展现卸下一切外界社会身份后，您最渴望留给世界的持久成果。",
+              "每个人各不相同: 依据您出生的精准真太阳时推算，补齐四柱八字的最终拼图。"
+            ]
+          }
+        },
+
+        luckDetails: [
+          {
+            badge: "后天大运柱 · 大运示例 (8–17岁)",
+            title: "8–17岁（大运示例一）—— 启蒙与筑基",
+            stage: "十年生命章节：青少年求学求知期",
+            chars: "示例天干：癸水 · 示例地支：未土",
+            whatItRepresents: [
+              "大运在推演中的含义: 先天四柱命盘终生不变，而十年大运则每十年切换一次，代表外部环境五行气运的更迭。",
+              "如何推演本阶段: 观察这十年中的干支能量与原局八字产生何种生克共振，反映求学环境是否顺遂、早期家庭是否有搬迁或变动。",
+              "每个人各不相同: 在八字中，每个人起大运的精准岁数（如2岁、5岁或8岁）各不相同，完全由出生时刻的天文历法推算。"
+            ]
+          },
+          {
+            badge: "后天大运柱 · 大运示例 (18–27岁)",
+            title: "18–27岁（大运示例二）—— 踏入社会与探索",
+            stage: "十年生命章节：青年独立与职业起步",
+            chars: "示例天干：甲木 · 示例地支：申金",
+            whatItRepresents: [
+              "大运在推演中的含义: 步入独立生活后，新的五行能量进入您的生命场域，检验您的应变能力并塑造初步职业方向。",
+              "如何推演本阶段: 揭示外部大势是推着您大胆开拓、接受系统培训，还是在反复试错中找寻定位。",
+              "每个人各不相同: 您自己的大运将拥有独特的发展流转，形成专属于您的成长节律。"
+            ]
+          },
+          {
+            badge: "后天大运柱 · 大运示例 (28–37岁) ★ 当前示例",
+            title: "28–37岁（大运示例三）—— 当前行运示例",
+            stage: "十年生命章节：当前外部宏观时空环境（示例）",
+            chars: "示例天干：乙木 · 示例地支：酉金",
+            whatItRepresents: [
+              "如何推演当前大运: 在命理咨询中，这是推演当前“外部路况”的关键。它指示您眼前是拥有顺风顺水的加速契机，还是需要沉潜耐心的爬坡阶段。",
+              "天干与地支的时效: 天干（上方）主要主导前五年的外部机遇与显性事件；地支（下方）主要主导后五年的深层环境与扎根底气。",
+              "牢记（这仅是示例文盘）: 在此示例中，当前大运恰为木与金。在您个人的真实命盘中，当前十年大运将完全由您自己的生辰八字生成。"
+            ]
+          },
+          {
+            badge: "后天大运柱 · 大运示例 (38–47岁)",
+            title: "38–47岁（大运示例四）—— 盛年成熟与担当",
+            stage: "十年生命章节：壮年担当与格局深化",
+            chars: "示例天干：丙火 · 示例地支：戌土",
+            whatItRepresents: [
+              "本阶段的核心含义: 人生的黄金成熟期，个人能力与见识趋于圆融，在家庭、事业与社会中的责任最为关键。",
+              "如何推演本阶段: 大运环境的变化直接影响决策心力、财富积累方式与长远资产安全。",
+              "每个人各不相同: 壮年时期到来的五行能量，将与您专属的日主产生独特的化学反应。"
+            ]
+          },
+          {
+            badge: "后天大运柱 · 大运示例 (48–57岁)",
+            title: "48–57岁（大运示例五）—— 智慧传承与融通",
+            stage: "十年生命章节：向导师与智慧沉淀过渡",
+            chars: "示例天干：丁火 · 示例地支：亥水",
+            whatItRepresents: [
+              "本阶段的核心含义: 从一线拼杀逐步转向知识传授、培育后进，享受过往辛勤耕耘所带来的复利成果。",
+              "如何推演本阶段: 评估生活节奏是否转向咨询指导、精神追求与身心平衡。",
+              "每个人各不相同: 您的大运图谱将根据您的先天五行喜忌，规划出属于您的秋收画卷。"
+            ]
+          },
+          {
+            badge: "后天大运柱 · 大运示例 (58–67岁)",
+            title: "58–67岁（大运示例六）—— 守成掌舵与从容",
+            stage: "十年生命章节：长久守护与从容圆满",
+            chars: "示例天干：戊土 · 示例地支：子水",
+            whatItRepresents: [
+              "本阶段的核心含义: 重心聚焦于长期内心宁静、家庭和睦、身心颐养与生命成果的守护。",
+              "如何推演本阶段: 展现外部大势如何支持退休安享、哲学思考与深厚的情感连接。",
+              "每个人各不相同: 每个人的人生都有自己的春夏秋冬，由您独一无二的命理轨迹决定。"
+            ]
+          }
+        ]
+      }
+    };
+
+    function renderInspector() {
+      const texts = DATA[currentLang];
+      const headerEl = document.getElementById('inspector-header');
+      const bodyEl = document.getElementById('inspector-body');
+
+      if (currentType === 'natal') {
+        const item = texts.natalDetails[currentKey];
+        headerEl.innerHTML = `
+          <span class="inline-block px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-gold-champagne/15 text-gold-champagne border border-gold-champagne/30">
+            ${item.badge}
+          </span>
+          <h3 class="font-serif text-2xl sm:text-3xl lg:text-[30px] text-cream font-light mt-2 leading-snug">${item.title}</h3>
+          <p class="text-sm sm:text-base text-gold-champagne font-mono font-medium pt-0.5">${item.stage}</p>
+          <p class="text-xs sm:text-sm text-slateMuted font-mono pt-1">${item.chars}</p>
+        `;
+
+        const points = item.whatItRepresents.map(pt => {
+          const parts = pt.split(':');
+          if (parts.length > 1) {
+            return `<li class="flex items-start gap-3">
+              <span class="text-gold-champagne font-bold shrink-0 mt-1 text-base">•</span>
+              <span><strong class="text-cream font-medium text-sm sm:text-base">${parts[0]}:</strong>${parts.slice(1).join(':')}</span>
+            </li>`;
+          }
+          return `<li class="flex items-start gap-3">
+            <span class="text-gold-champagne font-bold shrink-0 mt-1 text-base">•</span>
+            <span>${pt}</span>
+          </li>`;
+        }).join('');
+
+        bodyEl.innerHTML = `
+          <div class="space-y-4 pt-1">
+            <p class="text-xs sm:text-sm uppercase tracking-wider text-slateMuted font-mono font-semibold">
+              ${currentLang === 'en' ? 'WHAT THIS PILLAR REPRESENTS:' : '此柱对应的人生核心维度：'}
+            </p>
+            <ul class="space-y-4 text-sm sm:text-base text-slateMuted leading-relaxed">
+              ${points}
+            </ul>
+            <div class="p-4 sm:p-5 rounded-xl bg-obsidian-surface border border-obsidian-border text-xs sm:text-sm text-cream space-y-1.5 mt-6">
+              <p class="font-semibold text-gold-champagne font-mono text-xs sm:text-sm uppercase tracking-wider">
+                ${currentLang === 'en' ? 'BaZi Interpretation Principle:' : '命盘推演要诀：'}
+              </p>
+              <p class="text-slateMuted text-xs sm:text-sm leading-relaxed">
+                ${currentLang === 'en' ? 'A single pillar is never read in isolation. The Day Master is your central anchor, and all remaining pillars alongside your 10-year luck cycles are analyzed together to reveal your true elemental balance.' : '八字不可孤立看单一一柱。日主是核心坐标，年、月、时三柱与后天大运均以此为参照，共同构成完整、立体的生命图景。'}
+              </p>
+            </div>
+          </div>
+        `;
+      } else {
+        const item = texts.luckDetails[currentKey];
+        headerEl.innerHTML = `
+          <span class="inline-block px-2.5 py-1 rounded-md text-xs font-mono font-semibold bg-water/20 text-water border border-water/40">
+            ${item.badge}
+          </span>
+          <h3 class="font-serif text-2xl sm:text-3xl lg:text-[30px] text-cream font-light mt-2 leading-snug">${item.title}</h3>
+          <p class="text-sm sm:text-base text-gold-champagne font-mono font-medium pt-0.5">${item.stage}</p>
+          <p class="text-xs sm:text-sm text-slateMuted font-mono pt-1">${item.chars}</p>
+        `;
+
+        const points = item.whatItRepresents.map(pt => {
+          const parts = pt.split(':');
+          if (parts.length > 1) {
+            return `<li class="flex items-start gap-3">
+              <span class="text-gold-champagne font-bold shrink-0 mt-1 text-base">•</span>
+              <span><strong class="text-cream font-medium text-sm sm:text-base">${parts[0]}:</strong>${parts.slice(1).join(':')}</span>
+            </li>`;
+          }
+          return `<li class="flex items-start gap-3">
+            <span class="text-gold-champagne font-bold shrink-0 mt-1 text-base">•</span>
+            <span>${pt}</span>
+          </li>`;
+        }).join('');
+
+        bodyEl.innerHTML = `
+          <div class="space-y-4 pt-1">
+            <p class="text-xs sm:text-sm uppercase tracking-wider text-gold-champagne font-mono font-semibold">
+              ${currentLang === 'en' ? 'WHAT THIS LUCK CYCLE REPRESENTS:' : '大运在命盘推演中的含义：'}
+            </p>
+            <ul class="space-y-4 text-sm sm:text-base text-slateMuted leading-relaxed">
+              ${points}
+            </ul>
+            <div class="p-4 sm:p-5 rounded-xl bg-obsidian-surface border border-obsidian-border text-xs sm:text-sm text-cream space-y-1.5 mt-6">
+              <p class="font-semibold text-gold-champagne font-mono text-xs sm:text-sm uppercase tracking-wider">
+                ${currentLang === 'en' ? 'Important Note on Personal Cycles:' : '关于个人大运的重要说明：'}
+              </p>
+              <p class="text-slateMuted text-xs sm:text-sm leading-relaxed">
+                ${currentLang === 'en' ? 'The age you begin your luck cycles and the progression of elements are calculated individually from your exact birth time. Your personalized chart will show your unique timing.' : '每个人起运的岁数（例如2岁、6岁或8岁）与大运干支走向皆由出生时刻决定。当您生成自己的命盘时，系统将精准呈现属于您的专属十年流转与五行走向。'}
+              </p>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function selectItem(type, key) {
+      currentType = type;
+      currentKey = key;
+
+      // Remove active from all natal
+      ['hour', 'day', 'month', 'year'].forEach(k => {
+        const el = document.getElementById(`btn-natal-${k}`);
+        if (type === 'natal' && key === k) {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      });
+
+      // Remove active from all luck
+      [0, 1, 2, 3, 4, 5].forEach(i => {
+        const el = document.getElementById(`btn-luck-${i}`);
+        if (type === 'luck' && key === i) {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      });
+
+      renderInspector();
+    }
+
+    function applyLanguageText() {
+      const texts = DATA[currentLang];
+      document.querySelectorAll('[data-t]').forEach(el => {
+        const key = el.getAttribute('data-t');
+        switch (key) {
+          case 'bar-subtitle': el.textContent = texts.barSubtitle; break;
+          case 'banner-desc': el.textContent = texts.bannerDesc; break;
+          case 'elements-eyebrow': el.textContent = texts.elementsEyebrow; break;
+          case 'elements-heading': el.textContent = texts.elementsHeading; break;
+          case 'wood-desc': el.textContent = texts.woodDesc; break;
+          case 'fire-desc': el.textContent = texts.fireDesc; break;
+          case 'earth-desc': el.textContent = texts.earthDesc; break;
+          case 'metal-desc': el.textContent = texts.metalDesc; break;
+          case 'water-desc': el.textContent = texts.waterDesc; break;
+          case 'anatomy-eyebrow': el.textContent = texts.anatomyEyebrow; break;
+          case 'anatomy-title-1': el.textContent = texts.anatomyTitle1; break;
+          case 'anatomy-title-2': el.textContent = texts.anatomyTitle2; break;
+          case 'anatomy-desc': el.textContent = texts.anatomyDesc; break;
+          case 'banner-example-title': el.textContent = texts.bannerExampleTitle; break;
+          case 'banner-example-desc': el.innerHTML = texts.bannerExampleDesc; break;
+          case 'natal-badge': el.textContent = texts.natalBadge; break;
+          case 'luck-badge': el.textContent = texts.luckBadge; break;
+          case 'natal-card-title': el.textContent = texts.natalCardTitle; break;
+          case 'natal-sub': el.textContent = texts.natalSub; break;
+          case 'col-hour': el.textContent = texts.colHour; break;
+          case 'col-day': el.textContent = texts.colDay; break;
+          case 'col-month': el.textContent = texts.colMonth; break;
+          case 'col-year': el.textContent = texts.colYear; break;
+          case 'tag-hour': el.innerHTML = texts.tagHour; break;
+          case 'tag-day': el.innerHTML = texts.tagDay; break;
+          case 'tag-month': el.innerHTML = texts.tagMonth; break;
+          case 'tag-year': el.innerHTML = texts.tagYear; break;
+          case 'luck-card-title': el.textContent = texts.luckCardTitle; break;
+          case 'luck-sub': el.textContent = texts.luckSub; break;
+          case 'luck-instruction': el.textContent = texts.luckInstruction; break;
+          case 'd0-tag': el.textContent = texts.d0Tag; break;
+          case 'd1-tag': el.textContent = texts.d1Tag; break;
+          case 'd2-tag': el.textContent = texts.d2Tag; break;
+          case 'd3-tag': el.textContent = texts.d3Tag; break;
+          case 'd4-tag': el.textContent = texts.d4Tag; break;
+          case 'd5-tag': el.textContent = texts.d5Tag; break;
+          case 'legend-title': el.textContent = texts.legendTitle; break;
+          case 'takeaway-eyebrow': el.textContent = texts.takeawayEyebrow; break;
+          case 'takeaway-heading': el.textContent = texts.takeawayHeading; break;
+          case 'takeaway-desc': el.textContent = texts.takeawayDesc; break;
+        }
+      });
+      document.getElementById('langLabel').textContent = currentLang === 'en' ? 'Switch to 简体中文' : '切换至 English';
+      renderInspector();
+    }
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'zh' : 'en';
+      applyLanguageText();
     }
 
     function toggleTheme() {
       const html = document.documentElement;
-      const isDark = html.classList.contains('dark');
-      const label = document.getElementById('theme-label');
-      const icon = document.getElementById('theme-icon');
-
-      if (isDark) {
+      if (html.classList.contains('dark')) {
         html.classList.remove('dark');
         html.classList.add('light');
-        label.textContent = 'Dark Obsidian Slate';
-        icon.textContent = '🌙';
+        document.getElementById('themeLabel').textContent = 'Dark Mode';
       } else {
         html.classList.remove('light');
         html.classList.add('dark');
-        label.textContent = 'Light Xuan Paper';
-        icon.textContent = '☀️';
+        document.getElementById('themeLabel').textContent = 'Light Mode';
       }
     }
+
+    // Initialize with Day Pillar active
+    selectItem('natal', 'day');
   </script>
 </body>
 </html>
