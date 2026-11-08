@@ -1,0 +1,310 @@
+export function AstrolabeHero({ className = "" }: { className?: string }) {
+  return (
+    <div
+      className={`pointer-events-none transition-all duration-700 astrolabe-mask ${className}`}
+      aria-hidden="true"
+    >
+      <svg
+        viewBox="0 0 900 900"
+        className="w-full h-full"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <radialGradient id="gradGoldAstrolabeLive" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="var(--svg-gold)" stopOpacity="0.32" />
+            <stop offset="60%" stopColor="var(--svg-gold)" stopOpacity="0.06" />
+            <stop offset="100%" stopColor="var(--svg-gold)" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+
+        {/* Central Ambient Glow */}
+        <circle cx="450" cy="450" r="420" fill="url(#gradGoldAstrolabeLive)" />
+
+        {/* Outer Orbit Ring: Degrees and 60-Year Sexagenary Micro Ticks (Slow Clockwise) */}
+        <g className="animate-spin-slow">
+          <circle
+            cx="450"
+            cy="450"
+            r="435"
+            fill="none"
+            stroke="var(--svg-gold-muted)"
+            strokeWidth="1.2"
+            strokeDasharray="3, 5"
+          />
+          <circle
+            cx="450"
+            cy="450"
+            r="425"
+            fill="none"
+            stroke="var(--svg-gold)"
+            strokeWidth="1.8"
+          />
+          <circle
+            cx="450"
+            cy="450"
+            r="405"
+            fill="none"
+            stroke="var(--svg-gold-muted)"
+            strokeWidth="0.8"
+          />
+
+          {/* Primary Cardinal Notches */}
+          <g stroke="var(--svg-gold)" strokeWidth="1.4">
+            <line x1="450" y1="20" x2="450" y2="45" />
+            <line x1="450" y1="855" x2="450" y2="880" />
+            <line x1="20" y1="450" x2="45" y2="450" />
+            <line x1="855" y1="450" x2="880" y2="450" />
+            <line x1="145" y1="145" x2="162" y2="162" />
+            <line x1="755" y1="145" x2="738" y2="162" />
+            <line x1="145" y1="755" x2="162" y2="738" />
+            <line x1="755" y1="755" x2="738" y2="738" />
+          </g>
+
+          {/* Outer Sexagenary Degree Markers */}
+          <circle
+            cx="450"
+            cy="450"
+            r="390"
+            fill="none"
+            stroke="var(--svg-gold-faint)"
+            strokeWidth="16"
+            strokeDasharray="1 8"
+          />
+        </g>
+
+        {/* Middle Ring: 12 Earthly Branches (地支) & 24 Solar Terms (Slow Counter-Clockwise) */}
+        <g className="animate-spin-reverse">
+          <circle
+            cx="450"
+            cy="450"
+            r="345"
+            fill="none"
+            stroke="var(--svg-gold)"
+            strokeWidth="1.2"
+          />
+          <circle
+            cx="450"
+            cy="450"
+            r="300"
+            fill="none"
+            stroke="var(--svg-gold-muted)"
+            strokeWidth="0.8"
+          />
+
+          {/* 12 Earthly Branch Nodes with Hanzi */}
+          <g transform="translate(450, 125)">
+            <text
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="var(--svg-gold)"
+              fontFamily="var(--font-serif)"
+              fontSize="20"
+              fontWeight="600"
+            >
+              子
+            </text>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          </g>
+          <g transform="translate(612, 168)">
+            <text
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="var(--svg-gold)"
+              fontFamily="var(--font-serif)"
+              fontSize="20"
+            >
+              丑
+            </text>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          </g>
+          <g transform="translate(732, 288)">
+            <text
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="var(--svg-gold)"
+              fontFamily="var(--font-serif)"
+              fontSize="20"
+            >
+              寅
+            </text>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          </g>
+          <g transform="translate(775, 450)">
+            <text
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="var(--svg-gold)"
+              fontFamily="var(--font-serif)"
+              fontSize="20"
+              fontWeight="600"
+            >
+              卯
+            </text>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          </g>
+          <g transform="translate(732, 612)">
+            <text
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="var(--svg-gold)"
+              fontFamily="var(--font-serif)"
+              fontSize="20"
+            >
+              辰
+            </text>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          </g>
+          <g transform="translate(612, 732)">
+            <text
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="var(--svg-gold)"
+              fontFamily="var(--font-serif)"
+              fontSize="20"
+            >
+              巳
+            </text>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          </g>
+          <g transform="translate(450, 775)">
+            <text
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="var(--svg-gold)"
+              fontFamily="var(--font-serif)"
+              fontSize="20"
+              fontWeight="600"
+            >
+              午
+            </text>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          </g>
+          <g transform="translate(288, 732)">
+            <text
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="var(--svg-gold)"
+              fontFamily="var(--font-serif)"
+              fontSize="20"
+            >
+              未
+            </text>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          </g>
+          <g transform="translate(168, 612)">
+            <text
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="var(--svg-gold)"
+              fontFamily="var(--font-serif)"
+              fontSize="20"
+            >
+              申
+            </text>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          </g>
+          <g transform="translate(125, 450)">
+            <text
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="var(--svg-gold)"
+              fontFamily="var(--font-serif)"
+              fontSize="20"
+              fontWeight="600"
+            >
+              酉
+            </text>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          </g>
+          <g transform="translate(168, 288)">
+            <text
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="var(--svg-gold)"
+              fontFamily="var(--font-serif)"
+              fontSize="20"
+            >
+              戌
+            </text>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          </g>
+          <g transform="translate(288, 168)">
+            <text
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill="var(--svg-gold)"
+              fontFamily="var(--font-serif)"
+              fontSize="20"
+            >
+              亥
+            </text>
+            <circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          </g>
+
+          <circle
+            cx="450"
+            cy="450"
+            r="322"
+            fill="none"
+            stroke="var(--svg-gold-faint)"
+            strokeWidth="1"
+            strokeDasharray="4, 18"
+          />
+        </g>
+
+        {/* Inner Ring: 10 Heavenly Stems (天干) (Slow Clockwise) */}
+        <g className="animate-spin-slow">
+          <circle
+            cx="450"
+            cy="450"
+            r="240"
+            fill="none"
+            stroke="var(--svg-gold)"
+            strokeWidth="1.4"
+          />
+          <circle
+            cx="450"
+            cy="450"
+            r="190"
+            fill="none"
+            stroke="var(--svg-gold-muted)"
+            strokeWidth="0.8"
+            strokeDasharray="2, 4"
+          />
+
+          <text x="450" y="222" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16" fontWeight="600">甲</text>
+          <text x="580" y="265" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">乙</text>
+          <text x="660" y="375" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">丙</text>
+          <text x="660" y="525" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">丁</text>
+          <text x="580" y="635" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">戊</text>
+          <text x="450" y="678" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16" fontWeight="600">己</text>
+          <text x="320" y="635" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">庚</text>
+          <text x="240" y="525" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">辛</text>
+          <text x="240" y="375" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">壬</text>
+          <text x="320" y="265" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">癸</text>
+        </g>
+
+        {/* Core Coordinate Hub: Polar Crosshair, Constellation Nodes & Taiji Center */}
+        <g>
+          <line x1="450" y1="180" x2="450" y2="720" stroke="var(--svg-gold-muted)" strokeWidth="0.8" strokeDasharray="3, 6" />
+          <line x1="180" y1="450" x2="720" y2="450" stroke="var(--svg-gold-muted)" strokeWidth="0.8" strokeDasharray="3, 6" />
+          <circle cx="450" cy="450" r="120" fill="none" stroke="var(--svg-gold)" strokeWidth="1.2" />
+          <circle cx="450" cy="450" r="75" fill="none" stroke="var(--svg-gold-muted)" strokeWidth="0.8" />
+          <circle cx="450" cy="450" r="30" fill="none" stroke="var(--svg-gold)" strokeWidth="1.5" />
+          <circle cx="450" cy="450" r="6" fill="var(--svg-gold)" />
+
+          <g stroke="var(--svg-gold-muted)" strokeWidth="0.6">
+            <line x1="450" y1="450" x2="495" y2="415" />
+            <line x1="495" y1="415" x2="525" y2="445" />
+            <line x1="450" y1="450" x2="405" y2="485" />
+            <line x1="405" y1="485" x2="385" y2="440" />
+          </g>
+          <circle cx="495" cy="415" r="3" fill="var(--svg-gold)" />
+          <circle cx="525" cy="445" r="2.5" fill="var(--svg-gold)" />
+          <circle cx="405" cy="485" r="3" fill="var(--svg-gold)" />
+          <circle cx="385" cy="440" r="2.5" fill="var(--svg-gold)" />
+        </g>
+      </svg>
+    </div>
+  );
+}

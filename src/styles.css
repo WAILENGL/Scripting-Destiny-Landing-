@@ -111,6 +111,9 @@
   --sidebar-accent-foreground: oklch(0.18 0.012 60);
   --sidebar-border: oklch(0.2 0.012 60 / 0.09);
   --sidebar-ring: oklch(0.55 0.14 78);
+  --svg-gold: #9e7228;
+  --svg-gold-muted: rgba(158, 114, 40, 0.45);
+  --svg-gold-faint: rgba(158, 114, 40, 0.14);
 }
 
 /* Dark Mode: Deep Obsidian Sumi Slate & Champagne Gold Foil */
@@ -153,6 +156,9 @@
   --sidebar-accent-foreground: oklch(0.98 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 8%);
   --sidebar-ring: oklch(0.80 0.115 88);
+  --svg-gold: #dfb76c;
+  --svg-gold-muted: rgba(223, 183, 108, 0.40);
+  --svg-gold-faint: rgba(223, 183, 108, 0.15);
 }
 
 @layer base {
@@ -594,4 +600,29 @@ body::before {
 .pillar-cell.is-day-master {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent), 0 4px 16px oklch(0.80 0.115 88 / 0.25);
+}
+
+
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes reverse-spin {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-spin-slow {
+  animation: slow-spin 180s linear infinite;
+  transform-origin: center;
+}
+.animate-spin-reverse {
+  animation: reverse-spin 240s linear infinite;
+  transform-origin: center;
+}
+
+
+.astrolabe-mask {
+  -webkit-mask-image: radial-gradient(circle at center, black 48%, transparent 75%);
+  mask-image: radial-gradient(circle at center, black 48%, transparent 75%);
 }
