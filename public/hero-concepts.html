@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scripting Destiny — Hero Graphic Concept Previews</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-serif: "Cormorant Garamond", Georgia, serif;
+      --font-sans: "Manrope", system-ui, sans-serif;
+    }
+    .font-serif { font-family: var(--font-serif); }
+    .font-sans { font-family: var(--font-sans); }
+
+    /* Dark Mode: Obsidian Sumi Slate & Champagne Gold */
+    html.dark {
+      --bg-page: #111215;
+      --bg-surface: #17181e;
+      --bg-card: #1c1d25;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(212, 175, 105, 0.35);
+      --text-main: #f5f2ea;
+      --text-muted: #9ba1ad;
+      --accent-gold: #dfb76c;
+      --gold-gradient: linear-gradient(135deg, #eed290 0%, #caa157 50%, #ad833e 100%);
+      --glow-gold: rgba(223, 183, 108, 0.15);
+      --svg-gold: #dfb76c;
+      --svg-gold-muted: rgba(223, 183, 108, 0.35);
+      --svg-gold-faint: rgba(223, 183, 108, 0.12);
+    }
+
+    /* Light Mode: Warm Xuan Rice Paper & Sumi Ink */
+    html.light {
+      --bg-page: #fbf9f4;
+      --bg-surface: #f3efe6;
+      --bg-card: #ffffff;
+      --border-subtle: rgba(20, 20, 25, 0.09);
+      --border-gold: rgba(184, 137, 56, 0.35);
+      --text-main: #18191d;
+      --text-muted: #6b6f79;
+      --accent-gold: #b38536;
+      --gold-gradient: linear-gradient(135deg, #c99a48 0%, #a8792c 100%);
+      --glow-gold: rgba(179, 133, 54, 0.12);
+      --svg-gold: #9e7228;
+      --svg-gold-muted: rgba(158, 114, 40, 0.45);
+      --svg-gold-faint: rgba(158, 114, 40, 0.14);
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    .gold-text {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-btn {
+      background: var(--gold-gradient);
+      color: #111215;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(202, 161, 87, 0.25);
+      transition: all 0.25s ease;
+    }
+    .gold-btn:hover {
+      box-shadow: 0 6px 24px rgba(202, 161, 87, 0.4);
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    @keyframes slow-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes reverse-spin {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    .animate-spin-slow {
+      animation: slow-spin 180s linear infinite;
+      transform-origin: center;
+    }
+    .animate-spin-reverse {
+      animation: reverse-spin 240s linear infinite;
+      transform-origin: center;
+    }
+    .animate-pulse-slow {
+      animation: pulse-glow 6s ease-in-out infinite;
+    }
+
+    .concept-btn.active {
+      background: rgba(223, 183, 108, 0.18);
+      color: var(--accent-gold);
+      border-color: var(--border-gold);
+    }
+
+    .render-btn.active {
+      background: var(--accent-gold);
+      color: #111215;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="min-h-screen antialiased selection:bg-amber-500/20">
+
+  <!-- Top Navigation & Controls Bar -->
+  <header class="sticky top-0 z-50 w-full backdrop-blur-md bg-[var(--bg-surface)]/90 border-b border-[var(--border-subtle)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-500/15 text-[var(--accent-gold)] text-xs font-serif font-bold border border-[var(--border-gold)]">SD</span>
+        <div>
+          <h1 class="text-sm font-semibold tracking-tight text-[var(--text-main)]">Hero Graphic Concepts for BaZi</h1>
+          <p class="text-xs text-[var(--text-muted)]">Replacing the Buddhist Ensō with Authentic Chinese Astrological Iconography</p>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <!-- Render Style Toggle -->
+        <div class="inline-flex rounded-full p-1 bg-[var(--bg-card)] border border-[var(--border-subtle)] text-xs">
+          <button id="render-vector" onclick="switchRenderMode('vector')" class="render-btn active px-3 py-1 rounded-full font-medium transition">
+            Vector SVG (Interactive)
+          </button>
+          <button id="render-art" onclick="switchRenderMode('art')" class="render-btn px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]">
+            Master Rendered Artwork
+          </button>
+        </div>
+
+        <!-- Theme Switcher -->
+        <button onclick="toggleTheme()" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-card)] text-xs font-medium text-[var(--text-main)] hover:border-[var(--border-gold)] transition shadow-sm">
+          <span id="theme-icon">☀️</span>
+          <span id="theme-label">Light Xuan Paper</span>
+        </button>
+
+        <!-- Motion Toggle -->
+        <button id="motion-toggle" onclick="toggleMotion()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-card)] text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition">
+          <span id="motion-dot" class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span id="motion-label">Motion: On</span>
+        </button>
+
+        <!-- Back to Live -->
+        <a href="/" class="px-3.5 py-1.5 rounded-full border border-foreground/30 text-xs font-medium text-[var(--text-main)] hover:bg-[var(--text-main)] hover:text-[var(--bg-page)] transition">
+          Live Site →
+        </a>
+      </div>
+    </div>
+
+    <!-- Concept Selector Pills -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 border-t border-[var(--border-subtle)] flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
+      <span class="text-[var(--text-muted)] uppercase tracking-wider font-semibold text-[11px] shrink-0 mr-1">Concepts:</span>
+      <button onclick="selectConcept(1)" id="cbtn-1" class="concept-btn active shrink-0 px-3 py-1.5 rounded-lg border border-transparent font-medium transition text-[var(--text-main)] hover:bg-[var(--bg-card)]">
+        1. Celestial Astrolabe (六十甲子天仪盘)
+      </button>
+      <button onclick="selectConcept(2)" id="cbtn-2" class="concept-btn shrink-0 px-3 py-1.5 rounded-lg border border-transparent font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
+        2. Wu Xing Pentagram & Flow Rings (五行生克太极环)
+      </button>
+      <button onclick="selectConcept(3)" id="cbtn-3" class="concept-btn shrink-0 px-3 py-1.5 rounded-lg border border-transparent font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
+        3. Round Heaven & Four Cosmic Pillars (天圆地方·命盘神柱)
+      </button>
+      <button onclick="selectConcept(4)" id="cbtn-4" class="concept-btn shrink-0 px-3 py-1.5 rounded-lg border border-transparent font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
+        4. 24 Solar Terms Ecliptic Orbit (二十四节气天运之轨)
+      </button>
+      <button onclick="selectConcept(5)" id="cbtn-5" class="concept-btn shrink-0 px-3 py-1.5 rounded-lg border border-transparent font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
+        5. Han Dynasty Cosmic Mirror (汉式规矩铜镜图腾)
+      </button>
+    </div>
+  </header>
+
+  <!-- Interactive Hero Section Simulation -->
+  <main class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 overflow-hidden min-h-[780px]">
+
+    <!-- Live Graphic Watermark Container -->
+    <div id="graphic-container" class="pointer-events-none absolute right-[-5%] sm:right-[0%] top-[-30px] sm:top-[20px] -z-10 w-[95vw] sm:w-[680px] lg:w-[780px] xl:w-[860px] 2xl:w-[940px] aspect-square transition-all duration-700 [mask-image:radial-gradient(circle_at_center,black_45%,transparent_75%)]">
+      
+      <!-- MODE A: VECTOR SVG GRAPHICS -->
+      <div id="mode-vector" class="w-full h-full">
+        <!-- CONCEPT 1: CELESTIAL GAN-ZHI ASTROLABE -->
+        <div id="graphic-1" class="w-full h-full flex items-center justify-center transition-opacity duration-500">
+          <svg viewBox="0 0 900 900" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="gradGoldAstrolabe" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--svg-gold)" stop-opacity="0.35"/>
+                <stop offset="60%" stop-color="var(--svg-gold)" stop-opacity="0.08"/>
+                <stop offset="100%" stop-color="var(--svg-gold)" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <!-- Central Ambient Glow -->
+            <circle cx="450" cy="450" r="420" fill="url(#gradGoldAstrolabe)" />
+
+            <!-- Outer Orbit Ring: Degrees and 60-Year Sexagenary Micro Ticks -->
+            <g class="motion-target animate-spin-slow">
+              <circle cx="450" cy="450" r="435" fill="none" stroke="var(--svg-gold-muted)" stroke-width="1.2" stroke-dasharray="3, 5" />
+              <circle cx="450" cy="450" r="425" fill="none" stroke="var(--svg-gold)" stroke-width="1.8" />
+              <circle cx="450" cy="450" r="405" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8" />
+              
+              <!-- 12 Primary Cardinal Notches -->
+              <g stroke="var(--svg-gold)" stroke-width="1.2">
+                <line x1="450" y1="20" x2="450" y2="45" />
+                <line x1="450" y1="855" x2="450" y2="880" />
+                <line x1="20" y1="450" x2="45" y2="450" />
+                <line x1="855" y1="450" x2="880" y2="450" />
+                <line x1="145" y1="145" x2="162" y2="162" />
+                <line x1="755" y1="145" x2="738" y2="162" />
+                <line x1="145" y1="755" x2="162" y2="738" />
+                <line x1="755" y1="755" x2="738" y2="738" />
+              </g>
+
+              <!-- Outer Sexagenary Degree Markers -->
+              <circle cx="450" cy="450" r="390" fill="none" stroke="var(--svg-gold-faint)" stroke-width="16" stroke-dasharray="1 8" />
+            </g>
+
+            <!-- Middle Ring: 12 Earthly Branches (地支) & 24 Solar Terms (节气) -->
+            <g class="motion-target animate-spin-reverse">
+              <circle cx="450" cy="450" r="345" fill="none" stroke="var(--svg-gold)" stroke-width="1.2" />
+              <circle cx="450" cy="450" r="300" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8" />
+              
+              <!-- 12 Earthly Branch Nodes with Hanzi -->
+              <g transform="translate(450, 125)"><text text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20" font-weight="600">子</text><circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8"/></g>
+              <g transform="translate(612, 168)"><text text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20">丑</text><circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8"/></g>
+              <g transform="translate(732, 288)"><text text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20">寅</text><circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8"/></g>
+              <g transform="translate(775, 450)"><text text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20" font-weight="600">卯</text><circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8"/></g>
+              <g transform="translate(732, 612)"><text text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20">辰</text><circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8"/></g>
+              <g transform="translate(612, 732)"><text text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20">巳</text><circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8"/></g>
+              <g transform="translate(450, 775)"><text text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20" font-weight="600">午</text><circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8"/></g>
+              <g transform="translate(288, 732)"><text text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20">未</text><circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8"/></g>
+              <g transform="translate(168, 612)"><text text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20">申</text><circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8"/></g>
+              <g transform="translate(125, 450)"><text text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20" font-weight="600">酉</text><circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8"/></g>
+              <g transform="translate(168, 288)"><text text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20">戌</text><circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8"/></g>
+              <g transform="translate(288, 168)"><text text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20">亥</text><circle cx="0" cy="0" r="16" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8"/></g>
+
+              <circle cx="450" cy="450" r="322" fill="none" stroke="var(--svg-gold-faint)" stroke-width="1" stroke-dasharray="4, 18" />
+            </g>
+
+            <!-- Inner Ring: 10 Heavenly Stems (天干) -->
+            <g class="motion-target animate-spin-slow">
+              <circle cx="450" cy="450" r="240" fill="none" stroke="var(--svg-gold)" stroke-width="1.4" />
+              <circle cx="450" cy="450" r="190" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8" stroke-dasharray="2, 4" />
+
+              <text x="450" y="222" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16" font-weight="600">甲</text>
+              <text x="580" y="265" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16">乙</text>
+              <text x="660" y="375" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16">丙</text>
+              <text x="660" y="525" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16">丁</text>
+              <text x="580" y="635" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16">戊</text>
+              <text x="450" y="678" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16" font-weight="600">己</text>
+              <text x="320" y="635" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16">庚</text>
+              <text x="240" y="525" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16">辛</text>
+              <text x="240" y="375" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16">壬</text>
+              <text x="320" y="265" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16">癸</text>
+            </g>
+
+            <!-- Core Coordinate Hub -->
+            <g>
+              <line x1="450" y1="180" x2="450" y2="720" stroke="var(--svg-gold-muted)" stroke-width="0.8" stroke-dasharray="3, 6" />
+              <line x1="180" y1="450" x2="720" y2="450" stroke="var(--svg-gold-muted)" stroke-width="0.8" stroke-dasharray="3, 6" />
+              <circle cx="450" cy="450" r="120" fill="none" stroke="var(--svg-gold)" stroke-width="1.2" />
+              <circle cx="450" cy="450" r="75" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.8" />
+              <circle cx="450" cy="450" r="30" fill="none" stroke="var(--svg-gold)" stroke-width="1.5" />
+              <circle cx="450" cy="450" r="6" fill="var(--svg-gold)" />
+
+              <g stroke="var(--svg-gold-muted)" stroke-width="0.6">
+                <line x1="450" y1="450" x2="495" y2="415" />
+                <line x1="495" y1="415" x2="525" y2="445" />
+                <line x1="450" y1="450" x2="405" y2="485" />
+                <line x1="405" y1="485" x2="385" y2="440" />
+              </g>
+              <circle cx="495" cy="415" r="3" fill="var(--svg-gold)" />
+              <circle cx="525" cy="445" r="2.5" fill="var(--svg-gold)" />
+              <circle cx="405" cy="485" r="3" fill="var(--svg-gold)" />
+              <circle cx="385" cy="440" r="2.5" fill="var(--svg-gold)" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- CONCEPT 2: WU XING PENTAGRAM -->
+        <div id="graphic-2" class="w-full h-full hidden items-center justify-center transition-opacity duration-500">
+          <svg viewBox="0 0 900 900" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="gradWuXing2" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--svg-gold)" stop-opacity="0.30"/>
+                <stop offset="65%" stop-color="var(--svg-gold)" stop-opacity="0.05"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </radialGradient>
+            </defs>
+            <circle cx="450" cy="450" r="400" fill="url(#gradWuXing2)" />
+            <g class="motion-target animate-spin-slow">
+              <circle cx="450" cy="450" r="340" fill="none" stroke="var(--svg-gold-muted)" stroke-width="1.2" stroke-dasharray="12, 8" />
+              <path d="M 450 110 A 340 340 0 0 1 773 345" fill="none" stroke="var(--svg-gold)" stroke-width="2" stroke-dasharray="80 30" />
+              <path d="M 773 345 A 340 340 0 0 1 650 725" fill="none" stroke="var(--svg-gold)" stroke-width="2" stroke-dasharray="80 30" />
+              <path d="M 650 725 A 340 340 0 0 1 250 725" fill="none" stroke="var(--svg-gold)" stroke-width="2" stroke-dasharray="80 30" />
+              <path d="M 250 725 A 340 340 0 0 1 127 345" fill="none" stroke="var(--svg-gold)" stroke-width="2" stroke-dasharray="80 30" />
+              <path d="M 127 345 A 340 340 0 0 1 450 110" fill="none" stroke="var(--svg-gold)" stroke-width="2" stroke-dasharray="80 30" />
+            </g>
+            <g>
+              <polygon points="450,110 650,725 127,345 773,345 250,725" fill="none" stroke="var(--svg-gold)" stroke-width="1.4" opacity="0.65" />
+            </g>
+            <g>
+              <circle cx="450" cy="450" r="100" fill="none" stroke="var(--svg-gold)" stroke-width="1.4" />
+              <text x="450" y="445" text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="28" font-weight="600">五行</text>
+              <text x="450" y="475" text-anchor="middle" fill="var(--svg-gold-muted)" font-family="var(--font-sans)" font-size="11" letter-spacing="2">WU XING</text>
+            </g>
+            <!-- 5 Nodes -->
+            <g transform="translate(450, 110)"><circle cx="0" cy="0" r="42" fill="var(--bg-surface)" stroke="#d95c47" stroke-width="2" /><text x="0" y="2" text-anchor="middle" dominant-baseline="central" fill="#d95c47" font-family="var(--font-serif)" font-size="28" font-weight="bold">火</text><text x="0" y="-58" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-sans)" font-size="12" font-weight="600" letter-spacing="1">FIRE · 南</text></g>
+            <g transform="translate(773, 345)"><circle cx="0" cy="0" r="42" fill="var(--bg-surface)" stroke="#b3864c" stroke-width="2" /><text x="0" y="2" text-anchor="middle" dominant-baseline="central" fill="#b3864c" font-family="var(--font-serif)" font-size="28" font-weight="bold">土</text><text x="58" y="0" text-anchor="start" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-sans)" font-size="12" font-weight="600" letter-spacing="1">EARTH · 中</text></g>
+            <g transform="translate(650, 725)"><circle cx="0" cy="0" r="42" fill="var(--bg-surface)" stroke="#adb3be" stroke-width="2" /><text x="0" y="2" text-anchor="middle" dominant-baseline="central" fill="#adb3be" font-family="var(--font-serif)" font-size="28" font-weight="bold">金</text><text x="0" y="64" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-sans)" font-size="12" font-weight="600" letter-spacing="1">METAL · 西</text></g>
+            <g transform="translate(250, 725)"><circle cx="0" cy="0" r="42" fill="var(--bg-surface)" stroke="#5c8fc2" stroke-width="2" /><text x="0" y="2" text-anchor="middle" dominant-baseline="central" fill="#5c8fc2" font-family="var(--font-serif)" font-size="28" font-weight="bold">水</text><text x="0" y="64" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-sans)" font-size="12" font-weight="600" letter-spacing="1">WATER · 北</text></g>
+            <g transform="translate(127, 345)"><circle cx="0" cy="0" r="42" fill="var(--bg-surface)" stroke="#4e9a68" stroke-width="2" /><text x="0" y="2" text-anchor="middle" dominant-baseline="central" fill="#4e9a68" font-family="var(--font-serif)" font-size="28" font-weight="bold">木</text><text x="-58" y="0" text-anchor="end" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-sans)" font-size="12" font-weight="600" letter-spacing="1">WOOD · 东</text></g>
+          </svg>
+        </div>
+
+        <!-- CONCEPT 3: ROUND HEAVEN FOUR PILLARS -->
+        <div id="graphic-3" class="w-full h-full hidden items-center justify-center transition-opacity duration-500">
+          <svg viewBox="0 0 900 900" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ray3" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="var(--svg-gold)" stop-opacity="0.6"/>
+                <stop offset="60%" stop-color="var(--svg-gold)" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </linearGradient>
+            </defs>
+            <g class="motion-target animate-spin-slow">
+              <ellipse cx="450" cy="220" rx="380" ry="180" fill="none" stroke="var(--svg-gold)" stroke-width="1.5" />
+              <polyline points="280,180 340,165 410,175 450,150 490,120 540,135 580,110" fill="none" stroke="var(--svg-gold-muted)" stroke-width="0.7" />
+            </g>
+            <g><rect x="180" y="220" width="60" height="520" fill="url(#ray3)" /><line x1="180" y1="220" x2="180" y2="740" stroke="var(--svg-gold)" stroke-width="1" /><line x1="240" y1="220" x2="240" y2="740" stroke="var(--svg-gold)" stroke-width="1" /><text x="210" y="320" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="26">时</text><text x="210" y="350" text-anchor="middle" fill="var(--svg-gold-muted)" font-family="var(--font-sans)" font-size="10">HOUR</text></g>
+            <g><rect x="330" y="160" width="80" height="580" fill="url(#ray3)" /><line x1="330" y1="160" x2="330" y2="740" stroke="var(--svg-gold)" stroke-width="1.8" /><line x1="410" y1="160" x2="410" y2="740" stroke="var(--svg-gold)" stroke-width="1.8" /><text x="370" y="310" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="32" font-weight="bold">日</text><text x="370" y="345" text-anchor="middle" fill="var(--accent-gold)" font-family="var(--font-sans)" font-size="11" font-weight="bold">DAY MASTER</text></g>
+            <g><rect x="490" y="190" width="80" height="550" fill="url(#ray3)" /><line x1="490" y1="190" x2="490" y2="740" stroke="var(--svg-gold)" stroke-width="1.4" /><line x1="570" y1="190" x2="570" y2="740" stroke="var(--svg-gold)" stroke-width="1.4" /><text x="530" y="315" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="28">月</text><text x="530" y="348" text-anchor="middle" fill="var(--svg-gold-muted)" font-family="var(--font-sans)" font-size="10">MONTH</text></g>
+            <g><rect x="660" y="220" width="60" height="520" fill="url(#ray3)" /><line x1="660" y1="220" x2="660" y2="740" stroke="var(--svg-gold)" stroke-width="1" /><line x1="720" y1="220" x2="720" y2="740" stroke="var(--svg-gold)" stroke-width="1" /><text x="690" y="320" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="26">年</text><text x="690" y="350" text-anchor="middle" fill="var(--svg-gold-muted)" font-family="var(--font-sans)" font-size="10">YEAR</text></g>
+            <g><line x1="100" y1="740" x2="800" y2="740" stroke="var(--svg-gold)" stroke-width="1.8" /><line x1="180" y1="740" x2="120" y2="860" stroke="var(--svg-gold-muted)" stroke-width="1" /><line x1="330" y1="740" x2="280" y2="860" stroke="var(--svg-gold-muted)" stroke-width="1" /><line x1="450" y1="740" x2="450" y2="860" stroke="var(--svg-gold)" stroke-width="1.2" /><line x1="570" y1="740" x2="620" y2="860" stroke="var(--svg-gold-muted)" stroke-width="1" /><line x1="720" y1="740" x2="780" y2="860" stroke="var(--svg-gold-muted)" stroke-width="1" /></g>
+          </svg>
+        </div>
+
+        <!-- CONCEPT 4: 24 SOLAR TERMS -->
+        <div id="graphic-4" class="w-full h-full hidden items-center justify-center transition-opacity duration-500">
+          <svg viewBox="0 0 900 900" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="sunGlow2" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#fff" stop-opacity="1"/>
+                <stop offset="25%" stop-color="#eed290" stop-opacity="0.8"/>
+                <stop offset="60%" stop-color="#caa157" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </radialGradient>
+            </defs>
+            <g transform="rotate(-18 450 450)" class="motion-target">
+              <ellipse cx="450" cy="450" rx="380" ry="220" fill="none" stroke="var(--svg-gold)" stroke-width="1.8" />
+              <g transform="translate(830, 450)"><circle cx="0" cy="0" r="8" fill="var(--bg-surface)" stroke="#4e9a68" stroke-width="2" /><text x="18" y="4" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16" font-weight="600">春分 · 卯</text></g>
+              <g transform="translate(450, 230)"><circle cx="0" cy="0" r="8" fill="var(--bg-surface)" stroke="#d95c47" stroke-width="2" /><text x="0" y="-18" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16" font-weight="600">夏至 · 午</text></g>
+              <g transform="translate(70, 450)"><circle cx="0" cy="0" r="8" fill="var(--bg-surface)" stroke="#adb3be" stroke-width="2" /><text x="-18" y="4" text-anchor="end" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16" font-weight="600">秋分 · 酉</text></g>
+              <g transform="translate(450, 670)"><circle cx="0" cy="0" r="8" fill="var(--bg-surface)" stroke="#5c8fc2" stroke-width="2" /><text x="0" y="28" text-anchor="middle" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="16" font-weight="600">冬至 · 子</text></g>
+              <g transform="translate(780, 330)" class="animate-pulse-slow"><circle cx="0" cy="0" r="40" fill="url(#sunGlow2)" /><circle cx="0" cy="0" r="7" fill="#fff" /></g>
+            </g>
+            <circle cx="450" cy="450" r="60" fill="none" stroke="var(--svg-gold)" stroke-width="1.2" />
+            <text x="450" y="445" text-anchor="middle" dominant-baseline="central" fill="var(--svg-gold)" font-family="var(--font-serif)" font-size="20">太阳周天</text>
+            <text x="450" y="470" text-anchor="middle" fill="var(--svg-gold-muted)" font-family="var(--font-sans)" font-size="9" letter-spacing="1.5">SOLAR ECLIPTIC</text>
+          </svg>
+        </div>
+
+        <!-- CONCEPT 5: HAN DYNASTY MIRROR -->
+        <div id="graphic-5" class="w-full h-full hidden items-center justify-center transition-opacity duration-500">
+          <svg viewBox="0 0 900 900" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <g class="motion-target animate-spin-slow">
+              <circle cx="450" cy="450" r="430" fill="none" stroke="var(--svg-gold)" stroke-width="2.5" />
+              <circle cx="450" cy="450" r="340" fill="none" stroke="var(--svg-gold)" stroke-width="1.2" />
+              <path d="M 420 180 L 480 180 M 450 180 L 450 220" stroke="var(--svg-gold)" stroke-width="2" />
+              <path d="M 420 720 L 480 720 M 450 720 L 450 680" stroke="var(--svg-gold)" stroke-width="2" />
+              <path d="M 720 420 L 720 480 M 720 450 L 680 450" stroke="var(--svg-gold)" stroke-width="2" />
+              <path d="M 180 420 L 180 480 M 180 450 L 220 450" stroke="var(--svg-gold)" stroke-width="2" />
+            </g>
+            <rect x="330" y="330" width="240" height="240" fill="none" stroke="var(--svg-gold)" stroke-width="2" />
+            <circle cx="450" cy="450" r="55" fill="none" stroke="var(--svg-gold)" stroke-width="2" />
+            <circle cx="450" cy="450" r="16" fill="var(--svg-gold)" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- MODE B: MASTER RENDERED ARTWORK (PHOTO-REALISTIC GILDED BRONZE & OBSIDIAN) -->
+      <div id="mode-art" class="w-full h-full hidden items-center justify-center">
+        <img id="art-img" src="/concepts/astrolabe.jpg" alt="Concept Master Artwork" class="w-full h-full object-contain mix-blend-screen opacity-90 transition-all duration-500 [mask-image:radial-gradient(circle_at_center,black_50%,transparent_75%)]" />
+      </div>
+
+    </div>
+
+    <!-- Hero Content Overlay (Matches live site exactly) -->
+    <div class="relative z-10 max-w-4xl">
+      <p class="text-xs sm:text-sm font-semibold tracking-widest text-[var(--accent-gold)] uppercase font-mono mb-4 flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-[var(--accent-gold)]"></span>
+        Modern BaZi · Chinese Astrology, Made Practical
+      </p>
+
+      <h1 class="font-serif font-light leading-[0.92] tracking-[-0.03em] text-[15vw] sm:text-7xl lg:text-[6.5rem] xl:text-[7.5rem] text-[var(--text-main)]">
+        <span class="block">Know your</span>
+        <span class="block">nature.</span>
+        <em class="block gold-text italic">Time your moves.</em>
+      </h1>
+
+      <p class="mt-8 max-w-xl text-base sm:text-lg lg:text-xl leading-relaxed text-[var(--text-muted)]">
+        Enter your birth date and discover your BaZi Day Master: your natural strengths, element balance, and the 10-year cycles that shape your best timing.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <button class="gold-btn inline-flex h-12 items-center gap-2 rounded-full px-7 text-sm font-semibold shadow-lg">
+          Get Your Free Blueprint <span>→</span>
+        </button>
+        <button class="inline-flex h-12 items-center gap-2 rounded-full px-6 text-sm font-medium border border-[var(--border-subtle)] bg-[var(--bg-card)] text-[var(--text-main)] hover:border-[var(--border-gold)] transition">
+          How It Works
+        </button>
+      </div>
+
+      <!-- Live Concept Explanation Card (Floating Below) -->
+      <div class="mt-14 max-w-2xl rounded-2xl border border-[var(--border-gold)] bg-[var(--bg-surface)]/90 backdrop-blur-md p-6 sm:p-7 shadow-2xl">
+        <div class="flex items-center justify-between gap-4 mb-3">
+          <span id="desc-badge" class="px-2.5 py-0.5 rounded-full bg-amber-500/15 text-[var(--accent-gold)] text-xs font-mono font-semibold uppercase border border-[var(--border-gold)]">
+            Concept 1 · The Astronomical Astrolabe
+          </span>
+          <span id="render-type-label" class="text-xs text-[var(--text-muted)]">Vector SVG · High Retina Crispness</span>
+        </div>
+        <h3 id="desc-title" class="font-serif text-2xl font-normal text-[var(--text-main)]">
+          The Celestial Gan-Zhi Astrolabe (六十甲子天仪盘)
+        </h3>
+        <p id="desc-body" class="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">
+          Transforms the hero graphic into an authentic Chinese celestial coordinate dial. Concentric rings showcase the 10 Heavenly Stems, 12 Earthly Branches, and 60-year cycle with Swiss-watch precision, directly proving that BaZi is an astronomical calendar rather than fortune-telling superstition.
+        </p>
+
+        <div class="mt-4 pt-4 border-t border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-4 text-xs text-[var(--text-muted)]">
+          <div>
+            <strong class="text-[var(--text-main)]">Best For:</strong> High-trust editorial positioning, executive appeal & intellectual prestige.
+          </div>
+          <div class="flex items-center gap-2">
+            <span>Watermark Opacity:</span>
+            <input type="range" id="opacity-slider" min="15" max="100" value="75" oninput="changeOpacity(this.value)" class="w-24 accent-amber-500 cursor-pointer">
+            <span id="opacity-val" class="font-mono text-[var(--text-main)]">75%</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Complete Visual Comparison Gallery Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-[var(--border-subtle)]">
+    <div class="max-w-3xl mb-10">
+      <span class="text-xs font-mono font-semibold text-[var(--accent-gold)] uppercase tracking-wider">Concept Roster · 方案图鉴</span>
+      <h2 class="mt-2 font-serif text-3xl sm:text-4xl font-light text-[var(--text-main)]">
+        Compare All 5 BaZi Graphic Archetypes
+      </h2>
+      <p class="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">
+        Each direction anchors a unique philosophical pillar of BaZi: from astronomical coordinates and elemental thermodynamics to imperial cosmology.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card 1 -->
+      <div onclick="selectConcept(1); window.scrollTo({ top: 0, behavior: 'smooth' })" class="group cursor-pointer rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-card)] p-5 hover:border-[var(--border-gold)] transition duration-300">
+        <div class="relative aspect-square rounded-xl overflow-hidden bg-black/60 mb-4 border border-[var(--border-subtle)]">
+          <img src="/concepts/astrolabe.jpg" alt="Celestial Astrolabe" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+          <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[var(--accent-gold)] text-[11px] font-mono border border-white/10">01 · Astrolabe</span>
+        </div>
+        <h4 class="font-serif text-xl font-medium text-[var(--text-main)] group-hover:text-[var(--accent-gold)] transition">
+          The Celestial Astrolabe (六十甲子天仪)
+        </h4>
+        <p class="mt-2 text-xs text-[var(--text-muted)] leading-relaxed">
+          Concentric brass rings of 10 Heavenly Stems and 12 Earthly Branches. Communicates pure astronomical precision and intellectual rigor.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div onclick="selectConcept(2); window.scrollTo({ top: 0, behavior: 'smooth' })" class="group cursor-pointer rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-card)] p-5 hover:border-[var(--border-gold)] transition duration-300">
+        <div class="relative aspect-square rounded-xl overflow-hidden bg-black/60 mb-4 border border-[var(--border-subtle)]">
+          <img src="/concepts/wuxing.jpg" alt="Wu Xing Pentagram" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+          <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[var(--accent-gold)] text-[11px] font-mono border border-white/10">02 · Wu Xing</span>
+        </div>
+        <h4 class="font-serif text-xl font-medium text-[var(--text-main)] group-hover:text-[var(--accent-gold)] transition">
+          Wu Xing Quintessence (五行生克环)
+        </h4>
+        <p class="mt-2 text-xs text-[var(--text-muted)] leading-relaxed">
+          Five jewel cabochons connected by generating arcs and control cords. Perfect for immediately grasping the elemental balance system.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div onclick="selectConcept(3); window.scrollTo({ top: 0, behavior: 'smooth' })" class="group cursor-pointer rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-card)] p-5 hover:border-[var(--border-gold)] transition duration-300">
+        <div class="relative aspect-square rounded-xl overflow-hidden bg-black/60 mb-4 border border-[var(--border-subtle)]">
+          <img src="/concepts/tian-yuan-di-fang.jpg" alt="Tian Yuan Di Fang" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+          <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[var(--accent-gold)] text-[11px] font-mono border border-white/10">03 · Four Pillars</span>
+        </div>
+        <h4 class="font-serif text-xl font-medium text-[var(--text-main)] group-hover:text-[var(--accent-gold)] transition">
+          Round Heaven & Four Pillars (天圆地方)
+        </h4>
+        <p class="mt-2 text-xs text-[var(--text-muted)] leading-relaxed">
+          Celestial galaxy dome casting four monumental vertical pillars into a terrestrial square grid. Monumental, architectural destiny.
+        </p>
+      </div>
+
+      <!-- Card 4 -->
+      <div onclick="selectConcept(4); window.scrollTo({ top: 0, behavior: 'smooth' })" class="group cursor-pointer rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-card)] p-5 hover:border-[var(--border-gold)] transition duration-300">
+        <div class="relative aspect-square rounded-xl overflow-hidden bg-black/60 mb-4 border border-[var(--border-subtle)]">
+          <img src="/concepts/solar-terms.jpg" alt="24 Solar Terms" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+          <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[var(--accent-gold)] text-[11px] font-mono border border-white/10">04 · 24 Solar Terms</span>
+        </div>
+        <h4 class="font-serif text-xl font-medium text-[var(--text-main)] group-hover:text-[var(--accent-gold)] transition">
+          24 Solar Terms Orbit (二十四节气之轨)
+        </h4>
+        <p class="mt-2 text-xs text-[var(--text-muted)] leading-relaxed">
+          Armillary orbital ring tracking solar ingress and seasonal cycles. Pairs directly with the core message: "Time your moves."
+        </p>
+      </div>
+
+      <!-- Card 5 -->
+      <div onclick="selectConcept(5); window.scrollTo({ top: 0, behavior: 'smooth' })" class="group cursor-pointer rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-card)] p-5 hover:border-[var(--border-gold)] transition duration-300">
+        <div class="relative aspect-square rounded-xl overflow-hidden bg-black/60 mb-4 border border-[var(--border-subtle)]">
+          <img src="/concepts/cosmic-mirror.jpg" alt="TLV Cosmic Mirror" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+          <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[var(--accent-gold)] text-[11px] font-mono border border-white/10">05 · Han Cosmic Mirror</span>
+        </div>
+        <h4 class="font-serif text-xl font-medium text-[var(--text-main)] group-hover:text-[var(--accent-gold)] transition">
+          Han Dynasty TLV Mirror (规矩图腾铜镜)
+        </h4>
+        <p class="mt-2 text-xs text-[var(--text-muted)] leading-relaxed">
+          Embossed brushed gold bronze talisman with sacred geometry and cardinal symbols. Antique imperial heritage and museum prestige.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    const conceptData = {
+      1: {
+        badge: "Concept 1 · Astronomical Coordinates",
+        title: "The Celestial Gan-Zhi Astrolabe (六十甲子天仪盘)",
+        body: "Transforms the hero graphic into an authentic Chinese celestial coordinate dial. Concentric rings showcase the 10 Heavenly Stems, 12 Earthly Branches, and 60-year cycle with Swiss-watch precision, directly proving that BaZi is an astronomical calendar rather than fortune-telling superstition.",
+        bestFor: "High-trust editorial positioning, executive appeal & intellectual prestige.",
+        artSrc: "/concepts/astrolabe.jpg"
+      },
+      2: {
+        badge: "Concept 2 · Energetic Mechanics",
+        title: "Wu Xing Pentagram & Flow Rings (五行生克太极环)",
+        body: "Visualizes the fundamental energy mechanics of BaZi: the outer generating stream (生) in clockwise harmonic flow, and the inner golden pentagram cords (克) maintaining cosmic equilibrium. Anchors the core value proposition of balancing one's personal elements.",
+        bestFor: "Immediate comprehension of elements, visual vibrancy, and dynamic energy.",
+        artSrc: "/concepts/wuxing.jpg"
+      },
+      3: {
+        badge: "Concept 3 · Classical Cosmology",
+        title: "Round Heaven, Square Earth & Four Cosmic Pillars (天圆地方·命盘神柱)",
+        body: "Directly translates the literal name 'Four Pillars of Destiny' into architectural art. A celestial star canopy (Tian Yuan) casts four monumental vertical shafts of light (Year, Month, Day, Hour) deep into a grounded terrestrial horizon grid (Di Fang).",
+        bestFor: "Literal architectural representation of the Four Pillars and life foundation.",
+        artSrc: "/concepts/tian-yuan-di-fang.jpg"
+      },
+      4: {
+        badge: "Concept 4 · Timing & Macro Weather",
+        title: "24 Solar Terms Ecliptic Orbit (二十四节气天运之轨)",
+        body: "Tilted astronomical ellipse tracking the Earth's orbit around the sun, marked by the 24 solar terms that govern BaZi month transitions. A radiant celestial sun highlights the active season, reinforcing the tagline 'Time your moves.'",
+        bestFor: "Connecting destiny with seasonal timing, cyclical rhythm, and life strategy.",
+        artSrc: "/concepts/solar-terms.jpg"
+      },
+      5: {
+        badge: "Concept 5 · Imperial Heritage",
+        title: "Han Dynasty Cosmic Mirror (汉式规矩铜镜图腾)",
+        body: "Inspired by sacred Han Dynasty TLV bronze mirrors (Gui Ju Jing) used by emperors as cosmological maps. Combines the central terrestrial square with celestial orientation glyphs for a museum-grade archeological luxury aesthetic.",
+        bestFor: "Heritage depth, antique luxury prestige, and museum-grade collector feel.",
+        artSrc: "/concepts/cosmic-mirror.jpg"
+      }
+    };
+
+    let activeConcept = 1;
+    let isMotionOn = true;
+    let renderMode = 'vector';
+
+    function selectConcept(id) {
+      activeConcept = id;
+      for (let i = 1; i <= 5; i++) {
+        const el = document.getElementById('graphic-' + i);
+        const btn = document.getElementById('cbtn-' + i);
+        if (i === id) {
+          el.classList.remove('hidden');
+          el.classList.add('flex');
+          btn.classList.add('active');
+          btn.classList.remove('text-[var(--text-muted)]');
+          btn.classList.add('text-[var(--text-main)]');
+        } else {
+          el.classList.add('hidden');
+          el.classList.remove('flex');
+          btn.classList.remove('active');
+          btn.classList.add('text-[var(--text-muted)]');
+          btn.classList.remove('text-[var(--text-main)]');
+        }
+      }
+
+      const data = conceptData[id];
+      document.getElementById('desc-badge').textContent = data.badge;
+      document.getElementById('desc-title').textContent = data.title;
+      document.getElementById('desc-body').textContent = data.body;
+      document.getElementById('art-img').src = data.artSrc;
+    }
+
+    function switchRenderMode(mode) {
+      renderMode = mode;
+      const vBtn = document.getElementById('render-vector');
+      const aBtn = document.getElementById('render-art');
+      const vMode = document.getElementById('mode-vector');
+      const aMode = document.getElementById('mode-art');
+      const label = document.getElementById('render-type-label');
+
+      if (mode === 'vector') {
+        vBtn.className = 'render-btn active px-3 py-1 rounded-full font-medium transition';
+        aBtn.className = 'render-btn px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]';
+        vMode.classList.remove('hidden');
+        aMode.classList.add('hidden');
+        aMode.classList.remove('flex');
+        label.textContent = 'Vector SVG · High Retina Crispness & Live Animation';
+      } else {
+        aBtn.className = 'render-btn active px-3 py-1 rounded-full font-medium transition';
+        vBtn.className = 'render-btn px-3 py-1 rounded-full font-medium transition text-[var(--text-muted)] hover:text-[var(--text-main)]';
+        vMode.classList.add('hidden');
+        aMode.classList.remove('hidden');
+        aMode.classList.add('flex');
+        label.textContent = 'Master Rendered Artwork · Gilded Gold on Sumi Slate';
+      }
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      const label = document.getElementById('theme-label');
+      const icon = document.getElementById('theme-icon');
+
+      if (isDark) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        label.textContent = 'Dark Obsidian Slate';
+        icon.textContent = '🌙';
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        label.textContent = 'Light Xuan Paper';
+        icon.textContent = '☀️';
+      }
+    }
+
+    function toggleMotion() {
+      isMotionOn = !isMotionOn;
+      const targets = document.querySelectorAll('.motion-target');
+      const dot = document.getElementById('motion-dot');
+      const label = document.getElementById('motion-label');
+
+      targets.forEach(t => {
+        if (isMotionOn) {
+          t.style.animationPlayState = 'running';
+        } else {
+          t.style.animationPlayState = 'paused';
+        }
+      });
+
+      if (isMotionOn) {
+        dot.className = 'w-2 h-2 rounded-full bg-emerald-500';
+        label.textContent = 'Motion: On';
+      } else {
+        dot.className = 'w-2 h-2 rounded-full bg-rose-500';
+        label.textContent = 'Motion: Off';
+      }
+    }
+
+    function changeOpacity(val) {
+      const container = document.getElementById('graphic-container');
+      container.style.opacity = (val / 100);
+      document.getElementById('opacity-val').textContent = val + '%';
+    }
+  </script>
+</body>
+</html>

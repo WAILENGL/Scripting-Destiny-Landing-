@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ShieldCheck, Mail, Phone, Globe, Lock, Database, UserCheck } from "lucide-react";
 import logo from "@/assets/logo.png";
-import enso from "@/assets/ink-enso.jpg";
+import astrolabe from "@/assets/bazi-astrolabe.jpg";
 import { InkStroke } from "@/components/site/Ink";
 import { ThemeToggle } from "@/components/site/ThemeToggle";
 import { LanguageToggle } from "@/components/site/LanguageToggle";
@@ -56,11 +56,11 @@ function PrivacyPage() {
       <main className="relative flex-1 w-full max-w-4xl mx-auto px-5 py-10 sm:py-16">
         {/* Subtle decorative Enso background */}
         <img
-          src={enso}
+          src={astrolabe}
           alt=""
-          width={700}
-          height={700}
-          className="enso-watermark pointer-events-none fixed left-1/2 top-1/3 -z-10 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[600px] opacity-15 dark:opacity-10 [mask-image:radial-gradient(circle,black_30%,transparent_70%)]"
+          width={1024}
+          height={1024}
+          className="astrolabe-watermark pointer-events-none fixed left-1/2 top-1/3 -z-10 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[600px] opacity-15 dark:opacity-10 [mask-image:radial-gradient(circle_at_center,black_30%,transparent_70%)]"
         />
 
         {/* Header Block */}

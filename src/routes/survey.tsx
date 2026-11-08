@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Sparkles, CheckCircle2, AlertCircle, Loader2, Languages } from "lucide-react";
 import logo from "@/assets/logo.png";
-import enso from "@/assets/ink-enso.jpg";
+import astrolabe from "@/assets/bazi-astrolabe.jpg";
 import { InkStroke } from "@/components/site/Ink";
 import { ThemeToggle } from "@/components/site/ThemeToggle";
 import { LanguageToggle } from "@/components/site/LanguageToggle";
@@ -358,11 +358,11 @@ function SurveyPage() {
 
         {/* Ambient Enso Watermark */}
         <img
-          src={enso}
+          src={astrolabe}
           alt=""
-          width={800}
-          height={800}
-          className="enso-watermark pointer-events-none absolute -top-16 right-[-8%] -z-10 w-[320px] max-w-none [mask-image:radial-gradient(circle,black_40%,transparent_70%)] sm:w-[480px] 2xl:w-[650px]"
+          width={1024}
+          height={1024}
+          className="astrolabe-watermark pointer-events-none absolute -top-16 right-[-8%] -z-10 w-[320px] sm:w-[480px] 2xl:w-[650px] [mask-image:radial-gradient(circle_at_center,black_40%,transparent_70%)]"
         />
 
         <div className="text-center mb-6 sm:mb-8">

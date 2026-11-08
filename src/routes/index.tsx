@@ -13,7 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import enso from "@/assets/ink-enso.jpg";
+import astrolabe from "@/assets/bazi-astrolabe.jpg";
 import { InkStroke, Reveal } from "@/components/site/Ink";
 import logo from "@/assets/logo.png";
 
@@ -157,14 +157,16 @@ function Index() {
       ) : (
         <main id="top" className="overflow-x-clip">
         {/* Hero */}
-        <section className="relative site-container pb-16 pt-6 sm:pb-20 sm:pt-8 lg:pt-12 2xl:pb-28 2xl:pt-16 overflow-x-clip">
-          <img
-            src={enso}
-            alt=""
-            width={1024}
-            height={1024}
-            className="enso-watermark ink-in pointer-events-none absolute -right-8 top-0 -z-10 w-[86vw] max-w-[340px] [mask-image:radial-gradient(circle,black_40%,transparent_68%)] sm:-right-24 sm:top-10 sm:w-[620px] sm:max-w-none 2xl:w-[850px] 3xl:w-[1050px] 2xl:-right-24 2xl:-top-16 3xl:-right-32 3xl:-top-24 transition-all"
-          />
+        <section className="relative isolate site-container pb-16 pt-6 sm:pb-20 sm:pt-8 lg:pt-12 2xl:pb-28 2xl:pt-16 overflow-x-clip">
+          <div className="pointer-events-none absolute -right-10 top-0 sm:-right-20 sm:top-4 md:-right-12 lg:-right-4 lg:-top-6 xl:right-4 2xl:-top-16 2xl:-right-8 3xl:-right-16 -z-10 w-[94vw] max-w-[380px] sm:w-[580px] sm:max-w-none md:w-[640px] lg:w-[740px] xl:w-[820px] 2xl:w-[940px] 3xl:w-[1060px] aspect-square transition-all duration-700 [mask-image:radial-gradient(circle_at_center,black_46%,transparent_74%)]">
+            <img
+              src={astrolabe}
+              alt="Celestial Gan-Zhi Astrolabe"
+              width={1024}
+              height={1024}
+              className="astrolabe-watermark ink-in w-full h-full object-contain"
+            />
+          </div>
           <p className="eyebrow rise 2xl:text-sm">{t.hero.eyebrow}</p>
           <h1 className="mt-4 2xl:mt-6 font-serif font-light leading-[0.92] tracking-[-0.03em] text-[17vw] sm:text-8xl lg:text-[7.5rem] xl:text-[8.5rem] 2xl:text-[10rem] 3xl:text-[11.5rem]">
             <span className="rise block" style={{ animationDelay: "120ms" }}>

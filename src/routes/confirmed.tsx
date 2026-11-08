@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Compass, BookOpen } from "lucide-react";
 import logo from "@/assets/logo.png";
-import enso from "@/assets/ink-enso.jpg";
+import astrolabe from "@/assets/bazi-astrolabe.jpg";
 import { InkStroke } from "@/components/site/Ink";
 import { ThemeToggle } from "@/components/site/ThemeToggle";
 import { LanguageToggle } from "@/components/site/LanguageToggle";
@@ -49,14 +49,14 @@ function ConfirmedPage() {
       </header>
 
       {/* Main Confirmation Content */}
-      <main className="relative mx-auto my-auto w-full max-w-2xl 2xl:max-w-3xl 3xl:max-w-4xl px-5 py-12 sm:px-6 2xl:py-16 text-center">
+      <main className="relative isolate mx-auto my-auto w-full max-w-2xl 2xl:max-w-3xl 3xl:max-w-4xl px-5 py-12 sm:px-6 2xl:py-16 text-center">
         {/* Subtle decorative Enso background */}
         <img
-          src={enso}
+          src={astrolabe}
           alt=""
-          width={700}
-          height={700}
-          className="enso-watermark pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[460px] 2xl:max-w-[650px] [mask-image:radial-gradient(circle,black_35%,transparent_70%)]"
+          width={1024}
+          height={1024}
+          className="astrolabe-watermark pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-[460px] 2xl:max-w-[650px] [mask-image:radial-gradient(circle_at_center,black_45%,transparent_72%)]"
         />
 
         <div className="rounded-3xl border border-foreground/15 bg-card/85 p-8 sm:p-12 2xl:p-16 shadow-2xl backdrop-blur-sm">

@@ -289,6 +289,31 @@ body::before {
   filter: brightness(0.18) contrast(1.1);
 }
 
+/* Astrolabe watermark hero adaptation */
+.astrolabe-watermark {
+  transition: opacity 0.5s ease, filter 0.5s ease;
+}
+.dark .astrolabe-watermark {
+  mix-blend-mode: screen;
+  opacity: 0.90;
+  filter: contrast(1.1) brightness(1.05);
+}
+:root:not(.dark) .astrolabe-watermark,
+.light .astrolabe-watermark {
+  filter: invert(1) hue-rotate(185deg) contrast(1.25) brightness(0.92);
+  mix-blend-mode: multiply;
+  opacity: 0.80;
+}
+@media (max-width: 640px) {
+  .dark .astrolabe-watermark {
+    opacity: 0.75;
+  }
+  :root:not(.dark) .astrolabe-watermark,
+  .light .astrolabe-watermark {
+    opacity: 0.65;
+  }
+}
+
 /* Enso watermark brush adaptation */
 .enso-watermark {
   transition: opacity 0.4s ease, filter 0.4s ease;
