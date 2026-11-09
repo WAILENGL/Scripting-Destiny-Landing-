@@ -3,6 +3,7 @@ import { ArrowRight, Calendar } from "lucide-react";
 import { calculateBaZi } from "@/lib/baziCalculator";
 import type { BaZiChart, ElementType } from "@/types/bazi";
 import { useLanguage } from "@/hooks/useLanguage";
+import { trackChartCalculation } from "@/lib/analytics";
 import { WaitlistForm } from "./WaitlistForm";
 
 export const ELEMENT_BAR: Record<ElementType, string> = {
@@ -65,7 +66,9 @@ export function ChartTry() {
   const submit = (e: FormEvent) => {
     e.preventDefault();
     if (!date.trim()) return;
-    setChart(calculateBaZi(date, time));
+    const calculated = calculateBaZi(date, time);
+    setChart(calculated);
+    trackChartCalculation(calculated.dayMaster.hanzi, calculated.dayMaster.element);
     setTimeout(
       () =>
         document.getElementById("result")?.scrollIntoView({ behavior: "smooth", block: "nearest" }),

@@ -4,6 +4,7 @@ import { ArrowRight, Check, MailCheck, Loader2 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { BREVO_CONFIG } from "@/config/newsletter";
 import { useLanguage } from "@/hooks/useLanguage";
+import { trackLead } from "@/lib/analytics";
 
 export function WaitlistForm({ compact = false }: { compact?: boolean }) {
   const [email, setEmail] = useState("");
@@ -53,6 +54,7 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
       }
 
       await new Promise((resolve) => setTimeout(resolve, 500));
+      trackLead(compact ? "calculator" : "landing_footer", substackOptin);
       setDone(true);
     } catch {
       setError(t.waitlist.errorGeneric);
