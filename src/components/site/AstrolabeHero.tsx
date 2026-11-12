@@ -97,7 +97,7 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               fill="var(--svg-gold)"
-              fontFamily="var(--font-serif)"
+              fontFamily="var(--font-chinese), var(--font-serif)"
               fontSize="20"
               fontWeight="600"
             >
@@ -110,7 +110,7 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               fill="var(--svg-gold)"
-              fontFamily="var(--font-serif)"
+              fontFamily="var(--font-chinese), var(--font-serif)"
               fontSize="20"
             >
               丑
@@ -122,7 +122,7 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               fill="var(--svg-gold)"
-              fontFamily="var(--font-serif)"
+              fontFamily="var(--font-chinese), var(--font-serif)"
               fontSize="20"
             >
               寅
@@ -134,7 +134,7 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               fill="var(--svg-gold)"
-              fontFamily="var(--font-serif)"
+              fontFamily="var(--font-chinese), var(--font-serif)"
               fontSize="20"
               fontWeight="600"
             >
@@ -147,7 +147,7 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               fill="var(--svg-gold)"
-              fontFamily="var(--font-serif)"
+              fontFamily="var(--font-chinese), var(--font-serif)"
               fontSize="20"
             >
               辰
@@ -159,7 +159,7 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               fill="var(--svg-gold)"
-              fontFamily="var(--font-serif)"
+              fontFamily="var(--font-chinese), var(--font-serif)"
               fontSize="20"
             >
               巳
@@ -171,7 +171,7 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               fill="var(--svg-gold)"
-              fontFamily="var(--font-serif)"
+              fontFamily="var(--font-chinese), var(--font-serif)"
               fontSize="20"
               fontWeight="600"
             >
@@ -184,7 +184,7 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               fill="var(--svg-gold)"
-              fontFamily="var(--font-serif)"
+              fontFamily="var(--font-chinese), var(--font-serif)"
               fontSize="20"
             >
               未
@@ -196,7 +196,7 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               fill="var(--svg-gold)"
-              fontFamily="var(--font-serif)"
+              fontFamily="var(--font-chinese), var(--font-serif)"
               fontSize="20"
             >
               申
@@ -208,7 +208,7 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               fill="var(--svg-gold)"
-              fontFamily="var(--font-serif)"
+              fontFamily="var(--font-chinese), var(--font-serif)"
               fontSize="20"
               fontWeight="600"
             >
@@ -221,7 +221,7 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               fill="var(--svg-gold)"
-              fontFamily="var(--font-serif)"
+              fontFamily="var(--font-chinese), var(--font-serif)"
               fontSize="20"
             >
               戌
@@ -233,7 +233,7 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
               textAnchor="middle"
               dominantBaseline="central"
               fill="var(--svg-gold)"
-              fontFamily="var(--font-serif)"
+              fontFamily="var(--font-chinese), var(--font-serif)"
               fontSize="20"
             >
               亥
@@ -272,16 +272,16 @@ export function AstrolabeHero({ className = "" }: { className?: string }) {
             strokeDasharray="2, 4"
           />
 
-          <text x="450" y="222" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16" fontWeight="600">甲</text>
-          <text x="580" y="265" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">乙</text>
-          <text x="660" y="375" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">丙</text>
-          <text x="660" y="525" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">丁</text>
-          <text x="580" y="635" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">戊</text>
-          <text x="450" y="678" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16" fontWeight="600">己</text>
-          <text x="320" y="635" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">庚</text>
-          <text x="240" y="525" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">辛</text>
-          <text x="240" y="375" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">壬</text>
-          <text x="320" y="265" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-serif)" fontSize="16">癸</text>
+          <text x="450" y="222" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-chinese), var(--font-serif)" fontSize="16" fontWeight="600">甲</text>
+          <text x="580" y="265" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-chinese), var(--font-serif)" fontSize="16">乙</text>
+          <text x="660" y="375" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-chinese), var(--font-serif)" fontSize="16">丙</text>
+          <text x="660" y="525" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-chinese), var(--font-serif)" fontSize="16">丁</text>
+          <text x="580" y="635" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-chinese), var(--font-serif)" fontSize="16">戊</text>
+          <text x="450" y="678" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-chinese), var(--font-serif)" fontSize="16" fontWeight="600">己</text>
+          <text x="320" y="635" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-chinese), var(--font-serif)" fontSize="16">庚</text>
+          <text x="240" y="525" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-chinese), var(--font-serif)" fontSize="16">辛</text>
+          <text x="240" y="375" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-chinese), var(--font-serif)" fontSize="16">壬</text>
+          <text x="320" y="265" textAnchor="middle" fill="var(--svg-gold)" fontFamily="var(--font-chinese), var(--font-serif)" fontSize="16">癸</text>
         </g>
 
         {/* Core Coordinate Hub: Polar Crosshair, Constellation Nodes & Taiji Center */}

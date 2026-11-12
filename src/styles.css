@@ -58,8 +58,9 @@
   --color-earth: var(--earth);
   --color-metal: var(--metal);
   --color-water: var(--water);
-  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-serif: "Cormorant Garamond", "Noto Serif SC", "Songti SC", "STSong", "STKaiti", "KaiTi", "SimSun", Georgia, serif;
   --font-sans: "Manrope", system-ui, sans-serif;
+  --font-chinese: "Noto Serif SC", "Songti SC", "STSong", "STKaiti", "KaiTi", "SimSun", serif;
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -580,11 +581,15 @@ body::before {
   place-items: center;
   aspect-ratio: 1;
   border-radius: 6px;
-  font-family: var(--font-serif);
+  font-family: var(--font-chinese);
   font-size: clamp(1.35rem, 5.5vw, 1.65rem);
   transition: all 0.3s ease;
   position: relative;
   min-width: 0;
+}
+
+.font-chinese {
+  font-family: var(--font-chinese);
 }
 .dark .pillar-cell {
   border: 1px solid oklch(0.80 0.115 88 / 0.25);
