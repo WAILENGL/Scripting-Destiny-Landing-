@@ -293,9 +293,9 @@ export const translations = {
     },
     survey: {
       communityBadge: "Community Inquiry",
-      headline: "Scripting Destiny: Life Clarity & Timing",
+      headline: "Life Clarity & Timing",
       description:
-        "We are designing tools to help people decipher their innate nature and make timely, aligned life decisions. Your answers directly shape what we build next.",
+        "Share your perspective on personal crossroads and help shape what we build next.",
       saving: "Saving your contact preferences…",
       saved: "Your preferences have been saved. We'll be in touch!",
       error:
@@ -462,9 +462,9 @@ export const translations = {
     },
     survey: {
       communityBadge: "社区共创调研",
-      headline: "Scripting Destiny: 生命清晰度与时机调研",
+      headline: "生命清晰度与时机研判",
       description:
-        "我们正在构建赋能每个人洞悉天性、在关键时机做出清醒顺势决策的现代工具。您的宝贵洞察将直接塑造我们下一步的产品研发。",
+        "分享您在关键十字路口的真实视角，与我们共同打造新一代时机研判工具。",
       saving: "正在保存您的联系偏好…",
       saved: "您的偏好已保存，我们会在第一时间与您联络！",
       error: "保存联系信息失败，如需联络请直接发送邮件给我们。",
