@@ -111,12 +111,14 @@ async function upsertBrevoContact({
   wantsTrial,
   readingPreference,
   surveyLanguage,
+  birthInfo,
 }: {
   email: string;
   openToChat: boolean;
   wantsTrial: boolean;
   readingPreference: string | null;
   surveyLanguage: string;
+  birthInfo?: string | null;
 }): Promise<void> {
   const apiKey = BREVO_CONFIG.surveyApiKey;
   if (!apiKey) {
@@ -141,6 +143,7 @@ async function upsertBrevoContact({
         SURVEY_SOURCE: "tally-life-clarity",
         SURVEY_LANGUAGE: surveyLanguage,
         ...(readingPreference ? { READING_PREFERENCE: readingPreference } : {}),
+        ...(birthInfo ? { BIRTH_INFO: birthInfo } : {}),
       },
     }),
   });
@@ -301,6 +304,17 @@ function SurveyPage() {
         }
       }
 
+      // Detect optional birth details
+      const birthField = findField(
+        fields,
+        (f) =>
+          f.label?.toLowerCase().includes("birth details") ||
+          f.label?.toLowerCase().includes("birth date") ||
+          f.label?.includes("出生信息") ||
+          f.label?.includes("出生")
+      );
+      const birthInfo = typeof birthField?.value === "string" ? birthField.value.trim() : null;
+
       setBrevoState("saving");
       try {
         await upsertBrevoContact({
@@ -309,6 +323,7 @@ function SurveyPage() {
           wantsTrial,
           readingPreference,
           surveyLanguage: isZh ? "zh" : "en",
+          birthInfo,
         });
         setBrevoState("saved");
       } catch (err) {
@@ -474,6 +489,9 @@ function SurveyPage() {
             <LanguageToggle />
             <Link to="/privacy" className="hover:text-foreground transition-colors">
               {t.footer.privacyPolicy}
+            </Link>
+            <Link to="/terms" className="hover:text-foreground transition-colors">
+              {t.footer.termsOfService}
             </Link>
             <span>{t.footer.tagline}</span>
           </div>
