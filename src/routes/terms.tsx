@@ -67,32 +67,16 @@ function TermsPage() {
         <div className="mb-10 text-center sm:text-left">
           <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-foreground mb-4">
             <Scale className="h-3.5 w-3.5 text-wood" />
-            <span>{isZh ? "全球适用服务协议与移动应用终端协议" : "Global Terms of Service & App Store EULA"}</span>
+            <span>{isZh ? "服务条款" : "Terms of Service"}</span>
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-foreground leading-tight">
             {isZh ? "服务条款与用户协议" : "Terms of Service & End User Agreement"}
           </h1>
           <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed">
             {isZh
-              ? "适用于 Scripting Destiny 网站、四柱八字测算引擎、早期候补名单及 iOS / Android 移动端应用。"
-              : "Governing access to the Scripting Destiny website, BaZi computational engine, waitlist services, and mobile applications across iOS and Android."}
+              ? "适用于 Scripting Destiny 网站、四柱八字测算引擎、早期候补名单及数字化服务。"
+              : "Governing access to the Scripting Destiny website, BaZi computational engine, waitlist services, and related digital products."}
           </p>
-
-          {/* Quick Jurisdictional Badges */}
-          <div className="mt-4 flex flex-wrap gap-2 text-[11px] sm:text-xs text-muted-foreground">
-            <span className="rounded-md border border-border/70 bg-card px-2.5 py-1 font-medium text-foreground">
-              🇸🇬 Singapore Governing Law
-            </span>
-            <span className="rounded-md border border-border/70 bg-card px-2.5 py-1">
-              🇪🇺 EU Consumer Rights Directive
-            </span>
-            <span className="rounded-md border border-border/70 bg-card px-2.5 py-1">
-              🇺🇸 US / California Disclaimers
-            </span>
-            <span className="rounded-md border border-border/70 bg-card px-2.5 py-1">
-              📱 Apple & Google Play App-Ready
-            </span>
-          </div>
         </div>
 
         {/* Metadata Card */}

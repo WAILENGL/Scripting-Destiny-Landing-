@@ -67,32 +67,16 @@ function PrivacyPage() {
         <div className="mb-10 text-center sm:text-left">
           <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-foreground mb-4">
             <ShieldCheck className="h-3.5 w-3.5 text-wood" />
-            <span>{isZh ? "GDPR / PDPA / CCPA 全球合规隐私政策" : "GDPR / PDPA / CCPA Global Privacy Policy"}</span>
+            <span>{isZh ? "隐私政策" : "Privacy Policy"}</span>
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-foreground leading-tight">
             {isZh ? "隐私政策与数据保护声明" : "Privacy Policy & Data Protection Notice"}
           </h1>
           <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed">
             {isZh
-              ? "以欧盟 GDPR 框架为核心构建，全面遵从新加坡 PDPA 与美国加州 CCPA/CPRA 法规标准。"
-              : "Structured under the European Union GDPR standard, fully compliant with Singapore PDPA and California CCPA/CPRA standards."}
+              ? "适用于 Scripting Destiny 网站、四柱八字排盘工具、订阅候补通道及相关数字化服务。"
+              : "Governing the Scripting Destiny platform, BaZi charting tools, waitlist registrations, and related digital services."}
           </p>
-
-          {/* Quick Regulatory Badges */}
-          <div className="mt-4 flex flex-wrap gap-2 text-[11px] sm:text-xs text-muted-foreground">
-            <span className="rounded-md border border-border/70 bg-card px-2.5 py-1 font-medium text-foreground">
-              🇪🇺 EU / UK GDPR (Reg. 2016/679)
-            </span>
-            <span className="rounded-md border border-border/70 bg-card px-2.5 py-1">
-              🇸🇬 Singapore PDPA 2012
-            </span>
-            <span className="rounded-md border border-border/70 bg-card px-2.5 py-1">
-              🇺🇸 US / California (CCPA / CPRA)
-            </span>
-            <span className="rounded-md border border-border/70 bg-card px-2.5 py-1">
-              🔒 TLS 1.3 & AES-256
-            </span>
-          </div>
         </div>
 
         {/* Metadata Card (Clean & Discrete) */}
