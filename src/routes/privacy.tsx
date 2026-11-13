@@ -481,10 +481,28 @@ function PrivacyPage() {
             </div>
           </section>
 
-          {/* Section 13: DPO Contact */}
+          {/* Section 13: Mobile App Store Compliance & In-App Account Deletion */}
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
               <span className="text-accent font-sans font-semibold text-base sm:text-lg">13</span>
+              {isZh ? "移动应用商店合规与账号注销机制" : "Mobile App Store Compliance & Account Deletion (Apple & Google Play)"}
+            </h2>
+            <div className="space-y-3 text-muted-foreground text-xs sm:text-sm leading-relaxed">
+              <p>
+                In compliance with <strong>Apple App Store Review Guideline 5.1.1(v)</strong> and the <strong>Google Play Data Safety Policy</strong>, we maintain transparent protocols for our mobile applications:
+              </p>
+              <ul className="space-y-1.5 list-disc list-inside pl-2">
+                <li><strong className="text-foreground">In-App Account Deletion:</strong> If you register an account in our mobile app, you may permanently delete your account and all associated identifiable records directly within the app settings (via “Account → Delete Account”) or by emailing <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a>. Deletion takes effect within thirty (30) days.</li>
+                <li><strong className="text-foreground">Device Hardware Permissions:</strong> The Scripting Destiny mobile app does not request access to your device microphone, camera, contacts/address book, photo library, or precise real-time GPS location.</li>
+                <li><strong className="text-foreground">No Cross-App Tracking (IDFA):</strong> We do not track users across third-party apps or websites for targeted advertising, and we do not request or utilize Apple’s Identifier for Advertisers (IDFA) or Google Advertising ID (GAID) for cross-context behavioral marketing.</li>
+              </ul>
+            </div>
+          </section>
+
+          {/* Section 14: DPO Contact */}
+          <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
+            <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
+              <span className="text-accent font-sans font-semibold text-base sm:text-lg">14</span>
               {isZh ? "数据保护官与权利行使途径" : "Data Protection Officer & Privacy Inquiries"}
             </h2>
             <p className="text-muted-foreground leading-relaxed">
@@ -492,10 +510,10 @@ function PrivacyPage() {
             </p>
           </section>
 
-          {/* Section 14: Amendments & Deemed Acceptance */}
+          {/* Section 15: Amendments & Deemed Acceptance */}
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
-              <span className="text-accent font-sans font-semibold text-base sm:text-lg">14</span>
+              <span className="text-accent font-sans font-semibold text-base sm:text-lg">15</span>
               {isZh ? "条款修订与默示同意" : "Amendments to This Notice & Deemed Acceptance"}
             </h2>
             <div className="space-y-3 text-muted-foreground leading-relaxed">
@@ -527,6 +545,9 @@ function PrivacyPage() {
             </Link>
             <Link to="/privacy" className="text-foreground font-medium underline underline-offset-4">
               {isZh ? "隐私政策" : "Privacy Policy"}
+            </Link>
+            <Link to="/terms" className="hover:text-foreground transition-colors">
+              {isZh ? "服务条款" : "Terms of Service"}
             </Link>
           </div>
         </div>

@@ -208,9 +208,16 @@ export function WaitlistForm({ compact = false }: { compact?: boolean }) {
           </label>
         </div>
 
-        {/* Global privacy compliance notice */}
+        {/* Global legal & privacy compliance notice */}
         <p className="mt-2 text-[11px] text-muted-foreground/80 leading-normal">
           {t.waitlist.privacyConsentPre}{" "}
+          <Link
+            to="/terms"
+            className="underline underline-offset-2 hover:text-foreground transition-colors"
+          >
+            {t.waitlist.termsOfService}
+          </Link>{" "}
+          {t.waitlist.andWord}{" "}
           <Link
             to="/privacy"
             className="underline underline-offset-2 hover:text-foreground transition-colors"
