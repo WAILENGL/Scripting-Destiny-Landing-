@@ -339,35 +339,38 @@ function SurveyPage() {
   }, [isZh]);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-background text-foreground selection:bg-accent/30">
+    <div className="min-h-screen flex flex-col justify-between bg-background text-foreground selection:bg-accent/30 overflow-x-clip">
       {/* Top Header */}
-      <header className="site-container flex items-center justify-between py-5 sm:py-6">
+      <header className="site-container flex items-center justify-between gap-2 py-4 sm:py-6">
         <Link
           to="/"
           aria-label="Scripting Destiny home"
-          className="block transition-opacity hover:opacity-90"
+          className="block shrink-0 transition-opacity hover:opacity-90"
         >
           <img
             src={logo}
             alt="Scripting Destiny"
-            className="brand-logo h-9 w-auto sm:h-11 2xl:h-13 transition-all"
+            width={138}
+            height={36}
+            className="brand-logo h-7 sm:h-9 2xl:h-13 w-auto max-h-8 sm:max-h-9 object-contain transition-all"
           />
         </Link>
-        <div className="flex items-center gap-2.5 sm:gap-3 2xl:gap-4">
+        <div className="flex items-center gap-1.5 sm:gap-3 2xl:gap-4 shrink-0">
           <LanguageToggle />
           <ThemeToggle />
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 rounded-full border border-foreground/20 px-3.5 py-1.5 2xl:px-5 2xl:py-2 text-xs sm:text-sm 2xl:text-base font-medium transition hover:border-foreground hover:bg-foreground hover:text-background"
+            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-foreground/20 px-2.5 py-1.5 sm:px-3.5 sm:py-1.5 2xl:px-5 2xl:py-2 text-xs sm:text-sm 2xl:text-base font-medium transition hover:border-foreground hover:bg-foreground hover:text-background shrink-0 whitespace-nowrap"
           >
-            <ArrowLeft className="h-3.5 w-3.5" />
-            <span>{t.survey.backHome}</span>
+            <ArrowLeft className="h-3.5 w-3.5 shrink-0" />
+            <span className="hidden sm:inline">{t.survey.backHome}</span>
+            <span className="sm:hidden">{isZh ? "首页" : "Home"}</span>
           </Link>
         </div>
       </header>
 
       {/* Main Container */}
-      <main className="relative mx-auto my-6 w-full max-w-4xl 2xl:max-w-5xl 3xl:max-w-6xl px-4 sm:px-6 2xl:px-8">
+      <main className="relative mx-auto my-4 sm:my-6 w-full max-w-4xl 2xl:max-w-5xl 3xl:max-w-6xl px-3 sm:px-6 2xl:px-8 overflow-x-clip">
         {/* Ambient Gold Radial Glow */}
         <div className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-[550px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-gradient-to-b from-accent/15 via-accent/5 to-transparent blur-3xl" />
 
@@ -377,34 +380,34 @@ function SurveyPage() {
           alt=""
           width={1024}
           height={1024}
-          className="astrolabe-watermark pointer-events-none absolute -top-16 right-[-8%] -z-10 w-[320px] sm:w-[480px] 2xl:w-[650px] [mask-image:radial-gradient(circle_at_center,black_40%,transparent_70%)]"
+          className="astrolabe-watermark pointer-events-none absolute -top-8 sm:-top-16 right-0 sm:right-[-8%] -z-10 w-[240px] sm:w-[480px] 2xl:w-[650px] [mask-image:radial-gradient(circle_at_center,black_40%,transparent_70%)] opacity-40 sm:opacity-90"
         />
 
-        <div className="text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-medium text-accent">
-            <Sparkles className="h-3.5 w-3.5 text-accent" />
+        <div className="text-center mb-5 sm:mb-8">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] sm:text-xs font-medium text-accent">
+            <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-accent shrink-0" />
             <span>{t.survey.communityBadge}</span>
           </div>
 
-          <h1 className="mt-4 font-serif text-3xl sm:text-5xl 2xl:text-6xl font-light tracking-tight text-foreground leading-tight">
+          <h1 className="mt-3 sm:mt-4 font-serif text-2xl sm:text-5xl 2xl:text-6xl font-light tracking-tight text-foreground leading-tight px-1">
             {t.survey.headline}
           </h1>
-          <p className="mx-auto mt-4 max-w-xl 2xl:max-w-2xl text-sm sm:text-base 2xl:text-lg leading-relaxed text-muted-foreground">
+          <p className="mx-auto mt-2.5 sm:mt-4 max-w-xl 2xl:max-w-2xl text-xs sm:text-base 2xl:text-lg leading-relaxed text-muted-foreground px-2">
             {t.survey.description}
           </p>
         </div>
 
         {/* Survey Language Switcher Pill Banner */}
-        <div className="mx-auto max-w-md mb-6 flex items-center justify-between gap-3 rounded-full border border-accent/25 bg-card/75 p-1.5 px-3.5 shadow-sm backdrop-blur-md">
-          <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+        <div className="mx-auto max-w-md mb-4 sm:mb-6 flex items-center justify-between gap-2 rounded-full border border-accent/25 bg-card/75 p-1 px-3 sm:p-1.5 sm:px-3.5 shadow-sm backdrop-blur-md">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-medium text-muted-foreground shrink-0">
             <Languages className="h-3.5 w-3.5 text-accent shrink-0" />
             <span>{t.survey.langPrompt}:</span>
           </div>
-          <div className="inline-flex items-center gap-1">
+          <div className="inline-flex items-center gap-1 shrink-0">
             <button
               type="button"
               onClick={() => setLang("en")}
-              className={`inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
+              className={`inline-flex items-center justify-center rounded-full px-2.5 py-1 sm:px-3 text-[11px] sm:text-xs font-medium transition-all cursor-pointer ${
                 !isZh
                   ? "bg-accent text-accent-foreground shadow-sm font-semibold"
                   : "text-muted-foreground hover:text-foreground"
@@ -415,7 +418,7 @@ function SurveyPage() {
             <button
               type="button"
               onClick={() => setLang("zh")}
-              className={`inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
+              className={`inline-flex items-center justify-center rounded-full px-2.5 py-1 sm:px-3 text-[11px] sm:text-xs font-medium transition-all cursor-pointer ${
                 isZh
                   ? "bg-accent text-accent-foreground shadow-sm font-semibold"
                   : "text-muted-foreground hover:text-foreground"
@@ -428,7 +431,7 @@ function SurveyPage() {
 
         {/* Notice when Chinese is selected but custom form ID not yet connected */}
         {isZh && !hasSeparateZhForm && (
-          <div className="mx-auto max-w-2xl mb-6 rounded-2xl border border-accent/30 bg-accent/10 p-4 text-center text-xs sm:text-sm text-foreground/90 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="mx-auto max-w-2xl mb-4 sm:mb-6 rounded-2xl border border-accent/30 bg-accent/10 p-3 sm:p-4 text-center text-xs sm:text-sm text-foreground/90 backdrop-blur-sm animate-in fade-in duration-300">
             <p className="font-semibold text-accent">ℹ️ 中文问卷创建指引 (Mandarin Form Setup)</p>
             <p className="mt-1 text-muted-foreground leading-relaxed">
               目前展示的是英文原版问卷。我们已为您准备好
@@ -439,7 +442,7 @@ function SurveyPage() {
         )}
 
         {/* Survey Embed Container: dark:bg-[#1a1917] matches Tally dark theme perfectly */}
-        <div className="relative overflow-hidden rounded-3xl border border-accent/25 bg-card/90 dark:bg-[#1a1917] p-2 sm:p-6 2xl:p-8 shadow-[0_20px_50px_-20px_oklch(0.2_0.01_60/0.1)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.7)] backdrop-blur-xl ring-1 ring-accent/10 transition-all">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-accent/25 bg-card/90 dark:bg-[#1a1917] p-0.5 sm:p-6 2xl:p-8 shadow-[0_20px_50px_-20px_oklch(0.2_0.01_60/0.1)] dark:shadow-[0_24px_60px_rgba(0,0,0,0.7)] backdrop-blur-xl ring-1 ring-accent/10 transition-all">
           <iframe
             key={activeFormId}
             ref={iframeRef}
@@ -453,7 +456,7 @@ function SurveyPage() {
               backgroundColor: "transparent",
               colorScheme: "dark",
             }}
-            className="w-full border-0 min-h-[750px] transition-all bg-transparent"
+            className="w-full border-0 min-h-[650px] sm:min-h-[750px] transition-all bg-transparent"
           />
         </div>
 
@@ -479,13 +482,13 @@ function SurveyPage() {
       </main>
 
       {/* Footer */}
-      <footer className="w-full mt-12">
+      <footer className="w-full mt-10 sm:mt-12">
         <InkStroke className="site-container" />
-        <div className="site-container flex items-center justify-between py-6 text-xs 2xl:text-sm text-muted-foreground">
+        <div className="site-container flex flex-col sm:flex-row items-center justify-between gap-4 py-6 text-xs 2xl:text-sm text-muted-foreground text-center sm:text-left">
           <span>
             &copy; {new Date().getFullYear()} {t.footer.copyright}
           </span>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-4">
             <LanguageToggle />
             <Link to="/privacy" className="hover:text-foreground transition-colors">
               {t.footer.privacyPolicy}
