@@ -304,16 +304,27 @@ function SurveyPage() {
         }
       }
 
-      // Detect optional birth details
-      const birthField = findField(
-        fields,
-        (f) =>
-          f.label?.toLowerCase().includes("birth details") ||
-          f.label?.toLowerCase().includes("birth date") ||
-          f.label?.includes("出生信息") ||
-          f.label?.includes("出生")
-      );
-      const birthInfo = typeof birthField?.value === "string" ? birthField.value.trim() : null;
+      // Detect optional birth details (Name, Gender, DOB, Time, Location)
+      const birthParts: string[] = [];
+      fields.forEach((f) => {
+        const lbl = (f.label || "").toLowerCase();
+        const val = typeof f.value === "string" ? f.value.trim() : Array.isArray(f.value) ? f.value.join(", ") : "";
+        if (!val) return;
+        if (lbl.includes("name") || lbl.includes("姓名") || lbl.includes("称呼")) {
+          birthParts.push(`Name: ${val}`);
+        } else if (lbl.includes("gender") || lbl.includes("sex") || lbl.includes("性别")) {
+          birthParts.push(`Gender: ${val}`);
+        } else if (lbl.includes("date") || lbl.includes("日期") || lbl.includes("dob")) {
+          birthParts.push(`DOB: ${val}`);
+        } else if (lbl.includes("time") || lbl.includes("时辰") || lbl.includes("时间")) {
+          birthParts.push(`Time: ${val}`);
+        } else if (lbl.includes("city") || lbl.includes("country") || lbl.includes("城市") || lbl.includes("地区")) {
+          birthParts.push(`Location: ${val}`);
+        } else if (lbl.includes("birth") || lbl.includes("出生")) {
+          birthParts.push(`${val}`);
+        }
+      });
+      const birthInfo = birthParts.length > 0 ? birthParts.join(" | ") : null;
 
       setBrevoState("saving");
       try {
