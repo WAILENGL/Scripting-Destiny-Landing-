@@ -232,20 +232,35 @@ function Index() {
               {t.elements.heading}
             </h2>
             <div className="mt-12 2xl:mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl 2xl:rounded-3xl border border-border bg-border sm:grid-cols-5">
-              {t.elements.items.map((e) => (
-                <div
-                  key={e.k}
-                  className="bg-card p-6 2xl:p-10 3xl:p-12 last:col-span-2 sm:last:col-span-1"
-                >
-                  <span
-                    className={`font-serif text-5xl 2xl:text-6xl 3xl:text-7xl ${ELEMENT_COLORS[e.zh] || "text-foreground"}`}
+              {t.elements.items.map((e, idx) => {
+                const isLast = idx === t.elements.items.length - 1;
+                return (
+                  <div
+                    key={e.k}
+                    className={`bg-card p-6 2xl:p-10 3xl:p-12 ${
+                      isLast
+                        ? "col-span-2 sm:col-span-1 flex flex-row sm:flex-col items-center sm:items-start gap-5 sm:gap-0"
+                        : "flex flex-col"
+                    }`}
                   >
-                    {e.zh}
-                  </span>
-                  <h3 className="mt-4 2xl:mt-6 font-semibold 2xl:text-xl">{e.k}</h3>
-                  <p className="mt-1 text-sm 2xl:text-base text-muted-foreground">{e.d}</p>
-                </div>
-              ))}
+                    <span
+                      className={`font-serif text-5xl 2xl:text-6xl 3xl:text-7xl shrink-0 ${ELEMENT_COLORS[e.zh] || "text-foreground"}`}
+                    >
+                      {e.zh}
+                    </span>
+                    <div className={isLast ? "min-w-0" : ""}>
+                      <h3
+                        className={`${
+                          isLast ? "sm:mt-4 2xl:mt-6" : "mt-4 2xl:mt-6"
+                        } font-semibold 2xl:text-xl`}
+                      >
+                        {e.k}
+                      </h3>
+                      <p className="mt-1 text-sm 2xl:text-base text-muted-foreground">{e.d}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
