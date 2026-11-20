@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as ConfirmedRouteImport } from './routes/confirmed'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SurveyRouteImport } from './routes/survey'
@@ -18,6 +19,11 @@ import { Route as TermsRouteImport } from './routes/terms'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConfirmedRoute = ConfirmedRouteImport.update({
@@ -43,6 +49,7 @@ const TermsRoute = TermsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/confirmed': typeof ConfirmedRoute
   '/privacy': typeof PrivacyRoute
   '/survey': typeof SurveyRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/confirmed': typeof ConfirmedRoute
   '/privacy': typeof PrivacyRoute
   '/survey': typeof SurveyRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/confirmed': typeof ConfirmedRoute
   '/privacy': typeof PrivacyRoute
   '/survey': typeof SurveyRoute
@@ -65,14 +74,22 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/confirmed' | '/privacy' | '/survey' | '/terms'
+  fullPaths: '/' | '/about' | '/confirmed' | '/privacy' | '/survey' | '/terms'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/confirmed' | '/privacy' | '/survey' | '/terms'
-  id: '__root__' | '/' | '/confirmed' | '/privacy' | '/survey' | '/terms'
+  to: '/' | '/about' | '/confirmed' | '/privacy' | '/survey' | '/terms'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/confirmed'
+    | '/privacy'
+    | '/survey'
+    | '/terms'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   ConfirmedRoute: typeof ConfirmedRoute
   PrivacyRoute: typeof PrivacyRoute
   SurveyRoute: typeof SurveyRoute
@@ -86,6 +103,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/confirmed': {
@@ -121,6 +145,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   ConfirmedRoute: ConfirmedRoute,
   PrivacyRoute: PrivacyRoute,
   SurveyRoute: SurveyRoute,
