@@ -6,9 +6,9 @@ import { ThemeToggle } from "@/components/site/ThemeToggle";
 import { LanguageToggle } from "@/components/site/LanguageToggle";
 import { useLanguage } from "@/hooks/useLanguage";
 
-const TITLE = "Privacy Policy & Data Protection Notice — Scripting Destiny";
+const TITLE = "Privacy & Birth Data Protection Policy — Scripting Destiny";
 const DESC =
-  "Comprehensive global privacy policy for Scripting Destiny, structured for EU/UK GDPR compliance, Singapore PDPA, and US/California (CCPA/CPRA) standards.";
+  "Comprehensive global privacy and birth data protection policy for Scripting Destiny, compliant with EU/UK GDPR, Singapore PDPA, and US/California (CCPA/CPRA) standards.";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -69,12 +69,12 @@ function PrivacyPage() {
             <span>{isZh ? "隐私政策" : "Privacy Policy"}</span>
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-foreground leading-tight">
-            {isZh ? "隐私政策与数据保护声明" : "Privacy Policy & Data Protection Notice"}
+            {isZh ? "隐私与生辰数据保护政策" : "Privacy & Birth Data Protection Policy"}
           </h1>
           <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed">
             {isZh
               ? "适用于 Scripting Destiny 网站、真太阳时自动化命理报告、一对一私人邮件咨询、订阅候补通道及相关数字化服务。"
-              : "Governing the Scripting Destiny platform, automated BaZi PDF reports, 1-on-1 private email consultations, waitlist registrations, and related digital services."}
+              : "Governing the Scripting Destiny platform, True Solar Time automated BaZi PDF reports, 1-on-1 private email consultations, waitlist registrations, and related digital services."}
           </p>
         </div>
 
@@ -105,71 +105,92 @@ function PrivacyPage() {
             </h2>
             <div className="space-y-3 text-muted-foreground">
               <p>
-                This Privacy Policy and Data Protection Notice (“Notice”) is issued by <strong>Scripting Destiny</strong> (“we”, “us”, or “our”), acting as the <strong>Data Controller</strong> under Regulation (EU) 2016/679 (the General Data Protection Regulation, or “GDPR”) and the UK Data Protection Act 2018. It governs personal data processed through our website (<a href="https://scriptingdestiny.com" className="text-wood hover:underline">scriptingdestiny.com</a>), our Automated Digital Reports (Free Blueprint, Standard Reading, Full Reading), our 1-on-1 Private Email Consultations, our Substack publication, our waitlist forms, and associated digital products (collectively, the “Services”).
+                This Privacy &amp; Birth Data Protection Policy (“Notice”) is issued by <strong>Scripting Destiny</strong> (“we”, “us”, or “our”), acting as the <strong>Data Controller</strong> under Regulation (EU) 2016/679 (the General Data Protection Regulation, or “GDPR”) and the UK Data Protection Act 2018. It governs personal and birth data processed through our website (<a href="https://scriptingdestiny.com" className="text-wood hover:underline">scriptingdestiny.com</a>), our Automated Digital Reports (Free Blueprint, Standard Reading, Full Reading), our 1-on-1 Private Email Consultations, our Substack publication, our waitlist forms, and associated digital products (collectively, the “Services”).
               </p>
               <p>
-                We are committed to operating in full compliance with global privacy frameworks, notably the <strong>EU &amp; UK GDPR</strong>, the <strong>Personal Data Protection Act 2012 of Singapore (“PDPA”)</strong>, and United States federal and state privacy statutes, with special regard to the <strong>California Consumer Privacy Act of 2018 as amended by the California Privacy Rights Act of 2020 (“CCPA/CPRA”)</strong>.
+                We operate in full compliance with global privacy frameworks, notably the <strong>EU &amp; UK GDPR</strong>, the <strong>Personal Data Protection Act 2012 of Singapore (“PDPA”)</strong>, and United States federal and state privacy statutes, with special regard to the <strong>California Consumer Privacy Act of 2018 as amended by the California Privacy Rights Act of 2020 (“CCPA/CPRA”)</strong>. This Policy should be read alongside our <Link to="/terms" className="text-wood hover:underline font-medium">Terms of Service</Link>.
               </p>
             </div>
           </section>
 
-          {/* Section 2: Categories of Personal Data */}
+          {/* Section 2: Information We Collect */}
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
               <span className="text-accent font-sans font-semibold text-base sm:text-lg">02</span>
-              {isZh ? "我们处理的个人数据类别" : "Categories of Personal Data We Process"}
+              {isZh ? "我们收集的信息" : "Information We Collect"}
             </h2>
             <p className="text-muted-foreground mb-4">
-              In adherence to the GDPR principle of <em>data minimization</em> (Article 5(1)(c)), we collect only personal data strictly necessary to fulfill our services:
+              In adherence to the GDPR principle of <em>data minimization</em> (Article 5(1)(c)), we collect only the information strictly necessary to compute your chart, generate your report, or deliver your consultation:
             </p>
             <ul className="space-y-3 text-muted-foreground">
               <li className="flex items-start gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent mt-2 shrink-0" />
                 <span>
-                  <strong className="text-foreground">Customer, Subscriber &amp; Waitlist Identifiers:</strong> Your name, email address, subscription preferences, locale selection (English or Chinese), and records of communication when purchasing a report, requesting a 48-hour typographical correction, contacting support, or joining our waitlist.
+                  <strong className="text-foreground">Birth Data &amp; Geographical Coordinates:</strong> To compute your BaZi chart and True Solar Time accurately, we collect your <strong>birth date</strong>, <strong>birth time</strong> (or a note indicating an unknown birth time), <strong>gender</strong>, <strong>birth city</strong>, and coarse city-level <strong>geographical coordinates (longitude and latitude resolved via Open-Meteo)</strong>. We do <strong>not</strong> collect real-time device GPS or precise street-level geolocation.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent mt-2 shrink-0" />
                 <span>
-                  <strong className="text-foreground">BaZi Astrological Coordinates:</strong> Numerical coordinates required to calculate True Solar Time metaphysical Four Pillars charts, PDF reports, and Day Master archetypes: exact date of birth, time of birth, gender, and country/city of birth. You may also voluntarily submit significant life event milestone years to calibrate and validate calculation precision.
+                  <strong className="text-foreground">Identity, Contact &amp; Intake Life Context Notes:</strong> Your <strong>name</strong>, <strong>email address</strong>, language/subscription preferences, and any <strong>voluntary life context notes</strong> or past life event milestones you provide at intake (or share in private email correspondence with Blake during a 1-on-1 Consultation).
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent mt-2 shrink-0" />
                 <span>
-                  <strong className="text-foreground">Payment &amp; Transaction Information:</strong> When you purchase a paid PDF report or 1-on-1 Consultation, payment card details are collected and processed directly by <strong>Stripe</strong> (PCI-DSS Level 1 certified). Scripting Destiny does <strong>not</strong> store full credit/debit card numbers or CVV codes on our servers. We receive limited transaction records from Stripe—such as billing name, billing email, country/postal code, transaction ID, amount paid, currency, payment status, and the last four (4) digits of the payment card—for order delivery, refund verification, fraud prevention, and statutory tax recordkeeping.
+                  <strong className="text-foreground">Payment &amp; Transaction Metadata:</strong> All payment card processing is handled securely by <strong>Stripe</strong> (PCI-DSS Level 1 certified). <strong>Scripting Destiny never sees or stores full credit/debit card numbers or CVV codes.</strong> We receive limited transaction metadata from Stripe—such as billing name, billing email, country/postal code, order ID, amount paid, currency, payment status, and the last four (4) digits of the payment card—strictly for order fulfillment, 48-hour refund/correction handling, fraud prevention, and statutory tax compliance.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent mt-2 shrink-0" />
                 <span>
-                  <strong className="text-foreground">1-on-1 Consultation Correspondence:</strong> Questions, reflections, and personal context voluntarily shared via email with Blake during a 1-on-1 Private Email Consultation. Such private narrative correspondence is held in strict confidence and used exclusively to deliver your consultation.
+                  <strong className="text-foreground">Technical &amp; Network Metadata:</strong> Internet Protocol (IP) addresses, browser type, device specifications, operating system, and HTTP request headers transmitted automatically to maintain platform uptime, prevent payment fraud, and block automated spam.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent mt-2 shrink-0" />
                 <span>
-                  <strong className="text-foreground">Technical &amp; Network Metadata:</strong> Internet Protocol (IP) addresses, browser type, device specifications, operating system, and HTTP request headers transmitted automatically to maintain platform uptime, prevent payment fraud, and detect spam bots.
-                </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent mt-2 shrink-0" />
-                <span>
-                  <strong className="text-foreground">Note on Special Category Data (GDPR Article 9):</strong> While birth details are astronomical coordinates, metaphysical interpretations and private consultation discussions may touch on personal philosophical reflection. We do not solicit medical, racial, political, or religious data. To the extent any voluntarily provided input is construed under local law as relating to personal beliefs or sensitive context, we process such data exclusively based on your <strong>explicit request and affirmative consent</strong> (Art. 9(2)(a) GDPR) to deliver your reading or consultation.
+                  <strong className="text-foreground">Note on Special Category Data (GDPR Article 9):</strong> While birth coordinates are astronomical data, voluntary life context notes and metaphysical readings may touch on personal philosophical reflection. We do not solicit medical, racial, political, or religious records. To the extent any voluntarily submitted intake note is construed under applicable law as special-category or sensitive data, it is processed strictly based on your <strong>explicit request and affirmative consent</strong> (Art. 9(2)(a) GDPR) to deliver your reading or consultation.
                 </span>
               </li>
             </ul>
           </section>
 
-          {/* Section 3: Legal Bases & Purposes */}
-          <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
+          {/* Section 3: How Your Data Is Protected & AI Safeguards */}
+          <section className="rounded-xl border border-accent/30 bg-accent/5 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
               <span className="text-accent font-sans font-semibold text-base sm:text-lg">03</span>
-              {isZh ? "处理目的与 GDPR 法律依据" : "Purposes of Processing & Legal Bases (GDPR Art. 6 & 9)"}
+              {isZh ? "您的数据如何受到保护与零公共模型训练承诺" : "How Your Data Is Protected & Zero Public AI Training"}
+            </h2>
+            <div className="space-y-3 text-muted-foreground">
+              <p>
+                We apply strict administrative, contractual, and technical safeguards (including TLS 1.3 encryption in transit and AES-256 encryption at rest) to protect your birth details and intake notes:
+              </p>
+              <ul className="space-y-2.5 list-disc list-inside">
+                <li>
+                  <strong className="text-foreground">Zero Data Brokering:</strong> We <strong>never</strong> sell, rent, lease, or trade your birth details, email address, or voluntary life context notes to third-party data brokers, advertisers, or marketing exchanges.
+                </li>
+                <li>
+                  <strong className="text-foreground">Zero Public AI Model Training:</strong> Synthesis requests sent to our underlying enterprise AI models to compose personalized PDF readings run exclusively under <strong>enterprise API agreements with strict zero-data-retention (ZDR) policies</strong>. Your personal chart data and intake life context notes are <strong>never retained by third-party AI vendors and never used to train public or third-party AI models</strong>.
+                </li>
+                <li>
+                  <strong className="text-foreground">Payment Security (Stripe):</strong> All payments are processed directly via Stripe’s encrypted infrastructure; Scripting Destiny never sees, processes, or stores raw payment card numbers.
+                </li>
+                <li>
+                  <strong className="text-foreground">Transactional Emailing (Brevo):</strong> Order confirmations, PDF report delivery emails, and waitlist verifications are delivered securely via Brevo (EU-headquartered, GDPR-compliant email processor).
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          {/* Section 4: Legal Bases & Purposes */}
+          <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
+            <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
+              <span className="text-accent font-sans font-semibold text-base sm:text-lg">04</span>
+              {isZh ? "处理目的与 GDPR / PDPA 法律依据" : "Purposes of Processing & Legal Bases (GDPR Art. 6 & 9)"}
             </h2>
             <p className="text-muted-foreground mb-4">
-              Under Article 6 of the GDPR, we only process personal data when we have a recognized legal basis:
+              Under Article 6 of the GDPR and Singapore PDPA, we process personal data only when an established legal basis applies:
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs sm:text-sm border-collapse">
@@ -182,7 +203,7 @@ function PrivacyPage() {
                 </thead>
                 <tbody className="divide-y divide-border/40 text-muted-foreground">
                   <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">Service Delivery: True Solar Time chart calculations, automated PDF reports (Free Blueprint, Standard Reading, Full Reading), 1-on-1 email consultations, and 48-hour typographical re-renders</td>
+                    <td className="py-3 pr-4 font-medium text-foreground">Service Delivery: True Solar Time chart computation (via Open-Meteo city coordinates), automated PDF synthesis (zero-retention AI API), 1-on-1 email consultations, and 48-hour typographical re-renders</td>
                     <td className="py-3 px-4">
                       <strong>Performance of a Contract</strong> (Art. 6(1)(b)) &amp; <strong>Explicit Consent</strong> (Art. 9(2)(a))
                     </td>
@@ -196,81 +217,77 @@ function PrivacyPage() {
                     <td className="py-3 pl-4">Processing payment transactions &amp; statutory compliance (IRAS)</td>
                   </tr>
                   <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">Waitlist Notifications &amp; Editorial Subscriptions (Substack / Brevo)</td>
+                    <td className="py-3 pr-4 font-medium text-foreground">Transactional Emails, Waitlist Notifications &amp; Editorial Subscriptions (Brevo / Substack)</td>
                     <td className="py-3 px-4">
-                      <strong>Freely Given Consent</strong> (Art. 6(1)(a))
+                      <strong>Performance of a Contract</strong> (transactional) / <strong>Freely Given Consent</strong> (Art. 6(1)(a), newsletters)
                     </td>
-                    <td className="py-3 pl-4">Opt-in Consent</td>
+                    <td className="py-3 pl-4">Provision of service / Opt-in Consent</td>
                   </tr>
                   <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">Customer Service &amp; Helpdesk Correspondence</td>
+                    <td className="py-3 pr-4 font-medium text-foreground">Customer Service, Typographical Data Corrections &amp; Helpdesk</td>
                     <td className="py-3 px-4">
-                      <strong>Legitimate Interests</strong> (Art. 6(1)(f)) — managing user communications
+                      <strong>Performance of a Contract</strong> (Art. 6(1)(b)) / <strong>Legitimate Interests</strong> (Art. 6(1)(f))
                     </td>
                     <td className="py-3 pl-4">Customer relationship &amp; query handling</td>
                   </tr>
                   <tr>
                     <td className="py-3 pr-4 font-medium text-foreground">Cybersecurity, Payment Fraud Prevention, Bot Defense &amp; Rate Limiting</td>
                     <td className="py-3 px-4">
-                      <strong>Legitimate Interests</strong> (Art. 6(1)(f)) — safeguarding infrastructure and preventing fraud
+                      <strong>Legitimate Interests</strong> (Art. 6(1)(f)) — protecting systems and preventing fraud
                     </td>
                     <td className="py-3 pl-4">Compliance with law &amp; security operations</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 pr-4 font-medium text-foreground">Statutory Compliance &amp; Legal Obligations</td>
-                    <td className="py-3 px-4">
-                      <strong>Legal Obligation</strong> (Art. 6(1)(c))
-                    </td>
-                    <td className="py-3 pl-4">Statutory compliance</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </section>
 
-          {/* Section 4: Anonymized Research & AI Datasets */}
-          <section className="rounded-xl border border-accent/30 bg-accent/5 p-6 sm:p-8">
+          {/* Section 5: Internal De-Identified Research vs Public AI */}
+          <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
-              <span className="text-accent font-sans font-semibold text-base sm:text-lg">04</span>
-              {isZh ? "匿名化科研、算法模型与数据安全" : "Anonymized Research, Computational Modeling, & Recital 26 GDPR"}
+              <span className="text-accent font-sans font-semibold text-base sm:text-lg">05</span>
+              {isZh ? "内部去标识化统计研究 (GDPR 第26条序言)" : "Internal De-Identified Statistical Research (Recital 26 GDPR)"}
             </h2>
             <div className="space-y-3 text-muted-foreground">
               <p>
-                Scripting Destiny conducts mathematical and statistical pattern research to evaluate astrological cycle correlations. To facilitate this research while protecting individual privacy, we maintain a strict de-identification pipeline:
+                While your personal chart data and intake life context notes are <strong>never</strong> shared with or used to train third-party or public AI models (Section 03), Scripting Destiny conducts internal mathematical and statistical pattern research to validate classical astrological cycle correlations.
               </p>
               <p>
-                <strong className="text-foreground">De-Identification Standard &amp; Consultation Privacy:</strong> All personally identifiable information (including name, email address, payment details, IP address, unique user identifiers, and private free-form email narratives from 1-on-1 consultations) is strictly excluded or irreversibly detached prior to any research analysis. Only structured, anonymized birth coordinates and non-identifying milestone event years are used.
+                <strong className="text-foreground">Strict Exclusion of Personal &amp; Narrative Data:</strong> Prior to any internal statistical compilation, all personally identifiable information—including your name, email address, payment details, IP address, private intake life context notes, and 1-on-1 email dialogue—is strictly excluded or permanently stripped. Only irreversibly anonymized astronomical birth coordinates and non-identifying milestone years may be aggregated.
               </p>
               <p>
-                <strong className="text-foreground">Exemption under GDPR Recital 26, Singapore PDPA &amp; CCPA:</strong> Under Recital 26 of the GDPR, Singapore PDPC Advisory Guidelines, and Cal. Civ. Code § 1798.140(m)/(v)(3), the principles of data protection do not apply to irreversibly anonymized or de-identified information that cannot reasonably be linked to an identified or identifiable natural person. We maintain technical safeguards and commit not to attempt re-identification of de-identified datasets.
-              </p>
-              <p>
-                <strong className="text-foreground">Algorithmic Integration &amp; Technical Notice:</strong> Fully anonymized charting points and event coordinates may be aggregated into statistical machine learning datasets or computational reference tables. Because this data is completely severed from your real-world identity, it is technically impossible to identify, isolate, retrieve, or selectively extract an individual record once merged into trained statistical models.
+                <strong className="text-foreground">Legal Classification (GDPR Recital 26, PDPA &amp; CCPA):</strong> Under Recital 26 of the GDPR, Singapore PDPC Advisory Guidelines, and Cal. Civ. Code § 1798.140(m)/(v)(3), irreversibly de-identified information that cannot reasonably be linked to an identified or identifiable individual is no longer personal data. We maintain technical safeguards and commit not to attempt re-identification. Because anonymized aggregates are decoupled from your identity, individual historical points cannot be isolated or retroactively extracted once merged into aggregate statistical tables.
               </p>
             </div>
           </section>
 
-          {/* Section 5: Recipients & Data Processors */}
+          {/* Section 6: Third-Party Processors & API Providers */}
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
-              <span className="text-accent font-sans font-semibold text-base sm:text-lg">05</span>
-              {isZh ? "第三方受托处理者与数据共享" : "Third-Party Processors & Data Sharing (GDPR Art. 13(1)(e))"}
+              <span className="text-accent font-sans font-semibold text-base sm:text-lg">06</span>
+              {isZh ? "第三方受托处理者与 API 服务商" : "Third-Party Processors & API Providers (GDPR Art. 13(1)(e))"}
             </h2>
             <p className="text-muted-foreground mb-3">
-              We do <strong>not</strong> sell, rent, lease, or trade personal data to third-party data brokers, marketers, or data exchanges. We share personal data solely with contractually bound Data Processors:
+              We share data solely with vetted, contractually bound service providers necessary to operate our platform:
             </p>
             <ul className="space-y-2 text-muted-foreground list-disc list-inside">
               <li>
-                <strong className="text-foreground">Stripe (Stripe, Inc. / Stripe Payments Europe / Stripe Payments Singapore):</strong> PCI-DSS Level 1 payment processor handling secure checkout, card authorization, fraud detection, refunds, and billing receipts.
+                <strong className="text-foreground">Open-Meteo (Geocoding API):</strong> Receives only the birth city name (no personal identifiers, birth date, or email) to resolve coarse city-level longitude and latitude coordinates required for True Solar Time calculations.
               </li>
               <li>
-                <strong className="text-foreground">Brevo (Sendinblue SAS, France):</strong> GDPR-compliant European email marketing and transactional platform handling report delivery emails, waitlist registration queues, and double opt-in confirmations.
+                <strong className="text-foreground">Enterprise AI Synthesis Providers (Zero-Data-Retention APIs):</strong> Process chart synthesis requests transiently under enterprise zero-retention terms; inputs are neither retained nor used to train public models.
               </li>
               <li>
-                <strong className="text-foreground">Substack Inc. (USA):</strong> Publication platform facilitating newsletter dispatch for users opting in to editorial essays.
+                <strong className="text-foreground">Stripe (Stripe, Inc. / Stripe Payments Europe / Stripe Payments Singapore):</strong> PCI-DSS Level 1 payment processor handling secure checkout, card authorization, fraud screening, refunds, and receipts.
               </li>
               <li>
-                <strong className="text-foreground">Cloud Infrastructure &amp; Web Hosting:</strong> Serverless edge hosting, PDF generation pipelines, and Content Delivery Network (CDN) providers with built-in TLS encryption and firewall security.
+                <strong className="text-foreground">Brevo (Sendinblue SAS, France):</strong> GDPR-compliant European transactional email and list management platform delivering your PDF reports, confirmations, and updates.
+              </li>
+              <li>
+                <strong className="text-foreground">Substack Inc. (USA):</strong> Editorial publication platform for users who opt in to our essays.
+              </li>
+              <li>
+                <strong className="text-foreground">Cloud Infrastructure &amp; Web Hosting:</strong> Encrypted serverless hosting, PDF rendering pipelines, and CDN security infrastructure.
               </li>
               <li>
                 <strong className="text-foreground">Public Authorities &amp; Courts:</strong> Strictly where compelled by valid subpoenas, court orders, tax audits, or statutory obligations.
@@ -278,53 +295,56 @@ function PrivacyPage() {
             </ul>
           </section>
 
-          {/* Section 6: International Transfers */}
+          {/* Section 7: International Transfers */}
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
-              <span className="text-accent font-sans font-semibold text-base sm:text-lg">06</span>
+              <span className="text-accent font-sans font-semibold text-base sm:text-lg">07</span>
               {isZh ? "跨境数据传输与保护措施" : "International Transfers (GDPR Chapter V, Art. 44–49)"}
             </h2>
             <div className="space-y-3 text-muted-foreground">
               <p>
-                Scripting Destiny is operated from Singapore, with technical infrastructure and subprocessors (including Stripe, Brevo, and Substack) located in Singapore, the United States, and the European Economic Area (EEA).
+                Scripting Destiny is operated from Singapore, with subprocessors and cloud infrastructure (including Stripe, Brevo, Substack, Open-Meteo, and enterprise AI APIs) located in Singapore, the European Economic Area (EEA), and the United States.
               </p>
               <p>
-                When transferring personal data originating in the European Economic Area or the UK to jurisdictions outside the EEA:
+                When transferring personal data originating in the EEA or UK to jurisdictions outside the EEA:
               </p>
               <ul className="space-y-1.5 list-disc list-inside">
-                <li>We ensure the transfer relies on <strong>Standard Contractual Clauses (SCCs)</strong> adopted by the European Commission (Art. 46(2)(c) GDPR), equivalent UK International Data Transfer Addendums, or the EU-U.S. Data Privacy Framework (DPF) where certified by our subprocessors.</li>
-                <li>We require recipient processors to maintain security safeguards comparable to the GDPR and Singapore PDPA.</li>
-                <li>Where applicable, transfers necessary for the performance of a contract or requested report/consultation are conducted pursuant to Article 49(1)(b) GDPR.</li>
+                <li>We ensure transfers rely on European Commission <strong>Standard Contractual Clauses (SCCs)</strong> (Art. 46(2)(c) GDPR), equivalent UK International Data Transfer Addendums, or certified <strong>EU-U.S. Data Privacy Framework (DPF)</strong> protections where applicable.</li>
+                <li>We require all processors to uphold security standards comparable to the GDPR and Singapore PDPA.</li>
+                <li>Transfers strictly necessary to generate and deliver a report or consultation requested by you are additionally supported under Article 49(1)(b) GDPR.</li>
               </ul>
             </div>
           </section>
 
-          {/* Section 7: Data Retention */}
-          <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
-            <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
-              <span className="text-accent font-sans font-semibold text-base sm:text-lg">07</span>
-              {isZh ? "数据留存期限与标准" : "Data Retention Criteria (GDPR Art. 13(2)(a))"}
-            </h2>
-            <p className="text-muted-foreground mb-3">
-              We retain personal data only for as long as necessary to satisfy the operational, contractual, or statutory purposes for which it was obtained:
-            </p>
-            <ul className="space-y-2 text-muted-foreground list-disc list-inside">
-              <li><strong className="text-foreground">Transaction, Billing &amp; Tax Records:</strong> Retained for <strong>five (5) to seven (7) years</strong> following the transaction date as required by Singapore IRAS statutory accounting rules, EU VAT regulations, and U.S. tax/audit requirements.</li>
-              <li><strong className="text-foreground">Purchased PDF Reports &amp; 1-on-1 Consultation Correspondence:</strong> Retained for the duration needed to deliver your report, honor the 48-hour free typographical correction window, complete your 7-day email dialogue, and provide post-delivery support (typically up to 24 months after completion), or deleted earlier upon a verified erasure request.</li>
-              <li><strong className="text-foreground">Waitlist &amp; Subscriber Records:</strong> Retained for the duration of the early access campaign or active newsletter subscription, or until you exercise your right to withdraw consent / unsubscribe.</li>
-              <li><strong className="text-foreground">Unsubscribe Suppression Lists:</strong> Retained indefinitely in hashed or minimized form solely to prevent inadvertent re-contacting.</li>
-              <li><strong className="text-foreground">Transient Security &amp; Server Logs:</strong> Retained for standard operational cycles (typically 30 to 90 days) before automatic deletion.</li>
-            </ul>
-          </section>
-
-          {/* Section 8: GDPR Data Subject Rights */}
+          {/* Section 8: Data Retention */}
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
               <span className="text-accent font-sans font-semibold text-base sm:text-lg">08</span>
-              {isZh ? "欧洲用户专享权利 (GDPR 权利体系)" : "Your Rights Under the GDPR (Articles 15–22)"}
+              {isZh ? "数据留存期限与标准" : "Data Retention Criteria (GDPR Art. 13(2)(a))"}
+            </h2>
+            <p className="text-muted-foreground mb-3">
+              We retain personal data only for as long as necessary for the operational, contractual, or statutory purposes for which it was collected:
+            </p>
+            <ul className="space-y-2 text-muted-foreground list-disc list-inside">
+              <li><strong className="text-foreground">Intake Records, Life Context Notes &amp; Generated PDF Reports:</strong> Retained for up to <strong>24 months</strong> to enable download access, honor our 48-hour free typographical correction policy, and complete 1-on-1 consultations—or <strong>permanently deleted earlier at any time upon your erasure request</strong> to <a href="mailto:support@scriptingdestiny.com" className="text-foreground hover:underline font-medium">support@scriptingdestiny.com</a>.</li>
+              <li><strong className="text-foreground">Transaction, Billing &amp; Tax Records:</strong> Minimal invoice metadata retained for <strong>five (5) to seven (7) years</strong> as legally required under Singapore IRAS accounting rules, EU VAT regulations, and U.S. tax laws.</li>
+              <li><strong className="text-foreground">Waitlist &amp; Subscriber Records:</strong> Retained while subscribed until you withdraw consent or unsubscribe.</li>
+              <li><strong className="text-foreground">Unsubscribe Suppression Lists:</strong> Retained in minimal hashed form solely to guarantee you are not inadvertently emailed again.</li>
+              <li><strong className="text-foreground">Transient Security &amp; Server Logs:</strong> Automatically rotated and purged after 30 to 90 days.</li>
+            </ul>
+          </section>
+
+          {/* Section 9: Right to Erasure & GDPR Data Subject Rights */}
+          <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
+            <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
+              <span className="text-accent font-sans font-semibold text-base sm:text-lg">09</span>
+              {isZh ? "删除权与欧洲用户法定权利 (GDPR)" : "Right to Erasure & Your Rights Under GDPR (Articles 15–22)"}
             </h2>
             <p className="text-muted-foreground mb-4">
-              If you are located in the European Union or United Kingdom, you possess comprehensive statutory rights:
+              <strong>Universal Right to Erasure:</strong> Regardless of your location, you may request the <strong>permanent deletion of your intake records, birth details, life context notes, and generated reports at any time</strong> by emailing <a href="mailto:support@scriptingdestiny.com" className="text-foreground hover:underline font-medium">support@scriptingdestiny.com</a> (or <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a>). Verified deletion requests are processed within 30 days (subject only to mandatory tax/invoice retention under applicable fiscal law).
+            </p>
+            <p className="text-muted-foreground mb-4">
+              If you are located in the European Union or United Kingdom, you also possess the full suite of statutory rights under GDPR Chapter III:
             </p>
             <div className="grid gap-3 sm:grid-cols-2 text-xs sm:text-sm text-muted-foreground">
               <div className="rounded-lg border border-border/60 bg-card/60 p-3.5">
@@ -333,66 +353,61 @@ function PrivacyPage() {
               </div>
               <div className="rounded-lg border border-border/60 bg-card/60 p-3.5">
                 <strong className="text-foreground block mb-1">Right to Rectification (Art. 16):</strong>
-                Request correction of inaccurate or incomplete personal records.
+                Request correction of inaccurate or incomplete personal records at any time.
               </div>
               <div className="rounded-lg border border-border/60 bg-card/60 p-3.5">
                 <strong className="text-foreground block mb-1">Right to Erasure (Art. 17):</strong>
-                Request deletion of your personal data (“Right to be Forgotten”) where grounds apply (subject to mandatory tax/invoice retention under Art. 17(3)(b)).
+                Request permanent deletion of your intake records, notes, and reports (“Right to be Forgotten”), subject to Art. 17(3)(b) tax invoice obligations.
               </div>
               <div className="rounded-lg border border-border/60 bg-card/60 p-3.5">
                 <strong className="text-foreground block mb-1">Right to Restriction (Art. 18):</strong>
-                Limit processing under circumstances such as disputing accuracy or unlawful processing.
+                Limit processing while disputing accuracy or asserting unlawful processing.
               </div>
               <div className="rounded-lg border border-border/60 bg-card/60 p-3.5">
                 <strong className="text-foreground block mb-1">Right to Portability (Art. 20):</strong>
                 Receive your personal data in a structured, commonly used, and machine-readable format.
               </div>
               <div className="rounded-lg border border-border/60 bg-card/60 p-3.5">
-                <strong className="text-foreground block mb-1">Right to Object (Art. 21):</strong>
-                Object at any time to processing based on legitimate interests or direct marketing.
+                <strong className="text-foreground block mb-1">Right to Object &amp; Withdraw Consent (Art. 21 &amp; 7(3)):</strong>
+                Object at any time to processing based on legitimate interests or direct marketing, or withdraw consent without affecting prior lawful processing.
               </div>
             </div>
             <div className="mt-4 space-y-2 text-muted-foreground text-xs sm:text-sm">
               <p>
-                <strong className="text-foreground">Automated Decision-Making &amp; Profiling (Art. 22):</strong> Our BaZi calculations generate interpretive archetypes and PDF analyses for personal insight and entertainment. We do <strong>not</strong> subject users to automated decision-making that produces legal effects or similarly significantly affects you.
+                <strong className="text-foreground">Automated Processing &amp; Profiling Notice (Art. 13(2)(f) &amp; Art. 22):</strong> While our engine automates True Solar Time BaZi calculations and uses zero-retention enterprise AI APIs to compose interpretive prose, outputs are strictly for personal contemplation and entertainment. We do <strong>not</strong> make automated decisions that produce legal, financial, employment, credit, or similarly significant effects.
               </p>
               <p>
-                <strong className="text-foreground">Right to Lodge a Complaint (Art. 77):</strong> You have the right to lodge a complaint with your local European Data Protection Authority (DPA) in your EU member state of habitual residence or workplace, or the UK Information Commissioner’s Office (ICO).
+                <strong className="text-foreground">Right to Lodge a Complaint (Art. 77):</strong> You may lodge a complaint with your local European Data Protection Authority (DPA) or the UK Information Commissioner’s Office (ICO).
               </p>
             </div>
           </section>
 
-          {/* Section 9: Cookies & Tracking */}
-          <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
-            <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
-              <span className="text-accent font-sans font-semibold text-base sm:text-lg">09</span>
-              {isZh ? "Cookie 与本地存储声明" : "Cookies & Local Storage (ePrivacy Directive)"}
-            </h2>
-            <div className="space-y-3 text-muted-foreground">
-              <p>
-                Our website does <strong>not</strong> employ invasive third-party cross-site tracking cookies or behavioral advertising pixels.
+          {/* Section 10: Cookies & Children's Privacy */}
+          <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8 grid gap-6 md:grid-cols-2">
+            <div>
+              <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
+                <span className="text-accent font-sans font-semibold text-base sm:text-lg">10</span>
+                {isZh ? "Cookie 与本地存储" : "Cookies & Local Storage"}
+              </h2>
+              <p className="text-muted-foreground text-sm">
+                We do <strong>not</strong> deploy third-party cross-site advertising cookies or tracking pixels. We use only strictly functional client-side keys (<code>sd-lang</code>, <code>sd-theme</code>) and strictly necessary session/fraud-prevention cookies set by <strong>Stripe</strong> during payment checkout, which are exempt from advertising cookie consent mandates under the ePrivacy Directive.
               </p>
-              <p>
-                We utilize minimal, strictly functional client-side storage keys (such as <code>sd-lang</code> for language preference and <code>sd-theme</code> for dark/light mode) and strictly necessary session/fraud-prevention cookies deployed by <strong>Stripe</strong> during payment checkout. Under the ePrivacy Directive and GDPR, strictly necessary functional and payment-security mechanisms are exempt from advertising cookie consent mandates.
+            </div>
+            <div>
+              <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
+                <span className="text-accent font-sans font-semibold text-base sm:text-lg">11</span>
+                {isZh ? "未成年人隐私保护" : "Children’s Privacy"}
+              </h2>
+              <p className="text-muted-foreground text-sm">
+                Paid Automated Digital Reports and 1-on-1 Consultations are strictly restricted to individuals aged <strong>18 and older</strong>. Free web tools and waitlist features are intended for users aged <strong>16 and older</strong> (GDPR Art. 8 / COPPA). We do not knowingly collect data from children under 16 and will promptly delete any such submission upon discovery.
               </p>
             </div>
           </section>
 
-          {/* Section 10: Children's Privacy */}
+          {/* Section 12: Singapore PDPA Specific Notice */}
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
-              <span className="text-accent font-sans font-semibold text-base sm:text-lg">10</span>
-              {isZh ? "未成年人隐私保护" : "Children’s Privacy (GDPR Art. 8 & COPPA)"}
-            </h2>
-            <p className="text-muted-foreground">
-              Paid Automated Digital Reports and 1-on-1 Private Email Consultations are strictly limited to individuals aged <strong>18 and older</strong>. Free web tools and waitlist features are intended for individuals aged <strong>16 and older</strong> (or the applicable age of digital consent in your jurisdiction). We do not knowingly collect, solicit, or maintain personal information from children under 16 without verified parental authorization. If we become aware that personal data from an underage individual has been submitted, we will promptly delete it.
-            </p>
-          </section>
-
-          {/* Section 11: Singapore PDPA Specific Notice */}
-          <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
-            <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
-              <span className="text-accent font-sans font-semibold text-base sm:text-lg">11</span>
+              <span className="text-accent font-sans font-semibold text-base sm:text-lg">12</span>
               {isZh ? "新加坡个人数据保护法 (PDPA) 专章" : "Singapore PDPA Statutory Provisions"}
             </h2>
             <div className="space-y-3 text-muted-foreground">
@@ -401,22 +416,22 @@ function PrivacyPage() {
               </p>
               <ul className="space-y-2 list-disc list-inside">
                 <li>
-                  <strong className="text-foreground">Withdrawal of Consent:</strong> You may withdraw consent at any time. We will process your withdrawal notice within <strong>ten (10) business days</strong> of receipt (noting that withdrawing consent during an active 1-on-1 consultation may prevent us from completing the consultation).
+                  <strong className="text-foreground">Withdrawal of Consent &amp; Deletion:</strong> You may withdraw consent or request deletion of your intake records and reports at any time via <a href="mailto:support@scriptingdestiny.com" className="text-foreground hover:underline font-medium">support@scriptingdestiny.com</a> or <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a>. We process consent withdrawals within <strong>ten (10) business days</strong> of receipt.
                 </li>
                 <li>
-                  <strong className="text-foreground">Access &amp; Correction Requests:</strong> We respond to formal access or correction requests within <strong>thirty (30) business days</strong>. A reasonable administrative fee may be assessed for complex physical or manual access requests.
+                  <strong className="text-foreground">Access &amp; Correction Requests:</strong> We respond to formal access or correction requests within <strong>thirty (30) business days</strong>. A reasonable administrative fee may be assessed for complex manual access requests.
                 </li>
                 <li>
-                  <strong className="text-foreground">Transfer Limitation Obligation (PDPA Section 26):</strong> We ensure that overseas recipients of personal data (including Stripe, Brevo, and Substack) provide a standard of protection comparable to the PDPA.
+                  <strong className="text-foreground">Transfer Limitation Obligation (PDPA Section 26):</strong> We ensure that overseas subprocessors (including Stripe, Brevo, Substack, Open-Meteo, and enterprise AI APIs) provide a standard of protection comparable to the PDPA.
                 </li>
               </ul>
             </div>
           </section>
 
-          {/* Section 12: California & US State Privacy Laws */}
+          {/* Section 13: California & US State Privacy Laws */}
           <section className="rounded-xl border border-accent/40 bg-card/75 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
-              <span className="text-accent font-sans font-semibold text-base sm:text-lg">12</span>
+              <span className="text-accent font-sans font-semibold text-base sm:text-lg">13</span>
               {isZh ? "美国与加利福尼亚州消费者隐私专章 (CCPA / CPRA)" : "United States & California Privacy Notice (CCPA / CPRA)"}
             </h2>
             <div className="space-y-4 text-muted-foreground">
@@ -439,18 +454,18 @@ function PrivacyPage() {
                     <tr>
                       <td className="py-2.5 pr-3 font-medium text-foreground">A. Identifiers</td>
                       <td className="py-2.5 px-3">Name, email address, IP address</td>
-                      <td className="py-2.5 px-3">Active account/order + 24 mos (or until erasure)</td>
+                      <td className="py-2.5 px-3">Up to 24 mos after order (or earlier upon erasure)</td>
                       <td className="py-2.5 pl-3 text-wood font-semibold">NO</td>
                     </tr>
                     <tr>
                       <td className="py-2.5 pr-3 font-medium text-foreground">B. Personal Records (§ 1798.80)</td>
-                      <td className="py-2.5 px-3">Name, email, gender, birth date/time, Stripe billing metadata (no full card stored)</td>
-                      <td className="py-2.5 px-3">5–7 yrs for tax/billing records; up to 24 mos for reports</td>
+                      <td className="py-2.5 px-3">Name, email, gender, birth date/time (or unknown), intake life notes, Stripe billing metadata (no card numbers stored)</td>
+                      <td className="py-2.5 px-3">5–7 yrs for tax invoices; up to 24 mos for intake/reports (or earlier upon erasure)</td>
                       <td className="py-2.5 pl-3 text-wood font-semibold">NO</td>
                     </tr>
                     <tr>
                       <td className="py-2.5 pr-3 font-medium text-foreground">D. Commercial Information</td>
-                      <td className="py-2.5 px-3">Purchased PDF reports &amp; 1-on-1 consultations, order IDs, refund/re-render records</td>
+                      <td className="py-2.5 px-3">Purchased PDF reports &amp; 1-on-1 consultations, order IDs, refund/re-render history</td>
                       <td className="py-2.5 px-3">5–7 years (statutory tax &amp; accounting compliance)</td>
                       <td className="py-2.5 pl-3 text-wood font-semibold">NO</td>
                     </tr>
@@ -461,15 +476,15 @@ function PrivacyPage() {
                       <td className="py-2.5 pl-3 text-wood font-semibold">NO</td>
                     </tr>
                     <tr>
-                      <td className="py-2.5 pr-3 font-medium text-foreground">G. Geolocation Data</td>
-                      <td className="py-2.5 px-3">City/Country of birth (coarse only; no real-time GPS)</td>
-                      <td className="py-2.5 px-3">Up to 24 mos for report support (or until erasure)</td>
+                      <td className="py-2.5 pr-3 font-medium text-foreground">G. Geolocation Data (Coarse Only)</td>
+                      <td className="py-2.5 px-3">Birth city &amp; city-centroid longitude/latitude via Open-Meteo (NOT precise GPS within 1,850 ft)</td>
+                      <td className="py-2.5 px-3">Up to 24 mos for report support (or earlier upon erasure)</td>
                       <td className="py-2.5 pl-3 text-wood font-semibold">NO</td>
                     </tr>
                     <tr>
                       <td className="py-2.5 pr-3 font-medium text-foreground">K. Inferences</td>
                       <td className="py-2.5 px-3">Calculated Day Master &amp; BaZi profile archetype</td>
-                      <td className="py-2.5 px-3">Up to 24 mos for report support (or until erasure)</td>
+                      <td className="py-2.5 px-3">Up to 24 mos for report support (or earlier upon erasure)</td>
                       <td className="py-2.5 pl-3 text-wood font-semibold">NO</td>
                     </tr>
                   </tbody>
@@ -480,9 +495,9 @@ function PrivacyPage() {
               <div className="rounded-lg border border-accent/30 bg-accent/10 p-4 text-xs sm:text-sm">
                 <strong className="text-foreground block mb-1">Mandatory California Disclosures:</strong>
                 <ul className="space-y-1.5 list-disc list-inside">
-                  <li><strong>No Sale or Sharing:</strong> Scripting Destiny has <strong>not sold or shared</strong> (for cross-context behavioral advertising) personal information of consumers in the preceding 12 months, and does not sell or share information of consumers under 16 years of age.</li>
-                  <li><strong>Sensitive Personal Information (SPI):</strong> We do not collect or use Sensitive Personal Information (including billing details handled by Stripe or private consultation emails) for purposes other than performing the requested services, preventing fraud, or complying with law (Cal. Civ. Code § 1798.121 &amp; 11 CCR § 7027(m)). We do not use SPI to infer characteristics for marketing.</li>
-                  <li><strong>Opt-Out Preference Signals / Global Privacy Control (GPC):</strong> We recognize and honor browser-based Global Privacy Control (GPC) signals in compliance with 11 CCR § 7025; because we do not sell or share personal information for behavioral advertising, all visitors automatically receive opt-out level privacy by default.</li>
+                  <li><strong>Zero Data Brokering (No Sale or Sharing):</strong> Scripting Destiny has <strong>not sold or shared</strong> (for cross-context behavioral advertising) personal information of consumers in the preceding 12 months, and does not sell or share information of consumers under 16 years of age.</li>
+                  <li><strong>Sensitive Personal Information (SPI) &amp; Coarse Geolocation:</strong> Birth city longitude/latitude resolved via Open-Meteo is strictly coarse city-level astronomical data and does <strong>not</strong> constitute “precise geolocation” SPI under Cal. Civ. Code § 1798.140(w). Any potentially sensitive details voluntarily included in intake life context notes or billing metadata handled by Stripe are used exclusively to fulfill the requested reading/consultation, prevent fraud, or comply with law (Cal. Civ. Code § 1798.121 &amp; 11 CCR § 7027(m)), and never to infer characteristics for marketing or train public AI models.</li>
+                  <li><strong>Global Privacy Control (GPC) Signals:</strong> We honor browser-based Global Privacy Control (GPC) opt-out signals in compliance with 11 CCR § 7025; because we never sell or share personal information, all visitors automatically receive opt-out level protection by default.</li>
                 </ul>
               </div>
 
@@ -490,21 +505,21 @@ function PrivacyPage() {
               <div className="space-y-2 text-xs sm:text-sm">
                 <strong className="text-foreground block text-sm">Your Rights as a California Consumer:</strong>
                 <ul className="space-y-1.5 list-disc list-inside">
-                  <li><strong>Right to Know / Access:</strong> You may request the categories and specific pieces of personal information collected about you in the preceding 12 months, plus the categories of sources and business purposes.</li>
-                  <li><strong>Right to Delete:</strong> You may request deletion of personal information we collected from you, subject to statutory exceptions under Cal. Civ. Code § 1798.105(d) (such as completing an active consultation, detecting fraud, or retaining required tax/invoice records).</li>
-                  <li><strong>Right to Correct:</strong> You may request correction of inaccurate personal information held in our systems.</li>
-                  <li><strong>Right to Non-Discrimination:</strong> We will never discriminate against you, deny access, or charge varying prices for exercising any of your statutory rights.</li>
-                  <li><strong>Response Timeline &amp; Authorized Agents:</strong> We respond to verifiable consumer requests within <strong>45 calendar days</strong> (extendable by an additional 45 days when reasonably necessary with notice). You may designate an authorized agent to submit requests on your behalf, subject to written proof of authorization and identity verification.</li>
-                  <li><strong>California “Shine the Light” (Civil Code § 1798.83):</strong> We do not share personal information with third parties for their own direct marketing purposes.</li>
+                  <li><strong>Right to Know / Access:</strong> Request the categories and specific pieces of personal information collected about you in the preceding 12 months, sources, and business purposes.</li>
+                  <li><strong>Right to Delete:</strong> Request permanent deletion of your intake records, birth details, life context notes, and reports at any time via <a href="mailto:support@scriptingdestiny.com" className="text-foreground hover:underline font-medium">support@scriptingdestiny.com</a> or <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a>, subject only to statutory exceptions under Cal. Civ. Code § 1798.105(d) (such as retaining tax/invoice records or completing an active consultation).</li>
+                  <li><strong>Right to Correct:</strong> Request correction of inaccurate personal information held in our systems.</li>
+                  <li><strong>Right to Non-Discrimination:</strong> We never discriminate against you, deny access, or alter pricing for exercising your statutory privacy rights.</li>
+                  <li><strong>Response Timeline &amp; Authorized Agents:</strong> We respond to verifiable requests within <strong>45 calendar days</strong> (extendable by 45 days when reasonably necessary with notice). Authorized agents may submit requests with written proof of authorization and identity verification.</li>
+                  <li><strong>California “Shine the Light” (Civil Code § 1798.83):</strong> We never disclose personal information to third parties for their own direct marketing purposes.</li>
                 </ul>
               </div>
             </div>
           </section>
 
-          {/* Section 13: Mobile App Store Compliance & In-App Account Deletion */}
+          {/* Section 14: Mobile App Store Compliance & In-App Account Deletion */}
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
-              <span className="text-accent font-sans font-semibold text-base sm:text-lg">13</span>
+              <span className="text-accent font-sans font-semibold text-base sm:text-lg">14</span>
               {isZh ? "移动应用商店合规与账号注销机制" : "Mobile App Store Compliance & Account Deletion (Apple & Google Play)"}
             </h2>
             <div className="space-y-3 text-muted-foreground text-xs sm:text-sm leading-relaxed">
@@ -512,39 +527,28 @@ function PrivacyPage() {
                 In compliance with <strong>Apple App Store Review Guideline 5.1.1(v)</strong> and the <strong>Google Play Data Safety Policy</strong>, we maintain transparent protocols for our mobile applications:
               </p>
               <ul className="space-y-1.5 list-disc list-inside pl-2">
-                <li><strong className="text-foreground">In-App Account Deletion:</strong> If you register an account in our mobile app, you may permanently delete your account and all associated identifiable records directly within the app settings (via “Account → Delete Account”) or by emailing <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a>. Deletion takes effect within thirty (30) days (subject to statutory billing/tax record retention).</li>
+                <li><strong className="text-foreground">In-App Account &amp; Data Deletion:</strong> If you register an account in our mobile app, you may permanently delete your account, intake records, and reports directly within app settings (via “Account → Delete Account”) or by emailing <a href="mailto:support@scriptingdestiny.com" className="text-foreground hover:underline font-medium">support@scriptingdestiny.com</a> or <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a>. Deletion takes effect within thirty (30) days (subject to statutory billing/tax record retention).</li>
                 <li><strong className="text-foreground">Device Hardware Permissions:</strong> The Scripting Destiny mobile app does not request access to your device microphone, camera, contacts/address book, photo library, or precise real-time GPS location.</li>
                 <li><strong className="text-foreground">No Cross-App Tracking (IDFA):</strong> We do not track users across third-party apps or websites for targeted advertising, and we do not request or utilize Apple’s Identifier for Advertisers (IDFA) or Google Advertising ID (GAID) for cross-context behavioral marketing.</li>
               </ul>
             </div>
           </section>
 
-          {/* Section 14: DPO Contact */}
-          <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
-            <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
-              <span className="text-accent font-sans font-semibold text-base sm:text-lg">14</span>
-              {isZh ? "数据保护官与权利行使途径" : "Data Protection Officer & Privacy Inquiries"}
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              For order support or 48-hour typographical birth data corrections, please contact <a href="mailto:support@scriptingdestiny.com" className="text-foreground hover:underline font-medium">support@scriptingdestiny.com</a>. To exercise any statutory privacy rights under GDPR, Singapore PDPA, or CCPA/CPRA (such as requests to access, rectify, delete, or withdraw consent), you may contact our designated Data Protection Officer (DPO) representing Scripting Destiny by email at <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a> or by phone / voicemail at <span className="text-foreground font-medium">+1 (628) 238-4763</span>. We verify requestor identities prior to processing disclosures to prevent unauthorized access.
-            </p>
-          </section>
-
-          {/* Section 15: Amendments & Deemed Acceptance */}
+          {/* Section 15: DPO Contact & Amendments */}
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
               <span className="text-accent font-sans font-semibold text-base sm:text-lg">15</span>
-              {isZh ? "条款修订与默示同意" : "Amendments to This Notice & Deemed Acceptance"}
+              {isZh ? "联系方式、数据保护官与条款修订" : "Contact, Data Protection Officer & Policy Amendments"}
             </h2>
             <div className="space-y-3 text-muted-foreground leading-relaxed">
               <p>
-                We reserve the right to review, update, or amend this Privacy Policy from time to time to reflect technological enhancements, operational changes, or evolving statutory requirements across our international operating regions.
+                <strong className="text-foreground">Erasure, Corrections &amp; Support:</strong> To request permanent deletion of your intake records and reports, or to report typographical birth errors within 48 hours of purchase, email <a href="mailto:support@scriptingdestiny.com" className="text-foreground hover:underline font-medium">support@scriptingdestiny.com</a>.
               </p>
               <p>
-                The date of the most recent revision will always be displayed under “Effective & Last Updated” at the top of this document. For routine or non-material updates, changes take effect immediately upon publication. Within reasonable bounds under applicable law, your continued access, use of our Services, or participation in our waitlist following any posted modifications constitutes your acknowledgment, acceptance, and deemed consent to the updated terms.
+                <strong className="text-foreground">Data Protection Officer (DPO):</strong> For formal statutory privacy inquiries under GDPR, Singapore PDPA, or CCPA/CPRA, you may also contact our designated Data Protection Officer representing Scripting Destiny at <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a> or via phone / voicemail at <span className="text-foreground font-medium">+1 (628) 238-4763</span>. We verify requestor identities prior to fulfilling disclosures or deletions to safeguard your data.
               </p>
               <p>
-                Where any revision involves a materially significant change to how your personal data is collected, disclosed, or processed in a way not reasonably contemplated at the time of initial collection, we will provide appropriate advance notice (such as an email notification to registered addresses or an announcement banner on the platform) prior to the effective date of such changes.
+                <strong className="text-foreground">Amendments to This Policy:</strong> We may update this Policy periodically to reflect technical, operational, or legal developments. The latest revision date is displayed at the top of this page. Routine, non-material updates take effect immediately upon publication, and continued use of our Services constitutes acceptance within reasonable bounds under applicable law. For materially significant changes affecting how we process your personal data, we will provide appropriate advance notice (via email or platform banner) before the changes take effect.
               </p>
             </div>
           </section>

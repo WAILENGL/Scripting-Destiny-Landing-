@@ -236,28 +236,23 @@ function TermsPage() {
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
               <span className="text-accent font-sans font-semibold text-base sm:text-lg">07</span>
-              {isZh ? "数据收集、科研授权与模型训练许可" : "Data Collection, Anonymized Research & Model Training License"}
+              {isZh ? "数据收集、零公共AI训练与内部科研许可" : "Data Collection, Zero Public AI Training & Research License"}
             </h2>
             <div className="space-y-3 text-muted-foreground">
               <p>
-                To calculate True Solar Time charts, deliver PDF reports, and conduct 1-on-1 consultations, we process birth coordinates (date, time, location of birth, and gender), contact and billing details, and any significant past life events voluntarily shared for chart calibration and accuracy validation.
+                To calculate True Solar Time charts (resolving birth city longitude/latitude via Open-Meteo), generate PDF reports, and conduct 1-on-1 consultations, we process your birth date, birth time (or note of unknown time), gender, birth city, name, email, Stripe billing metadata, and any voluntary life context notes or past life event milestones you share at intake.
               </p>
               <p>
-                <strong className="text-foreground">Confidentiality of 1-on-1 Email Dialogue:</strong> Private narrative correspondence exchanged during a 1-on-1 email consultation is treated as strictly confidential and used solely to deliver your bespoke advisory engagement. We will never publish, share, or disclose your identifiable consultation emails.
+                <strong className="text-foreground">Zero Public AI Training &amp; Consultation Confidentiality:</strong> Synthesis requests sent to our underlying enterprise AI APIs operate under strict <strong>zero-data-retention (ZDR) enterprise agreements</strong>—your personal chart data and intake life notes are <strong>never used to train public or third-party AI models</strong>. Voluntary intake life context notes and private email dialogue exchanged with Blake during a 1-on-1 consultation are treated as strictly confidential and never published or disclosed.
               </p>
               <p>
-                <strong className="text-foreground">License Grant for De-Identified Research &amp; Algorithmic Training:</strong> By submitting structured birth coordinates or milestone event years to Scripting Destiny, you grant Scripting Destiny a <strong>perpetual, irrevocable, worldwide, fully paid-up, royalty-free, transferable, and sublicensable license</strong> to strip all direct and indirect personally identifiable markers (PII) and private narratives from such structured coordinates and to compile, aggregate, analyze, and incorporate such irreversibly de-identified data into:
-              </p>
-              <ul className="space-y-1.5 list-disc list-inside pl-2">
-                <li>Statistical calibration models and computational BaZi pattern-recognition systems.</li>
-                <li>Algorithmic training datasets and machine learning models developed by Scripting Destiny.</li>
-                <li>Academic, statistical, and educational reference archives.</li>
-              </ul>
-              <p>
-                <strong className="text-foreground">Irreversibility Acknowledgment:</strong> Once structured birth data and milestone event coordinates have passed through our de-identification pipeline and been integrated into aggregated machine learning weights, statistical tables, or trained algorithmic systems, such data is completely decoupled from your identity and ceases to constitute personal data under GDPR Recital 26, Singapore PDPA, and California CCPA/CPRA. Consequently, it is technically impossible to isolate, retrieve, or selectively excise individual historical records once trained into aggregated computational models.
+                <strong className="text-foreground">License Grant for Internal De-Identified Statistical Research:</strong> By submitting structured birth coordinates or milestone event years to Scripting Destiny, you grant Scripting Destiny a <strong>perpetual, irrevocable, worldwide, fully paid-up, royalty-free, transferable, and sublicensable license</strong> to strip all direct and indirect personally identifiable markers (PII), intake life context notes, and private narratives from such structured coordinates and to compile, aggregate, analyze, and incorporate such irreversibly de-identified astronomical data into Scripting Destiny’s internal statistical calibration models, proprietary research datasets, and educational reference archives.
               </p>
               <p>
-                <strong className="text-foreground">Privacy Commitment:</strong> We reaffirm that identifiable personal data (such as your name, email address, payment metadata, and private consultation emails) will <strong>never</strong> be sold, rented, or traded to third-party data brokers or marketing exchanges. All processing of personal data is governed strictly by our <Link to="/privacy" className="text-wood hover:underline font-medium">Privacy Policy</Link>.
+                <strong className="text-foreground">Irreversibility Acknowledgment:</strong> Once structured birth coordinates and milestone years have passed through our de-identification pipeline and been integrated into internal aggregated statistical tables or proprietary calibration models, such data is completely decoupled from your identity and ceases to constitute personal data under GDPR Recital 26, Singapore PDPA, and California CCPA/CPRA. Consequently, it is technically impossible to isolate, retrieve, or selectively excise individual historical points once merged into aggregate statistical models.
+              </p>
+              <p>
+                <strong className="text-foreground">Zero Data Brokering:</strong> We reaffirm that your birth details, intake life notes, email address, and payment metadata will <strong>never</strong> be sold, rented, or traded to third-party data brokers or marketing exchanges. All processing of personal data is governed strictly by our <Link to="/privacy" className="text-wood hover:underline font-medium">Privacy &amp; Birth Data Protection Policy</Link>.
               </p>
             </div>
           </section>
@@ -403,7 +398,7 @@ function TermsPage() {
               </p>
               <ul className="space-y-1.5 list-disc list-inside pl-2">
                 <li>Via any in-app “Delete My Account” interface in our mobile applications.</li>
-                <li>By submitting a written erasure request to <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a>.</li>
+                <li>By emailing a deletion request for your intake records, life notes, and reports to <a href="mailto:support@scriptingdestiny.com" className="text-foreground hover:underline font-medium">support@scriptingdestiny.com</a> or <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a>.</li>
               </ul>
               <p>
                 Upon receipt of a verified deletion request, all identifiable user profile data, authentication credentials, and email records will be permanently purged within thirty (30) days, subject to Section 7 regarding irreversible de-identified computational models and mandatory statutory retention of payment/tax invoices under Singapore IRAS, EU, and US tax laws.
