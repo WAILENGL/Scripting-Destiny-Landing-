@@ -96,7 +96,6 @@ function TermsPage() {
 
         {/* Terms Body */}
         <div className="space-y-10 text-sm sm:text-base leading-relaxed text-foreground/90">
-
           {/* Section 1: Agreement to Terms */}
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
@@ -105,10 +104,28 @@ function TermsPage() {
             </h2>
             <div className="space-y-3 text-muted-foreground">
               <p>
-                These Terms of Service (“Terms”, or “Agreement”) constitute a legally binding agreement made between you (“User”, “Client”, “you”, or “your”) and <strong>Scripting Destiny</strong> (“we”, “us”, or “our”). These Terms govern your access to and use of <a href="https://scriptingdestiny.com" className="text-wood hover:underline">scriptingdestiny.com</a>, our automated digital BaZi reports, our 1-on-1 private email consultations, our mobile applications made available through third-party distribution channels (including the Apple App Store and Google Play Store), our email newsletters, our waitlist, and any associated interactive tools (collectively, the “Services”).
+                These Terms of Service (“Terms”, or “Agreement”) constitute a legally binding
+                agreement made between you (“User”, “Client”, “you”, or “your”) and{" "}
+                <strong>Scripting Destiny</strong> (“we”, “us”, or “our”). These Terms govern your
+                access to and use of{" "}
+                <a href="https://scriptingdestiny.com" className="text-wood hover:underline">
+                  scriptingdestiny.com
+                </a>
+                , our automated digital BaZi reports, our 1-on-1 private email consultations, our
+                mobile applications made available through third-party distribution channels
+                (including the Apple App Store and Google Play Store), our email newsletters, our
+                waitlist, and any associated interactive tools (collectively, the “Services”).
               </p>
               <p>
-                BY ACCESSING OUR WEBSITE, PURCHASING A REPORT OR CONSULTATION, REGISTERING FOR OUR WAITLIST, DOWNLOADING OUR MOBILE APPLICATION, OR GENERATING A BAZI CHART, YOU EXPRESSLY ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY ALL OF THESE TERMS AND OUR <Link to="/privacy" className="text-wood hover:underline font-medium">PRIVACY POLICY</Link>. IF YOU DO NOT AGREE WITH ALL OF THESE TERMS, YOU ARE EXPRESSLY PROHIBITED FROM USING THE SERVICES AND MUST DISCONTINUE USE IMMEDIATELY.
+                BY ACCESSING OUR WEBSITE, PURCHASING A REPORT OR CONSULTATION, REGISTERING FOR OUR
+                WAITLIST, DOWNLOADING OUR MOBILE APPLICATION, OR GENERATING A BAZI CHART, YOU
+                EXPRESSLY ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY ALL
+                OF THESE TERMS AND OUR{" "}
+                <Link to="/privacy" className="text-wood hover:underline font-medium">
+                  PRIVACY POLICY
+                </Link>
+                . IF YOU DO NOT AGREE WITH ALL OF THESE TERMS, YOU ARE EXPRESSLY PROHIBITED FROM
+                USING THE SERVICES AND MUST DISCONTINUE USE IMMEDIATELY.
               </p>
             </div>
           </section>
@@ -120,17 +137,34 @@ function TermsPage() {
               {isZh ? "产品与服务说明" : "Products & Services"}
             </h2>
             <p className="text-muted-foreground mb-3">
-              Scripting Destiny provides astronomical and classical Chinese metaphysical calculations (BaZi / Four Pillars of Destiny):
+              Scripting Destiny provides astronomical and classical Chinese metaphysical
+              calculations (BaZi / Four Pillars of Destiny):
             </p>
             <ul className="space-y-2.5 text-muted-foreground list-disc list-inside">
               <li>
-                <strong className="text-foreground">Automated Digital Reports (Free Blueprint, Standard Reading, Full Reading):</strong> Personalized PDF analyses generated automatically via True Solar Time based on the birth coordinates you submit.
+                <strong className="text-foreground">
+                  Automated Digital Reports (Free Blueprint, Standard Reading, 24-Page Full
+                  Reading):
+                </strong>{" "}
+                Personalized PDF analyses generated automatically via True Solar Time based on the
+                birth coordinates you submit.
               </li>
               <li>
-                <strong className="text-foreground">1-on-1 Private Email Consultation:</strong> A bespoke advisory engagement including the Full Reading PDF, manual hand-charting by Blake, and seven (7) calendar days of direct email dialogue.
+                <strong className="text-foreground">1-on-1 Private Email Consultation:</strong> A
+                bespoke advisory engagement including immediate generation and delivery of the
+                24-page Full Reading PDF dossier,{" "}
+                <strong>
+                  personally audited review &amp; bespoke analysis by Scripting Destiny’s Lead
+                  Analyst, Blake Leung
+                </strong>{" "}
+                (who personally audits, verifies, and performs bespoke analysis on your chart
+                calculations and strategic questions), and seven (7) calendar days of direct private
+                email Q&amp;A dialogue.
               </li>
               <li>
-                <strong className="text-foreground">Interactive Tools & Publications:</strong> Web-based chart previews, waitlist registrations, and optional Substack editorial newsletters.
+                <strong className="text-foreground">Interactive Tools &amp; Publications:</strong>{" "}
+                Web-based chart previews, waitlist registrations, and optional Substack editorial
+                newsletters.
               </li>
             </ul>
           </section>
@@ -142,18 +176,41 @@ function TermsPage() {
               {isZh ? "使用资格与购买年龄要求" : "Eligibility & Age Requirements"}
             </h2>
             <p className="text-muted-foreground mb-3">
-              By accessing, registering for, or purchasing any of our Services, you represent and warrant that:
+              By accessing, registering for, or purchasing any of our Services, you represent and
+              warrant that:
             </p>
             <ul className="space-y-2 text-muted-foreground list-disc list-inside">
               <li>
-                <strong className="text-foreground">Paid Purchases (18+):</strong> You are at least <strong>18 years of age</strong> (or the age of legal majority in your jurisdiction, whichever is higher) to purchase any Automated Digital Report or 1-on-1 Private Email Consultation.
+                <strong className="text-foreground">
+                  Paid Purchases (18+) &amp; Minor / Guardian Attestation:
+                </strong>{" "}
+                You must be at least <strong>18 years of age</strong> to purchase reports or
+                consultations (or the age of legal majority in your jurisdiction, whichever is
+                higher).{" "}
+                <strong>
+                  If you are purchasing a chart or consultation for an individual under 18 years of
+                  age, you expressly confirm and warrant that you are their parent or legal guardian
+                  authorized to purchase and receive the reading on their behalf.
+                </strong>
               </li>
               <li>
-                <strong className="text-foreground">General Browsing & Free Tools:</strong> You are at least 16 years of age (or the applicable age of digital consent under EU GDPR Article 8 or local law) to access free web tools or subscribe to our waitlist.
+                <strong className="text-foreground">General Browsing &amp; Free Tools:</strong> You
+                are at least 16 years of age (or the applicable age of digital consent under EU GDPR
+                Article 8 or local law) to access free web tools or subscribe to our waitlist.
               </li>
-              <li>You possess the legal capacity to enter into these binding Terms under the laws of your place of residence.</li>
-              <li>You are not located in a country subject to a U.S., Singapore, EU, or international government embargo, or designated as a terrorist-supporting country, and you are not listed on any prohibited or restricted party lists.</li>
-              <li>All information voluntarily submitted by you (including birth coordinates, billing details, and contact details) is truthful, accurate, and voluntarily provided.</li>
+              <li>
+                You possess the legal capacity to enter into these binding Terms under the laws of
+                your place of residence.
+              </li>
+              <li>
+                You are not located in a country subject to a U.S., Singapore, EU, or international
+                government embargo, or designated as a terrorist-supporting country, and you are not
+                listed on any prohibited or restricted party lists.
+              </li>
+              <li>
+                All information voluntarily submitted by you (including birth coordinates, billing
+                details, and contact details) is truthful, accurate, and voluntarily provided.
+              </li>
             </ul>
           </section>
 
@@ -166,17 +223,43 @@ function TermsPage() {
             <div className="space-y-3 text-muted-foreground">
               <ul className="space-y-2.5 list-disc list-inside">
                 <li>
-                  <strong className="text-foreground">Automated Digital Reports:</strong> Generated and delivered via the on-screen download page and your provided email address within approximately <strong>60 seconds</strong> of confirmed Stripe payment.
+                  <strong className="text-foreground">Automated Digital Reports:</strong>{" "}
+                  <strong>Instant download · Emailed within minutes (typically 2–5 minutes)</strong>{" "}
+                  of confirmed Stripe payment.
                 </li>
                 <li>
-                  <strong className="text-foreground">Consultation Turnaround:</strong> For 1-on-1 Private Email Consultations, the automated Full Reading PDF is delivered immediately upon purchase. Your opening hand-charted analysis by Blake is prepared manually in the order received, typically within <strong>10–14 business days</strong> (extending up to <strong>3–4 weeks</strong> during peak seasonal volume).
+                  <strong className="text-foreground">Consultation Turnaround:</strong> For 1-on-1
+                  Private Email Consultations, the 24-page Full Reading PDF dossier is generated and
+                  delivered immediately (instant download · emailed within minutes, typically 2–5
+                  minutes). Meanwhile, Scripting Destiny’s Lead Analyst, Blake Leung, personally
+                  audits, verifies, and performs bespoke analysis on your chart calculations and
+                  strategic questions in the order received,{" "}
+                  <strong>
+                    within 10 business days (often faster; extending up to 3–4 weeks during peak
+                    seasonal launch periods)
+                  </strong>
+                  .
                 </li>
                 <li>
-                  <strong className="text-foreground">The 7-Day Dialogue Clock:</strong> Your 7-day direct email dialogue window begins <strong>only when you receive Blake’s opening analysis email</strong>, ensuring you never lose consultation time while waiting in queue or reviewing your Full Reading PDF.
+                  <strong className="text-foreground">The 7-Day Dialogue Clock:</strong> Your 7-day
+                  private email Q&amp;A clock begins{" "}
+                  <strong>
+                    ONLY after Blake’s opening analysis email is delivered to you, never at the time
+                    of purchase
+                  </strong>
+                  —ensuring you never lose consultation time while waiting in queue or reviewing
+                  your 24-page Full Reading PDF.
                 </li>
               </ul>
               <p className="text-xs sm:text-sm">
-                <strong className="text-foreground">Statutory Delay Safeguard (FTC & EU Consumer Compliance):</strong> In the unlikely event that exceptional demand delays delivery of an opening hand-charted consultation beyond thirty (30) calendar days from purchase without prior agreement, we will notify you by email and provide you the option to either consent to a revised delivery date or cancel for a full refund of the unperformed consultation portion.
+                <strong className="text-foreground">
+                  Statutory Delay Safeguard (FTC &amp; EU Consumer Compliance):
+                </strong>{" "}
+                In the unlikely event that exceptional demand delays delivery of your opening
+                personally audited review &amp; bespoke analysis beyond thirty (30) calendar days
+                from purchase without prior agreement, we will notify you by email and provide you
+                the option to either consent to a revised delivery date or cancel for a full refund
+                of the unperformed consultation portion.
               </p>
             </div>
           </section>
@@ -185,24 +268,82 @@ function TermsPage() {
           <section className="rounded-xl border border-accent/30 bg-card/60 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
               <span className="text-accent font-sans font-semibold text-base sm:text-lg">05</span>
-              {isZh ? "付款、退款、取消政策与数据更正" : "Payments, Refund & Cancellation Policy, & Data Corrections"}
+              {isZh
+                ? "付款、退款、取消政策与数据更正"
+                : "Payments, Refund & Cancellation Policy, & Data Corrections"}
             </h2>
             <div className="space-y-3 text-muted-foreground">
               <p>
-                <strong>1. Payment Processing:</strong> All web purchases are securely processed via <strong>Stripe</strong> (PCI-DSS Level 1 compliant). If any future digital goods or subscriptions are purchased through the Apple App Store or Google Play Store, billing is governed by the respective platform’s payment terms. Prices are displayed prior to checkout; you are responsible for any applicable local taxes or currency conversion fees charged by your card issuer.
+                <strong>1. Payment Processing:</strong> All web purchases are securely processed via{" "}
+                <strong>Stripe</strong> (PCI-DSS Level 1 compliant). If any future digital goods or
+                subscriptions are purchased through the Apple App Store or Google Play Store,
+                billing is governed by the respective platform’s payment terms. Prices are displayed
+                prior to checkout; you are responsible for any applicable local taxes or currency
+                conversion fees charged by your card issuer.
               </p>
               <p>
-                <strong>2. Automated Digital Reports (Final Sale):</strong> In accordance with international consumer regulations for customized, immediately delivered digital content (including California Civil Code § 1723 notice standards, Singapore CPFTA, and EU/UK Consumer Rights Directive Art. 16(c) &amp; (m)), <strong>all sales of automated PDF reports are final and non-refundable once generated</strong>. If a technical system fault prevents delivery of your purchased PDF, contact <a href="mailto:support@scriptingdestiny.com" className="text-foreground hover:underline font-medium">support@scriptingdestiny.com</a> and we will promptly remediate and re-deliver your file.
+                <strong>2. Automated Digital Reports (Final Sale):</strong> In accordance with
+                international consumer regulations for customized, immediately delivered digital
+                content (including California Civil Code § 1723 notice standards, Singapore CPFTA,
+                and EU/UK Consumer Rights Directive Art. 16(c) &amp; (m)),{" "}
+                <strong>
+                  all sales of automated PDF reports are final and non-refundable once generated
+                </strong>
+                . If a technical system fault prevents delivery of your purchased PDF, contact{" "}
+                <a
+                  href="mailto:support@scriptingdestiny.com"
+                  className="text-foreground hover:underline font-medium"
+                >
+                  support@scriptingdestiny.com
+                </a>{" "}
+                and we will promptly remediate and re-deliver your file.
               </p>
               <p>
-                <strong>3. 1-on-1 Private Email Consultations:</strong> Eligible for a refund (less non-recoverable payment processor fees) within <strong>48 hours of purchase</strong>, provided manual hand-charting work has not yet commenced. Once custom hand-charting analysis has begun or the initial opening response has been delivered, consultation fees are <strong>non-refundable</strong>. <em>Statutory Carve-Out:</em> Where mandatory consumer protection law in your jurisdiction (such as the EU/UK Consumer Rights Directive) prohibits deducting payment processor fees upon a valid statutory withdrawal or grants non-waivable statutory cancellation rights, we will honor your statutory rights to the full extent required by law.
+                <strong>3. 1-on-1 Private Email Consultations:</strong> Because the 24-page Full
+                Reading PDF dossier ($39.99 standard retail value) is delivered within minutes of
+                purchase, if a customer requests cancellation of a 1-on-1 Consultation within the
+                permitted <strong>48-hour window</strong> after their Full Reading report has
+                already been delivered, they will be refunded the amount paid{" "}
+                <strong>
+                  minus the standard retail price of the Full Reading ($39.99) and unrecoverable
+                  Stripe payment processor fees
+                </strong>
+                . The client retains permanent access to their delivered 24-page Full Reading PDF.
+                Once Blake’s personally audited review work has commenced or the opening analysis
+                has been delivered, consultation fees are <strong>strictly non-refundable</strong>.{" "}
+                <em>Statutory Carve-Out:</em> Where mandatory consumer protection law in your
+                jurisdiction (such as the EU/UK Consumer Rights Directive) prohibits deducting
+                payment processor fees upon a valid statutory withdrawal or grants non-waivable
+                statutory cancellation rights, we will honor your statutory rights to the full
+                extent required by law.
               </p>
               <p>
-                <strong>4. Data Corrections (Free 48-Hour Re-Render):</strong> Typographical birth errors (e.g., mistyped birth date, time, or city) reported within <strong>48 hours of purchase</strong> to <a href="mailto:support@scriptingdestiny.com" className="text-foreground hover:underline font-medium">support@scriptingdestiny.com</a> will be corrected and your PDF report will be <strong>re-rendered free of charge</strong>. This commercial re-render window does not limit your separate statutory right to request rectification of personal records stored in our database under the GDPR (Art. 16), Singapore PDPA (Section 22), or California CCPA/CPRA.
+                <strong>4. Data Corrections (Free 48-Hour Re-Render):</strong> Typographical birth
+                errors (e.g., mistyped birth date, time, or city) reported within{" "}
+                <strong>48 hours of purchase</strong> to{" "}
+                <a
+                  href="mailto:support@scriptingdestiny.com"
+                  className="text-foreground hover:underline font-medium"
+                >
+                  support@scriptingdestiny.com
+                </a>{" "}
+                will be corrected and your PDF report will be{" "}
+                <strong>re-rendered free of charge</strong>. This commercial re-render window does
+                not limit your separate statutory right to request rectification of personal records
+                stored in our database under the GDPR (Art. 16), Singapore PDPA (Section 22), or
+                California CCPA/CPRA.
               </p>
               <p className="bg-card/70 border border-border p-3.5 rounded-lg text-xs sm:text-sm">
-                <strong className="text-foreground block mb-1">EU / UK Consumer Right of Withdrawal Notice (Directive 2011/83/EU):</strong>
-                <em>“BY PURCHASING AND REQUESTING IMMEDIATE GENERATION OF A PERSONALIZED DIGITAL BAZI PDF REPORT OR DIGITALLY DELIVERED CONTENT, YOU EXPRESSLY CONSENT TO THE IMMEDIATE COMMENCEMENT OF PERFORMANCE AND EXPRESSLY ACKNOWLEDGE THAT YOU THEREBY LOSE YOUR STATUTORY 14-DAY RIGHT OF WITHDRAWAL ONCE DIGITAL GENERATION AND TRANSMISSION HAS BEGUN.”</em>
+                <strong className="text-foreground block mb-1">
+                  EU / UK Consumer Right of Withdrawal Notice (Directive 2011/83/EU):
+                </strong>
+                <em>
+                  “BY PURCHASING AND REQUESTING IMMEDIATE GENERATION OF A PERSONALIZED DIGITAL BAZI
+                  PDF REPORT OR DIGITALLY DELIVERED CONTENT, YOU EXPRESSLY CONSENT TO THE IMMEDIATE
+                  COMMENCEMENT OF PERFORMANCE AND EXPRESSLY ACKNOWLEDGE THAT YOU THEREBY LOSE YOUR
+                  STATUTORY 14-DAY RIGHT OF WITHDRAWAL ONCE DIGITAL GENERATION AND TRANSMISSION HAS
+                  BEGUN.”
+                </em>
               </p>
             </div>
           </section>
@@ -212,22 +353,46 @@ function TermsPage() {
             <div className="flex items-center gap-2 mb-3">
               <ShieldAlert className="h-5 w-5 text-wood shrink-0" />
               <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground">
-                <span className="text-accent font-sans font-semibold text-base sm:text-lg mr-2">06</span>
-                {isZh ? "命理玄学与法律免责声明 (重要)" : "Metaphysical & Legal Disclaimer (Important)"}
+                <span className="text-accent font-sans font-semibold text-base sm:text-lg mr-2">
+                  06
+                </span>
+                {isZh
+                  ? "命理玄学与法律免责声明 (重要)"
+                  : "Metaphysical & Legal Disclaimer (Important)"}
               </h2>
             </div>
             <div className="space-y-3 text-muted-foreground">
               <p className="font-medium text-foreground">
-                PLEASE READ THIS SECTION CAREFULLY. IT GOVERNS ALL AUTOMATED REPORTS, CHARTS, AND 1-ON-1 CONSULTATIONS.
+                PLEASE READ THIS SECTION CAREFULLY. IT GOVERNS ALL AUTOMATED REPORTS, CHARTS, AND
+                1-ON-1 CONSULTATIONS.
               </p>
               <p>
-                <strong>1. Nature of Readings &amp; Consultations:</strong> All readings, PDF analyses, and 1-on-1 email consultations are traditional Chinese metaphysical interpretations (BaZi / Four Pillars of Destiny) provided solely for <strong>personal insight, contemplation, and self-reflection (classified legally as entertainment)</strong>.
+                <strong>1. Nature of Readings &amp; Consultations:</strong> All readings, PDF
+                analyses, and 1-on-1 email consultations are traditional Chinese metaphysical
+                interpretations (BaZi / Four Pillars of Destiny) provided solely for{" "}
+                <strong>
+                  personal insight, contemplation, and self-reflection (classified legally as
+                  entertainment)
+                </strong>
+                .
               </p>
               <p>
-                <strong>2. Not Licensed Professional Advice:</strong> OUR SERVICES DO NOT CONSTITUTE, AND MUST NEVER BE RELIED UPON AS, LICENSED MEDICAL, PSYCHIATRIC, PSYCHOLOGICAL, LEGAL, TAX, OR INVESTMENT ADVICE. Neither Scripting Destiny nor Blake is acting as a licensed medical practitioner, mental health professional, attorney, tax advisor, or registered financial advisor.
+                <strong>2. Not Licensed Professional Advice:</strong> OUR SERVICES DO NOT
+                CONSTITUTE, AND MUST NEVER BE RELIED UPON AS, LICENSED MEDICAL, PSYCHIATRIC,
+                PSYCHOLOGICAL, LEGAL, TAX, OR INVESTMENT ADVICE. Neither Scripting Destiny nor its
+                Lead Analyst, Blake Leung, is acting as a licensed medical practitioner, mental
+                health professional, attorney, tax advisor, or registered financial advisor.
               </p>
               <p>
-                <strong>3. Personal Agency &amp; Age Requirement:</strong> The client retains <strong>full personal agency and sole responsibility for all life, health, relationship, career, and financial choices</strong>. Scripting Destiny bears zero liability for any decisions, actions, or outcomes undertaken by you or any third party following a reading or consultation. You must be <strong>18+ to purchase</strong>.
+                <strong>3. Personal Agency &amp; Age Requirement:</strong> The client retains{" "}
+                <strong>
+                  full personal agency and sole responsibility for all life, health, relationship,
+                  career, and financial choices
+                </strong>
+                . Scripting Destiny bears zero liability for any decisions, actions, or outcomes
+                undertaken by you or any third party following a reading or consultation. You must
+                be <strong>18+ to purchase</strong> (or a parent/legal guardian purchasing on behalf
+                of a minor under Section 03).
               </p>
             </div>
           </section>
@@ -236,23 +401,65 @@ function TermsPage() {
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
               <span className="text-accent font-sans font-semibold text-base sm:text-lg">07</span>
-              {isZh ? "数据收集、零公共AI训练与内部科研许可" : "Data Collection, Zero Public AI Training & Research License"}
+              {isZh
+                ? "数据收集、零公共AI训练与内部科研许可"
+                : "Data Collection, Zero Public AI Training & Research License"}
             </h2>
             <div className="space-y-3 text-muted-foreground">
               <p>
-                To calculate True Solar Time charts (resolving birth city longitude/latitude via Open-Meteo), generate PDF reports, and conduct 1-on-1 consultations, we process your birth date, birth time (or note of unknown time), gender, birth city, name, email, Stripe billing metadata, and any voluntary life context notes or past life event milestones you share at intake.
+                To calculate True Solar Time charts (resolving birth city longitude/latitude via
+                Open-Meteo), generate PDF reports, and conduct 1-on-1 consultations, we process your
+                birth date, birth time (or note of unknown time), gender, birth city, name, email,
+                Stripe billing metadata, and any voluntary life context notes or past life event
+                milestones you share at intake.
               </p>
               <p>
-                <strong className="text-foreground">Zero Public AI Training &amp; Consultation Confidentiality:</strong> Synthesis requests sent to our underlying enterprise AI APIs operate under strict <strong>zero-data-retention (ZDR) enterprise agreements</strong>—your personal chart data and intake life notes are <strong>never used to train public or third-party AI models</strong>. Voluntary intake life context notes and private email dialogue exchanged with Blake during a 1-on-1 consultation are treated as strictly confidential and never published or disclosed.
+                <strong className="text-foreground">
+                  Zero Public AI Training &amp; Consultation Confidentiality:
+                </strong>{" "}
+                Synthesis requests sent to our underlying enterprise AI APIs operate under strict{" "}
+                <strong>zero-data-retention (ZDR) enterprise agreements</strong>—your personal chart
+                data and intake life notes are{" "}
+                <strong>never used to train public or third-party AI models</strong>. Voluntary
+                intake life context notes and private email dialogue exchanged with Scripting
+                Destiny’s Lead Analyst, Blake Leung, during a 1-on-1 consultation are treated as
+                strictly confidential and never published or disclosed.
               </p>
               <p>
-                <strong className="text-foreground">License Grant for Internal De-Identified Statistical Research:</strong> By submitting structured birth coordinates or milestone event years to Scripting Destiny, you grant Scripting Destiny a <strong>perpetual, irrevocable, worldwide, fully paid-up, royalty-free, transferable, and sublicensable license</strong> to strip all direct and indirect personally identifiable markers (PII), intake life context notes, and private narratives from such structured coordinates and to compile, aggregate, analyze, and incorporate such irreversibly de-identified astronomical data into Scripting Destiny’s internal statistical calibration models, proprietary research datasets, and educational reference archives.
+                <strong className="text-foreground">
+                  License Grant for Internal De-Identified Statistical Research:
+                </strong>{" "}
+                By submitting structured birth coordinates or milestone event years to Scripting
+                Destiny, you grant Scripting Destiny a{" "}
+                <strong>
+                  perpetual, irrevocable, worldwide, fully paid-up, royalty-free, transferable, and
+                  sublicensable license
+                </strong>{" "}
+                to strip all direct and indirect personally identifiable markers (PII), intake life
+                context notes, and private narratives from such structured coordinates and to
+                compile, aggregate, analyze, and incorporate such irreversibly de-identified
+                astronomical data into Scripting Destiny’s internal statistical calibration models,
+                proprietary research datasets, and educational reference archives.
               </p>
               <p>
-                <strong className="text-foreground">Irreversibility Acknowledgment:</strong> Once structured birth coordinates and milestone years have passed through our de-identification pipeline and been integrated into internal aggregated statistical tables or proprietary calibration models, such data is completely decoupled from your identity and ceases to constitute personal data under GDPR Recital 26, Singapore PDPA, and California CCPA/CPRA. Consequently, it is technically impossible to isolate, retrieve, or selectively excise individual historical points once merged into aggregate statistical models.
+                <strong className="text-foreground">Irreversibility Acknowledgment:</strong> Once
+                structured birth coordinates and milestone years have passed through our
+                de-identification pipeline and been integrated into internal aggregated statistical
+                tables or proprietary calibration models, such data is completely decoupled from
+                your identity and ceases to constitute personal data under GDPR Recital 26,
+                Singapore PDPA, and California CCPA/CPRA. Consequently, it is technically impossible
+                to isolate, retrieve, or selectively excise individual historical points once merged
+                into aggregate statistical models.
               </p>
               <p>
-                <strong className="text-foreground">Zero Data Brokering:</strong> We reaffirm that your birth details, intake life notes, email address, and payment metadata will <strong>never</strong> be sold, rented, or traded to third-party data brokers or marketing exchanges. All processing of personal data is governed strictly by our <Link to="/privacy" className="text-wood hover:underline font-medium">Privacy &amp; Birth Data Protection Policy</Link>.
+                <strong className="text-foreground">Zero Data Brokering:</strong> We reaffirm that
+                your birth details, intake life notes, email address, and payment metadata will{" "}
+                <strong>never</strong> be sold, rented, or traded to third-party data brokers or
+                marketing exchanges. All processing of personal data is governed strictly by our{" "}
+                <Link to="/privacy" className="text-wood hover:underline font-medium">
+                  Privacy &amp; Birth Data Protection Policy
+                </Link>
+                .
               </p>
             </div>
           </section>
@@ -265,10 +472,19 @@ function TermsPage() {
             </h2>
             <div className="space-y-3 text-muted-foreground">
               <p>
-                Unless otherwise indicated, the Services—including all source code, True Solar Time calculation engines, software, algorithms, mathematical models, PDF report templates, bespoke written analyses prepared by Blake, databases, interface designs, artwork, and trademarks (the “Content”)—are the exclusive property of Scripting Destiny and are protected by copyright, trademark, and intellectual property laws in Singapore, the United States, the European Union, and internationally.
+                Unless otherwise indicated, the Services—including all source code, True Solar Time
+                calculation engines, software, algorithms, mathematical models, PDF report
+                templates, bespoke written analyses prepared by Scripting Destiny’s Lead Analyst,
+                Blake Leung, databases, interface designs, artwork, and trademarks (the
+                “Content”)—are the exclusive property of Scripting Destiny and are protected by
+                copyright, trademark, and intellectual property laws in Singapore, the United
+                States, the European Union, and internationally.
               </p>
               <p>
-                Subject to your ongoing compliance with these Terms, Scripting Destiny grants you a limited, non-exclusive, non-transferable, revocable license to access the Services and download, store, or print copies of your purchased PDF reports and consultation correspondence solely for your personal, non-commercial use.
+                Subject to your ongoing compliance with these Terms, Scripting Destiny grants you a
+                limited, non-exclusive, non-transferable, revocable license to access the Services
+                and download, store, or print copies of your purchased PDF reports and consultation
+                correspondence solely for your personal, non-commercial use.
               </p>
             </div>
           </section>
@@ -278,35 +494,65 @@ function TermsPage() {
             <div className="flex items-center gap-2 mb-3">
               <Smartphone className="h-5 w-5 text-wood shrink-0" />
               <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground">
-                <span className="text-accent font-sans font-semibold text-base sm:text-lg mr-2">09</span>
-                {isZh ? "移动应用商店附加条款与 Apple EULA 附录" : "Mobile Application Terms & Apple App Store EULA Rider"}
+                <span className="text-accent font-sans font-semibold text-base sm:text-lg mr-2">
+                  09
+                </span>
+                {isZh
+                  ? "移动应用商店附加条款与 Apple EULA 附录"
+                  : "Mobile Application Terms & Apple App Store EULA Rider"}
               </h2>
             </div>
             <div className="space-y-3 text-muted-foreground">
               <p>
-                If you access or download our mobile application through the Apple App Store or Google Play Store, you acknowledge and agree that these Terms incorporate the following mandatory platform provisions:
+                If you access or download our mobile application through the Apple App Store or
+                Google Play Store, you acknowledge and agree that these Terms incorporate the
+                following mandatory platform provisions:
               </p>
               <div className="space-y-2 text-xs sm:text-sm pl-2 border-l-2 border-accent/40 my-3">
                 <p>
-                  <strong>a. Acknowledgment:</strong> This Agreement is concluded between you and Scripting Destiny only, and not with Apple Inc. (“Apple”) or Google LLC (“Google”). Scripting Destiny, not Apple or Google, is solely responsible for the mobile application and its content.
+                  <strong>a. Acknowledgment:</strong> This Agreement is concluded between you and
+                  Scripting Destiny only, and not with Apple Inc. (“Apple”) or Google LLC
+                  (“Google”). Scripting Destiny, not Apple or Google, is solely responsible for the
+                  mobile application and its content.
                 </p>
                 <p>
-                  <strong>b. Scope of License:</strong> The license granted to you for the application is limited to a non-transferable license to use the app on any Apple-branded or Android-compatible device that you own or control, as permitted by the Usage Rules set forth in the applicable App Store Terms of Service.
+                  <strong>b. Scope of License:</strong> The license granted to you for the
+                  application is limited to a non-transferable license to use the app on any
+                  Apple-branded or Android-compatible device that you own or control, as permitted
+                  by the Usage Rules set forth in the applicable App Store Terms of Service.
                 </p>
                 <p>
-                  <strong>c. Maintenance and Support:</strong> Scripting Destiny is solely responsible for providing any maintenance and support services with respect to the app. You acknowledge that neither Apple nor Google has any obligation whatsoever to furnish any maintenance or support services.
+                  <strong>c. Maintenance and Support:</strong> Scripting Destiny is solely
+                  responsible for providing any maintenance and support services with respect to the
+                  app. You acknowledge that neither Apple nor Google has any obligation whatsoever
+                  to furnish any maintenance or support services.
                 </p>
                 <p>
-                  <strong>d. Warranty:</strong> Scripting Destiny is solely responsible for any product warranties, whether express or implied by law. In the event of any failure of the mobile app to conform to any applicable warranty, you may notify Apple, and Apple may refund the purchase price paid (if any); to the maximum extent permitted by applicable law, Apple will have no other warranty obligation whatsoever.
+                  <strong>d. Warranty:</strong> Scripting Destiny is solely responsible for any
+                  product warranties, whether express or implied by law. In the event of any failure
+                  of the mobile app to conform to any applicable warranty, you may notify Apple, and
+                  Apple may refund the purchase price paid (if any); to the maximum extent permitted
+                  by applicable law, Apple will have no other warranty obligation whatsoever.
                 </p>
                 <p>
-                  <strong>e. Product Claims:</strong> Scripting Destiny, not Apple, is responsible for addressing any claims by you or any third party relating to the mobile app, including product liability claims, consumer protection claims, and regulatory compliance.
+                  <strong>e. Product Claims:</strong> Scripting Destiny, not Apple, is responsible
+                  for addressing any claims by you or any third party relating to the mobile app,
+                  including product liability claims, consumer protection claims, and regulatory
+                  compliance.
                 </p>
                 <p>
-                  <strong>f. Intellectual Property Rights:</strong> In the event of any third-party claim that the app or your possession and use of the app infringes a third party’s intellectual property rights, Scripting Destiny, not Apple, will be solely responsible for the investigation, defense, settlement, and discharge of any such claim.
+                  <strong>f. Intellectual Property Rights:</strong> In the event of any third-party
+                  claim that the app or your possession and use of the app infringes a third party’s
+                  intellectual property rights, Scripting Destiny, not Apple, will be solely
+                  responsible for the investigation, defense, settlement, and discharge of any such
+                  claim.
                 </p>
                 <p>
-                  <strong>g. Third-Party Beneficiary:</strong> You acknowledge and agree that Apple and Apple’s subsidiaries, as well as Google, are third-party beneficiaries of these Terms, and that upon your acceptance, Apple and Google will have the right (and will be deemed to have accepted the right) to enforce these Terms against you as a third-party beneficiary.
+                  <strong>g. Third-Party Beneficiary:</strong> You acknowledge and agree that Apple
+                  and Apple’s subsidiaries, as well as Google, are third-party beneficiaries of
+                  these Terms, and that upon your acceptance, Apple and Google will have the right
+                  (and will be deemed to have accepted the right) to enforce these Terms against you
+                  as a third-party beneficiary.
                 </p>
               </div>
             </div>
@@ -320,11 +566,29 @@ function TermsPage() {
             </h2>
             <p className="text-muted-foreground mb-3">You agree not to:</p>
             <ul className="space-y-2 text-muted-foreground list-disc list-inside">
-              <li>Systematically scrape, crawl, data-mine, harvest, or extract algorithmic calculations or report templates from our platform using automated bots or headless browsers.</li>
-              <li>Decompile, reverse-engineer, disassemble, or derive the mathematical source algorithms underlying our BaZi and True Solar Time calculations.</li>
-              <li>Submit fraudulent, automated, or malicious spam inputs through our forms, checkout flows, or waitlist endpoints, or initiate fraudulent payment chargebacks after receiving delivered reports or consultations.</li>
-              <li>Circumvent, disable, or interfere with security-related features, rate-limiters, or web application firewalls.</li>
-              <li>Resell, commercially redistribute, or re-license generated PDF reports or private consultation analyses to third parties without prior written consent from Scripting Destiny.</li>
+              <li>
+                Systematically scrape, crawl, data-mine, harvest, or extract algorithmic
+                calculations or report templates from our platform using automated bots or headless
+                browsers.
+              </li>
+              <li>
+                Decompile, reverse-engineer, disassemble, or derive the mathematical source
+                algorithms underlying our BaZi and True Solar Time calculations.
+              </li>
+              <li>
+                Submit fraudulent, automated, or malicious spam inputs through our forms, checkout
+                flows, or waitlist endpoints, or initiate fraudulent payment chargebacks after
+                receiving delivered reports or consultations.
+              </li>
+              <li>
+                Circumvent, disable, or interfere with security-related features, rate-limiters, or
+                web application firewalls.
+              </li>
+              <li>
+                Resell, commercially redistribute, or re-license generated PDF reports or private
+                consultation analyses to third parties without prior written consent from Scripting
+                Destiny.
+              </li>
             </ul>
           </section>
 
@@ -335,7 +599,13 @@ function TermsPage() {
               {isZh ? "保证免责声明 (AS IS)" : "Disclaimer of Warranties (AS-IS)"}
             </h2>
             <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
-              TO THE FULLEST EXTENT PERMISSIBLE UNDER APPLICABLE LAW, THE SERVICES, REPORTS, CONSULTATIONS, AND ALL CONTENT ARE PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS. SCRIPTING DESTINY EXPRESSLY DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. WE MAKE NO WARRANTY THAT THE CALCULATIONS OR INTERPRETATIONS WILL BE ERROR-FREE, CONTINUOUS, UNINTERRUPTED, OR WILL MEET YOUR SUBJECTIVE EXPECTATIONS.
+              TO THE FULLEST EXTENT PERMISSIBLE UNDER APPLICABLE LAW, THE SERVICES, REPORTS,
+              CONSULTATIONS, AND ALL CONTENT ARE PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS.
+              SCRIPTING DESTINY EXPRESSLY DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS,
+              IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES
+              OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. WE
+              MAKE NO WARRANTY THAT THE CALCULATIONS OR INTERPRETATIONS WILL BE ERROR-FREE,
+              CONTINUOUS, UNINTERRUPTED, OR WILL MEET YOUR SUBJECTIVE EXPECTATIONS.
             </p>
           </section>
 
@@ -347,16 +617,35 @@ function TermsPage() {
             </h2>
             <div className="space-y-3 text-muted-foreground text-xs sm:text-sm leading-relaxed">
               <p>
-                IN NO EVENT SHALL SCRIPTING DESTINY, ITS FOUNDERS, CONSULTANTS, EMPLOYEES, OR AGENTS BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL, OR PUNITIVE DAMAGES (INCLUDING LOSS OF PROFIT, LOSS OF REVENUE, LOSS OF DATA, OR EMOTIONAL DISTRESS) ARISING FROM YOUR USE OF THE SERVICES, REPORTS, OR CONSULTATIONS, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+                IN NO EVENT SHALL SCRIPTING DESTINY, ITS FOUNDERS, CONSULTANTS, EMPLOYEES, OR AGENTS
+                BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY INDIRECT, CONSEQUENTIAL, EXEMPLARY,
+                INCIDENTAL, SPECIAL, OR PUNITIVE DAMAGES (INCLUDING LOSS OF PROFIT, LOSS OF REVENUE,
+                LOSS OF DATA, OR EMOTIONAL DISTRESS) ARISING FROM YOUR USE OF THE SERVICES, REPORTS,
+                OR CONSULTATIONS, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
               </p>
               <p>
-                TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, OUR AGGREGATE LIABILITY TO YOU FOR ANY CAUSE WHATSOEVER SHALL AT ALL TIMES BE LIMITED TO THE TOTAL FEES ACTUALLY PAID BY YOU TO SCRIPTING DESTINY IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM, OR SGD $100 (ONE HUNDRED SINGAPORE DOLLARS) IF YOU HAVE NOT MADE ANY PAID PURCHASES.
+                TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, OUR AGGREGATE LIABILITY TO YOU
+                FOR ANY CAUSE WHATSOEVER SHALL AT ALL TIMES BE LIMITED TO THE TOTAL FEES ACTUALLY
+                PAID BY YOU TO SCRIPTING DESTINY IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM, OR
+                SGD $100 (ONE HUNDRED SINGAPORE DOLLARS) IF YOU HAVE NOT MADE ANY PAID PURCHASES.
               </p>
               <p>
-                <strong className="text-foreground">Statutory Consumer Carve-Outs:</strong> Nothing in these Terms shall exclude or limit liability that cannot be excluded or limited under applicable law, including liability under the Singapore Unfair Contract Terms Act (UCTA) for death or personal injury resulting from negligence, fraud, or non-waivable statutory consumer guarantees under European Union, UK, or California law.
+                <strong className="text-foreground">Statutory Consumer Carve-Outs:</strong> Nothing
+                in these Terms shall exclude or limit liability that cannot be excluded or limited
+                under applicable law, including liability under the Singapore Unfair Contract Terms
+                Act (UCTA) for death or personal injury resulting from negligence, fraud, or
+                non-waivable statutory consumer guarantees under European Union, UK, or California
+                law.
               </p>
               <p>
-                <strong className="text-foreground">California Civil Code § 1542 Waiver:</strong> If you are a California resident, you waive California Civil Code § 1542, which says: <em>“A general release does not extend to claims that the creditor or releasing party does not know or suspect to exist in his or her favor at the time of executing the release and that, if known by him or her, would have materially affected his or her settlement with the debtor or released party.”</em>
+                <strong className="text-foreground">California Civil Code § 1542 Waiver:</strong> If
+                you are a California resident, you waive California Civil Code § 1542, which says:{" "}
+                <em>
+                  “A general release does not extend to claims that the creditor or releasing party
+                  does not know or suspect to exist in his or her favor at the time of executing the
+                  release and that, if known by him or her, would have materially affected his or
+                  her settlement with the debtor or released party.”
+                </em>
               </p>
             </div>
           </section>
@@ -365,23 +654,43 @@ function TermsPage() {
           <section className="rounded-xl border border-border/50 bg-card/40 p-6 sm:p-8">
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-foreground mb-3 flex items-center gap-2">
               <span className="text-accent font-sans font-semibold text-base sm:text-lg">13</span>
-              {isZh ? "争议解决、管辖法律与集体诉讼放弃" : "Governing Law, Dispute Resolution & Class Action Waiver"}
+              {isZh
+                ? "争议解决、管辖法律与集体诉讼放弃"
+                : "Governing Law, Dispute Resolution & Class Action Waiver"}
             </h2>
             <div className="space-y-3 text-muted-foreground">
               <p>
-                <strong>1. Governing Law:</strong> These Terms and your use of the Services shall be governed by and construed in accordance with the <strong>laws of the Republic of Singapore</strong>, without regard to conflict of law principles (subject to mandatory consumer protection statutes in your country of residence).
+                <strong>1. Governing Law:</strong> These Terms and your use of the Services shall be
+                governed by and construed in accordance with the{" "}
+                <strong>laws of the Republic of Singapore</strong>, without regard to conflict of
+                law principles (subject to mandatory consumer protection statutes in your country of
+                residence).
               </p>
               <p>
-                <strong>2. Informal Resolution:</strong> Before initiating formal legal proceedings, you and Scripting Destiny agree to attempt to resolve any dispute, claim, or controversy informally for at least thirty (30) days by contacting our support desk.
+                <strong>2. Informal Resolution:</strong> Before initiating formal legal proceedings,
+                you and Scripting Destiny agree to attempt to resolve any dispute, claim, or
+                controversy informally for at least thirty (30) days by contacting our support desk.
               </p>
               <p>
-                <strong>3. Jurisdiction (Singapore):</strong> If informal resolution is unsuccessful, any dispute shall be submitted to the exclusive jurisdiction of the courts of Singapore, unless mandatory international consumer law grants you the right to bring proceedings in the courts of your home jurisdiction.
+                <strong>3. Jurisdiction (Singapore):</strong> If informal resolution is
+                unsuccessful, any dispute shall be submitted to the exclusive jurisdiction of the
+                courts of Singapore, unless mandatory international consumer law grants you the
+                right to bring proceedings in the courts of your home jurisdiction.
               </p>
               <p>
-                <strong>4. U.S. Arbitration &amp; Class Action Waiver:</strong> FOR RESIDENTS OF THE UNITED STATES, EXCEPT FOR ELIGIBLE SMALL CLAIMS COURT DISPUTES OR WHERE PROHIBITED BY LAW, ANY DISPUTE ARISING FROM THESE TERMS SHALL BE RESOLVED THROUGH BINDING INDIVIDUAL ARBITRATION RATHER THAN IN COURT. YOU AND SCRIPTING DESTINY AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING. You may opt out of this arbitration provision within 30 days of your first purchase or acceptance by emailing our legal desk in writing.
+                <strong>4. U.S. Arbitration &amp; Class Action Waiver:</strong> FOR RESIDENTS OF THE
+                UNITED STATES, EXCEPT FOR ELIGIBLE SMALL CLAIMS COURT DISPUTES OR WHERE PROHIBITED
+                BY LAW, ANY DISPUTE ARISING FROM THESE TERMS SHALL BE RESOLVED THROUGH BINDING
+                INDIVIDUAL ARBITRATION RATHER THAN IN COURT. YOU AND SCRIPTING DESTINY AGREE THAT
+                EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY, AND
+                NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE
+                PROCEEDING. You may opt out of this arbitration provision within 30 days of your
+                first purchase or acceptance by emailing our legal desk in writing.
               </p>
               <p>
-                <strong>5. European Consumer Protection:</strong> Nothing in these Terms deprives consumers resident in the European Union or United Kingdom of the mandatory protections afforded by the law of their country of habitual residence.
+                <strong>5. European Consumer Protection:</strong> Nothing in these Terms deprives
+                consumers resident in the European Union or United Kingdom of the mandatory
+                protections afforded by the law of their country of habitual residence.
               </p>
             </div>
           </section>
@@ -394,14 +703,37 @@ function TermsPage() {
             </h2>
             <div className="space-y-3 text-muted-foreground">
               <p>
-                In compliance with <strong>Apple App Store Review Guideline 5.1.1(v)</strong> and the <strong>Google Play Data Safety Policy</strong>, users who register for accounts or waitlist access may request account closure and personal data deletion at any time:
+                In compliance with <strong>Apple App Store Review Guideline 5.1.1(v)</strong> and
+                the <strong>Google Play Data Safety Policy</strong>, users who register for accounts
+                or waitlist access may request account closure and personal data deletion at any
+                time:
               </p>
               <ul className="space-y-1.5 list-disc list-inside pl-2">
                 <li>Via any in-app “Delete My Account” interface in our mobile applications.</li>
-                <li>By emailing a deletion request for your intake records, life notes, and reports to <a href="mailto:support@scriptingdestiny.com" className="text-foreground hover:underline font-medium">support@scriptingdestiny.com</a> or <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a>.</li>
+                <li>
+                  By emailing a deletion request for your intake records, life notes, and reports to{" "}
+                  <a
+                    href="mailto:support@scriptingdestiny.com"
+                    className="text-foreground hover:underline font-medium"
+                  >
+                    support@scriptingdestiny.com
+                  </a>{" "}
+                  or{" "}
+                  <a
+                    href="mailto:admin@scriptingdestiny.com"
+                    className="text-foreground hover:underline font-medium"
+                  >
+                    admin@scriptingdestiny.com
+                  </a>
+                  .
+                </li>
               </ul>
               <p>
-                Upon receipt of a verified deletion request, all identifiable user profile data, authentication credentials, and email records will be permanently purged within thirty (30) days, subject to Section 7 regarding irreversible de-identified computational models and mandatory statutory retention of payment/tax invoices under Singapore IRAS, EU, and US tax laws.
+                Upon receipt of a verified deletion request, all identifiable user profile data,
+                authentication credentials, and email records will be permanently purged within
+                thirty (30) days, subject to Section 7 regarding irreversible de-identified
+                computational models and mandatory statutory retention of payment/tax invoices under
+                Singapore IRAS, EU, and US tax laws.
               </p>
             </div>
           </section>
@@ -413,7 +745,13 @@ function TermsPage() {
               {isZh ? "条款修改与未来更新" : "Modifications to Terms & Future Updates"}
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              We reserve the right to modify these Terms at any time. Non-material changes become effective immediately upon posting to this URL. For material modifications that substantially alter user rights or obligations, we will provide reasonable advance notice (e.g., via email or an in-app prompt). Your continued use of the Services following posted amendments represents your acknowledgment, acceptance, and deemed agreement to the revised Terms. Changes do not apply retroactively to completed purchases.
+              We reserve the right to modify these Terms at any time. Non-material changes become
+              effective immediately upon posting to this URL. For material modifications that
+              substantially alter user rights or obligations, we will provide reasonable advance
+              notice (e.g., via email or an in-app prompt). Your continued use of the Services
+              following posted amendments represents your acknowledgment, acceptance, and deemed
+              agreement to the revised Terms. Changes do not apply retroactively to completed
+              purchases.
             </p>
           </section>
 
@@ -424,10 +762,26 @@ function TermsPage() {
               {isZh ? "联系方式与客户支持" : "Contact Information & Inquiries"}
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              For order assistance, 48-hour typographical birth data corrections, or consultation support, please email <a href="mailto:support@scriptingdestiny.com" className="text-foreground hover:underline font-medium">support@scriptingdestiny.com</a>. For formal legal notices, Data Protection Officer (DPO) inquiries, or privacy rights requests under GDPR, PDPA, or CCPA/CPRA, please reach out to <a href="mailto:admin@scriptingdestiny.com" className="text-foreground hover:underline font-medium">admin@scriptingdestiny.com</a> or via phone / voicemail at <span className="text-foreground font-medium">+1 (628) 238-4763</span>.
+              For order assistance, 48-hour typographical birth data corrections, or consultation
+              support, please email{" "}
+              <a
+                href="mailto:support@scriptingdestiny.com"
+                className="text-foreground hover:underline font-medium"
+              >
+                support@scriptingdestiny.com
+              </a>
+              . For formal legal notices, Data Protection Officer (DPO) inquiries, or privacy rights
+              requests under GDPR, PDPA, or CCPA/CPRA, please reach out to{" "}
+              <a
+                href="mailto:admin@scriptingdestiny.com"
+                className="text-foreground hover:underline font-medium"
+              >
+                admin@scriptingdestiny.com
+              </a>{" "}
+              or via phone / voicemail at{" "}
+              <span className="text-foreground font-medium">+1 (628) 238-4763</span>.
             </p>
           </section>
-
         </div>
       </main>
 
