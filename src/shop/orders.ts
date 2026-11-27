@@ -15,6 +15,7 @@ export interface ReportDetails {
   timezone: string;
   city: string;
   lifeContext?: string;
+  language?: 'en' | 'zh';
 }
 
 export interface Prices {
@@ -264,7 +265,7 @@ export async function startCheckout(
   intakeId: string,
   tier: PaidTier,
   discountCode?: string,
-  opts?: { returnTo?: 'app' | 'shop' }
+  opts?: { returnTo?: 'app' | 'shop'; language?: 'en' | 'zh' }
 ): Promise<string> {
   let res: Response;
   try {
@@ -274,7 +275,8 @@ export async function startCheckout(
       body: JSON.stringify({
         tier,
         ...(discountCode ? { discountCode } : {}),
-        ...(opts?.returnTo ? { returnTo: opts.returnTo } : {})
+        ...(opts?.returnTo ? { returnTo: opts.returnTo } : {}),
+        ...(opts?.language ? { language: opts.language } : {})
       })
     });
   } catch (err: any) {

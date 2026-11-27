@@ -154,6 +154,7 @@ export function ShopPage({ initialIntakeId, surveyUrl, onStartSurvey }: ShopPage
   const [email, setEmail] = useState('');
   const [marketingConsent, setMarketingConsent] = useState(false);
   const [lifeContext, setLifeContext] = useState('');
+  const [reportLanguage, setReportLanguage] = useState<'en' | 'zh'>('en');
 
   // City search state
   const [cityQuery, setCityQuery] = useState(() => initialDraft.city || '');
@@ -431,7 +432,7 @@ export function ShopPage({ initialIntakeId, surveyUrl, onStartSurvey }: ShopPage
     setError(null);
     trackEvent('checkout_started', { tier, source: 'shop_saved_intake', has_discount: Boolean(activeDiscount) });
     try {
-      const url = await startCheckout(savedIntake.intakeId, tier, activeDiscount?.code, { returnTo: 'shop' });
+      const url = await startCheckout(savedIntake.intakeId, tier, activeDiscount?.code, { returnTo: 'shop', language: reportLanguage });
       window.location.assign(url);
     } catch (err: any) {
       setError(err?.message || 'The payment page could not be opened. Please try again.');
@@ -501,6 +502,7 @@ export function ShopPage({ initialIntakeId, surveyUrl, onStartSurvey }: ShopPage
           longitude: Number(longitude),
           timezone,
           city,
+          language: reportLanguage,
           ...(lifeContext.trim() ? { lifeContext: lifeContext.trim() } : {})
         },
         email,
@@ -973,6 +975,37 @@ export function ShopPage({ initialIntakeId, surveyUrl, onStartSurvey }: ShopPage
                 <div className="p-3 rounded-xs bg-bg-panel/70 border border-border-main/50 text-sm space-y-0.5">
                   <span className="text-[10px] uppercase font-bold tracking-wider text-text-dim">Delivery Email Address</span>
                   <div className="text-text-main font-medium">{savedIntake.email}</div>
+                </div>
+              </div>
+
+              {/* Report Output Language Selector */}
+              <div className="space-y-1.5">
+                <label className="block text-xs uppercase tracking-wider text-text-dim font-medium">
+                  Report Language / 报告语言
+                </label>
+                <div className="grid grid-cols-2 gap-2.5 max-w-sm">
+                  <button
+                    type="button"
+                    onClick={() => setReportLanguage('en')}
+                    className={`min-h-[42px] px-3 rounded-xs border text-xs font-semibold transition-colors cursor-pointer ${
+                      reportLanguage === 'en'
+                        ? 'border-brand-gold bg-brand-gold/15 text-brand-gold'
+                        : 'border-border-main bg-bg-dark text-text-dim hover:text-text-main'
+                    }`}
+                  >
+                    English
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setReportLanguage('zh')}
+                    className={`min-h-[42px] px-3 rounded-xs border text-xs font-semibold transition-colors cursor-pointer ${
+                      reportLanguage === 'zh'
+                        ? 'border-brand-gold bg-brand-gold/15 text-brand-gold'
+                        : 'border-border-main bg-bg-dark text-text-dim hover:text-text-main'
+                    }`}
+                  >
+                    中文 (Mandarin)
+                  </button>
                 </div>
               </div>
 
@@ -1451,6 +1484,37 @@ export function ShopPage({ initialIntakeId, surveyUrl, onStartSurvey }: ShopPage
                     ? 'We send your Full Reading PDF here, followed by a separate welcome email to start your 7-day private Q&A.'
                     : 'We send your completed PDF report and permanent download link here.'}
                 </p>
+              </div>
+
+              {/* Report Output Language Selector */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-medium text-text-ash">
+                  Report Language / 报告语言
+                </label>
+                <div className="grid grid-cols-2 gap-2.5 max-w-sm">
+                  <button
+                    type="button"
+                    onClick={() => setReportLanguage('en')}
+                    className={`min-h-[42px] px-3 rounded-xs border text-xs font-semibold transition-colors cursor-pointer ${
+                      reportLanguage === 'en'
+                        ? 'border-brand-gold bg-brand-gold/15 text-brand-gold'
+                        : 'border-border-main bg-bg-dark text-text-dim hover:text-text-main'
+                    }`}
+                  >
+                    English
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setReportLanguage('zh')}
+                    className={`min-h-[42px] px-3 rounded-xs border text-xs font-semibold transition-colors cursor-pointer ${
+                      reportLanguage === 'zh'
+                        ? 'border-brand-gold bg-brand-gold/15 text-brand-gold'
+                        : 'border-border-main bg-bg-dark text-text-dim hover:text-text-main'
+                    }`}
+                  >
+                    中文 (Mandarin)
+                  </button>
+                </div>
               </div>
 
               <div className="space-y-1.5">
