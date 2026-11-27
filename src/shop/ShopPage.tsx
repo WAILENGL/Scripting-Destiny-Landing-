@@ -409,11 +409,22 @@ export function ShopPage({ initialIntakeId, surveyUrl, onStartSurvey }: ShopPage
     setError(null);
   };
 
+  const upgradeCreditCents = usingSavedIntake ? Math.max(0, savedIntake?.upgradeCreditCents || 0) : 0;
+
+  const netTierPricing = (tier: PaidTier) => {
+    if (!prices) return null;
+    const baseCents = activeDiscount ? discountedCents(prices[tier], activeDiscount.percent) : prices[tier];
+    const alreadyOwned =
+      usingSavedIntake &&
+      (ownsConsult || (tier !== 'consult' && ownsPremium) || (tier === 'standard' && ownsStandard));
+    const credit = !alreadyOwned && upgradeCreditCents > 0 ? Math.min(upgradeCreditCents, Math.max(0, baseCents - 50)) : 0;
+    return { baseCents, credit, netCents: Math.max(0, baseCents - credit) };
+  };
+
   const priceDisplay = (tier: PaidTier | null) => {
     if (!tier || !prices) return null;
-    const full = prices[tier];
-    if (!activeDiscount) return formatMoney(full, prices.currency);
-    return formatMoney(discountedCents(full, activeDiscount.percent), prices.currency);
+    const p = netTierPricing(tier);
+    return p ? formatMoney(p.netCents, prices.currency) : null;
   };
 
   /** Direct 1-click Stripe checkout for a returning visitor using their unedited saved intake. */
@@ -758,18 +769,37 @@ export function ShopPage({ initialIntakeId, surveyUrl, onStartSurvey }: ShopPage
 
                 {/* Price */}
                 <div className="min-h-[48px] flex flex-wrap items-baseline gap-x-2.5 gap-y-1 border-y border-border-main/60 py-3">
-                  {prices ? (
-                    activeDiscount ? (
-                      <>
-                        <span className="font-display text-3xl sm:text-4xl text-brand-gold font-normal">
-                          {formatMoney(discountedCents(prices[tier], activeDiscount.percent), prices.currency)}
-                        </span>
-                        <s className="text-sm text-text-dim">{formatMoney(prices[tier], prices.currency)}</s>
-                        <span className="text-xs font-semibold text-brand-gold">
-                          {activeDiscount.percent}% off
-                        </span>
-                      </>
-                    ) : (
+                  {prices ? (() => {
+                    const p = netTierPricing(tier)!;
+                    if (p.credit > 0) {
+                      return (
+                        <>
+                          <span className="font-display text-3xl sm:text-4xl text-brand-gold font-normal">
+                            {formatMoney(p.netCents, prices.currency)}
+                          </span>
+                          <s className="text-base text-text-dim font-normal line-through">
+                            {formatMoney(p.baseCents, prices.currency)}
+                          </s>
+                          <span className="px-1.5 py-0.5 rounded-xs bg-emerald-950/70 border border-emerald-500/40 text-[10px] font-bold text-emerald-300 uppercase tracking-wider">
+                            Upgrade Credit −{formatMoney(p.credit, prices.currency)}
+                          </span>
+                        </>
+                      );
+                    }
+                    if (activeDiscount) {
+                      return (
+                        <>
+                          <span className="font-display text-3xl sm:text-4xl text-brand-gold font-normal">
+                            {formatMoney(p.netCents, prices.currency)}
+                          </span>
+                          <s className="text-sm text-text-dim">{formatMoney(prices[tier], prices.currency)}</s>
+                          <span className="text-xs font-semibold text-brand-gold">
+                            {activeDiscount.percent}% off
+                          </span>
+                        </>
+                      );
+                    }
+                    return (
                       <>
                         <span className="font-display text-3xl sm:text-4xl text-brand-gold font-normal">
                           {formatMoney(prices[tier], prices.currency)}
@@ -783,8 +813,8 @@ export function ShopPage({ initialIntakeId, surveyUrl, onStartSurvey }: ShopPage
                           Black Friday
                         </span>
                       </>
-                    )
-                  ) : (
+                    );
+                  })() : (
                     <span className="text-sm text-text-dim">Loading price…</span>
                   )}
                 </div>

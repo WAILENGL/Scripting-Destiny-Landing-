@@ -347,6 +347,7 @@ export interface IntakeDetails {
   input: ReportDetails;
   orders: OrderInfo[];
   ownedTiers: PaidTier[];
+  upgradeCreditCents?: number;
   discount: Discount | null;
 }
 
