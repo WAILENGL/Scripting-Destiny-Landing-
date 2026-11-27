@@ -69,6 +69,27 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  /* Shop design tokens (matching Scripting Destiny app) */
+  --font-display: "Cormorant Garamond", "Noto Serif SC", Georgia, serif;
+  --radius-xs: 0.25rem;
+  --color-bg-dark: var(--shop-bg-dark);
+  --color-bg-panel: var(--shop-bg-panel);
+  --color-bg-elevated: var(--shop-bg-elevated);
+  --color-border-main: var(--shop-border-main);
+  --color-text-main: var(--shop-text-main);
+  --color-text-dim: var(--shop-text-dim);
+  --color-text-ash: var(--shop-text-ash);
+  --color-brand-gold: var(--shop-brand-gold);
+  --color-wood-yang: var(--shop-wood-yang);
+  --color-wood-yin: var(--shop-wood-yin);
+  --color-fire-yang: var(--shop-fire-yang);
+  --color-fire-yin: var(--shop-fire-yin);
+  --color-earth-yang: var(--shop-earth-yang);
+  --color-earth-yin: var(--shop-earth-yin);
+  --color-metal-yang: var(--shop-metal-yang);
+  --color-metal-yin: var(--shop-metal-yin);
+  --color-water-yang: var(--shop-water-yang);
+  --color-water-yin: var(--shop-water-yin);
 }
 
 /* Light Mode: Warm Chinese Xuan / Rice Paper & Sumi Ink */
@@ -115,10 +136,29 @@
   --svg-gold: #9e7228;
   --svg-gold-muted: rgba(158, 114, 40, 0.45);
   --svg-gold-faint: rgba(158, 114, 40, 0.14);
+  --shop-bg-dark: #fbf9f4;
+  --shop-bg-panel: #f2efe7;
+  --shop-bg-elevated: #e8e3d8;
+  --shop-border-main: #ded8cb;
+  --shop-text-main: #18191d;
+  --shop-text-dim: #57534e;
+  --shop-text-ash: #4a4742;
+  --shop-brand-gold: #8a6118;
+  --shop-wood-yang: #15803d;
+  --shop-wood-yin: #4d7c0f;
+  --shop-fire-yang: #b91c1c;
+  --shop-fire-yin: #be123c;
+  --shop-earth-yang: #9a511e;
+  --shop-earth-yin: #a16207;
+  --shop-metal-yang: #475569;
+  --shop-metal-yin: #334155;
+  --shop-water-yang: #1d4ed8;
+  --shop-water-yin: #0e7490;
 }
 
 /* Dark Mode: Deep Obsidian Sumi Slate & Champagne Gold Foil */
-.dark {
+.dark,
+.shop-obsidian {
   --radius: 0.5rem;
   --background: oklch(0.14 0.004 260);
   --foreground: oklch(0.94 0.012 85);
@@ -160,6 +200,24 @@
   --svg-gold: #dfb76c;
   --svg-gold-muted: rgba(223, 183, 108, 0.40);
   --svg-gold-faint: rgba(223, 183, 108, 0.15);
+  --shop-bg-dark: #131417;
+  --shop-bg-panel: #1a1b22;
+  --shop-bg-elevated: #23252f;
+  --shop-border-main: #292b37;
+  --shop-text-main: #eeebe2;
+  --shop-text-dim: #a8a5a0;
+  --shop-text-ash: #c4c1ba;
+  --shop-brand-gold: #dfb76c;
+  --shop-wood-yang: #16a34a;
+  --shop-wood-yin: #84cc16;
+  --shop-fire-yang: #ef4444;
+  --shop-fire-yin: #fb7185;
+  --shop-earth-yang: #c26d2d;
+  --shop-earth-yin: #eab308;
+  --shop-metal-yang: #7e97ad;
+  --shop-metal-yin: #f1f5f9;
+  --shop-water-yang: #2563eb;
+  --shop-water-yin: #06b6d4;
 }
 
 @layer base {
