@@ -241,8 +241,13 @@ function TermsPage() {
                   .
                 </li>
                 <li>
-                  <strong className="text-foreground">The 7-Day Dialogue Clock:</strong> Your 7-day
-                  private email Q&amp;A clock begins{" "}
+                  <strong className="text-foreground">
+                    The 7-Day Dialogue Clock (7 Business Days):
+                  </strong>{" "}
+                  Your consultation covers{" "}
+                  <strong>7 business days (Monday through Friday, excluding weekends)</strong>—please
+                  note that responses are sent on business days and correspondence is not conducted
+                  on the weekends. Your 7-business-day private email Q&amp;A clock begins{" "}
                   <strong>
                     ONLY after Blake’s opening analysis email is delivered to you, never at the time
                     of purchase
@@ -300,12 +305,12 @@ function TermsPage() {
               </p>
               <p>
                 <strong>3. 1-on-1 Private Email Consultations:</strong> Because the 24-page Full
-                Reading PDF dossier ($39.99 standard retail value) is delivered within minutes of
+                Reading PDF dossier ($49.99 USD standard retail value) is delivered within minutes of
                 purchase, if a customer requests cancellation of a 1-on-1 Consultation within the
                 permitted <strong>48-hour window</strong> after their Full Reading report has
                 already been delivered, they will be refunded the amount paid{" "}
                 <strong>
-                  minus the standard retail price of the Full Reading ($39.99) and unrecoverable
+                  minus the standard retail price of the Full Reading ($49.99 USD) and unrecoverable
                   Stripe payment processor fees
                 </strong>
                 . The client retains permanent access to their delivered 24-page Full Reading PDF.

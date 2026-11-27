@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ConfirmedRouteImport } from './routes/confirmed'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ShopRouteImport } from './routes/shop'
 import { Route as SurveyRouteImport } from './routes/survey'
 import { Route as TermsRouteImport } from './routes/terms'
 
@@ -36,6 +37,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SurveyRoute = SurveyRouteImport.update({
   id: '/survey',
   path: '/survey',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/confirmed': typeof ConfirmedRoute
   '/privacy': typeof PrivacyRoute
+  '/shop': typeof ShopRoute
   '/survey': typeof SurveyRoute
   '/terms': typeof TermsRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/confirmed': typeof ConfirmedRoute
   '/privacy': typeof PrivacyRoute
+  '/shop': typeof ShopRoute
   '/survey': typeof SurveyRoute
   '/terms': typeof TermsRoute
 }
@@ -69,20 +77,24 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/confirmed': typeof ConfirmedRoute
   '/privacy': typeof PrivacyRoute
+  '/shop': typeof ShopRoute
   '/survey': typeof SurveyRoute
   '/terms': typeof TermsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/confirmed' | '/privacy' | '/survey' | '/terms'
+  fullPaths:
+    '/' | '/about' | '/confirmed' | '/privacy' | '/shop' | '/survey' | '/terms'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/confirmed' | '/privacy' | '/survey' | '/terms'
+  to:
+    '/' | '/about' | '/confirmed' | '/privacy' | '/shop' | '/survey' | '/terms'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/confirmed'
     | '/privacy'
+    | '/shop'
     | '/survey'
     | '/terms'
   fileRoutesById: FileRoutesById
@@ -92,6 +104,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ConfirmedRoute: typeof ConfirmedRoute
   PrivacyRoute: typeof PrivacyRoute
+  ShopRoute: typeof ShopRoute
   SurveyRoute: typeof SurveyRoute
   TermsRoute: typeof TermsRoute
 }
@@ -126,6 +139,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/survey': {
       id: '/survey'
       path: '/survey'
@@ -148,6 +168,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ConfirmedRoute: ConfirmedRoute,
   PrivacyRoute: PrivacyRoute,
+  ShopRoute: ShopRoute,
   SurveyRoute: SurveyRoute,
   TermsRoute: TermsRoute,
 }

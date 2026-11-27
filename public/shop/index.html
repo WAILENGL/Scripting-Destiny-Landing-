@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting to Scripting Destiny Reports Shop…</title>
+    <link rel="canonical" href="https://app.scriptingdestiny.com/shop" />
+    <meta http-equiv="refresh" content="0;url=https://app.scriptingdestiny.com/shop" />
+    <script>
+      (function () {
+        var target =
+          "https://app.scriptingdestiny.com/shop" +
+          window.location.search +
+          window.location.hash;
+        window.location.replace(target);
+      })();
+    </script>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0d0e12;
+        color: #eeebe2;
+        font-family: system-ui, -apple-system, sans-serif;
+        text-align: center;
+        padding: 24px;
+      }
+      a {
+        color: #dfb76c;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Redirecting to the Scripting Destiny Reports Shop…
+      <br />
+      <a id="fallback-link" href="https://app.scriptingdestiny.com/shop">
+        Click here if you are not redirected automatically
+      </a>
+    </p>
+    <script>
+      var el = document.getElementById("fallback-link");
+      if (el) {
+        el.href =
+          "https://app.scriptingdestiny.com/shop" +
+          window.location.search +
+          window.location.hash;
+      }
+    </script>
+  </body>
+</html>
