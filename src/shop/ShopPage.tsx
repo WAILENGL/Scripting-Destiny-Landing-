@@ -1743,7 +1743,7 @@ export function ShopPage({ initialIntakeId, surveyUrl, onStartSurvey }: ShopPage
         <div className="p-4 rounded-sm border border-border-main/70 bg-bg-panel/40 space-y-1.5">
           <h3 className="text-sm font-semibold text-text-main font-sans">How fast will I receive my PDF?</h3>
           <p className="text-xs text-text-dim leading-relaxed">
-            Your report begins generating the moment Stripe confirms payment—typically ready on screen and emailed to your inbox within minutes (typically 2–5 minutes).
+            Your report begins generating the moment Stripe confirms payment—typically ready on screen and emailed to your inbox within minutes (typically 2–5 minutes). If your report does not appear in your primary inbox, please check your Promotions, Spam, or Junk folder before contacting support.
           </p>
         </div>
         <div className="p-4 rounded-sm border border-border-main/70 bg-bg-panel/40 space-y-1.5">
