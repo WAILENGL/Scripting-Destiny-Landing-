@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ConfirmedRouteImport } from './routes/confirmed'
+import { Route as DownloadRouteImport } from './routes/download'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as SurveyRouteImport } from './routes/survey'
@@ -30,6 +31,11 @@ const AboutRoute = AboutRouteImport.update({
 const ConfirmedRoute = ConfirmedRouteImport.update({
   id: '/confirmed',
   path: '/confirmed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DownloadRoute = DownloadRouteImport.update({
+  id: '/download',
+  path: '/download',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/confirmed': typeof ConfirmedRoute
+  '/download': typeof DownloadRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
   '/survey': typeof SurveyRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/confirmed': typeof ConfirmedRoute
+  '/download': typeof DownloadRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
   '/survey': typeof SurveyRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/confirmed': typeof ConfirmedRoute
+  '/download': typeof DownloadRoute
   '/privacy': typeof PrivacyRoute
   '/shop': typeof ShopRoute
   '/survey': typeof SurveyRoute
@@ -84,15 +93,30 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/about' | '/confirmed' | '/privacy' | '/shop' | '/survey' | '/terms'
+    | '/'
+    | '/about'
+    | '/confirmed'
+    | '/download'
+    | '/privacy'
+    | '/shop'
+    | '/survey'
+    | '/terms'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/about' | '/confirmed' | '/privacy' | '/shop' | '/survey' | '/terms'
+    | '/'
+    | '/about'
+    | '/confirmed'
+    | '/download'
+    | '/privacy'
+    | '/shop'
+    | '/survey'
+    | '/terms'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/confirmed'
+    | '/download'
     | '/privacy'
     | '/shop'
     | '/survey'
@@ -103,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ConfirmedRoute: typeof ConfirmedRoute
+  DownloadRoute: typeof DownloadRoute
   PrivacyRoute: typeof PrivacyRoute
   ShopRoute: typeof ShopRoute
   SurveyRoute: typeof SurveyRoute
@@ -130,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/confirmed'
       fullPath: '/confirmed'
       preLoaderRoute: typeof ConfirmedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/download': {
+      id: '/download'
+      path: '/download'
+      fullPath: '/download'
+      preLoaderRoute: typeof DownloadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -167,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ConfirmedRoute: ConfirmedRoute,
+  DownloadRoute: DownloadRoute,
   PrivacyRoute: PrivacyRoute,
   ShopRoute: ShopRoute,
   SurveyRoute: SurveyRoute,
